@@ -1,28 +1,26 @@
 ---
 templateKey: bio-page
-thumbnail: /img/clay-image-1.jpg
+thumbnail: /img/matrimonio01.jpg
 date: 2023-03-02T10:17:05.133Z
-title: Bio
+title: Il Matrimonio
 description: About the Artist
 number: 1
 pagetype:
   - main
-featuredimage: /img/clay-image-1.jpg
+featuredimage: /img/matrimonio01.jpg
 ---
-![Artist at work](/img/clay-images-11.jpg)
 
-## The Hands Behind the Clay
+## <i>Il matrimonio</i>, di Witold Gombrowicz (1947)
 
-I am a ceramic artist based in the Pacific Northwest, where the rugged coastline and dense forests inspire my work. My journey with clay began over a decade ago, first as a meditative practice and later as a lifelong obsession with form and fire.
-
-I work primarily with stoneware and porcelain, utilizing both wheel-throwing and hand-building techniques. My philosophy is rooted in wabi-sabi—finding beauty in the imperfect, the impermanent, and the incomplete.
+«L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato gli altri», pensa Witold Gombrowicz, secondo l’interpretazione critica offerta da Jan Kott (1971). Nella seconda opera teatrale dell’autore polacco Witold Gombrowicz (1909-1969), il cerimoniale umano, e in particolare il rituale del matrimonio, sono al centro dell’attenzione. Concepita come farsa tragica, la pièce interroga i modi in cui l’impotenza dell’uomo, cui resta solo la possibilità dello scontro e di gesti simbolici e deformanti, assume le manifestazioni più grottesche. Con una teatralità ispirata alla commedia dell’arte, al circo e all’Ubu Roy di Alfred Jarry, lo spettacolo propone un adattamento dell’opera di Gombrowicz. In una dimensione sospesa fra sogno e veglia, si trasferisce la vicenda dalla cupa notte della Seconda guerra mondiale al nostro tempo contemporaneo, nel quale indifferenza, senso di impotenza e volgarità convivono nuovamente nel vivere quotidiano.
 
 ![Studio shelves](/img/clay-images-12.jpg)
 
-### Process & Materials
+### Compagnia
 
-Every piece is crafted in my home studio. I formulate my own glazes using locally sourced ash and minerals, resulting in surfaces that are unique to my environment. The firing process is a collaboration with the kiln; I can guide the heat, but the flame has the final say.
+<b>Interpreti</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
+<b>Musiche</b>: Andrea D'Oria<br/>
+<b>Luci</b>: Marco Usmigli<br/>
+<b>Adattamento drammaturgico e regia</b>: Leonardo Mancini
 
-When I am not in the studio, you can find me hiking the trails of the Cascades or scouring the beach for interesting stones and driftwood.
-
-<a href="https://unsplash.com/@tomcrewceramics" target="_blank">Image credits - Tom Crew</a>
+<a href="https://www.instagram.com/sonodello/" target="_blank">Fotografie: Alessio Dell'Anna</a>
