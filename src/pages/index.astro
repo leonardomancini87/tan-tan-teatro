@@ -34,7 +34,7 @@ let postCounter = 0;
         {posts.map((post) => {
             postCounter++;
             // Calculate slug. If it's from 'pages', slug is just slug (or flattened).
-            // content/pages/bio.md -> slug 'bio'.
+            // content/pages/matrimonio.md -> slug 'matrimonio'.
             // content/work/work-1.md -> slug 'work-1'? No, in config.ts, work collection.
             // But legacy mapped work/work-1.md -> /work/work-1
             // My [...slug].astro will handle mapping.

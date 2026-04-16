@@ -1,20 +1,20 @@
 ---
 templateKey: bio-page
-thumbnail: /img/matrimonio01.jpg
+thumbnail: /img/tantanteatro.jpeg
 date: 2023-03-02T10:17:05.133Z
-title: Il Matrimonio
+title: Chi siamo
 description: About the Artist
 number: 1
 pagetype:
-  - main
-featuredimage: /img/matrimonio01.jpg
+  - page
+featuredimage: /img/tantanteatro.jpeg
 ---
 
-## <i>Il matrimonio</i>, di Witold Gombrowicz (1947)
+## Tan Tan Teatro
 
-«L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato gli altri», pensa Witold Gombrowicz, secondo l’interpretazione critica offerta da Jan Kott (1971). Nella seconda opera teatrale dell’autore polacco Witold Gombrowicz (1909-1969), il cerimoniale umano, e in particolare il rituale del matrimonio, sono al centro dell’attenzione. Concepita come farsa tragica, la pièce interroga i modi in cui l’impotenza dell’uomo, cui resta solo la possibilità dello scontro e di gesti simbolici e deformanti, assume le manifestazioni più grottesche. Con una teatralità ispirata alla commedia dell’arte, al circo e all’Ubu Roy di Alfred Jarry, lo spettacolo propone un adattamento dell’opera di Gombrowicz. In una dimensione sospesa fra sogno e veglia, si trasferisce la vicenda dalla cupa notte della Seconda guerra mondiale al nostro tempo contemporaneo, nel quale indifferenza, senso di impotenza e volgarità convivono nuovamente nel vivere quotidiano.
+Siamo un gruppo teatrale universitario nato a Torino nel 2024 come esperienza di incontro e di sviluppo di progetti artistici. A partire dal settembre 2024 il gruppo ha lavorato alla creazione di uno spettacolo: Macbett di Eugène Ionesco (1972), debuttato a Lione presso il Festival di teatro universitario “Meraki” e presentato in Italia a Torino, Cuneo e Bergamo. Attualmente, il gruppo, improntato su una chiave laboratoriale e di condivisione dell’esperienza, lavora a una messa in scena de <i>Il matrimonio</i> di Witold Gombrowicz (1947), il cui debutto è previsto per il maggio 2026.
 
-![Studio shelves](/img/clay-images-12.jpg)
+![Studio shelves](/img/macbett03.jpg)
 
 ### Compagnia
 
