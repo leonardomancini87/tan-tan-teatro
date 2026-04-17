@@ -35,33 +35,32 @@ const { title, description, thumbnail } = entry.data;
 
         <div class="row gtr-uniform">
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="first-name" id="first-name" placeholder="First Name" required />
+            <input type="text" name="first-name" id="first-name" placeholder="Nome" required />
           </div>
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="last-name" id="last-name" placeholder="Last Name" required />
+            <input type="text" name="last-name" id="last-name" placeholder="Cognome" required />
           </div>
 
           <div class="col-6 col-12-xsmall">
             <input type="email" name="email" id="demo-email" placeholder="Email" required />
           </div>
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="location" id="location" placeholder="Location" required />
+            <input type="text" name="location" id="location" placeholder="Luogo" required />
           </div>
 
           <div class="col-12">
             <select name="category" id="category" required>
-              <option value="">-Nature of Enquiry-</option>
-              <option value="General">General</option>
-              <option value="Purchase">Purchase</option>
-              <option value="Commissions">Commissions</option>
-              <option value="Exhibitions">Exhibitions</option>
-              <option value="Gallery Feature">Gallery Feature</option>
-              <option value="Other">Other</option>
+              <option value="">-Informazioni-</option>
+              <option value="General">Generale</option>
+              <option value="Purchase">Spettacoli</option>
+              <option value="Commissions">Laboratorio</option>
+              <option value="Exhibitions">Ricerca</option>
+              <option value="Gallery Feature">Altro</option>
             </select>
           </div>
 
           <div class="col-12">
-            <textarea name="message" id="message" placeholder="Enter your message" rows="6" required></textarea>
+            <textarea name="message" id="message" placeholder="Scrivi qui il tuo messaggio" rows="6" required></textarea>
           </div>
 
           <div data-netlify-recaptcha="true"></div>
