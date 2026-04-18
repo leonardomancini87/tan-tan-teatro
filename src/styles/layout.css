@@ -144,6 +144,7 @@ footer.site-foot a {
 
 .site-head-container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     align-items: center;
     margin: 0 1rem;
@@ -367,3 +368,4 @@ footer.site-foot a {
         transform: translateY(-4vw);
     }
 }
+
