@@ -6,7 +6,7 @@ pagetype:
 number: 1
 date: 2023-01-03T15:04:10.000Z
 title: Il matrimonio
-description: dall'omonima pièce di Witold Gombrowicz (prima edizione 1947).
+description: Witold Gombrowicz, 1947.
 ---
 ## "Il matrimonio" (<em>Ślub</em>), 1947
 

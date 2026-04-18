@@ -22,7 +22,7 @@ Durata: 1 ora<br/>
 <h3>Precedenti rappresentazioni</h3>
 22/05/2025: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lione<br/>
 02/07/2025: <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank">Tingeltangel</a>, Torino<br/>
-07/09/2025: <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/ target="_blank">Festival Mirabilia</a>, Cuneo<br/>
+07/09/2025: <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/" target="_blank">Festival Mirabilia</a>, Cuneo<br/>
 10-11/01/2026: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Torino<br/>
 21/02/2026: <a href="http://www.arhatteatro.it/?fbclid=IwY2xjawRQlXdleHRuA2FlbQIxMABicmlkETBVVWlhbk83SVFaWWZsekNoc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDdArXwkeXCNv-unycShqgwOzyFvdjz9Mkmo4t83z9x3REUSkuYOASUxqrW_aem_ihTtIDvuoRrzA0hpMG-zZQ" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo
 
