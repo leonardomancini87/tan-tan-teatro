@@ -23,4 +23,8 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 <br /><br />
 <i>Durata</i>: 1 ora
 
-<a href="https://www.instagram.com/sonodello/" target="_blank">Fotografie: Alessio Dell'Anna</a>
+<p class="photo-credit">
+  <a href="https://www.instagram.com/sonodello/" target="_blank">
+    Fotografie: Alessio Dell'Anna
+  </a>
+</p>

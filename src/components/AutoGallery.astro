@@ -1,0 +1,56 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import Gallery from "./Gallery.astro";
+
+interface Props {
+  slug: string;
+  title?: string;
+  group?: string;
+}
+
+const {
+  slug,
+  title = "Galleria fotografica",
+  group = slug,
+} = Astro.props;
+
+const projectRoot = fileURLToPath(new URL("../../", import.meta.url));
+const galleryDir = path.join(projectRoot, "public/img", slug);
+
+const allowedExt = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+let items = [];
+
+function prettifyFilename(filename: string) {
+  return filename
+    .replace(/\.[^.]+$/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+try {
+  const entries = await fs.readdir(galleryDir, { withFileTypes: true });
+
+  items = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
+    .filter((name) => allowedExt.has(path.extname(name).toLowerCase()))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((filename) => {
+      const label = prettifyFilename(filename);
+
+      return {
+        src: `/img/${slug}/${filename}`,
+        alt: `${slug} – ${label}`,
+        caption: label,
+      };
+    });
+} catch {
+  items = [];
+}
+---
+
+{items.length > 0 && (
+  <Gallery items={items} group={group} title={title} />
+)}

@@ -8,27 +8,6 @@ number: 2
 title: Macbett
 description: Eugène Ionesco, 1972
 folder: macbett
-gallery:
-  - src: /img/macbett/macbett-01.jpg
-    alt: Tan Tan Teatro, Macbett, Gabriele Vaschetti, Stefano Martelli (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-02.jpg
-    alt: Tan Tan Teatro, Macbett, Gabriele Vaschetti, Viola Cicoria (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-03.jpg
-    alt: Tan Tan Teatro, Macbett, Giovanni Pessina, Aurora Sempio (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-04.jpg
-    alt: Tan Tan Teatro, Macbett, Giulia Tonello, Siyuan Chen, Aurora Sempio (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-05.jpg
-    alt: Tan Tan Teatro, Macbett, Olivia Del Sante (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-06.jpg
-    alt: Tan Tan Teatro, Macbett, Olivia Del Sante 2 (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-07.jpg
-    alt: Tan Tan Teatro, Macbett, Olivia Del Sante, Gabriele Vaschetti, Stefano Martelli (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-08.jpg
-    alt: Tan Tan Teatro, Macbett, Olivia Del Sante, Gianluca Fiore, Gabriele Vaschetti (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-09.jpg
-    alt: Tan Tan Teatro, Macbett, Stefano Martelli (foto Adam Hamadou 2025)
-  - src: /img/macbett/macbett-10.jpg
-    alt: Tan Tan Teatro, Macbett, Stefano Martelli (foto Adam Hamadou 2025)
 
 ---
 ## <i>Macbett</i>, di Eugène Ionesco, 1972
@@ -53,6 +32,10 @@ Durata: 1 ora<br/>
 <br/>
 <h3>Trailer</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+<p class="photo-credit">
+  <a href="https://www.instagram.com/adam_bbp/" target="_blank">
+    Fotografie: Adam Hamadou
+  </a>
+</p>
 
 
