@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
+import Gallery from '../components/Gallery.astro';
 
 interface Props {
   entry: CollectionEntry<'work'> | CollectionEntry<'news'> | CollectionEntry<'sold'>;
@@ -16,6 +17,7 @@ const { title, description, thumbnail } = entry.data;
 
 // Icons logic (replacing SVG imports with inline or similar)
 // For simplicity, using text or simple arrows.
+
 ---
 
 <Layout title={title} description={description}>
@@ -39,6 +41,14 @@ const { title, description, thumbnail } = entry.data;
     <div class="post-content-body">
       <Content />
     </div>
+
+    {entry.data.gallery && (
+    <Gallery
+    items={entry.data.gallery}
+    group={entry.data.title}
+    title="Galleria"
+   />
+    )}
 
     <div class="post-link">
       <div>

@@ -1,196 +1,138 @@
 ---
-import fs from "fs";
-import path from "path";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+export interface GalleryItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
 
 interface Props {
-  folder: string; // Es. "matrimonio"
+  items: GalleryItem[];
+  group?: string;
   title?: string;
 }
 
-const { folder, title = "Galleria fotografica" } = Astro.props;
-
-// Trova le immagini nella cartella public/img/<folder>/
-const folderPath = path.resolve(Astro.srcDir, "../public/img", folder);
-let images: string[] = [];
-
-try {
-  const files = fs.readdirSync(folderPath);
-  images = files
-    .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f))
-    .sort()
-    .map(f => `/img/${folder}/${f}`);
-} catch {
-  console.warn(`Nessuna cartella trovata per ${folder}`);
-}
+const { items, group = "gallery", title } = Astro.props;
 ---
 
-<style>
-  :root {
-    --accent: #b80000;
-    --text-light: #fff;
-  }
+{title && <h3 class="gallery-title">{title}</h3>}
 
-  section.gallery-section {
-    margin: 2rem auto;
-    max-width: 900px;
-    padding: 1rem;
-  }
-
-  section.gallery-section h2 {
-    text-align: center;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .gallery img {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .gallery img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-  }
-
-  /* Lightbox */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    flex-direction: column;
-  }
-
-  .lightbox.visible {
-    display: flex;
-  }
-
-  .lightbox img {
-    max-width: 90%;
-    max-height: 80vh;
-    border: 4px solid var(--accent);
-    border-radius: 8px;
-  }
-
-  .close-btn,
-  .nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2.5rem;
-    color: var(--text-light);
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    user-select: none;
-  }
-
-  .close-btn {
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    transform: none;
-  }
-
-  .nav-btn.left {
-    left: 1rem;
-  }
-
-  .nav-btn.right {
-    right: 1rem;
-  }
-
-  .nav-btn:hover,
-  .close-btn:hover {
-    color: var(--accent);
-  }
-
-  .counter {
-    position: absolute;
-    bottom: 1rem;
-    color: var(--text-light);
-    background: rgba(0, 0, 0, 0.6);
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-  }
-</style>
-
-<section class="gallery-section">
-  <h2>{title}</h2>
-
-  <div class="gallery">
-    {images.map(src => (
-      <img src={src} alt={folder} loading="lazy" />
-    ))}
-  </div>
-
-  <div class="lightbox" id={`lightbox-${folder}`}>
-    <span class="close-btn">✕</span>
-    <span class="nav-btn left">❮</span>
-    <img id={`lightbox-img-${folder}`} src="" alt="foto" />
-    <span class="nav-btn right">❯</span>
-    <span class="counter" id={`lightbox-counter-${folder}`}></span>
-  </div>
-</section>
+<div class="gallery-grid">
+  {items.map((item, index) => (
+    <a
+      href={item.src}
+      data-fancybox={group}
+      data-caption={item.caption ?? item.alt}
+      class={`gallery-item ${index % 5 === 0 ? "gallery-item--large" : ""}`}
+      aria-label={item.alt}
+    >
+      <img src={item.src} alt={item.alt} loading="lazy" />
+      <span class="gallery-overlay">
+        <span class="gallery-label">Apri</span>
+      </span>
+    </a>
+  ))}
+</div>
 
 <script>
-  const section = document.currentScript.closest(".gallery-section");
-  const imgs = [...section.querySelectorAll(".gallery img")];
-  const lightbox = section.querySelector(".lightbox");
-  const lightboxImg = lightbox.querySelector("img");
-  const closeBtn = lightbox.querySelector(".close-btn");
-  const leftBtn = lightbox.querySelector(".nav-btn.left");
-  const rightBtn = lightbox.querySelector(".nav-btn.right");
-  const counter = lightbox.querySelector(".counter");
+  import { Fancybox } from "@fancyapps/ui";
 
-  let current = 0;
-
-  function showImage(idx) {
-    if (idx < 0) idx = imgs.length - 1;
-    if (idx >= imgs.length) idx = 0;
-    current = idx;
-    lightboxImg.src = imgs[current].src;
-    counter.textContent = \`\${current + 1} / \${imgs.length}\`;
-    lightbox.classList.add("visible");
-  }
-
-  imgs.forEach((img, i) => {
-    img.addEventListener("click", () => showImage(i));
-  });
-
-  closeBtn.addEventListener("click", () => lightbox.classList.remove("visible"));
-
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) lightbox.classList.remove("visible");
-  });
-
-  leftBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    showImage(current - 1);
-  });
-
-  rightBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    showImage(current + 1);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("visible")) return;
-    if (e.key === "Escape") lightbox.classList.remove("visible");
-    if (e.key === "ArrowLeft") showImage(current - 1);
-    if (e.key === "ArrowRight") showImage(current + 1);
+  Fancybox.bind("[data-fancybox]", {
+    Thumbs: false,
+    Toolbar: {
+      display: {
+        left: [],
+        middle: [],
+        right: ["zoom", "slideshow", "fullscreen", "close"],
+      },
+    },
   });
 </script>
+
+<style>
+  .gallery-title {
+    margin: 3rem 0 1.25rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    margin: 0 0 3rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    grid-column: span 6;
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #e9e9e9;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .gallery-item--large {
+    grid-column: span 12;
+  }
+
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.45s ease, filter 0.45s ease;
+  }
+
+  .gallery-item--large img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .gallery-label {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    color: white;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.03);
+    filter: brightness(0.96);
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .gallery-item,
+    .gallery-item--large {
+      grid-column: span 12;
+    }
+
+    .gallery-item img,
+    .gallery-item--large img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

@@ -8,6 +8,28 @@ number: 2
 title: Macbett
 description: Eugène Ionesco, 1972
 folder: macbett
+gallery:
+  - src: /img/macbett/macbett-01.jpg
+    alt: Tan Tan Teatro, Macbett, Gabriele Vaschetti, Stefano Martelli (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-02.jpg
+    alt: Tan Tan Teatro, Macbett, Gabriele Vaschetti, Viola Cicoria (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-03.jpg
+    alt: Tan Tan Teatro, Macbett, Giovanni Pessina, Aurora Sempio (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-04.jpg
+    alt: Tan Tan Teatro, Macbett, Giulia Tonello, Siyuan Chen, Aurora Sempio (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-05.jpg
+    alt: Tan Tan Teatro, Macbett, Olivia Del Sante (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-06.jpg
+    alt: Tan Tan Teatro, Macbett, Olivia Del Sante 2 (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-07.jpg
+    alt: Tan Tan Teatro, Macbett, Olivia Del Sante, Gabriele Vaschetti, Stefano Martelli (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-08.jpg
+    alt: Tan Tan Teatro, Macbett, Olivia Del Sante, Gianluca Fiore, Gabriele Vaschetti (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-09.jpg
+    alt: Tan Tan Teatro, Macbett, Stefano Martelli (foto Adam Hamadou 2025)
+  - src: /img/macbett/macbett-10.jpg
+    alt: Tan Tan Teatro, Macbett, Stefano Martelli (foto Adam Hamadou 2025)
+
 ---
 ## <i>Macbett</i>, di Eugène Ionesco, 1972
 
@@ -15,7 +37,7 @@ Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziab
 <br/><br/>
 <b>Interpreti</b>: Siyuan Chen, Viola Cicoria, Olivia Del Sante, Pablo Comune, Stefano Martelli, Giovanni Pessina, Aurora Matilde Viola Sempio, Giulia Tonello, Gabriele Vaschetti<br/>
 <b>Musiche</b>: Andrea D'Oria<br/>
-<b>Luci (ideazione)</b>: Sara Marenco. <b>Datore luci</b>: Marco Usmigli<br/>
+<b>Luci (ideazione)</b>: Sara Marenco. <b>Datore luci</b>: Marco Usmigli<br/> (da maggio 2026)
 <b>Costumi</b>: Giulia Tonello, Sara Marenco<br/>
 <b>Regia</b>: Leonardo Mancini<br/><br/>
 Durata: 1 ora<br/>

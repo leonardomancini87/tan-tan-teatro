@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
+    "@fancyapps/ui": "^6.1.13",
     "astro": "^5.16.5",
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
