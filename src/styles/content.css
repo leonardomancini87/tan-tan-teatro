@@ -349,3 +349,81 @@ production stylesheet in assets/built/screen.css using gulp dev
 img.gatsby-resp-image-image { border-radius: 10px !important;}
 
 img {border-radius: 10px;}
+
+[data-theme='dark'] h3 {
+  color: #fff;
+}
+
+/* Stile link coerente con il testo */
+a,
+a:visited,
+a:active {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* Opzionale: effetto hover */
+a:hover {
+  color: var(--color-primary);
+}
+
+/* Link normali: stesso colore del testo, sempre sottolineati */
+a,
+a:visited,
+a:active {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* Niente sottolineatura in hover (resta pulito) */
+a:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Disattiva sottolineatura nei titoli e nel menu */
+h1 a,
+h2 a,
+h3 a,
+nav a,
+.menu a {
+  text-decoration: none;
+}
+.title a,
+.post-content-title a,
+.page-head-title a,
+.title a:visited,
+.post-content-title a:visited,
+.page-head-title a:visited,
+.title a:hover,
+.post-content-title a:hover,
+.page-head-title a:hover {
+  color: var(--color-base) !important;
+  text-decoration: none !important;
+}
+/* Rimuove la sottolineatura dal titolo/logo principale */
+.site-head-logo {
+  text-decoration: none !important;
+  color: var(--color-base) !important;
+}
+[data-theme="dark"] .page-head-description,
+[data-theme="dark"] .site-head-logo {
+  color: var(--color-text) !important;
+}
+[data-theme="dark"] .post-content-excerpt {
+  color: var(--color-text) !important;
+  opacity: 0.8 !important;
+}
+/* Forza il colore dei titoli nei post in modalità scura */
+html[data-theme="dark"] body .post-content-body h1,
+html[data-theme="dark"] body .post-content-body h2,
+html[data-theme="dark"] body .post-content-body h3,
+html[data-theme="dark"] body .post-content-body h4,
+html[data-theme="dark"] body .post-content-body h5,
+html[data-theme="dark"] body .post-content-body h6 {
+  color: #ffffff !important;
+}

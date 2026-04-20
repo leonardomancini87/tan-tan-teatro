@@ -1,0 +1,196 @@
+---
+import fs from "fs";
+import path from "path";
+
+interface Props {
+  folder: string; // Es. "matrimonio"
+  title?: string;
+}
+
+const { folder, title = "Galleria fotografica" } = Astro.props;
+
+// Trova le immagini nella cartella public/img/<folder>/
+const folderPath = path.resolve(Astro.srcDir, "../public/img", folder);
+let images: string[] = [];
+
+try {
+  const files = fs.readdirSync(folderPath);
+  images = files
+    .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f))
+    .sort()
+    .map(f => `/img/${folder}/${f}`);
+} catch {
+  console.warn(`Nessuna cartella trovata per ${folder}`);
+}
+---
+
+<style>
+  :root {
+    --accent: #b80000;
+    --text-light: #fff;
+  }
+
+  section.gallery-section {
+    margin: 2rem auto;
+    max-width: 900px;
+    padding: 1rem;
+  }
+
+  section.gallery-section h2 {
+    text-align: center;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    flex-direction: column;
+  }
+
+  .lightbox.visible {
+    display: flex;
+  }
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+    border: 4px solid var(--accent);
+    border-radius: 8px;
+  }
+
+  .close-btn,
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    user-select: none;
+  }
+
+  .close-btn {
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    transform: none;
+  }
+
+  .nav-btn.left {
+    left: 1rem;
+  }
+
+  .nav-btn.right {
+    right: 1rem;
+  }
+
+  .nav-btn:hover,
+  .close-btn:hover {
+    color: var(--accent);
+  }
+
+  .counter {
+    position: absolute;
+    bottom: 1rem;
+    color: var(--text-light);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+</style>
+
+<section class="gallery-section">
+  <h2>{title}</h2>
+
+  <div class="gallery">
+    {images.map(src => (
+      <img src={src} alt={folder} loading="lazy" />
+    ))}
+  </div>
+
+  <div class="lightbox" id={`lightbox-${folder}`}>
+    <span class="close-btn">✕</span>
+    <span class="nav-btn left">❮</span>
+    <img id={`lightbox-img-${folder}`} src="" alt="foto" />
+    <span class="nav-btn right">❯</span>
+    <span class="counter" id={`lightbox-counter-${folder}`}></span>
+  </div>
+</section>
+
+<script>
+  const section = document.currentScript.closest(".gallery-section");
+  const imgs = [...section.querySelectorAll(".gallery img")];
+  const lightbox = section.querySelector(".lightbox");
+  const lightboxImg = lightbox.querySelector("img");
+  const closeBtn = lightbox.querySelector(".close-btn");
+  const leftBtn = lightbox.querySelector(".nav-btn.left");
+  const rightBtn = lightbox.querySelector(".nav-btn.right");
+  const counter = lightbox.querySelector(".counter");
+
+  let current = 0;
+
+  function showImage(idx) {
+    if (idx < 0) idx = imgs.length - 1;
+    if (idx >= imgs.length) idx = 0;
+    current = idx;
+    lightboxImg.src = imgs[current].src;
+    counter.textContent = \`\${current + 1} / \${imgs.length}\`;
+    lightbox.classList.add("visible");
+  }
+
+  imgs.forEach((img, i) => {
+    img.addEventListener("click", () => showImage(i));
+  });
+
+  closeBtn.addEventListener("click", () => lightbox.classList.remove("visible"));
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.classList.remove("visible");
+  });
+
+  leftBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showImage(current - 1);
+  });
+
+  rightBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showImage(current + 1);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("visible")) return;
+    if (e.key === "Escape") lightbox.classList.remove("visible");
+    if (e.key === "ArrowLeft") showImage(current - 1);
+    if (e.key === "ArrowRight") showImage(current + 1);
+  });
+</script>

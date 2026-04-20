@@ -15,7 +15,7 @@ featuredimage: /img/news.jpg
 28/05/2026, <i>Matrimonio</i>: Festival de théâtre universitaire "Meraki", Lyon<br />
 08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University<br />
 02/08/2026, <i>Matrimonio</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo)<br />
-05-06/09/2026, <i>Matrimonio</i>: Festival Mirabilia, Cuneo<br />
+05-06/09/2026, <i>Matrimonio</i>: Festival Mirabilia, Cuneo
 
 ## Precedenti rappresentazioni
 
