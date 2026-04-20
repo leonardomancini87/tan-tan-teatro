@@ -41,7 +41,8 @@ Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziab
 <b>Costumi</b>: Giulia Tonello, Sara Marenco<br/>
 <b>Regia</b>: Leonardo Mancini<br/><br/>
 Durata: 1 ora<br/>
-<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Scheda tecnica</a> / <a href="/doc/macbett-rassegna.pdf" target="_blank">Rassegna stampa</a>
+<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Scheda tecnica</a> / <a href="/doc/macbett-rassegna.pdf" target="_blank">Rassegna stampa</a><br /> 
+<a href="https://www.instagram.com/adam_bbp" target="_blank">Fotografie: Adam Hamadou, 2025</a> 
 <h3>Precedenti rappresentazioni</h3>
 22/05/2025: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lione<br/>
 02/07/2025: <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank">Tingeltangel</a>, Torino<br/>
@@ -52,5 +53,6 @@ Durata: 1 ora<br/>
 <br/>
 <h3>Trailer</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 

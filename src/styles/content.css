@@ -427,3 +427,7 @@ html[data-theme="dark"] body .post-content-body h5,
 html[data-theme="dark"] body .post-content-body h6 {
   color: #ffffff !important;
 }
+.video-wrap,
+.video-wrap iframe {
+  box-sizing: border-box;
+}

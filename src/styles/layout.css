@@ -368,4 +368,23 @@ footer.site-foot a {
         transform: translateY(-4vw);
     }
 }
+@media (max-width: 1600px) {
+  .site-head-container,
+  .site-head-left,
+  .site-head-right {
+    z-index: 1;
+  }
 
+  .nav-burger,
+  .site-head-logo,
+  .site-head-left a,
+  .site-head-right a {
+    color: var(--color-base) !important;
+  }
+
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    background-color: var(--color-base) !important;
+  }
+}
