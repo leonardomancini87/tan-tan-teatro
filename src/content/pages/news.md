@@ -10,7 +10,7 @@ featuredimage: /img/news.jpg
 
 ## Prossime rappresentazioni
 
-08/05/2026, <i>Macbett</i>: Accademia Ligustica di Belle Arti Ligustica<br />
+08/05/2026, <i>Macbett</i>: Accademia Ligustica di Belle Arti di Genova<br />
 09/05/2026, <i>Macbett</i>: Teatro Martini, Comune di Cavagnolo (Torino)<br />
 28/05/2026, <i>Matrimonio</i>: Festival de théâtre universitaire "Meraki", Lyon<br />
 08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University<br />
