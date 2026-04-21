@@ -13,7 +13,7 @@ translationKey: "news-page"
 
 08/05/2026, <i>Macbett</i>: Accademia Ligustica di Belle Arti di Genova<br />
 09/05/2026, <i>Macbett</i>: Teatro Martini, Comune di Cavagnolo (Torino)<br />
-28/05/2026, <i>Matrimonio</i>: Festival de théâtre universitaire "Meraki", Lyon<br />
+28/05/2026, <i>Matrimonio</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/meraki-festival-internazionale-di-teatro/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon<br />
 08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University<br />
 02/08/2026, <i>Matrimonio</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo)<br />
 05-06/09/2026, <i>Matrimonio</i>: Festival Mirabilia, Cuneo
