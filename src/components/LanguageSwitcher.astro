@@ -1,0 +1,56 @@
+---
+const pathname = Astro.url.pathname;
+
+const routeMap: Record<string, string> = {
+  '/': '/en',
+  '/bio': '/en/about',
+  '/bio/': '/en/about/',
+  '/contatti': '/en/contact',
+  '/contatti/': '/en/contact/',
+  '/laboratorio': '/en/laboratory',
+  '/laboratorio/': '/en/laboratory/',
+  '/spettacoli': '/en/performances',
+  '/spettacoli/': '/en/performances/',
+  '/appuntamenti': '/en/news',
+  '/appuntamenti/': '/en/news/',
+
+  '/en': '/',
+  '/en/': '/',
+  '/en/about': '/bio',
+  '/en/about/': '/bio/',
+  '/en/contact': '/contatti',
+  '/en/contact/': '/contatti/',
+  '/en/laboratory': '/laboratorio',
+  '/en/laboratory/': '/laboratorio/',
+  '/en/performances': '/spettacoli',
+  '/en/performances/': '/spettacoli/',
+  '/en/news': '/appuntamenti',
+  '/en/news/': '/appuntamenti/',
+
+  '/spettacoli/matrimonio': '/spettacoli/en/wedding',
+  '/spettacoli/matrimonio/': '/spettacoli/en/wedding/',
+  '/spettacoli/en/wedding': '/spettacoli/matrimonio',
+  '/spettacoli/en/wedding/': '/spettacoli/matrimonio/',
+
+  '/spettacoli/macbett': '/spettacoli/en/macbett-ionesco',
+  '/spettacoli/macbett/': '/spettacoli/en/macbett-ionesco/',
+  '/spettacoli/en/macbett-ionesco': '/spettacoli/macbett',
+  '/spettacoli/en/macbett-ionesco/': '/spettacoli/macbett/',
+};
+
+const isEnglish =
+  pathname === '/en' ||
+  pathname.startsWith('/en/') ||
+  pathname.startsWith('/spettacoli/en/');
+
+const currentLocale = isEnglish ? 'en' : 'it';
+
+const itHref = currentLocale === 'it' ? pathname : (routeMap[pathname] ?? '/');
+const enHref = currentLocale === 'en' ? pathname : (routeMap[pathname] ?? '/en');
+---
+
+<nav class="language-switcher" aria-label="Language switcher">
+  <a href={itHref} aria-current={currentLocale === 'it' ? 'page' : undefined}>IT</a>
+  <span>/</span>
+  <a href={enHref} aria-current={currentLocale === 'en' ? 'page' : undefined}>EN</a>
+</nav>

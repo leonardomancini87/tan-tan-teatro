@@ -10,12 +10,47 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const { title, description, thumbnail } = entry.data;
+const currentLocale = entry.data.locale ?? 'it';
 
-// Porting the form HTML.
-// Using standard Netlify form submission (no JS hijack required for basic functionality).
+const formText = {
+  it: {
+    heading: 'Modulo di contatto',
+    firstName: 'Nome',
+    lastName: 'Cognome',
+    email: 'Email',
+    location: 'Luogo',
+    categoryPlaceholder: '-Informazioni-',
+    categoryGeneral: 'Generale',
+    categoryShows: 'Spettacoli',
+    categoryWorkshop: 'Laboratorio',
+    categoryResearch: 'Ricerca',
+    categoryOther: 'Altro',
+    message: 'Scrivi qui il tuo messaggio',
+    submit: 'Invia messaggio',
+    action: '/contact/thanks',
+  },
+  en: {
+    heading: 'Contact form',
+    firstName: 'First name',
+    lastName: 'Last name',
+    email: 'Email',
+    location: 'Location',
+    categoryPlaceholder: '-Information-',
+    categoryGeneral: 'General',
+    categoryShows: 'Performances',
+    categoryWorkshop: 'Laboratory',
+    categoryResearch: 'Research',
+    categoryOther: 'Other',
+    message: 'Write your message here',
+    submit: 'Send message',
+    action: '/contact/thanks',
+  }
+};
+
+const t = formText[currentLocale];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} locale={currentLocale}>
   <article class="contact-form page-template">
     {thumbnail && (
       <div class="post-content-image">
@@ -25,41 +60,45 @@ const { title, description, thumbnail } = entry.data;
 
     <div class="post-content-body">
       <Content />
-      <h3 id="forms">Modulo di contatto</h3>
-      <form name="contact" method="POST" data-netlify="true" action="/contact/thanks">
+      <h3 id="forms">{t.heading}</h3>
+
+      <form name="contact" method="POST" data-netlify="true" action={t.action}>
         <input type="hidden" name="form-name" value="contact" />
+
         <p hidden>
-           <label>Don’t fill this out: <input name="bot-field" /></label>
+          <label>Don’t fill this out: <input name="bot-field" /></label>
         </p>
 
         <div class="row gtr-uniform">
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="first-name" id="first-name" placeholder="Nome" required />
-          </div>
-          <div class="col-6 col-12-xsmall">
-            <input type="text" name="last-name" id="last-name" placeholder="Cognome" required />
+            <input type="text" name="first-name" id="first-name" placeholder={t.firstName} required />
           </div>
 
           <div class="col-6 col-12-xsmall">
-            <input type="email" name="email" id="demo-email" placeholder="Email" required />
+            <input type="text" name="last-name" id="last-name" placeholder={t.lastName} required />
           </div>
+
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="location" id="location" placeholder="Luogo" required />
+            <input type="email" name="email" id="demo-email" placeholder={t.email} required />
+          </div>
+
+          <div class="col-6 col-12-xsmall">
+            <input type="text" name="location" id="location" placeholder={t.location} required />
           </div>
 
           <div class="col-12">
             <select name="category" id="category" required>
-              <option value="">-Informazioni-</option>
-              <option value="General">Generale</option>
-              <option value="Purchase">Spettacoli</option>
-              <option value="Commissions">Laboratorio</option>
-              <option value="Exhibitions">Ricerca</option>
-              <option value="Gallery Feature">Altro</option>
+              <option value="">{t.categoryPlaceholder}</option>
+              <option value="General">{t.categoryGeneral}</option>
+              <option value="Purchase">{t.categoryShows}</option>
+              <option value="Commissions">{t.categoryWorkshop}</option>
+              <option value="Exhibitions">{t.categoryResearch}</option>
+              <option value="Gallery Feature">{t.categoryOther}</option>
             </select>
           </div>
 
           <div class="col-12">
-            <textarea name="message" id="message" placeholder="Scrivi qui il tuo messaggio" rows="6" required></textarea>
+            <textarea name="message" id="message" placeholder={t.message} rows="6" required></textarea>
           </div>
 
           <div data-netlify-recaptcha="true"></div>
@@ -67,7 +106,7 @@ const { title, description, thumbnail } = entry.data;
           <div class="col-12">
             <ul class="actions">
               <li>
-                <input type="submit" value="Invia messaggio" class="primary" />
+                <input type="submit" value={t.submit} class="primary" />
               </li>
             </ul>
           </div>

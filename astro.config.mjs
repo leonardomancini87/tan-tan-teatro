@@ -4,6 +4,13 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://clay-astro-theme.netlify.app',
-    integrations: [sitemap()],
+  site: 'https://www.tantanteatro.it',
+  integrations: [sitemap()],
+  i18n: {
+    locales: ['it', 'en'],
+    defaultLocale: 'it',
+    routing: {
+      prefixDefaultLocale: false
+    }
+  }
 });

@@ -8,6 +8,8 @@ number: 1
 pagetype:
   - page
 featuredimage: /img/tantanteatro.jpeg
+locale: "it"
+translationKey: "about-page"
 ---
 
 ## Tan Tan Teatro

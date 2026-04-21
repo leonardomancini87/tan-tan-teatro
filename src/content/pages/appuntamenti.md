@@ -1,11 +1,12 @@
 ---
 title: "Appuntamenti"
-slug: "news"
+templateKey: news-page
 thumbnail: /img/news.jpg
-layout: "../templates/Page.astro"
 pagetype:
   - page
 featuredimage: /img/news.jpg
+locale: "it"
+translationKey: "news-page"
 ---
 
 ## Prossime rappresentazioni

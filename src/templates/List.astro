@@ -5,40 +5,48 @@ import { type CollectionEntry } from 'astro:content';
 
 interface Props {
   entry: CollectionEntry<'pages'>;
-  items?: any[]; // The list of items to display
+  items?: any[];
   baseSlug?: string;
 }
 
 const { entry, items = [], baseSlug } = Astro.props;
 const { Content } = await entry.render();
 
-const { title, description, thumbnail } = entry.data;
+const { title, description, templateKey } = entry.data;
+const currentLocale = entry.data.locale ?? 'it';
+
+const showCards = templateKey !== 'news-page';
 
 let postCounter = 0;
 ---
 
-<Layout title={title} description={description}>
-    {description && (
-      <header class="page-head">
-        <h2 class="page-head-title">
-          {description}
-        </h2>
-      </header>
-    )}
+<Layout title={title} description={description} locale={currentLocale}>
+  {description && (
+    <header class="page-head">
+      <h2 class="page-head-title">
+        {description}
+      </h2>
+    </header>
+  )}
 
-    {/* Content from the index markdown (if any, though legacy work-page didn't show it, only description).
-        But generic List might want it. */}
-
-    <div class="post-feed">
-        {items.map((post) => {
-            postCounter++;
-            return (
-                <PostCard
-                    count={postCounter}
-                    post={post}
-                    slug={baseSlug ? `${baseSlug}/${post.slug}` : post.slug}
-                />
-            );
-        })}
+  <section class="post-content page-template">
+    <div class="post-content-body">
+      <Content />
     </div>
+  </section>
+
+  {showCards && (
+    <div class="post-feed">
+      {items.map((post) => {
+        postCounter++;
+        return (
+          <PostCard
+            count={postCounter}
+            post={post}
+            slug={baseSlug ? `${baseSlug}/${post.slug}` : post.slug}
+          />
+        );
+      })}
+    </div>
+  )}
 </Layout>

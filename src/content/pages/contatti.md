@@ -8,4 +8,6 @@ number: 5
 pagetype:
   - page
 featuredimage: /img/contatti.jpg
+locale: "it"
+translationKey: "contact-page"
 ---

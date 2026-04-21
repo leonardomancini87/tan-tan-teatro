@@ -1,9 +1,30 @@
 ---
+interface Props {
+  locale?: 'it' | 'en';
+}
+
+const { locale = 'it' } = Astro.props;
+
+const isEn = locale === 'en';
+
+const today = new Date().toLocaleDateString(
+  isEn ? 'en-GB' : 'it-IT',
+  { day: 'numeric', month: 'long', year: 'numeric' }
+);
+
+const homeHref = isEn ? '/en' : '/';
 ---
-<footer class="site-foot">
-    <div><a href="/">Tan Tan Teatro</a></div>
-    <div>
-        Torino, Italia |
-        Ultimo aggiornamento del sito web: 18 aprile 2026
-    </div>
+
+<footer class="site-footer">
+  <div class="site-footer-content">
+    <a href={homeHref}>
+      Tan Tan Teatro
+    </a>
+
+    <p>
+      {isEn
+        ? `Turin, Italy | Last website update: ${today}`
+        : `Torino, Italia | Ultimo aggiornamento del sito web: ${today}`}
+    </p>
+  </div>
 </footer>

@@ -16,9 +16,11 @@ const { entry, next, prev, baseSlug, slug } = Astro.props;
 const { Content } = await entry.render();
 
 const { title, description, thumbnail } = entry.data;
+const currentLocale = entry.data.locale ?? 'it';
+const galleryTitle = currentLocale === 'en' ? 'Gallery' : 'Galleria';
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} locale={currentLocale}>
   <article class={`post-content ${thumbnail ? '' : 'no-image'}`}>
     {description && (
       <p class="post-content-excerpt">{description}</p>
@@ -31,29 +33,31 @@ const { title, description, thumbnail } = entry.data;
     )}
 
     <div class="post-content-body" id="post-body">
-    <Content />
+      <Content />
     </div>
 
     {entry.data.gallery && (
       <Gallery
         items={entry.data.gallery}
         group={entry.data.title}
-        title="Galleria"
+        title={galleryTitle}
       />
     )}
 
     {slug && <AutoGallery slug={slug} />}
-    <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const body = document.getElementById("post-body");
-    const credit = body?.querySelector(".photo-credit");
-    const postLink = document.querySelector(".post-link");
 
-    if (credit && postLink) {
-      postLink.parentElement.insertBefore(credit, postLink);
-    }
-  });
-</script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const body = document.getElementById("post-body");
+        const credit = body?.querySelector(".photo-credit");
+        const postLink = document.querySelector(".post-link");
+
+        if (credit && postLink) {
+          postLink.parentElement.insertBefore(credit, postLink);
+        }
+      });
+    </script>
+
     <div class="post-link">
       <div>
         {next && (

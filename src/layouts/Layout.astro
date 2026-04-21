@@ -10,14 +10,15 @@ import Footer from "../components/Footer.astro";
 export interface Props {
     title?: string;
     description?: string;
+    locale?: "it" | "en";
     children?: any;
 }
 
-const { title, description } = Astro.props;
+const { title, description, locale = "it" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content={description || "Clay Theme"} />
@@ -29,7 +30,6 @@ const { title, description } = Astro.props;
         <title>{title || "Clay"}</title>
         <ClientRouter />
         <script is:inline>
-            // Theme init
             const theme = (() => {
                 if (
                     typeof localStorage !== "undefined" &&
@@ -39,6 +39,7 @@ const { title, description } = Astro.props;
                 }
                 return "light";
             })();
+
             if (theme === "dark") {
                 document.documentElement.setAttribute("data-theme", "dark");
             } else {
@@ -55,7 +56,7 @@ const { title, description } = Astro.props;
             </div>
         </main>
 
-        <Footer />
+        <Footer locale={locale} />
 
         <script>
             import { navigate } from "astro:transitions/client";
@@ -73,18 +74,19 @@ const { title, description } = Astro.props;
 
             function initTheme() {
                 const toggleBtn = document.getElementById("theme-toggle");
+
                 const updateIcon = () => {
                     const isDark =
                         document.documentElement.getAttribute("data-theme") ===
                         "dark";
-                    // Add logic to animate or swap icons if needed, currently CSS handles visibility? No, added SVGs.
-                    // Simple SVG toggle:
+
                     const sun = document.querySelector(
                         ".sun-icon",
-                    ) as HTMLElement;
+                    );
                     const moon = document.querySelector(
                         ".moon-icon",
-                    ) as HTMLElement;
+                    );
+
                     if (sun && moon) {
                         sun.style.display = isDark ? "inline-block" : "none";
                         moon.style.display = isDark ? "none" : "inline-block";
@@ -110,23 +112,21 @@ const { title, description } = Astro.props;
                                 "data-theme",
                             );
                         }
+
                         localStorage.setItem("theme", newTheme);
                         updateIcon();
                     });
                 }
             }
 
-            // Run on view transitions (fires on initial load too)
             document.addEventListener("astro:page-load", () => {
                 initNav();
                 initTheme();
             });
 
-            // Re-apply theme on swap to prevent flash?
-            // The is:inline script in head handles the initial check on reload.
-            // astro:after-swap handles verifying state after client-side nav.
             document.addEventListener("astro:after-swap", () => {
                 const theme = localStorage.getItem("theme");
+
                 if (
                     theme === "dark" ||
                     (!theme &&

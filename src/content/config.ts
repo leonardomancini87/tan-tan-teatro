@@ -20,6 +20,8 @@ const commonSchema = z.object({
   pagetype: z.array(z.string()).optional(),
   folder: z.string().optional(),
   gallery: z.array(galleryItemSchema).optional(),
+  locale: z.enum(['it', 'en']).optional(),
+  translationKey: z.string().optional(),
 });
 
 const news = defineCollection({

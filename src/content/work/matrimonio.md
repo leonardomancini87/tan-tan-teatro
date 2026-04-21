@@ -7,24 +7,26 @@ number: 1
 date: 2023-01-03T15:04:10.000Z
 title: Il matrimonio
 description: Witold Gombrowicz, 1947
+locale: "it"
+translationKey: "matrimonio-page"
 ---
 ## "Il matrimonio" (<em>Ślub</em>), 1947
 
-L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato gli altri», pensa Witold Gombrowicz (1904-1969), secondo l’interpretazione critica offerta da Jan Kott (1971). Nella seconda opera teatrale dell’autore polacco, il cerimoniale umano, e in particolare il rituale del matrimonio, sono al centro dell’attenzione. Concepita come farsa tragica, la pièce interroga i modi in cui l’impotenza dell’uomo, cui resta solo la possibilità dello scontro e di gesti simbolici e deformanti, assume le manifestazioni più grottesche. In una dimensione sospesa fra sogno e veglia, la vicenda, ambientata da Gombrowicz nella cupa notte della Seconda guerra mondiale, è riportata al nostro tempo contemporaneo, nel quale indifferenza, senso di impotenza e volgarità convivono nuovamente nel vivere quotidiano.
+"The self is another," writes Rimbaud; "the self is the face that others have given me," thinks Witold Gombrowicz (1904-1969), according to the critical interpretation offered by Jan Kott (1971). In the Polish author's second play, human ceremony, and in particular the ritual of marriage, are the focus. Conceived as a tragic farce, the play interrogates the ways in which human impotence, left only with the possibility of conflict and symbolic and distorting gestures, takes on the most grotesque manifestations. In a dimension suspended between dream and waking, the story, set by Gombrowicz in the dark night of the Second World War, is brought to our contemporary times, in which indifference, a sense of impotence, and vulgarity once again coexist in everyday life.
 <br /><br />
 ![Studio shelves](/img/matrimonio02.jpg)
 
-### Compagnia
+### Ensemble
 
-<b>Interpreti</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
-<b>Musiche</b>: Andrea D'Oria<br/>
-<b>Coreografie</b>:Francesca Tomalino<br/>
-<b>Adattamento drammaturgico e regia</b>: Leonardo Mancini
+<b>Actors</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
+<b>Music</b>: Andrea D'Oria<br/>
+<b>Choreographies</b>:Francesca Tomalino<br/>
+<b>Dramaturgical adaptation and direction</b>: Leonardo Mancini
 <br /><br />
-<i>Durata</i>: 1 ora
+<i>Duration</i>: 1 hour.
 
 <p class="photo-credit">
   <a href="https://www.instagram.com/sonodello/" target="_blank">
-    Fotografie: Alessio Dell'Anna
+    Photos: Alessio Dell'Anna
   </a>
 </p>

@@ -78,6 +78,16 @@
             "additionalProperties": false
           }
         },
+        "locale": {
+          "type": "string",
+          "enum": [
+            "it",
+            "en"
+          ]
+        },
+        "translationKey": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import WorkTemplate from '../../templates/Work.astro';
+
+export async function getStaticPaths() {
+  const workEntries = await getCollection('work');
+
+  const sortedEntries = [...workEntries].sort((a, b) => {
+    return new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
+  });
+
+  return sortedEntries.map((entry) => {
+    const locale = entry.data.locale ?? 'it';
+    const publicSlug = entry.slug;
+
+    const sameLocaleEntries = sortedEntries.filter(
+      (item) => (item.data.locale ?? 'it') === locale
+    );
+
+    const currentIndex = sameLocaleEntries.findIndex(
+      (item) => item.id === entry.id
+    );
+
+    const newer = currentIndex === 0 ? null : sameLocaleEntries[currentIndex - 1];
+    const older =
+      currentIndex === sameLocaleEntries.length - 1
+        ? null
+        : sameLocaleEntries[currentIndex + 1];
+
+    return {
+      params: {
+        slug: locale === 'en' ? `en/${publicSlug}` : publicSlug,
+      },
+      props: {
+        entry,
+        next: newer,
+        prev: older,
+      },
+    };
+  });
+}
+
+const { entry, next, prev } = Astro.props;
+const locale = entry.data.locale ?? 'it';
+const publicSlug = entry.slug;
+const baseSlug = locale === 'en' ? 'spettacoli/en' : 'spettacoli';
+---
+
+<WorkTemplate
+  entry={entry}
+  next={next}
+  prev={prev}
+  baseSlug={baseSlug}
+  slug={publicSlug}
+/>

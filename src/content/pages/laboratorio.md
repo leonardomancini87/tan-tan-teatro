@@ -10,6 +10,8 @@ pagetype:
   - main
 number: 3
 featuredimage: /img/lab01.jpeg
+locale: "it"
+translationKey: "laboratory-page"
 ---
 
 ## Corpo, movimento, voce
