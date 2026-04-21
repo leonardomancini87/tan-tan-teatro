@@ -23,7 +23,8 @@ A lucid reflection on madness and human senselessness in the insatiable lust for
 <b>Costumes</b>: Giulia Tonello, Sara Marenco<br/>
 <b>Direction</b>: Leonardo Mancini<br/><br/>
 Duration: 1 hour<br/>
-<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Tech rider</a> / <a href="/doc/macbett-rassegna.pdf" target="_blank">Press</a><br /> 
+<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Tech rider</a> / <a href="/doc/macbett-rassegna.pdf" target="_blank">Press</a><br /><br /> 
+<i>Thanks to</i>: Ivana Ferri, Bruno Maria Ferraro (Teatro Tangram, Torino); Silvia Battaglio.
 <h3>Previous performances</h3>
 22/05/2025: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon, France<br/>
 02/07/2025: <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank">Tingeltangel</a>, Turin, Italy<br/>

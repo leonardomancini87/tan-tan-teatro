@@ -3,26 +3,17 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import Gallery from "./Gallery.astro";
+import { galleryCaptions } from "../data/gallery-captions.js";
 
-interface Props {
-  slug: string;
-  title?: string;
-  group?: string;
-}
-
-const {
-  slug,
-  title = "Galleria fotografica",
-  group = slug,
-} = Astro.props;
+const { slug, title = "Galleria fotografica", group = slug } = Astro.props;
 
 const projectRoot = fileURLToPath(new URL("../../", import.meta.url));
-const galleryDir = path.join(projectRoot, "public/img", slug);
+const galleryDir = path.join(projectRoot, "public", "img", slug);
 
 const allowedExt = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 let items = [];
 
-function prettifyFilename(filename: string) {
+function prettifyFilename(filename) {
   return filename
     .replace(/\.[^.]+$/, "")
     .replace(/[-_]/g, " ")
@@ -31,6 +22,7 @@ function prettifyFilename(filename: string) {
 
 try {
   const entries = await fs.readdir(galleryDir, { withFileTypes: true });
+  const captionsForSlug = galleryCaptions[slug] || {};
 
   items = entries
     .filter((entry) => entry.isFile())
@@ -38,19 +30,18 @@ try {
     .filter((name) => allowedExt.has(path.extname(name).toLowerCase()))
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
     .map((filename) => {
-      const label = prettifyFilename(filename);
+      const label = captionsForSlug[filename] || prettifyFilename(filename);
 
       return {
         src: `/img/${slug}/${filename}`,
-        alt: `${slug} – ${label}`,
+        alt: label,
         caption: label,
       };
     });
-} catch {
+} catch (error) {
+  console.error("AutoGallery error:", error);
   items = [];
 }
 ---
 
-{items.length > 0 && (
-  <Gallery items={items} group={group} title={title} />
-)}
+{items.length > 0 && <Gallery items={items} group={group} title={title} />}

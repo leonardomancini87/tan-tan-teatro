@@ -18,7 +18,7 @@ const { items, group = "gallery", title } = Astro.props;
 
 {title && <h3 class="gallery-title">{title}</h3>}
 
-<div class="gallery-grid">
+<div class="gallery-grid" data-gallery={group}>
   {items.map((item, index) => (
     <a
       href={item.src}
@@ -35,16 +35,28 @@ const { items, group = "gallery", title } = Astro.props;
 <script>
   import { Fancybox } from "@fancyapps/ui";
 
-  Fancybox.bind("[data-fancybox]", {
-    Thumbs: false,
-    Toolbar: {
-      display: {
-        left: [],
-        middle: [],
-        right: ["zoom", "slideshow", "fullscreen", "close"],
-      },
-    },
-  });
+  function initGalleries() {
+    document.querySelectorAll(".gallery-grid").forEach((grid) => {
+      Fancybox.unbind(grid);
+
+      Fancybox.bind(grid, "[data-fancybox]", {
+        groupAll: true,
+        Thumbs: {
+          autoStart: true,
+        },
+        Toolbar: {
+          display: {
+            left: ["infobar"],
+            middle: [],
+            right: ["zoom", "slideshow", "fullscreen", "thumbs", "close"],
+          },
+        },
+      });
+    });
+  }
+
+  initGalleries();
+  document.addEventListener("astro:page-load", initGalleries);
 </script>
 
 <style>
@@ -131,5 +143,56 @@ const { items, group = "gallery", title } = Astro.props;
     .gallery-item--large img {
       aspect-ratio: 4 / 3;
     }
+  }
+
+  :global(.fancybox__container) {
+    --fancybox-color: #fff;
+    --fancybox-bg: rgba(10, 10, 12, 0.96);
+    --fancybox-toolbar-bg: rgba(0, 0, 0, 0.5);
+  }
+
+  :global(.fancybox__nav .f-button) {
+    color: #fff !important;
+    background: rgba(0, 0, 0, 0.55) !important;
+    border-radius: 999px;
+    width: 44px;
+    height: 44px;
+    opacity: 1 !important;
+    backdrop-filter: blur(4px);
+  }
+
+  :global(.fancybox__nav .f-button:hover) {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  :global(.fancybox__toolbar) {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 4px;
+  }
+
+  :global(.fancybox__toolbar .f-button) {
+    color: #fff !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border-radius: 6px;
+    opacity: 1 !important;
+  }
+
+  :global(.fancybox__toolbar .f-button:hover) {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  :global(.fancybox__counter) {
+    color: #fff !important;
+    font-weight: 500;
+  }
+
+  :global(.f-button svg) {
+    stroke: currentColor !important;
+  }
+
+  :global(.fancybox__caption) {
+    color: #fff;
+    text-align: center;
   }
 </style>
