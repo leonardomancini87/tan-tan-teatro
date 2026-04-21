@@ -450,3 +450,42 @@ html[data-theme="dark"] body .post-content-body h6 {
   opacity: 1;
   font-weight: 600;
 }
+/* Contact block elegante */
+
+.contact-block {
+    max-width: 520px;
+    margin: 0 auto 4rem auto;
+    text-align: left;
+}
+
+.contact-block h2 {
+    font-size: 2.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-line {
+    margin: 0.6rem 0;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+.contact-line a {
+    text-decoration: underline;
+}
+/* Blocco contatti sopra il form */
+.contact-block {
+    max-width: 720px;
+    margin: 0 auto 3rem auto;
+    text-align: left; /* ← questo è il punto chiave */
+}
+
+/* Titolo */
+.contact-block h2 {
+    margin-bottom: 1rem;
+}
+
+/* Righe */
+.contact-line {
+    margin: 0.4rem 0;
+}
