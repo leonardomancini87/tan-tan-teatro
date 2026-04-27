@@ -6,12 +6,12 @@ pagetype:
 number: 1
 date: 2023-01-03T15:04:10.000Z
 title: The wedding
-description: Witold Gombrowicz, 1947
+description: Witold Gombrowicz, 1948
 locale: "en"
 slug: "wedding"
 translationKey: "wedding-page"
 ---
-## "The wedding" (<em>Ślub</em>), 1947
+## "The wedding" (<em>Ślub</em>), 1948
 
 "The self is another," writes Rimbaud; "the self is the face that others have given me," thinks Witold Gombrowicz (1904-1969), according to the critical interpretation offered by Jan Kott (1971). In the Polish author's second play, human ceremony, and in particular the ritual of marriage, are the focus. Conceived as a tragic farce, the play interrogates the ways in which human impotence, left only with the possibility of conflict and symbolic and distorting gestures, takes on the most grotesque manifestations. In a dimension suspended between dream and waking, the story, set by Gombrowicz in the dark night of the Second World War, is brought to our contemporary times, in which indifference, a sense of impotence, and vulgarity once again coexist in everyday life.
 <br /><br />
