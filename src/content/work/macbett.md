@@ -28,6 +28,7 @@ Durata: 1 ora<br/>
 07/09/2025: <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/" target="_blank">Festival Mirabilia</a>, Cuneo<br/>
 10-11/01/2026: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Torino<br/>
 21/02/2026: <a href="http://www.arhatteatro.it/?fbclid=IwY2xjawRQlXdleHRuA2FlbQIxMABicmlkETBVVWlhbk83SVFaWWZsekNoc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDdArXwkeXCNv-unycShqgwOzyFvdjz9Mkmo4t83z9x3REUSkuYOASUxqrW_aem_ihTtIDvuoRrzA0hpMG-zZQ" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo
+<h3>Rassegna stampa</h3>: Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L’Eco di Bergamo”, 21 febbraio 2026, p. 35; Micaela Vernice, <i>«Macbett è l’insensatezza della brama di potere»</i>, “L’Eco di Bergamo”, 25 febbraio 2026, p. 47; Daniele Stellato, <i>«Gemme di teatro» parte  col botto</i>, “Giornale di Treviglio”, p. 35. 
 
 <br/>
 <h3>Trailer</h3>
