@@ -17,7 +17,7 @@ Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziab
 <br/><br/>
 <b>Interpreti</b>: Siyuan Chen, Viola Cicoria, Olivia Del Sante, Pablo Comune, Stefano Martelli, Giovanni Pessina, Aurora Matilde Viola Sempio, Giulia Tonello, Gabriele Vaschetti<br/>
 <b>Musiche</b>: Andrea D'Oria<br/>
-<b>Luci (ideazione)</b>: Sara Marenco. <b>Datore luci</b>: Marco Usmigli<br/> (da maggio 2026)
+<b>Luci (ideazione)</b>: Sara Marenco. <b>Datore luci</b>: Marco Usmigli<br/> (da maggio 2026)<br/>
 <b>Costumi</b>: Giulia Tonello, Sara Marenco<br/>
 <b>Regia</b>: Leonardo Mancini<br/><br/>
 Durata: 1 ora<br/>

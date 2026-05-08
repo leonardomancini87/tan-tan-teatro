@@ -12,10 +12,11 @@ translationKey: "news-page"
 ## Next performances
 
 09/05/2026, <i>Macbett</i>: Teatro Martini, Comune di Cavagnolo (Torino), Italy<br />
-28/05/2026, <i>The Wedding</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/meraki-festival-internazionale-di-teatro/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon, France<br />
+28/05/2026, <i>The Marriage</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/meraki-festival-internazionale-di-teatro/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon, France<br />
+03/07/2026, ore 21: <i>Il Matrimonio</i>: Spazio Kairòs / Onda Larsen Teatro, Turin, Italy<br />
 08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University, Lithuania<br />
-02/08/2026, <i>The Wedding</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo), Italy<br />
-05-06/09/2026, <i>The Wedding</i>: Festival Mirabilia, Cuneo, Italy
+02/08/2026, <i>The Marriage</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo), Italy<br />
+05-06/09/2026, <i>The Marriage</i>: Festival Mirabilia, Cuneo, Italy
 
 ## Previous performances
 
