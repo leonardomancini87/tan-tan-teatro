@@ -13,6 +13,7 @@ translationKey: "news-page"
 
 09/05/2026, <i>Macbett</i>: <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Comune di Cavagnolo (Torino)<br />
 28/05/2026, <i>Il Matrimonio</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/meraki-festival-internazionale-di-teatro/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon<br />
+11/06/2026, <i>Macbett</i>: Accademia Ligustica di Belle Arti di Genova<br />
 03/07/2026, ore 21: <i>Il Matrimonio</i>: Spazio Kairòs / Onda Larsen Teatro, Torino<br />
 08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University<br />
 02/08/2026, <i>Matrimonio</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo)<br />
