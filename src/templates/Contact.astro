@@ -19,7 +19,7 @@ const formText = {
     lastName: 'Cognome',
     email: 'Email',
     location: 'Luogo',
-    categoryPlaceholder: '-Informazioni-',
+    categoryPlaceholder: 'Informazioni',
     categoryGeneral: 'Generale',
     categoryShows: 'Spettacoli',
     categoryWorkshop: 'Laboratorio',
@@ -35,7 +35,7 @@ const formText = {
     lastName: 'Last name',
     email: 'Email',
     location: 'Location',
-    categoryPlaceholder: '-Information-',
+    categoryPlaceholder: 'Information',
     categoryGeneral: 'General',
     categoryShows: 'Performances',
     categoryWorkshop: 'Laboratory',
@@ -51,7 +51,11 @@ const t = formText[currentLocale];
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
-  <article class="contact-form page-template">
+  <article class={`post-content contact-form page-template ${thumbnail ? '' : 'no-image'}`}>
+    {description && (
+      <p class="post-content-excerpt">{description}</p>
+    )}
+
     {thumbnail && (
       <div class="post-content-image">
         <img src={thumbnail} class="kg-image" alt={title} />

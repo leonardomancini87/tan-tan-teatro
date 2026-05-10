@@ -58,8 +58,12 @@ export async function getStaticPaths() {
     } else if (isEnglishNews) {
       slugParam = "en/news";
     } else {
-      slugParam = locale === "en" ? `en/${entry.slug}` : entry.slug;
-    }
+  slugParam = locale === "en"
+    ? entry.slug.startsWith("en/")
+      ? entry.slug
+      : `en/${entry.slug}`
+    : entry.slug;
+}
 
     return {
       params: { slug: slugParam },

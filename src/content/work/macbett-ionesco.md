@@ -19,20 +19,22 @@ A lucid reflection on madness and human senselessness in the insatiable lust for
 
 <b>Actors</b>: Siyuan Chen, Viola Cicoria, Olivia Del Sante, Pablo Comune, Stefano Martelli, Giovanni Pessina, Aurora Matilde Viola Sempio, Giulia Tonello, Gabriele Vaschetti<br/>
 <b>Music</b>: Andrea D'Oria<br/>
-<b>Lights (creation)</b>: Sara Marenco. <b>Light designer</b>: Marco Usmigli<br/> (since May 2026)
-<b>Costumes</b>: Giulia Tonello, Sara Marenco<br/>
+<b>Lights (creation)</b>: Sara Marenco. <b>Light designer</b>: Marco Usmigli<br/> (since May 2026)<br />
+<b>Costumes</b>: Sara Marenco, Giulia Tonello<br/>
 <b>Direction</b>: Leonardo Mancini<br/><br/>
 Duration: 1 hour<br/>
-<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Tech rider</a> / <a href="/doc/macbett-rassegna.pdf" target="_blank">Press</a><br /><br /> 
 <i>Thanks to</i>: Ivana Ferri, Bruno Maria Ferraro (Teatro Tangram, Torino); Silvia Battaglio.
 <h3>Previous performances</h3>
-22/05/2025: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon, France<br/>
-02/07/2025: <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank">Tingeltangel</a>, Turin, Italy<br/>
+09/05/2026, <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Cavagnolo (Turin), Italy<br />
+21/02/2026: <a href="http://www.arhatteatro.it/?fbclid=IwY2xjawRQlXdleHRuA2FlbQIxMABicmlkETBVVWlhbk83SVFaWWZsekNoc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDdArXwkeXCNv-unycShqgwOzyFvdjz9Mkmo4t83z9x3REUSkuYOASUxqrW_aem_ihTtIDvuoRrzA0hpMG-zZQ" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo, Italy<br />
+10-11/01/2026: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Turin, Italy<br/>
 07/09/2025: <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/" target="_blank">Festival Mirabilia</a>, Cuneo, Italy<br/>
-10-11/01/2026: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Torino, Italy<br/>
-21/02/2026: <a href="http://www.arhatteatro.it/?fbclid=IwY2xjawRQlXdleHRuA2FlbQIxMABicmlkETBVVWlhbk83SVFaWWZsekNoc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDdArXwkeXCNv-unycShqgwOzyFvdjz9Mkmo4t83z9x3REUSkuYOASUxqrW_aem_ihTtIDvuoRrzA0hpMG-zZQ" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo, Italy
-
-<br/>
+02/07/2025: <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank">Tingeltangel</a>, Turin, Italy<br/>
+22/05/2025: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon, France<br/>
+<h3>Press articles</h3>
+Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L’Eco di Bergamo”, 21 febbraio 2026, p. 35; Micaela Vernice, <i>«Macbett è l’insensatezza della brama di potere»</i>, “L’Eco di Bergamo”, 25 febbraio 2026, p. 47; Daniele Stellato, <i>«Gemme di teatro» parte  col botto</i>, “Giornale di Treviglio”, p. 35 (<a href="/doc/macbett-rassegna.pdf" target="_blank">dossier</a>)
+<h3>Materials</h3>
+<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Tech rider</a>
 <h3>Trailer</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <p class="photo-credit">

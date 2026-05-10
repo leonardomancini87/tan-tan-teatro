@@ -3,7 +3,7 @@ templateKey: bio-page
 thumbnail: /img/tantanteatro.jpeg
 date: 2023-03-02T10:17:05.133Z
 title: About
-description: About the Artist
+description: Tan Tan Teatro – University theatre company based in Turin, Italy
 number: 1
 pagetype:
   - page
@@ -22,7 +22,7 @@ In addition to creating performances, Tan Tan Teatro regularly promotes and offe
 
 ### Members
 
-<b>Actors</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
+<b>Actors</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli<br/>
 <b>Music</b>: Andrea D'Oria<br/>
 <b>Dance and choreographies</b>: Francesca Tomalino<br/>
 <b>Lights</b>: Marco Usmigli<br/>

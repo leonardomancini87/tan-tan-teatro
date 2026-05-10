@@ -15,30 +15,26 @@ const { Content } = await entry.render();
 const { title, description, templateKey } = entry.data;
 const currentLocale = entry.data.locale ?? 'it';
 
+const isNewsPage = templateKey === 'news-page';
 const showCards = templateKey !== 'news-page';
 
 let postCounter = 0;
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
-  {description && (
-    <header class="page-head">
-      <h2 class="page-head-title">
-        {description}
-      </h2>
-    </header>
+  {isNewsPage && (
+    <section class="post-content page-template">
+      <div class="post-content-body">
+        <Content />
+      </div>
+    </section>
   )}
-
-  <section class="post-content page-template">
-    <div class="post-content-body">
-      <Content />
-    </div>
-  </section>
 
   {showCards && (
     <div class="post-feed">
       {items.map((post) => {
         postCounter++;
+
         return (
           <PostCard
             count={postCounter}

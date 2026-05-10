@@ -9,5 +9,6 @@ number: 2
 featuredimage: /img/lab01.jpeg
 locale: "en"
 slug: "performances"
+description: Our theatre performances and creations
 translationKey: "performances-page"
 ---

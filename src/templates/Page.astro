@@ -14,7 +14,11 @@ const currentLocale = entry.data.locale ?? 'it';
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
-  <article class={`post-content ${thumbnail ? '' : 'no-image'}`}>
+  <article class={`post-content contact-form page-template ${thumbnail ? '' : 'no-image'}`}>
+    {description && (
+      <p class="post-content-excerpt">{description}</p>
+    )}
+
     {thumbnail && (
       <div class="post-content-image">
         <img src={thumbnail} class="kg-image" alt={title} />
