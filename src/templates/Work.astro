@@ -46,17 +46,20 @@ const galleryTitle = currentLocale === 'en' ? 'Gallery' : 'Galleria';
 
     {slug && <AutoGallery slug={slug} />}
 
-    <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        const body = document.getElementById("post-body");
-        const credit = body?.querySelector(".photo-credit");
-        const postLink = document.querySelector(".post-link");
+    <script is:inline>
+  function movePhotoCredit() {
+    const body = document.getElementById("post-body");
+    const credit = body?.querySelector(".photo-credit");
+    const postLink = document.querySelector(".post-link");
 
-        if (credit && postLink) {
-          postLink.parentElement.insertBefore(credit, postLink);
-        }
-      });
-    </script>
+    if (!credit || !postLink || !postLink.parentElement) return;
+
+    postLink.parentElement.insertBefore(credit, postLink);
+  }
+
+  document.addEventListener("DOMContentLoaded", movePhotoCredit);
+  document.addEventListener("astro:page-load", movePhotoCredit);
+</script>
 
     <div class="post-link">
       <div>

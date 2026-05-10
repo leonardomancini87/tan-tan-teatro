@@ -1,0 +1,48 @@
+.fancybox__container {
+  --fancybox-color: #ffffff;
+  --fancybox-bg: rgba(10, 10, 12, 0.96);
+  --fancybox-toolbar-bg: rgba(0, 0, 0, 0.6);
+}
+
+.fancybox__nav .f-button {
+  color: #fff !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  opacity: 1 !important;
+}
+
+.fancybox__nav .f-button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.fancybox__toolbar {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+}
+
+.fancybox__toolbar .f-button {
+  color: #fff !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  opacity: 1 !important;
+  border-radius: 6px !important;
+}
+
+.fancybox__toolbar .f-button:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.fancybox__counter {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.f-button svg {
+  stroke: currentColor !important;
+}
+
+.fancybox__caption {
+  color: #fff !important;
+}
