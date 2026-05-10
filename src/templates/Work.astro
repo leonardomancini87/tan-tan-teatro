@@ -44,7 +44,12 @@ const galleryTitle = currentLocale === 'en' ? 'Gallery' : 'Galleria';
       />
     )}
 
-    {slug && <AutoGallery slug={slug} />}
+    {(entry.data.folder || slug) && (
+  <AutoGallery
+  slug={entry.data.folder || slug}
+  title={currentLocale === 'en' ? 'Photo Gallery' : 'Galleria fotografica'}
+/>
+)}
 
     <script is:inline>
   function movePhotoCredit() {

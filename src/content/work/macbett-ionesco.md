@@ -9,6 +9,7 @@ title: Macbett
 description: Eugène Ionesco, 1972
 locale: "en"
 slug: "macbett-ionesco"
+folder: "macbett"
 translationKey: "macbett-page"
 ---
 ## <i>Macbett</i>, by Eugène Ionesco, 1972

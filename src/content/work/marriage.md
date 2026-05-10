@@ -9,7 +9,8 @@ title: The Marriage
 description: Witold Gombrowicz, 1948
 locale: "en"
 slug: "the-marriage"
-translationKey: "wedding-page"
+folder: "matrimonio"
+translationKey: "the-marriage-page"
 ---
 ## "<i>The Marriage</i>" (<em>Ślub</em>), 1948
 
