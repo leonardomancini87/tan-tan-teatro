@@ -13,7 +13,10 @@ translationKey: "news-page"
 
 28/05/2026, <i>Il Matrimonio</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/meraki-festival-internazionale-di-teatro/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon<br />
 11/06/2026, <i>Macbett</i>: Accademia Ligustica di Belle Arti di Genova<br />
-03/07/2026, ore 21: <i>Il Matrimonio</i>: Spazio Kairòs / Onda Larsen Teatro, Torino<br />
+27/06/2026, <i>Il Matrimonio</i>: Villa Martini, Cavagnolo (Torino)<br />
+28/06/2026, <i>Il Matrimonio</i>: San Pietro in Vincoli, Torino<br />
+03/07/2026: <i>Il Matrimonio</i>: Spazio Kairòs / Onda Larsen Teatro, Torino<br />
+05/07/2026, <i>Macbett</i>: San Pietro in Vincoli, Torino<br />
 08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University<br />
 02/08/2026, <i>Il Matrimonio</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo)<br />
 05-06/09/2026, <i>Il Matrimonio</i>: Festival Mirabilia, Cuneo
