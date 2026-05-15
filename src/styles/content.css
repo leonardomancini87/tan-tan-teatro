@@ -542,28 +542,15 @@ html[data-theme="dark"] body .post-content-body h6 {
 .fancybox__nav .is-next {
   right: 16px !important;
 }
-/* VIDEO RESPONSIVO */
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: 2rem 0;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
 .video-wrapper {
   position: relative;
   width: 100%;
+  max-width: 100%;
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
+  margin: 2rem 0;
+  box-sizing: border-box;
 }
 
 .video-wrapper iframe {
@@ -571,6 +558,8 @@ html[data-theme="dark"] body .post-content-body h6 {
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 100%;
   height: 100%;
   border: 0;
+  display: block;
 }
