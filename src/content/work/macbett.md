@@ -32,7 +32,8 @@ Durata: 1 ora<br/>
 
 <br/>
 <h3>Trailer</h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="no-referrer-when-downgrade" allowfullscreen data-no-optimize>
+</iframe>
 <p class="photo-credit">
   <a href="https://www.instagram.com/adam_bbp/" target="_blank">
     Fotografie: Adam Hamadou
