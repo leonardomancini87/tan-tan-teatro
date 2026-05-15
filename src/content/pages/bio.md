@@ -3,7 +3,7 @@ templateKey: bio-page
 thumbnail: /img/tantanteatro.jpeg
 date: 2023-03-02T10:17:05.133Z
 title: Chi siamo
-description: Tan Tan Teatro. Gruppo di teatro universitario con sede a Torino
+description: Tan Tan Teatro
 number: 1
 pagetype:
   - page
