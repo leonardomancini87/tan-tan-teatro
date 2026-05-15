@@ -542,3 +542,18 @@ html[data-theme="dark"] body .post-content-body h6 {
 .fancybox__nav .is-next {
   right: 16px !important;
 }
+.post-content-body .fluid-width-video-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.post-content-body .fluid-width-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
