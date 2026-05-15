@@ -186,10 +186,6 @@ production stylesheet in assets/built/screen.css using gulp dev
   margin: 0;
 }
 
-.post-content-body iframe {
-  margin: 0 auto !important;
-}
-
 .post-content-body blockquote {
   margin: 0 0 1.5em;
   padding: 0 1.5em;
@@ -545,4 +541,23 @@ html[data-theme="dark"] body .post-content-body h6 {
 
 .fancybox__nav .is-next {
   right: 16px !important;
+}
+/* VIDEO RESPONSIVO */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
