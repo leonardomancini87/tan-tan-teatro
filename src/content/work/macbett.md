@@ -33,7 +33,7 @@ Durata: 1 ora<br/>
 <h3>Materiali</h3>
 <a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Scheda tecnica</a>
 <h3>Trailer</h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="no-referrer" allowfullscreen>
 </iframe>
 <p class="photo-credit">
   <a href="https://www.instagram.com/adam_bbp/" target="_blank">
