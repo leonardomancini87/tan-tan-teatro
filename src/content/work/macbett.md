@@ -42,14 +42,14 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, â€œLâ€
 
 <h3>Trailer</h3>
 
-<div class="video-container">
+<div class="video-wrapper">
   <iframe
     src="https://www.youtube.com/embed/_p8u-0JkcHc"
     title="Trailer Macbett"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-  ></iframe>
+    allowfullscreen>
+  </iframe>
 </div>
 
 <style>
