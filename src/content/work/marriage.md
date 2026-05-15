@@ -5,11 +5,12 @@ pagetype:
   - main
 number: 1
 date: 2023-01-03T15:04:10.000Z
-title: <i>The Marriage</i>
+title: The Marriage
 description: Witold Gombrowicz, 1948
 locale: "en"
-slug: "wedding"
-translationKey: "wedding-page"
+slug: "the-marriage"
+folder: "matrimonio"
+translationKey: "the-marriage-page"
 ---
 ## "<i>The Marriage</i>" (<em>Ślub</em>), 1948
 
@@ -19,9 +20,10 @@ translationKey: "wedding-page"
 
 ### Ensemble
 
-<b>Actors</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
+<b>Actors</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli<br/>
 <b>Music</b>: Andrea D'Oria<br/>
-<b>Choreographies</b>:Francesca Tomalino<br/>
+<b>Choreographies</b>: Francesca Tomalino<br/>
+<b>Light design</b>: Marco Usmigli<br/>
 <b>Dramaturgical adaptation and direction</b>: Leonardo Mancini
 <br /><br />
 <i>Duration</i>: 1 hour

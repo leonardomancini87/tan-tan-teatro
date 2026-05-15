@@ -2,7 +2,7 @@
 templateKey: elements
 title: Laboratory
 image: /img/clay-images-7.jpg
-description: A stunning Astro theme designed for captivating image-centric websites, perfect for photographers, portfolios, and blogs.
+description: Information about our training laboratory
 thumbnail: /img/lab01.jpeg
 heading: Main Heading
 subheading: Sub HEading

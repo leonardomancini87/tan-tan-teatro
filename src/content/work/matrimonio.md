@@ -8,7 +8,7 @@ date: 2023-01-03T15:04:10.000Z
 title: Il matrimonio
 description: Witold Gombrowicz, 1948
 locale: "it"
-translationKey: "wedding-page"
+translationKey: "the-marriage-page"
 ---
 ## "Il matrimonio" (<em>Ślub</em>), 1948
 
@@ -21,6 +21,7 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 <b>Attori</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
 <b>Musiche</b>: Andrea D'Oria<br/>
 <b>Coreografie</b>: Francesca Tomalino<br/>
+<b>Disegno luci</b>: Marco Usmigli<br/>
 <b>Adattamento drammaturgico e regia</b>: Leonardo Mancini
 <br /><br />
 <i>Durata</i>: 1 ora.

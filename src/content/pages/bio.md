@@ -3,7 +3,7 @@ templateKey: bio-page
 thumbnail: /img/tantanteatro.jpeg
 date: 2023-03-02T10:17:05.133Z
 title: Chi siamo
-description: About the Artist
+description: Tan Tan Teatro. Gruppo di teatro universitario con sede a Torino
 number: 1
 pagetype:
   - page
@@ -21,7 +21,7 @@ Parallelamente alla creazione di spettacoli, Tan Tan Teatro coltiva e propone re
 
 ### Membri della compagnia
 
-<b>Interpreti</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
+<b>Attori</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.<br/>
 <b>Musiche</b>: Andrea D'Oria<br/>
 <b>Danza e coreografie</b>: Francesca Tomalino<br/>
 <b>Luci</b>: Marco Usmigli<br/>

@@ -7,6 +7,7 @@ pagetype:
 featuredimage: /img/contatti.jpg
 locale: "en"
 translationKey: "contact-page"
+description: Contact us
 ---
 
 <div class="contact-block">

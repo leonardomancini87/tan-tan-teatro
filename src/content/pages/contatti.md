@@ -7,6 +7,7 @@ pagetype:
   - page
 locale: "it"
 translationKey: "contact-page"
+description: Informazioni e contatti
 ---
 
 <div class="contact-block">

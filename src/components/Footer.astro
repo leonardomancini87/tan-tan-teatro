@@ -13,6 +13,10 @@ const today = new Date().toLocaleDateString(
 );
 
 const homeHref = isEn ? '/en' : '/';
+
+const cookieHref = isEn
+  ? '/en/cookie-policy'
+  : '/cookie-policy';
 ---
 
 <footer class="site-footer">
@@ -25,6 +29,17 @@ const homeHref = isEn ? '/en' : '/';
       {isEn
         ? `Turin, Italy | Last website update: ${today}`
         : `Torino, Italia | Ultimo aggiornamento del sito web: ${today}`}
+      <br /><br />
+
+      <a href={cookieHref}>Cookie Policy</a>
+      {" | "}
+      <a
+        href="https://www.iubenda.com/privacy-policy/XXXXXXXX"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <a href="https://www.iubenda.com/privacy-policy/15384815" target="_blank">Privacy Policy
+      </a>
     </p>
   </div>
 </footer>

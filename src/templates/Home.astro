@@ -14,7 +14,7 @@ const currentLocale = entry.data.locale ?? 'it';
 const allPages = await getCollection('pages');
 const allWork = await getCollection('work');
 
-const allowedWorkKeys = ['wedding-page', 'matrimonio-page', 'macbett-page'];
+const allowedWorkKeys = ['the-marriage-page', 'matrimonio-page', 'macbett-page'];
 
 const homeWorks = allWork
   .filter((item) =>
