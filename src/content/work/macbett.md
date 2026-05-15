@@ -52,27 +52,6 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, â€œLâ€
   </iframe>
 </div>
 
-<style>
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-</style>
-
 <p class="photo-credit">
   <a href="[instagram.com](https://www.instagram.com/adam_bbp/)" target="_blank">
     Fotografie: Adam Hamadou
