@@ -17,15 +17,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <h2>Prossime rappresentazioni</h2>
 
 <div class="appointments-list">
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>28/05/2026</strong>
-<span>Maggio</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-il-matrimonio/" target="_blank" rel="noopener">Festival de théâtre universitaire “Meraki”</a>, Lyon
-</div>
-</div>
 
 <div class="appointment-row">
 <div class="appointment-date">
@@ -116,6 +107,15 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <details open>
 <summary>2026</summary>
 <div class="appointments-list appointments-list--compact">
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>28/05/2026</strong>
+<span>Maggio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-il-matrimonio/" target="_blank" rel="noopener">Festival de théâtre universitaire “Meraki”</a>, Lyon
+</div>
+</div>
 <div class="appointment-row">
 <div class="appointment-date">
 <strong>09/05/2026</strong>
@@ -220,7 +220,7 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <p class="appointments-note">
 Le date possono essere soggette a modifiche.<br />
-Ti invitiamo a consultare regolarmente questa pagina per aggiornamenti.
+Invitiamo a consultare regolarmente questa pagina per aggiornamenti.
 </p>
 
 <script>
