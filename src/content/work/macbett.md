@@ -1,6 +1,6 @@
 ---
 templateKey: work-sub-page
-thumbnail: /img/macbett/cavagnolo-2026-05-09/Cavagnolo-martelli.jpg
+thumbnail: /img/macbett01.jpg
 date: 2023-01-02T15:04:10.000Z
 pagetype:
   - main

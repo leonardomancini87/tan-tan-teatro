@@ -45,6 +45,24 @@ const photoCaptions: Record<string, Record<string, string>> = {
     'Cavagnolo-uccisione-banco.jpg': 'Gabriele Vaschetti (Banco), Stefano Martelli (Macbett). Fotografia: Alessio Dell’Anna',
   },
 
+    'macbett/tangram-2025-03': {
+    'macbett-tangram-01.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-02.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-03.jpg': 'Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-04.jpeg': 'Gianluca Fiore. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-05.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-06.jpg': 'Leonardo Mancini, Siyuan Chen. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-07.jpg': 'Andrea D’Oria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-08.jpg': 'Aurora Sempio. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-09.JPG': 'Gianluca Fiore, Giulia Tonello, Sara Marenco, Leonardo Mancini. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-10.jpg': 'Leonardo Mancini, Aurora Sempio. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-11.JPG': 'Viola Cicoria, Aurora Sempio, Leonardo Mancini. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-12.JPG': 'Stefano Martelli, Viola Cicoria, Giovanni Pessina, Olivia Del Sante. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-13.JPG': 'Stefano Martelli. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-14.JPG': 'Aurora Sempio, Giulia Tonello, Stefano Martelli, Viola Cicoria, Giovanni Pessina. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-15.JPG': 'Gianluca Fiore, Viola Cicoria, Giulia Tonello. Fotografia: Gabriele Vaschetti',
+  },
+
   'matrimonio/studiumlab-prove-2026-05-22': {
     'ambasciatore.jpg': 'Stefano Martelli, Eleonora Congiu, Aurora Sempio, Arturo Gerace, Viola Cicoria, Anita Masi, Giulia Tonello, Francesca Tomalino, Camilla Rizzo, Pablo Comune, Siyuan Chen, Giorgio Zaccarelli, Gabriela Checcia. Fotografia: Alessio Dell’Anna',
     'aurora-sempio.jpg': 'Aurora Sempio. Fotografia: Alessio Dell’Anna',
@@ -93,6 +111,11 @@ const cavagnoloCover =
   cavagnoloImages.find((image) => image.src.includes('Cavagnolo-soldato'))?.src ||
   cavagnoloImages[0]?.src;
 
+const tangramImages = getPublicAlbumImages('macbett/tangram-2025-03');
+
+const tangramCover =
+  tangramImages[0]?.src;
+
 const matrimonioStudiumlabImages = getPublicAlbumImages(
   'matrimonio/studiumlab-prove-2026-05-22'
 );
@@ -114,6 +137,18 @@ const relatedPhotoAlbums = [
         },
       ]
     : []),
+    ...(isMacbett && tangramImages.length > 0
+        ? [
+            {
+              title: 'Prove al Teatro Tangram',
+              meta: 'Torino, marzo 2025 · Apri album',
+              cover: tangramCover,
+              alt: 'Prove di Macbett al Teatro Tangram, Torino, marzo 2025',
+              group: 'macbett-tangram-2025-03',
+              images: tangramImages,
+            },
+          ]
+        : []),
 
   ...(isMatrimonio && matrimonioStudiumlabImages.length > 0
     ? [
