@@ -241,18 +241,21 @@ const relatedPhotoAlbums = [
           .forEach((grid) => {
             Fancybox.unbind(grid);
 
-            Fancybox.bind(grid, '[data-fancybox]', {
-              Thumbs: {
-                autoStart: true,
-              },
-              Toolbar: {
-                display: {
-                  left: ['infobar'],
-                  middle: [],
-                  right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
-                },
-              },
-            });
+            Fancybox.bind(grid, 'a[data-fancybox]', {
+  Hash: false,
+
+  Thumbs: {
+    autoStart: true,
+  },
+
+  Toolbar: {
+    display: {
+      left: ['infobar'],
+      middle: [],
+      right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
+    },
+  },
+});
           });
       }
 
