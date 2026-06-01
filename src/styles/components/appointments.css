@@ -1,0 +1,184 @@
+/* Appointments page
+/* ---------------------------------------------------------- */
+
+.appointments-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0 5rem;
+  font-family: var(--font-sans-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.appointments-tab {
+  display: inline-block;
+  color: var(--color-base);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 0.6rem;
+  font-family: var(--font-sans-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.appointments-tab:hover,
+.appointments-tab.is-active {
+  border-bottom-color: currentColor;
+  opacity: 1;
+}
+
+.appointments-panel {
+  display: none;
+}
+
+.appointments-panel.is-active {
+  display: block;
+}
+
+.appointments-list,
+.projects-list {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 1.5rem 0 4rem;
+}
+
+.appointment-row {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 1.8rem 2.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.appointment-row:last-child {
+  border-bottom: 0;
+}
+
+.appointment-date {
+  border-right: 1px solid var(--color-border);
+  padding-right: 2rem;
+}
+
+.appointment-date strong {
+  display: block;
+  font-size: 2.1rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.appointment-date span {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-sans-serif);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.appointment-content {
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+.appointments-accordion {
+  margin-bottom: 4rem;
+}
+
+.appointments-accordion details {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.appointments-accordion summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.2rem 0;
+  font-size: 2rem;
+}
+
+.appointments-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.appointments-accordion summary::after {
+  content: '+';
+  float: right;
+  font-family: var(--font-sans-serif);
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.appointments-accordion details[open] summary::after {
+  content: '–';
+}
+
+.appointments-list--compact {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: 1fr 18rem;
+  gap: 3rem;
+  padding: 2rem 2.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-row:last-child {
+  border-bottom: 0;
+}
+
+.project-row h3 {
+  margin: 0 0 0.6rem;
+}
+
+.project-row p {
+  margin: 0;
+}
+
+.project-meta {
+  font-family: var(--font-sans-serif);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.appointments-note {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+@media (max-width: 740px) {
+  .appointments-tabs {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .appointment-row,
+  .project-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.6rem;
+  }
+
+  .appointment-date {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+}
