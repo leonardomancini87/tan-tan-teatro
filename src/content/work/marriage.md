@@ -7,10 +7,10 @@ number: 1
 date: 2023-01-03T15:04:10.000Z
 title: The Marriage
 description: Witold Gombrowicz, 1948
+folder: matrimonio
 locale: "en"
-slug: "the-marriage"
-folder: "matrimonio"
 translationKey: "the-marriage-page"
+---
 ---
 ## "<i>The Marriage</i>" (<em>Ślub</em>), 1948
 
@@ -27,6 +27,14 @@ translationKey: "the-marriage-page"
 <b>Dramaturgical adaptation and direction</b>: Leonardo Mancini
 <br /><br />
 <i>Duration</i>: 1 hour
+
+<h3>Previous performances</h3>
+28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lyon (France)<br/>
+28/02/2026: Teatro Giacosa, Ivrea (Italy)<br/>
+
+<h3>Press</h3>
+Hugo Genève, <em>Il matrimonio</em>, "L'Entracte", n. 3, 28 May 2026, p. 2 <br/>
+Interview with Francesca Tomalino and Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
 
 <p class="photo-credit">
   <a href="https://www.instagram.com/sonodello/" target="_blank">

@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
 import Gallery from '../components/Gallery.astro';
 import AutoGallery from '../components/AutoGallery.astro';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import fs from 'node:fs';
+import path from 'node:path';
 
 interface Props {
   entry: CollectionEntry<'work'> | CollectionEntry<'news'> | CollectionEntry<'sold'>;
@@ -18,6 +21,113 @@ const { Content } = await entry.render();
 const { title, description, thumbnail } = entry.data;
 const currentLocale = entry.data.locale ?? 'it';
 const galleryTitle = currentLocale === 'en' ? 'Gallery' : 'Galleria';
+
+const workFolder = entry.data.folder || slug;
+const isMacbett = entry.data.folder === 'macbett';
+const isMatrimonio = entry.data.folder === 'matrimonio';
+
+const photoCaptions: Record<string, Record<string, string>> = {
+  'macbett/cavagnolo-2026-05-09': {
+    'Cavagnolo-soldato.jpg': 'Giulia Tonello (Soldato ferito). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Chen-2.jpg': 'Siyuan Chen (Macol). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Chen.jpg': 'Siyuan Chen (Macol). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-limonate.jpg': 'Giulia Tonello (Soldato) e Aurora Sempio (Venditore di limonate). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Cicoria.jpg': 'Viola Cicoria (Dama di compagnia). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Comune.jpg': 'Pablo Comune (Duncan). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-giustizia.jpg': 'Olivia Del Sante (Lady Duncan), Pablo Comune (Duncan) e Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-ghigliottine-2.jpg': 'Stefano Martelli (Macbett), Giovanni Pessina (Candor), Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-ghigliottine.jpg': 'Stefano Martelli (Macbett), Giovanni Pessina (Candor), Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Lady.jpg': 'Gabriele Vaschetti (Banco), Giovanni Pessina (Candor), Stefano Martelli (Macbett), Olivia Del Sante (Lady Duncan). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Martelli-Vaschetti.jpg': 'Stefano Martelli (Macbett) e Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-martelli.jpg': 'Stefano Martelli (Macbett). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Pessina.jpg': 'Giovanni Pessina (Candor). Fotografia: Alessio Dell’Anna',
+    'cavagnolo-tre.jpg': 'Olivia Del Sante (Lady Duncan), Gabriele Vaschetti (Banco), Viola Cicoria (Dama di compagnia). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-uccisione-banco.jpg': 'Gabriele Vaschetti (Banco), Stefano Martelli (Macbett). Fotografia: Alessio Dell’Anna',
+  },
+
+  'matrimonio/studiumlab-prove-2026-05-22': {
+    'ambasciatore.jpg': 'Stefano Martelli, Eleonora Congiu, Aurora Sempio, Arturo Gerace, Viola Cicoria, Anita Masi, Giulia Tonello, Francesca Tomalino, Camilla Rizzo, Pablo Comune, Siyuan Chen, Giorgio Zaccarelli, Gabriela Checcia. Fotografia: Alessio Dell’Anna',
+    'aurora-sempio.jpg': 'Aurora Sempio. Fotografia: Alessio Dell’Anna',
+    'cortei.jpg': 'Davanti: Camilla Rizzo, Francesca Tomalino, Anita Masi. Fotografia: Alessio Dell’Anna',
+    'genitori.jpg': 'Gabriela Checchia, Pablo Comune. Fotografia: Alessio Dell’Anna',
+    'giannetto.jpg': 'Eleonora Congiu. Fotografia: Alessio Dell’Anna',
+    'lucista.jpg': 'Marco Usmigli. Fotografia: Alessio Dell’Anna',
+    'regista.jpg': 'Leonardo Mancini. Fotografia: Alessio Dell’Anna',
+    'ripasso.jpg': 'Fotografia: Alessio Dell’Anna',
+    'studio-testo.jpg': 'Olivia Del Sante. Fotografia: Alessio Dell’Anna',
+    'testo-ubriaco.jpg': 'Fotografia: Alessio Dell’Anna',
+    'tradimento': 'Siyuan Chen, Francesca Tomalino, Gabriele Vaschetti, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+    'ubriaco.jpg': 'Stefano Martelli. Fotografia: Alessio Dell’Anna',
+    'vescovo.jpg': 'Francesca Tomalino, Giulia Tonello, Camilla Rizzo, Gabriela Checchia, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+  },
+};
+
+function getPublicAlbumImages(albumPath: string) {
+  const dir = path.join(process.cwd(), 'public', 'img', albumPath);
+  const captions = photoCaptions[albumPath] || {};
+
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(dir)
+    .filter((file) => /\.(jpe?g|png|webp|avif)$/i.test(file))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((file) => {
+      const fallbackName = file
+        .replace(/\.[^.]+$/, '')
+        .replace(/[-_]+/g, ' ')
+        .trim();
+
+      return {
+        src: `/img/${albumPath}/${file}`,
+        alt: captions[file] || fallbackName,
+      };
+    });
+}
+
+const cavagnoloImages = getPublicAlbumImages('macbett/cavagnolo-2026-05-09');
+
+const cavagnoloCover =
+  cavagnoloImages.find((image) => image.src.includes('Cavagnolo-soldato'))?.src ||
+  cavagnoloImages[0]?.src;
+
+const matrimonioStudiumlabImages = getPublicAlbumImages(
+  'matrimonio/studiumlab-prove-2026-05-22'
+);
+
+const matrimonioStudiumlabCover =
+  matrimonioStudiumlabImages.find((image) => image.src.includes('ripasso'))?.src ||
+  matrimonioStudiumlabImages[0]?.src;
+
+const relatedPhotoAlbums = [
+  ...(isMacbett && cavagnoloImages.length > 0
+    ? [
+        {
+          title: 'Teatro Martini — Comune di Cavagnolo (TO)',
+          meta: '9 maggio 2026 · Apri album',
+          cover: cavagnoloCover,
+          alt: 'Teatro Martini — Comune di Cavagnolo',
+          group: 'macbett-cavagnolo-2026-05-09',
+          images: cavagnoloImages,
+        },
+      ]
+    : []),
+
+  ...(isMatrimonio && matrimonioStudiumlabImages.length > 0
+    ? [
+        {
+          title: 'StudiumLab — prove',
+          meta: '22 maggio 2026 · Apri album',
+          cover: matrimonioStudiumlabCover,
+          alt: 'Il Matrimonio, prove StudiumLab',
+          group: 'matrimonio-studiumlab-prove-2026-05-22',
+          images: matrimonioStudiumlabImages,
+        },
+      ]
+    : []),
+];
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
@@ -44,27 +154,91 @@ const galleryTitle = currentLocale === 'en' ? 'Gallery' : 'Galleria';
       />
     )}
 
-    {(entry.data.folder || slug) && (
-  <AutoGallery
-  slug={entry.data.folder || slug}
-  title={currentLocale === 'en' ? 'Photo Gallery' : 'Galleria fotografica'}
-/>
-)}
+    {workFolder && (
+      <AutoGallery
+        slug={workFolder}
+        title={currentLocale === 'en' ? 'Photo Gallery' : 'Galleria fotografica'}
+      />
+    )}
+
+    {relatedPhotoAlbums.length > 0 && (
+      <section class="related-photo-albums">
+        <h3>
+          {currentLocale === 'en' ? 'Other photo albums' : 'Altri album fotografici'}
+        </h3>
+
+        <div class="related-photo-albums__grid">
+          {relatedPhotoAlbums.map((album) => (
+            <div class="related-photo-album-wrap">
+              <a
+                class="related-photo-album"
+                href={album.cover}
+                data-fancybox={album.group}
+                data-caption={album.title}
+              >
+                <img src={album.cover} alt={album.alt} />
+                <span class="related-photo-album__title">{album.title}</span>
+                <span class="related-photo-album__meta">{album.meta}</span>
+              </a>
+
+              {album.images
+                .filter((image) => image.src !== album.cover)
+                .map((image) => (
+                  <a
+                    href={image.src}
+                    data-fancybox={album.group}
+                    data-caption={image.alt}
+                    style="display: none;"
+                  />
+                ))}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <script>
+      import { Fancybox } from '@fancyapps/ui';
+
+      function initRelatedPhotoAlbums() {
+        document
+          .querySelectorAll('.related-photo-albums__grid')
+          .forEach((grid) => {
+            Fancybox.unbind(grid);
+
+            Fancybox.bind(grid, '[data-fancybox]', {
+              Thumbs: {
+                autoStart: true,
+              },
+              Toolbar: {
+                display: {
+                  left: ['infobar'],
+                  middle: [],
+                  right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
+                },
+              },
+            });
+          });
+      }
+
+      initRelatedPhotoAlbums();
+      document.addEventListener('astro:page-load', initRelatedPhotoAlbums);
+    </script>
 
     <script is:inline>
-  function movePhotoCredit() {
-    const body = document.getElementById("post-body");
-    const credit = body?.querySelector(".photo-credit");
-    const postLink = document.querySelector(".post-link");
+      function movePhotoCredit() {
+        const body = document.getElementById("post-body");
+        const credit = body?.querySelector(".photo-credit");
+        const postLink = document.querySelector(".post-link");
 
-    if (!credit || !postLink || !postLink.parentElement) return;
+        if (!credit || !postLink || !postLink.parentElement) return;
 
-    postLink.parentElement.insertBefore(credit, postLink);
-  }
+        postLink.parentElement.insertBefore(credit, postLink);
+      }
 
-  document.addEventListener("DOMContentLoaded", movePhotoCredit);
-  document.addEventListener("astro:page-load", movePhotoCredit);
-</script>
+      document.addEventListener("DOMContentLoaded", movePhotoCredit);
+      document.addEventListener("astro:page-load", movePhotoCredit);
+    </script>
 
     <div class="post-link">
       <div>
@@ -77,6 +251,7 @@ const galleryTitle = currentLocale === 'en' ? 'Gallery' : 'Galleria';
           </a>
         )}
       </div>
+
       <div>
         {prev && (
           <a

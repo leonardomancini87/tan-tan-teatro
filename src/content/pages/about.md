@@ -26,4 +26,5 @@ In addition to creating performances, Tan Tan Teatro regularly promotes and offe
 <b>Music</b>: Andrea D'Oria<br/>
 <b>Dance and choreographies</b>: Francesca Tomalino<br/>
 <b>Lights</b>: Marco Usmigli<br/>
+<b>Photographs</b>: Alessio Dell'Anna<br/>
 <b>Direction</b>: Leonardo Mancini

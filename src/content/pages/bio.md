@@ -25,4 +25,5 @@ Parallelamente alla creazione di spettacoli, Tan Tan Teatro coltiva e propone re
 <b>Musiche</b>: Andrea D'Oria<br/>
 <b>Danza e coreografie</b>: Francesca Tomalino<br/>
 <b>Luci</b>: Marco Usmigli<br/>
+<b>Fotografie</b>: Alessio Dell'Anna<br/>
 <b>Direzione</b>: Leonardo Mancini

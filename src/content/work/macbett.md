@@ -1,6 +1,6 @@
 ---
 templateKey: work-sub-page
-thumbnail: /img/macbett01.jpg
+thumbnail: /img/macbett/cavagnolo-2026-05-09/Cavagnolo-martelli.jpg
 date: 2023-01-02T15:04:10.000Z
 pagetype:
   - main
@@ -53,9 +53,3 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, â€œLâ€
     allowfullscreen>
   </iframe>
 </div>
-
-<p class="photo-credit">
-  <a href="https://www.instagram.com/adam_bbp/" target="_blank">
-    Fotografie: Adam Hamadou
-  </a>
-</p>
