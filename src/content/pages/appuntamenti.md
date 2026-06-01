@@ -1,36 +1,259 @@
 ---
-title: "Appuntamenti"
-templateKey: news-page
-thumbnail: /img/news.jpg
-pagetype:
-  - page
-featuredimage: /img/news.jpg
+templateKey: page
 locale: "it"
-translationKey: "news-page"
+translationKey: "appuntamenti-page"
+title: Appuntamenti
+description: "Dove e quando trovarci: prossime date, repliche passate ed eventi speciali."
 ---
 
-## Prossime rappresentazioni
+<div class="appointments-page">
+<nav class="appointments-tabs" aria-label="Sezioni appuntamenti">
+<a href="#prossime" class="appointments-tab is-active" data-tab="prossime">Prossime</a>
+<a href="#passate" class="appointments-tab" data-tab="passate">Passate</a>
+<a href="#eventi" class="appointments-tab" data-tab="eventi">Eventi e progetti</a>
+</nav>
 
-28/05/2026, <i>Il Matrimonio</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/meraki-festival-internazionale-di-teatro/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lyon<br />
-11/06/2026, <i>Macbett</i>: Accademia Ligustica di Belle Arti di Genova<br />
-27/06/2026, <i>Il Matrimonio</i>: Villa Martini, Cavagnolo (Torino)<br />
-28/06/2026, <i>Il Matrimonio</i>: San Pietro in Vincoli, Torino<br />
-03/07/2026: <i>Il Matrimonio</i>: Spazio Kairòs / Onda Larsen Teatro, Torino<br />
-05/07/2026, <i>Macbett</i>: San Pietro in Vincoli, Torino<br />
-08-13/07/2026, <i>Macbett</i>: Vilnius, International University Theatre Festival, Vilnius University<br />
-02/08/2026, <i>Il Matrimonio</i>: Fuma che 'nduma Scuole di circo, Busca (Cuneo)<br />
-05-06/09/2026, <i>Il Matrimonio</i>: Festival Mirabilia, Cuneo
+<section class="appointments-panel is-active" data-panel="prossime">
+<h2>Prossime rappresentazioni</h2>
 
-## Precedenti rappresentazioni
+<div class="appointments-list">
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>28/05/2026</strong>
+<span>Maggio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-il-matrimonio/" target="_blank" rel="noopener">Festival de théâtre universitaire “Meraki”</a>, Lyon
+</div>
+</div>
 
-<h4>2026</h4>
-09/05/2026, <i>Macbett</i>: <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Comune di Cavagnolo (Torino)<br />
-28/02/2026, <i>Il Matrimonio</i>: Teatro Giacosa, Ivrea<br />
-21/02/2026, <i>Macbett</i>: <a href="http://www.arhatteatro.it/?fbclid=IwY2xjawRQlXdleHRuA2FlbQIxMABicmlkETBVVWlhbk83SVFaWWZsekNoc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDdArXwkeXCNv-unycShqgwOzyFvdjz9Mkmo4t83z9x3REUSkuYOASUxqrW_aem_ihTtIDvuoRrzA0hpMG-zZQ" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo<br />
-10-11/01/2026, <i>Macbett</i>: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Torino<br/>
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>11/06/2026</strong>
+<span>Giugno</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Accademia Ligustica di Belle Arti di Genova
+</div>
+</div>
 
-<h4>2025</h4>
-07/09/2025, <i>Macbett</i>: <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/" target="_blank">Festival Mirabilia</a>, Cuneo<br/>
-02/07/2025, <i>Macbett</i>: <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank">Tingeltangel</a>, Torino<br/>
-22/05/2025, <i>Macbett</i>: <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, Lione<br/>
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>27/06/2026</strong>
+<span>Giugno</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Villa Martini, Cavagnolo (Torino)
+</div>
+</div>
 
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>28/06/2026</strong>
+<span>Giugno</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — San Pietro in Vincoli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>03/07/2026</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Spazio Kairòs / Onda Larsen Teatro, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>05/07/2026</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — San Pietro in Vincoli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>08–13/07/2026</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Vilnius, International University Theatre Festival, Vilnius University
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>02/08/2026</strong>
+<span>Agosto</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Fuma che ‘nduma Scuole di circo, Busca (Cuneo)
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>05–06/09/2026</strong>
+<span>Settembre</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Festival Mirabilia, Cuneo
+</div>
+</div>
+</div>
+</section>
+
+<section class="appointments-panel" data-panel="passate">
+<h2>Precedenti rappresentazioni</h2>
+
+<div class="appointments-accordion">
+<details open>
+<summary>2026</summary>
+<div class="appointments-list appointments-list--compact">
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>09/05/2026</strong>
+<span>Maggio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank" rel="noopener">Teatro Martini</a>, Comune di Cavagnolo (Torino)
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>28/02/2026</strong>
+<span>Febbraio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Teatro Giacosa, Ivrea
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>21/02/2026</strong>
+<span>Febbraio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — <a href="http://www.arhatteatro.it/" target="_blank" rel="noopener">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>10–11/01/2026</strong>
+<span>Gennaio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank" rel="noopener">Piccolo Teatro Comico</a>, Torino
+</div>
+</div>
+</div>
+</details>
+
+<details>
+<summary>2025</summary>
+<div class="appointments-list appointments-list--compact">
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>07/09/2025</strong>
+<span>Settembre</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/" target="_blank" rel="noopener">Festival Mirabilia</a>, Cuneo
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>02/07/2025</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — <a href="https://www.officinaperlascena.it/wordpress/tingeltangel/" target="_blank" rel="noopener">Tingeltangel</a>, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>22/05/2025</strong>
+<span>Maggio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/" target="_blank" rel="noopener">Festival de théâtre universitaire “Meraki”</a>, Lione
+</div>
+</div>
+</div>
+</details>
+</div>
+</section>
+
+<section class="appointments-panel" data-panel="eventi">
+<h2>Eventi e progetti</h2>
+
+<div class="projects-list">
+<article class="project-row">
+<div>
+<h3>Disseminazioni</h3>
+<p>Workshop / progetto formativo organizzato da Tan Tan Teatro.</p>
+</div>
+<p class="project-meta">Date e dettagli in aggiornamento</p>
+</article>
+
+<article class="project-row">
+<div>
+<h3>Settimana intensiva di teatro Kathakali</h3>
+<p>Laboratorio intensivo dedicato al teatro Kathakali.</p>
+</div>
+<p class="project-meta">Date e dettagli in aggiornamento</p>
+</article>
+</div>
+</section>
+</div>
+
+<p class="appointments-note">
+Le date possono essere soggette a modifiche.<br />
+Ti invitiamo a consultare regolarmente questa pagina per aggiornamenti.
+</p>
+
+<script>
+function initAppointmentTabs() {
+  const root = document.querySelector('.appointments-page');
+  if (!root) return;
+
+  const tabs = root.querySelectorAll('.appointments-tab');
+  const panels = root.querySelectorAll('.appointments-panel');
+
+  function activateTab(tabName) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.tab === tabName;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach((panel) => {
+      panel.classList.toggle('is-active', panel.dataset.panel === tabName);
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-selected', tab.classList.contains('is-active') ? 'true' : 'false');
+
+    tab.addEventListener('click', (event) => {
+      event.preventDefault();
+      activateTab(tab.dataset.tab);
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initAppointmentTabs);
+document.addEventListener('astro:page-load', initAppointmentTabs);
+</script>
