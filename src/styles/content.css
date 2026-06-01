@@ -569,3 +569,14 @@ html[data-theme="dark"] body .post-content-body h6 {
     aspect-ratio: 16 / 9;
   }
 }
+/* Fix leggibilità tab Appuntamenti / News su sfondo scuro */
+[data-theme='dark'] .appointments-tabs .appointments-tab,
+[data-theme='dark'] .appointments-tabs .appointments-tab:visited {
+    color: #f5f5f5 !important;
+}
+
+[data-theme='dark'] .appointments-tabs .appointments-tab:hover,
+[data-theme='dark'] .appointments-tabs .appointments-tab:focus,
+[data-theme='dark'] .appointments-tabs .appointments-tab.is-active {
+    color: #ffffff !important;
+}
