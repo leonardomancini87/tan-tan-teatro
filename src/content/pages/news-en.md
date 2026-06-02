@@ -213,21 +213,22 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <h2>Events and projects</h2>
 
 <div class="projects-list">
-
 <article class="project-row">
 <div>
-<h3>Disseminazioni</h3>
-<p>Workshop / educational project organized by Tan Tan Teatro.</p>
+<h3>Residency at Fuma che ’nduma</h3>
+<p>
+From 28 July to 2 August 2026, we will be in residence at Fuma che ’nduma, in Busca (Cuneo), for a new phase of work on the production <em>The Marriage</em>.
+</p>
 </div>
-<p class="project-meta">Dates and details coming soon</p>
+<p class="project-meta">28 July – 2 August&nbsp;·&nbsp;Busca (Cuneo)</p>
 </article>
 
 <article class="project-row">
 <div>
 <h3>Intensive Kathakali theatre week</h3>
-<p>Intensive workshop dedicated to Kathakali theatre.</p>
+<p>Intensive workshop dedicated to Kathakali theatre with Sri Pradeep Kalamandalam, organised by University of Turin and Academy Albertina of Fine Arts of Turin.</p>
 </div>
-<p class="project-meta">Dates and details coming soon</p>
+<p class="project-meta">4-7 May 2026, Torino</p>
 </article>
 
 </div>

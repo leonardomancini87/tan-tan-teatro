@@ -13,10 +13,10 @@ translationKey: "macbett-page"
 ---
 
 ## <i>Macbett</i>, di Eugène Ionesco, 1972
-
-Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziabile per il potere, il <i>Macbett</i> di Eugène Ionesco (1972) offre una riscrittura moderna della tragedia shakespeariana di particolare attualità. Il caos del mondo contemporaneo, segnato anche dalla perdita di autenticità del logos, è qui rappresentato in una chiave grottesca, con una poetica che è per molti versi debitrice dell’archetipo della cupidigia materialista e politica del <i>père Ubu</i> di Alfred Jarry (1896). Nel contesto di un’assurdità burlesca ed esuberante, il carattere dei grandi personaggi tragici si trova così ridotto a fanfara e a solennità ridicola e tronfia. Dopotutto, per dirla con Ionesco, è proprio l’humour che «rende consapevoli, con libera lucidità, della condizione tragica o derisoria dell'uomo». La messa in scena del <i>Macbett</i> da noi proposta presenta una versione essenziale dell’opera di Ionesco, con una regia incentrata sul gioco dell’attore in stretto dialogo con il testo originale e con l’accompagnamento sonoro, rumoristico e musicale.
-
-<b>Attori</b>: Siyuan Chen, Viola Cicoria, Olivia Del Sante, Pablo Comune, Stefano Martelli, Giovanni Pessina, Aurora Matilde Viola Sempio, Giulia Tonello, Gabriele Vaschetti<br/>
+<h3 class="toc-only">Sinossi</h3>
+Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziabile per il potere, il <i>Macbett</i> di Eugène Ionesco (1972) offre una riscrittura moderna della tragedia shakespeariana di particolare attualità. Il caos del mondo contemporaneo, segnato anche dalla perdita di autenticità del logos, è qui rappresentato in una chiave grottesca, con una poetica che è per molti versi debitrice dell’archetipo della cupidigia materialista e politica del <i>père Ubu</i> di Alfred Jarry (1896). Nel contesto di un’assurdità burlesca ed esuberante, il carattere dei grandi personaggi tragici si trova così ridotto a fanfara e a solennità ridicola e tronfia. Dopotutto, per dirla con Ionesco, è proprio l’humour che «rende consapevoli, con libera lucidità, della condizione tragica o derisoria dell'uomo». La messa in scena del <i>Macbett</i> da noi proposta presenta una versione essenziale dell’opera di Ionesco, con una regia incentrata sul gioco dell’attore in stretto dialogo con il testo originale e con l’accompagnamento sonoro, rumoristico e musicale.<br/><br/>
+<h3 class="toc-only">Scheda artistica</h3>
+<b>Con</b>: Siyuan Chen, Viola Cicoria, Olivia Del Sante, Pablo Comune, Stefano Martelli, Giovanni Pessina, Aurora Matilde Viola Sempio, Giulia Tonello, Gabriele Vaschetti<br/>
 <b>Musiche</b>: Andrea D'Oria<br/>
 <b>Luci (ideazione)</b>: Sara Marenco. <b>Datore luci</b>: Marco Usmigli (da maggio 2026)<br/>
 <b>Costumi</b>: Sara Marenco, Giulia Tonello<br/>
@@ -24,6 +24,16 @@ Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziab
 
 Durata: 1 ora<br/>
 <i>Ringraziamenti</i>: Ivana Ferri, Bruno Maria Ferraro (Teatro Tangram, Torino); Silvia Battaglio.
+<h3 class="toc-only">Trailer</h3>
+<div class="fluid-width-video-wrapper">
+  <iframe
+    src="https://www.youtube.com/embed/_p8u-0JkcHc"
+    title="Trailer Macbett"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
 
 <h3>Precedenti rappresentazioni</h3>
 
@@ -36,20 +46,40 @@ Durata: 1 ora<br/>
 
 <h3>Rassegna stampa</h3>
 
-Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L’Eco di Bergamo”, 21 febbraio 2026, p. 35; Micaela Vernice, <i>«Macbett è l’insensatezza della brama di potere»</i>, “L’Eco di Bergamo”, 25 febbraio 2026, p. 47; Daniele Stellato, <i>«Gemme di teatro» parte col botto</i>, “Giornale di Treviglio”, p. 35 (<a href="/doc/macbett-rassegna.pdf" target="_blank">dossier</a>).
+Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L’Eco di Bergamo”, 21 febbraio 2026, p. 35; Micaela Vernice, <i>«Macbett è l’insensatezza della brama di potere»</i>, “L’Eco di Bergamo”, 25 febbraio 2026, p. 47; Daniele Stellato, <i>«Gemme di teatro» parte col botto</i>, “Giornale di Treviglio”, p. 35; Marion Dumartin, <i>Danse entre Ionesco et Shakespeare</i>, "L'Entracte", n, 4, 22 mai 2025, p. 2.
 
 <h3>Materiali</h3>
 
-<a href="/doc/Macbett Tech-rider (eng).pdf" target="_blank">Scheda tecnica</a>
+<div class="materials-list">
+  <a class="material-link" href="/doc/Macbett-Tech-rider.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Scheda tecnica</strong>
+      <small>PDF</small>
+    </span>
+  </a>
 
-<h3>Trailer</h3>
-
-<div class="fluid-width-video-wrapper">
-  <iframe
-    src="https://www.youtube.com/embed/_p8u-0JkcHc"
-    title="Trailer Macbett"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  <a class="material-link" href="/doc/macbett-rassegna.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Dossier stampa</strong>
+      <small>PDF</small>
+    </span>
+  </a>
 </div>
+
+<h3>Accessibilità</h3>
+
+Per lo spettacolo teatrale è disponibile il sopratitolaggio in italiano, in inglese e in francese, tramite proiezione su schermo (o su fondale) oppure tramite uso di un'apposita WebApp per l'accessibilità che è stata sviluppata nell'ambito del progetto di <em>public engagement</em> dell'Università degli Studi di Torino "<a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45">Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile</a>". Sono in corso di realizzazione audiodescrizioni, che saranno rese disponibili prima delle rappresentazioni e su richiesta. Per ulteriori informazioni: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>

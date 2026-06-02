@@ -45,14 +45,14 @@ const photoCaptions: Record<string, Record<string, string>> = {
     'Cavagnolo-uccisione-banco.jpg': 'Gabriele Vaschetti (Banco), Stefano Martelli (Macbett). Fotografia: Alessio Dell’Anna',
   },
 
-    'macbett/tangram-2025-03': {
+  'macbett/tangram-2025-03': {
     'macbett-tangram-01.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-02.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-03.jpg': 'Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-04.jpeg': 'Gianluca Fiore. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-05.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-06.jpg': 'Leonardo Mancini, Siyuan Chen. Fotografia: Gabriele Vaschetti',
-    'macbett-tangram-07.jpg': 'Andrea D’Oria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-07.jpg': 'Andrea D\'Oria. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-08.jpg': 'Aurora Sempio. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-09.JPG': 'Gianluca Fiore, Giulia Tonello, Sara Marenco, Leonardo Mancini. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-10.jpg': 'Leonardo Mancini, Aurora Sempio. Fotografia: Gabriele Vaschetti',
@@ -60,7 +60,6 @@ const photoCaptions: Record<string, Record<string, string>> = {
     'macbett-tangram-12.JPG': 'Stefano Martelli, Viola Cicoria, Giovanni Pessina, Olivia Del Sante. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-13.JPG': 'Stefano Martelli. Fotografia: Gabriele Vaschetti',
     'macbett-tangram-14.JPG': 'Aurora Sempio, Giulia Tonello, Stefano Martelli, Viola Cicoria, Giovanni Pessina. Fotografia: Gabriele Vaschetti',
-    'macbett-tangram-15.JPG': 'Gianluca Fiore, Viola Cicoria, Giulia Tonello. Fotografia: Gabriele Vaschetti',
   },
 
   'matrimonio/studiumlab-prove-2026-05-22': {
@@ -74,7 +73,7 @@ const photoCaptions: Record<string, Record<string, string>> = {
     'ripasso.jpg': 'Fotografia: Alessio Dell’Anna',
     'studio-testo.jpg': 'Olivia Del Sante. Fotografia: Alessio Dell’Anna',
     'testo-ubriaco.jpg': 'Fotografia: Alessio Dell’Anna',
-    'tradimento': 'Siyuan Chen, Francesca Tomalino, Gabriele Vaschetti, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+    'tradimento.jpg': 'Siyuan Chen, Francesca Tomalino, Gabriele Vaschetti, Arturo Gerace. Fotografia: Alessio Dell’Anna',
     'ubriaco.jpg': 'Stefano Martelli. Fotografia: Alessio Dell’Anna',
     'vescovo.jpg': 'Francesca Tomalino, Giulia Tonello, Camilla Rizzo, Gabriela Checchia, Arturo Gerace. Fotografia: Alessio Dell’Anna',
   },
@@ -113,8 +112,7 @@ const cavagnoloCover =
 
 const tangramImages = getPublicAlbumImages('macbett/tangram-2025-03');
 
-const tangramCover =
-  tangramImages[0]?.src;
+const tangramCover = tangramImages[0]?.src;
 
 const matrimonioStudiumlabImages = getPublicAlbumImages(
   'matrimonio/studiumlab-prove-2026-05-22'
@@ -128,35 +126,63 @@ const relatedPhotoAlbums = [
   ...(isMacbett && cavagnoloImages.length > 0
     ? [
         {
-          title: 'Teatro Martini — Comune di Cavagnolo (TO)',
-          meta: '9 maggio 2026 · Apri album',
+          title:
+            currentLocale === 'en'
+              ? 'Teatro Martini — Municipality of Cavagnolo (TO)'
+              : 'Teatro Martini — Comune di Cavagnolo (TO)',
+          meta:
+            currentLocale === 'en'
+              ? '9 May 2026 · Open album'
+              : '9 maggio 2026 · Apri album',
           cover: cavagnoloCover,
-          alt: 'Teatro Martini — Comune di Cavagnolo',
+          alt:
+            currentLocale === 'en'
+              ? 'Teatro Martini — Municipality of Cavagnolo'
+              : 'Teatro Martini — Comune di Cavagnolo',
           group: 'macbett-cavagnolo-2026-05-09',
           images: cavagnoloImages,
         },
       ]
     : []),
-    ...(isMacbett && tangramImages.length > 0
-        ? [
-            {
-              title: 'Prove al Teatro Tangram',
-              meta: 'Torino, marzo 2025 · Apri album',
-              cover: tangramCover,
-              alt: 'Prove di Macbett al Teatro Tangram, Torino, marzo 2025',
-              group: 'macbett-tangram-2025-03',
-              images: tangramImages,
-            },
-          ]
-        : []),
+
+  ...(isMacbett && tangramImages.length > 0
+    ? [
+        {
+          title:
+            currentLocale === 'en'
+              ? 'Rehearsals at Teatro Tangram'
+              : 'Prove al Teatro Tangram',
+          meta:
+            currentLocale === 'en'
+              ? 'Turin, March 2025 · Open album'
+              : 'Torino, marzo 2025 · Apri album',
+          cover: tangramCover,
+          alt:
+            currentLocale === 'en'
+              ? 'Macbett rehearsals at Teatro Tangram, Turin, March 2025'
+              : 'Prove di Macbett al Teatro Tangram, Torino, marzo 2025',
+          group: 'macbett-tangram-2025-03',
+          images: tangramImages,
+        },
+      ]
+    : []),
 
   ...(isMatrimonio && matrimonioStudiumlabImages.length > 0
     ? [
         {
-          title: 'StudiumLab — prove',
-          meta: '22 maggio 2026 · Apri album',
+          title:
+            currentLocale === 'en'
+              ? 'StudiumLab — rehearsals'
+              : 'StudiumLab — prove',
+          meta:
+            currentLocale === 'en'
+              ? '22 May 2026 · Open album'
+              : '22 maggio 2026 · Apri album',
           cover: matrimonioStudiumlabCover,
-          alt: 'Il Matrimonio, prove StudiumLab',
+          alt:
+            currentLocale === 'en'
+              ? 'Il Matrimonio, StudiumLab rehearsals'
+              : 'Il Matrimonio, prove StudiumLab',
           group: 'matrimonio-studiumlab-prove-2026-05-22',
           images: matrimonioStudiumlabImages,
         },
@@ -177,60 +203,93 @@ const relatedPhotoAlbums = [
       </div>
     )}
 
-    <div class="post-content-body" id="post-body">
-      <Content />
-    </div>
-
-    {entry.data.gallery && (
-      <Gallery
-        items={entry.data.gallery}
-        group={entry.data.title}
-        title={galleryTitle}
-      />
-    )}
-
-    {workFolder && (
-      <AutoGallery
-        slug={workFolder}
-        title={currentLocale === 'en' ? 'Photo Gallery' : 'Galleria fotografica'}
-      />
-    )}
-
-    {relatedPhotoAlbums.length > 0 && (
-      <section class="related-photo-albums">
-        <h3>
-          {currentLocale === 'en' ? 'Other photo albums' : 'Altri album fotografici'}
-        </h3>
-
-        <div class="related-photo-albums__grid">
-          {relatedPhotoAlbums.map((album) => (
-            <div class="related-photo-album-wrap">
-              <a
-                class="related-photo-album"
-                href={album.cover}
-                data-fancybox={album.group}
-                data-caption={album.title}
-              >
-                <img src={album.cover} alt={album.alt} />
-                <span class="related-photo-album__title">{album.title}</span>
-                <span class="related-photo-album__meta">{album.meta}</span>
-              </a>
-
-              {album.images
-                .filter((image) => image.src !== album.cover)
-                .map((image) => (
-                  <a
-                    href={image.src}
-                    data-fancybox={album.group}
-                    data-caption={image.alt}
-                    style="display: none;"
-                  />
-                ))}
-            </div>
-          ))}
+    <div class="work-content-layout">
+      <div class="work-main-column">
+        <div class="post-content-body" id="post-body">
+          <Content />
         </div>
-      </section>
-    )}
+
+        {entry.data.gallery && (
+          <Gallery
+            items={entry.data.gallery}
+            group={entry.data.title}
+            title={galleryTitle}
+          />
+        )}
+
+        {workFolder && (
+          <AutoGallery
+            slug={workFolder}
+            title={currentLocale === 'en' ? 'Photo Gallery' : 'Galleria fotografica'}
+          />
+        )}
+
+        {relatedPhotoAlbums.length > 0 && (
+          <section class="related-photo-albums">
+            <h3>
+              {currentLocale === 'en' ? 'Other photo albums' : 'Altri album fotografici'}
+            </h3>
+
+            <div class="related-photo-albums__grid">
+              {relatedPhotoAlbums.map((album) => (
+                <div class="related-photo-album-wrap">
+                  <a
+                    class="related-photo-album"
+                    href={album.cover}
+                    data-fancybox={album.group}
+                    data-caption={album.images.find((image) => image.src === album.cover)?.alt || album.title}
+                  >
+                    <img src={album.cover} alt={album.alt} />
+                    <span class="related-photo-album__title">{album.title}</span>
+                    <span class="related-photo-album__meta">{album.meta}</span>
+                  </a>
+
+                  {album.images
+                    .filter((image) => image.src !== album.cover)
+                    .map((image) => (
+                      <a
+                        href={image.src}
+                        data-fancybox={album.group}
+                        data-caption={image.alt}
+                        style="display: none;"
+                      />
+                    ))}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <div class="post-link">
+          <div>
+            {next && (
+              <a
+                style="display: flex; align-items: center; color: #131313; font-size: 2rem;"
+                href={`/${baseSlug}/${next.slug}`}
+              >
+                <span>&larr; {next.data.title}</span>
+              </a>
+            )}
+          </div>
+
+          <div>
+            {prev && (
+              <a
+                style="display: flex; align-items: center; color: #131313; font-size: 2rem;"
+                href={`/${baseSlug}/${prev.slug}`}
+              >
+                <span>{prev.data.title} &rarr;</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <aside class="work-toc" aria-label={currentLocale === 'en' ? 'Table of contents' : 'Indice'}>
+        <h3>{currentLocale === 'en' ? 'Table of contents' : 'Indice'}</h3>
+        <nav id="work-toc-list"></nav>
+      </aside>
+    </div>
 
     <script>
       import { Fancybox } from '@fancyapps/ui';
@@ -242,25 +301,167 @@ const relatedPhotoAlbums = [
             Fancybox.unbind(grid);
 
             Fancybox.bind(grid, 'a[data-fancybox]', {
-  Hash: false,
+              Hash: false,
 
-  Thumbs: {
-    autoStart: true,
-  },
+              Thumbs: {
+                autoStart: true,
+              },
 
-  Toolbar: {
-    display: {
-      left: ['infobar'],
-      middle: [],
-      right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
-    },
-  },
-});
+              Toolbar: {
+                display: {
+                  left: ['infobar'],
+                  middle: [],
+                  right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
+                },
+              },
+            });
           });
       }
 
       initRelatedPhotoAlbums();
       document.addEventListener('astro:page-load', initRelatedPhotoAlbums);
+    </script>
+
+    <script is:inline>
+      function initWorkToc() {
+        const mainColumn = document.querySelector(".work-main-column");
+        const toc = document.getElementById("work-toc-list");
+
+        if (!mainColumn || !toc) return;
+
+        const headings = Array.from(mainColumn.querySelectorAll("h3"));
+
+        toc.innerHTML = "";
+
+        headings.forEach((heading, index) => {
+          if (!heading.id) {
+            heading.id = heading.textContent
+              .toLowerCase()
+              .trim()
+              .replace(/[àáâãäå]/g, "a")
+              .replace(/[èéêë]/g, "e")
+              .replace(/[ìíîï]/g, "i")
+              .replace(/[òóôõö]/g, "o")
+              .replace(/[ùúûü]/g, "u")
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-+|-+$/g, "") || `section-${index + 1}`;
+          }
+
+          const link = document.createElement("a");
+          link.href = `#${heading.id}`;
+          link.textContent = heading.textContent || `Section ${index + 1}`;
+          toc.appendChild(link);
+        });
+      }
+
+      function updateActiveTocLink() {
+        const headings = Array.from(document.querySelectorAll(".work-main-column h3[id]"));
+        const tocLinks = Array.from(document.querySelectorAll(".work-toc-floating a"));
+
+        if (!headings.length || !tocLinks.length) return;
+
+        const offset = 120;
+        const bottomThreshold = 220;
+
+        const isNearBottom =
+          window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - bottomThreshold;
+
+        let activeHeading = headings[0];
+
+        if (isNearBottom) {
+          activeHeading = headings[headings.length - 1];
+        } else {
+          headings.forEach((heading) => {
+            const rect = heading.getBoundingClientRect();
+
+            if (rect.top <= offset) {
+              activeHeading = heading;
+            }
+          });
+        }
+
+        tocLinks.forEach((link) => {
+          const href = link.getAttribute("href");
+          link.classList.toggle("is-active", href === `#${activeHeading.id}`);
+        });
+      }
+
+      function initFloatingWorkToc() {
+        if (window.__workTocCleanup) {
+          window.__workTocCleanup();
+        }
+
+        document.querySelectorAll(".work-toc-floating").forEach((item) => item.remove());
+
+        const sourceToc = document.querySelector(".work-toc");
+        const mainColumn = document.querySelector(".work-main-column");
+
+        if (!sourceToc || !mainColumn || window.innerWidth <= 1180) return;
+
+        const floatingToc = sourceToc.cloneNode(true);
+        floatingToc.classList.add("work-toc-floating");
+        document.body.appendChild(floatingToc);
+
+        const topOffset = 16;
+        let naturalTop = 0;
+
+        function calculateNaturalPosition() {
+          const mainRect = mainColumn.getBoundingClientRect();
+
+          naturalTop = window.scrollY + mainRect.top;
+
+          const left = mainRect.right + 56;
+          const maxLeft = window.innerWidth - 292;
+
+          floatingToc.style.left = `${Math.min(left, maxLeft)}px`;
+        }
+
+        function updateFloatingToc() {
+          if (window.innerWidth <= 1180) {
+            floatingToc.remove();
+            return;
+          }
+
+          calculateNaturalPosition();
+
+          if (window.scrollY + topOffset >= naturalTop) {
+            floatingToc.classList.add("is-fixed");
+            floatingToc.style.position = "fixed";
+            floatingToc.style.top = `${topOffset}px`;
+          } else {
+            floatingToc.classList.remove("is-fixed");
+            floatingToc.style.position = "absolute";
+            floatingToc.style.top = `${naturalTop}px`;
+          }
+
+          updateActiveTocLink();
+        }
+
+        updateFloatingToc();
+
+        window.addEventListener("scroll", updateFloatingToc, { passive: true });
+        window.addEventListener("resize", updateFloatingToc);
+
+        window.__workTocCleanup = () => {
+          window.removeEventListener("scroll", updateFloatingToc);
+          window.removeEventListener("resize", updateFloatingToc);
+          floatingToc.remove();
+          window.__workTocCleanup = null;
+        };
+      }
+
+      function initWorkPageToc() {
+        initWorkToc();
+        initFloatingWorkToc();
+      }
+
+      document.addEventListener("DOMContentLoaded", initWorkPageToc);
+      document.addEventListener("astro:page-load", initWorkPageToc);
+
+      if (document.readyState !== "loading") {
+        initWorkPageToc();
+      }
     </script>
 
     <script is:inline>
@@ -278,28 +479,5 @@ const relatedPhotoAlbums = [
       document.addEventListener("astro:page-load", movePhotoCredit);
     </script>
 
-    <div class="post-link">
-      <div>
-        {next && (
-          <a
-            style="display: flex; align-items: center; color: #131313; font-size: 2rem;"
-            href={`/${baseSlug}/${next.slug}`}
-          >
-            <span>&larr; {next.data.title}</span>
-          </a>
-        )}
-      </div>
-
-      <div>
-        {prev && (
-          <a
-            style="display: flex; align-items: center; color: #131313; font-size: 2rem;"
-            href={`/${baseSlug}/${prev.slug}`}
-          >
-            <span>{prev.data.title} &rarr;</span>
-          </a>
-        )}
-      </div>
-    </div>
   </article>
 </Layout>

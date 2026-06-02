@@ -127,10 +127,14 @@
   margin-bottom: 2rem;
 }
 
+/* Eventi e progetti
+/* ---------------------------------------------------------- */
+
 .project-row {
   display: grid;
-  grid-template-columns: 1fr 18rem;
+  grid-template-columns: minmax(0, 1fr) 18rem;
   gap: 3rem;
+  align-items: start;
   padding: 2rem 2.4rem;
   border-bottom: 1px solid var(--color-border);
 }
@@ -140,17 +144,28 @@
 }
 
 .project-row h3 {
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.7rem;
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
 }
 
 .project-row p {
   margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  line-height: 1.45;
 }
 
 .project-meta {
-  font-family: var(--font-sans-serif);
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
+  margin: 0;
+  font-family: var(--font-sans-serif) !important;
+  font-size: 1.05rem !important;
+  font-weight: 500;
+  line-height: 1.45 !important;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.7;
 }
@@ -180,5 +195,17 @@
     border-bottom: 1px solid var(--color-border);
     padding-right: 0;
     padding-bottom: 1rem;
+  }
+
+  .project-row h3 {
+    font-size: 2rem;
+  }
+
+  .project-row p {
+    font-size: 1.55rem;
+  }
+
+  .project-meta {
+    margin-top: 1rem;
   }
 }

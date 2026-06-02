@@ -201,18 +201,21 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <div class="projects-list">
 <article class="project-row">
 <div>
-<h3>Disseminazioni</h3>
-<p>Workshop / progetto formativo organizzato da Tan Tan Teatro.</p>
+<h3>Residenza a Fuma che ’nduma</h3>
+<p>
+Dal 28 luglio al 2 agosto 2026 saremo in residenza a Fuma che ’nduma, a Busca (Cuneo),
+per una nuova fase di lavoro sullo spettacolo <em>Il Matrimonio</em>.
+</p>
 </div>
-<p class="project-meta">Date e dettagli in aggiornamento</p>
+<p class="project-meta">28 July – 2 August 2026, &nbsp;Busca (Cuneo)</p>
 </article>
 
 <article class="project-row">
 <div>
 <h3>Settimana intensiva di teatro Kathakali</h3>
-<p>Laboratorio intensivo dedicato al teatro Kathakali.</p>
+<p>Laboratorio intensivo dedicato al teatro Kathakali con Sri Pradeep Kalamandalam, organizzato da Università degli Studi di Torino e Accademia Albertina di Belle Arti di Torino</p>
 </div>
-<p class="project-meta">Date e dettagli in aggiornamento</p>
+<p class="project-meta">4-7 maggio 2026, &nbsp;Torino</p>
 </article>
 </div>
 </section>
