@@ -391,13 +391,15 @@ footer.site-foot a {
     }
 
     .site-head-logo {
-        font-size: 2rem;
-        letter-spacing: 1px;
-        text-align: center;
-        max-width: 80%;
-        line-height: 1.2em;
-        white-space: normal;
-    }
+    font-size: clamp(1.6rem, 4vw, 2rem);
+    letter-spacing: 1px;
+    text-align: center;
+    max-width: calc(100vw - 120px);
+    line-height: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
     .site-head-open {
         background: var(--color-bg);

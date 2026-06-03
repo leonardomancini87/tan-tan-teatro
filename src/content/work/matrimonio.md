@@ -33,7 +33,7 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 28/02/2026: Teatro Giacosa, Ivrea<br/>
 
 <h3>Rassegna stampa</h3>
-Hugo Genève, <a href="/doc/Matrimonio-entracte.png" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
+Hugo Genève, <a href="/doc/2026-05-28-il-matrimonio-entracte.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
 Intervista con Francesca Tomalino e con Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
 
 <h3>Accessibilità</h3>
