@@ -1,1 +1,8 @@
 **/.DS_Store
+node_modules/
+.astro/
+dist/
+.vite/
+src.zip
+*.zip
+.DS_Store
