@@ -29,6 +29,17 @@ translationKey: "the-marriage-page"
 <br /><br />
 <i>Duration</i>: 1 hour
 
+<h3 class="toc-only">Trailer</h3>
+<div class="fluid-width-video-wrapper">
+  <iframe
+    src="https://www.youtube.com/embed/K0mLRFFcIG4?si=9ctbi23Yk4KGJ7Wt"
+    title="Trailer Il matrimonio"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
 <h3>Previous performances</h3>
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lyon (France)<br/>
 28/02/2026: Teatro Giacosa, Ivrea (Italy)<br/>
