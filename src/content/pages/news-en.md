@@ -24,16 +24,6 @@ description: "Where and when to find us: upcoming dates, past performances and s
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>11/06/2026</strong>
-<span>June</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — Academy “Ligustica” of Fine Arts of Genoa, Italy
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>27/06/2026</strong>
 <span>June</span>
 </div>
@@ -102,6 +92,37 @@ description: "Where and when to find us: upcoming dates, past performances and s
 </div>
 </div>
 
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>14/11/2026</strong>
+<span>Novembre</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Teatro Dravelli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>30/01/2027</strong>
+<span>Gennaio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Teatro Dravelli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>12-13/02/2027</strong>
+<span>Febbraio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Piccolo Teatro Comico, Torino
+</div>
+</div>
+
+
 </div>
 </section>
 
@@ -114,6 +135,16 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <summary>2026</summary>
 
 <div class="appointments-list appointments-list--compact">
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>11/06/2026</strong>
+<span>June</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Academy “Ligustica” of Fine Arts of Genoa, Italy
+</div>
+</div>
 
 <div class="appointment-row">
 <div class="appointment-date">

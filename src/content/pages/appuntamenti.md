@@ -20,16 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>11/06/2026</strong>
-<span>Giugno</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — Accademia Ligustica di Belle Arti di Genova
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>27/06/2026</strong>
 <span>Giugno</span>
 </div>
@@ -40,31 +30,11 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>28/06/2026</strong>
-<span>Giugno</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — San Pietro in Vincoli, Torino
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>03/07/2026</strong>
 <span>Luglio</span>
 </div>
 <div class="appointment-content">
 <em>Il Matrimonio</em> — Spazio Kairòs / Onda Larsen Teatro, Torino
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>05/07/2026</strong>
-<span>Luglio</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — San Pietro in Vincoli, Torino
 </div>
 </div>
 
@@ -97,11 +67,62 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <em>Il Matrimonio</em> — Festival Mirabilia, Cuneo
 </div>
 </div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>27/06/2026</strong>
+<span>Giugno</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Villa Martini, Cavagnolo (Torino)
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>14/11/2026</strong>
+<span>Novembre</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Teatro Dravelli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>30/01/2027</strong>
+<span>Gennaio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Teatro Dravelli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>12-13/02/2027</strong>
+<span>Febbraio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Piccolo Teatro Comico, Torino
+</div>
+</div>
+
 </div>
 </section>
 
 <section class="appointments-panel" data-panel="passate">
 <h2>Precedenti rappresentazioni</h2>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>11/06/2026</strong>
+<span>Giugno</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Accademia Ligustica di Belle Arti di Genova
+</div>
+</div>
 
 <div class="appointments-accordion">
 <details open>
