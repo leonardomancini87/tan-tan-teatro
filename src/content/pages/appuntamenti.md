@@ -145,7 +145,7 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <span>Maggio</span>
 </div>
 <div class="appointment-content">
-<em>Macbett</em> — <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank" rel="noopener">Teatro Martini</a>, Comune di Cavagnolo (Torino)
+<em>Macbett</em> — <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank" rel="noopener">Teatro Martini</a>, Comune di Cavagnolo (Torino) (anteprima di 20 minuti, di fronte al pubblico scolastico, nella rassegna "Ragazzi in gamba")
 </div>
 </div>
 
