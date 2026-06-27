@@ -114,6 +114,11 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <section class="appointments-panel" data-panel="passate">
 <h2>Precedenti rappresentazioni</h2>
 
+<div class="appointments-accordion">
+<details open>
+<summary>2026</summary>
+<div class="appointments-list appointments-list--compact">
+
 <div class="appointment-row">
 <div class="appointment-date">
 <strong>11/06/2026</strong>
@@ -124,10 +129,7 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 </div>
 </div>
 
-<div class="appointments-accordion">
-<details open>
-<summary>2026</summary>
-<div class="appointments-list appointments-list--compact">
+
 <div class="appointment-row">
 <div class="appointment-date">
 <strong>28/05/2026</strong>
