@@ -45,7 +45,8 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 
 <h3>Rassegna stampa</h3>
 Hugo Genève, <a href="/doc/2026-05-28-il-matrimonio-entracte.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
-Intervista con Francesca Tomalino e con Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
+Intervista a Francesca Tomalino e a Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
+Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Intervista a Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026
 
 <h3>Accessibilità</h3>
 

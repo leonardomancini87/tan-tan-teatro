@@ -46,7 +46,8 @@ translationKey: "the-marriage-page"
 
 <h3>Press review</h3>
 Hugo Genève, <em>Il matrimonio</em>, "L'Entracte", n. 3, 28 May 2026, p. 2 <br/>
-Interview with Francesca Tomalino and Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
+Interview with Francesca Tomalino and Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026 [French]<br/>
+Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Interview to Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026 [Italian]
 
 <p class="photo-credit">
   <a href="https://www.instagram.com/sonodello/" target="_blank">
