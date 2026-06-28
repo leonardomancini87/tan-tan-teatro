@@ -40,13 +40,47 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 </div>
 
 <h3>Precedenti rappresentazioni</h3>
+27/06/2026: Villa Martini, Cavagnolo (Torino)
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lione<br/>
 28/02/2026: Teatro Giacosa, Ivrea<br/>
 
+
 <h3>Rassegna stampa</h3>
-Hugo Genève, <a href="/doc/2026-05-28-il-matrimonio-entracte.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
+Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
 Intervista a Francesca Tomalino e a Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
 Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Intervista a Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026
+
+<h3>Materiali</h3>
+
+<div class="materials-list">
+  <a class="material-link" href="/doc/Macbett-Tech-rider.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Scheda tecnica</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+
+  <a class="material-link" href="/doc/macbett-rassegna.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Dossier stampa</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+</div>
 
 <h3>Accessibilità</h3>
 

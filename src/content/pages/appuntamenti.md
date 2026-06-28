@@ -20,13 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>27/06/2026</strong>
-<span>Giugno</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — Villa Martini, Cavagnolo (Torino)
-</div>
-</div>
 
 <div class="appointment-row">
 <div class="appointment-date">
@@ -108,6 +101,17 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <details open>
 <summary>2026</summary>
 <div class="appointments-list appointments-list--compact">
+
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>27/06/2026</strong>
+<span>Giugno</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Villa Martini, Cavagnolo (Torino)
+</div>
+</div>
 
 <div class="appointment-row">
 <div class="appointment-date">

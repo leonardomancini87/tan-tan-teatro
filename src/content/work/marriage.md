@@ -41,11 +41,12 @@ translationKey: "the-marriage-page"
 </div>
 
 <h3>Previous performances</h3>
+27/06/2026: Villa Martini, Cavagnolo (Turin, Italy)
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lyon (France)<br/>
 28/02/2026: Teatro Giacosa, Ivrea (Italy)<br/>
 
 <h3>Press review</h3>
-Hugo Genève, <em>Il matrimonio</em>, "L'Entracte", n. 3, 28 May 2026, p. 2 <br/>
+Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 May 2026, p. 2 <br/>
 Interview with Francesca Tomalino and Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026 [French]<br/>
 Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Interview to Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026 [Italian]
 
@@ -54,6 +55,43 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
     Photographies: Alessio Dell'Anna
   </a>
 </p>
+
+<h3>Rassegna stampa</h3>
+Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
+Intervista a Francesca Tomalino e a Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
+Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Intervista a Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026
+
+<h3>Materiali</h3>
+
+<div class="materials-list">
+  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Tech Rider.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Scheda tecnica</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+
+  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Rassegna stampa.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Dossier stampa</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+</div>
 
 <h3>Accessibility</h3>
 Surtitling for the performance is available in Italian, English, and French, both via projection on a screen (or backdrop) and via a web app which has been developed as part of the University of Turin's public engagement project "<a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45">"Etica. Theatrical Explorations and Innovation for an Accessible Culture"</a>. Audio descriptions are currently being produced and will be made available before the performances and upon request. For further information, please contact us at: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
