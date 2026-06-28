@@ -20,9 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>03/07/2026</strong>
 <span>Luglio</span>
 </div>
