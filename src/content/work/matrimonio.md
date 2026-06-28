@@ -53,7 +53,7 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
 <h3>Materiali</h3>
 
 <div class="materials-list">
-  <a class="material-link" href="/doc/Macbett-Tech-rider.pdf" target="_blank">
+  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Scheda dello spettacolo.pdf" target="_blank">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
@@ -67,7 +67,7 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
     </span>
   </a>
 
-  <a class="material-link" href="/doc/macbett-rassegna.pdf" target="_blank">
+  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Rassegna stampa.pdf" target="_blank">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
