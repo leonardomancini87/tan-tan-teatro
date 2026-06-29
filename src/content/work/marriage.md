@@ -64,6 +64,34 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
 <h3>Materiali</h3>
 
 <div class="materials-list">
+  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Scheda dello spettacolo.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Dossier</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+
+  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Rassegna stampa.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Press Kit</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+
   <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Tech Rider.pdf" target="_blank">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +101,7 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
       </svg>
     </span>
     <span>
-      <strong>Scheda tecnica</strong>
+      <strong>Technical Rider</strong>
       <small>PDF</small>
     </span>
   </a>

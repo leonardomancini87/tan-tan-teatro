@@ -38,6 +38,21 @@ Duration: 1 hour<br/>
 Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L’Eco di Bergamo”, 21 febbraio 2026, p. 35; Micaela Vernice, <i>«Macbett è l’insensatezza della brama di potere»</i>, “L’Eco di Bergamo”, 25 febbraio 2026, p. 47; Daniele Stellato, <i>«Gemme di teatro» parte  col botto</i>, “Giornale di Treviglio”, p. 35; Marion Dumartin, <i>Danse entre Ionesco et Shakespeare</i>, "L'Entracte", n, 4, 22 mai 2025, p. 2.
 <h3>Materials</h3>
 <div class="materials-list">
+
+<a class="material-link" href="/doc/Macbett (Ionesco), Tan Tan Teatro – dossier.pdf" target="_blank">
+    <span class="material-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
+        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
+        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+    <span>
+      <strong>Dossier</strong>
+      <small>PDF</small>
+    </span>
+  </a>
+
   <a class="material-link" href="/doc/Macbett-Tech-rider.pdf" target="_blank">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
