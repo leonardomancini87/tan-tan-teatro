@@ -4,6 +4,7 @@ import Home from "../templates/Home.astro";
 import Page from "../templates/Page.astro";
 import Contact from "../templates/Contact.astro";
 import List from "../templates/List.astro";
+import Accessibility from "../templates/Accessibility.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
@@ -87,6 +88,8 @@ const templateKey = entry.data.templateKey;
     templateKey === "work-page" ||
     templateKey === "exhibitions-page" ? (
     <List entry={entry} items={items} baseSlug={baseSlug} />
+  ) : templateKey === "accessibility-page" ? (
+    <Accessibility entry={entry} />
   ) : (
     <Page entry={entry} />
   )
