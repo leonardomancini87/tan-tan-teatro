@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'pages'>;
+}
+
+const { entry } = Astro.props;
+const currentLocale = entry.data.locale ?? 'it';
+const title = entry.data.title;
+const description = entry.data.description;
+---
+
+<Layout title={title} description={description} locale={currentLocale}>
+  <article class="accessibility-page" aria-labelledby="accessibility-title">
+    <header class="accessibility-hero">
+      <p class="accessibility-kicker">Tan Tan Teatro</p>
+      <h1 id="accessibility-title">Accessibilità</h1>
+      <p class="accessibility-lede">Prima, durante e dopo lo spettacolo.</p>
+      <p class="accessibility-intro">
+        Questa pagina raccoglie strumenti e materiali pensati per preparare la visione, orientarsi tra i contenuti e scegliere la modalità di fruizione più adatta.
+      </p>
+    </header>
+
+    <section class="accessibility-tools" aria-labelledby="tools-title">
+      <h2 id="tools-title">Scegli come navigare</h2>
+      <div class="accessibility-tools-grid">
+        <a href="#spettacolo-in-breve"><span aria-hidden="true">01</span><strong>Lo spettacolo in breve</strong></a>
+        <a href="#cosa-aspettarsi"><span aria-hidden="true">02</span><strong>Cosa aspettarsi</strong></a>
+        <a href="#prima-della-sala"><span aria-hidden="true">03</span><strong>Prima di entrare in sala</strong></a>
+        <a href="#lis"><span aria-hidden="true">04</span><strong>Lingua dei segni</strong></a>
+      </div>
+    </section>
+
+    <section class="accessibility-feature" aria-labelledby="featured-title">
+      <div>
+        <p class="accessibility-kicker">In evidenza</p>
+        <h2 id="featured-title">Il matrimonio</h2>
+        <p>
+          Un percorso di accessibilità accompagna lo spettacolo con informazioni semplici, materiali di preparazione alla visione e contenuti descrittivi.
+        </p>
+        <a class="accessibility-text-link" href="/spettacoli/matrimonio#accessibilita">Vai allo spettacolo</a>
+      </div>
+      <img src="/img/matrimonio01.jpg" alt="Una scena dello spettacolo Il matrimonio, con il gruppo in scena disposto intorno alla figura della sposa." />
+    </section>
+
+    <section class="accessibility-sections" aria-labelledby="sections-title">
+      <h2 id="sections-title">Cosa puoi trovare</h2>
+      <div class="accessibility-card-grid">
+        <a href="#spettacolo-in-breve" class="accessibility-card">
+          <span>01</span>
+          <h3>Lo spettacolo in breve</h3>
+          <p>Una sintesi chiara, con frasi brevi e informazioni essenziali.</p>
+        </a>
+        <a href="#cosa-aspettarsi" class="accessibility-card">
+          <span>02</span>
+          <h3>Cosa aspettarsi</h3>
+          <p>Durata, suoni, luci, contatto con il pubblico e informazioni sensoriali.</p>
+        </a>
+        <a href="#prima-della-sala" class="accessibility-card">
+          <span>03</span>
+          <h3>Prima di entrare in sala</h3>
+          <p>Indicazioni per orientarsi e vivere l'arrivo con maggiore serenità.</p>
+        </a>
+        <a href="#immagini-descritte" class="accessibility-card">
+          <span>04</span>
+          <h3>Immagini descritte</h3>
+          <p>Fotografie con testo alternativo e descrizioni estese.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="spettacolo-in-breve" class="accessibility-reading-section">
+      <h2>Lo spettacolo in breve</h2>
+      <p>
+        <em>Il matrimonio</em> parte da un testo di Witold Gombrowicz. Al centro c'è un rito collettivo: il matrimonio. Durante la festa, le relazioni cambiano forma e diventano sempre più instabili. La scena alterna momenti grotteschi, tensione e comicità.
+      </p>
+    </section>
+
+    <section id="cosa-aspettarsi" class="accessibility-expectations" aria-labelledby="expectations-title">
+      <div class="accessibility-section-head">
+        <h2 id="expectations-title">Cosa aspettarsi</h2>
+        <p>Informazioni utili per sapere in anticipo cosa potrebbe accadere durante lo spettacolo.</p>
+      </div>
+
+      <dl class="accessibility-facts">
+        <div><dt>Durata</dt><dd>1 ora</dd></div>
+        <div><dt>Intervallo</dt><dd>No</dd></div>
+        <div><dt>Luci</dt><dd>Sono presenti cambi di luce.</dd></div>
+        <div><dt>Suono</dt><dd>Alcuni momenti possono avere musica intensa.</dd></div>
+        <div><dt>Contatto con il pubblico</dt><dd>Non previsto.</dd></div>
+        <div><dt>Lingua</dt><dd>Italiano, con sopratitoli disponibili su richiesta.</dd></div>
+      </dl>
+    </section>
+
+    <section id="prima-della-sala" class="accessibility-reading-section accessibility-note">
+      <h2>Prima di entrare in sala</h2>
+      <p>
+        All'arrivo è possibile rivolgersi al personale di accoglienza. In caso di necessità, è possibile chiedere informazioni sulla sala, sui posti e sui servizi disponibili. Se durante la rappresentazione nasce la necessità di uscire, è possibile farlo in autonomia.
+      </p>
+    </section>
+
+    <section id="immagini-descritte" class="accessibility-image-text">
+      <img src="/img/matrimonio02.jpg" alt="Una scena in bianco e nero dello spettacolo Il matrimonio, con le persone in scena distribuite nello spazio teatrale." />
+      <div>
+        <h2>Immagini descritte</h2>
+        <p>
+          Le immagini degli spettacoli possono essere accompagnate da testi alternativi e descrizioni più estese. Le descrizioni aiutano a comprendere atmosfera, disposizione nello spazio, costumi, oggetti scenici e relazioni tra le persone in scena.
+        </p>
+      </div>
+    </section>
+
+    <section id="lis" class="accessibility-reading-section">
+      <h2>Lingua dei segni italiana</h2>
+      <p>
+        La sezione può ospitare video in LIS, quando disponibili. I contenuti possono essere inseriti accanto alla sinossi, alle informazioni pratiche o ai materiali di approfondimento.
+      </p>
+    </section>
+
+    <section class="accessibility-contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Informazioni e richieste</h2>
+      <p>
+        Per informazioni su sopratitoli, audiodescrizioni, materiali accessibili o necessità specifiche: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
+      </p>
+    </section>
+  </article>
+</Layout>
