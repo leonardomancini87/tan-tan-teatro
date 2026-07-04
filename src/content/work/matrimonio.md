@@ -50,6 +50,20 @@ Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matr
 Intervista a Francesca Tomalino e a Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
 Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Intervista a Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026
 
+<style>
+  @media (min-width: 900px) {
+    .materials-list {
+      flex-wrap: nowrap !important;
+      gap: 1rem 1.3rem !important;
+    }
+
+    .materials-list .material-link {
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+  }
+</style>
+
 <h3>Materiali</h3>
 
 <div class="materials-list">
