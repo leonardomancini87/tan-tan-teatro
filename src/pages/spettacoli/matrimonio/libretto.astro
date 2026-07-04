@@ -1,0 +1,153 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const title = 'Libretto di sala inclusivo — Il matrimonio';
+const description = 'Un percorso accessibile per preparare la visione dello spettacolo Il matrimonio di Tan Tan Teatro.';
+---
+
+<Layout title={title} description={description} locale="it">
+  <main class="inclusive-booklet-page" id="main-content">
+    <p class="inclusive-booklet-page__back">
+      <a href="/spettacoli/matrimonio#materiali">&larr; Torna a Il matrimonio</a>
+    </p>
+
+    <header class="inclusive-booklet-hero">
+      <p class="inclusive-booklet-hero__kicker">Libretto di sala inclusivo</p>
+      <h1>Il matrimonio</h1>
+      <p class="inclusive-booklet-hero__subtitle">Witold Gombrowicz, 1948</p>
+      <p class="inclusive-booklet-hero__lede">
+        Questo percorso accompagna la visione dello spettacolo. Puoi leggerlo prima,
+        durante o dopo la rappresentazione, scegliendo le informazioni più utili per te.
+      </p>
+    </header>
+
+    <section class="inclusive-booklet-tools" aria-label="Strumenti di accessibilità">
+      <a href="#spettacolo-in-breve"><span aria-hidden="true">01</span><span>Lo spettacolo in breve</span></a>
+      <a href="#cosa-aspettarsi"><span aria-hidden="true">02</span><span>Cosa aspettarsi</span></a>
+      <a href="#accessibilita-disponibile"><span aria-hidden="true">03</span><span>Accessibilità disponibile</span></a>
+      <a href="mailto:accessibilita@tantanteatro.it?subject=Richiesta%20informazioni%20accessibilit%C3%A0%20-%20Il%20matrimonio"><span aria-hidden="true">04</span><span>Contatti accessibilità</span></a>
+    </section>
+
+    <figure class="inclusive-booklet-image">
+      <img src="/img/matrimonio01.jpg" alt="Il cast dello spettacolo Il matrimonio in una scena corale, con abiti da cerimonia e una figura con il velo da sposa al centro." />
+    </figure>
+
+    <div class="inclusive-booklet-layout">
+      <article class="inclusive-booklet-main">
+        <section id="spettacolo-in-breve">
+          <h2>Lo spettacolo in breve</h2>
+          <p>
+            <em>Il matrimonio</em> è uno spettacolo tratto dal testo di Witold Gombrowicz.
+            La vicenda si svolge in una dimensione sospesa, tra sogno e veglia.
+            Al centro ci sono un matrimonio, una famiglia, una comunità e un potere che cambia forma.
+          </p>
+          <p>
+            La scena alterna momenti grotteschi, comici e inquieti. Le relazioni tra le persone in scena
+            si trasformano rapidamente e il rito del matrimonio diventa un modo per interrogare identità,
+            autorità e fragilità.
+          </p>
+        </section>
+
+        <section id="cosa-aspettarsi">
+          <h2>Cosa aspettarsi</h2>
+          <dl class="inclusive-booklet-facts">
+            <div><dt>Durata</dt><dd>Circa 1 ora.</dd></div>
+            <div><dt>Intervallo</dt><dd>Non previsto.</dd></div>
+            <div><dt>Lingua</dt><dd>Italiano.</dd></div>
+            <div><dt>Musica e suono</dt><dd>Sono presenti musiche e momenti sonori intensi.</dd></div>
+            <div><dt>Luci</dt><dd>Sono presenti cambi di luce durante la rappresentazione.</dd></div>
+            <div><dt>Contatto con il pubblico</dt><dd>Non previsto.</dd></div>
+          </dl>
+        </section>
+
+        <section id="prima-durante-dopo">
+          <h2>Prima, durante e dopo lo spettacolo</h2>
+          <p>
+            Prima dell’inizio puoi consultare questa pagina per conoscere la struttura dello spettacolo,
+            l’atmosfera della scena e alcune informazioni sensoriali. Durante la rappresentazione puoi
+            uscire dalla sala se ne senti la necessità, secondo le indicazioni del personale di sala.
+          </p>
+          <p>
+            Dopo lo spettacolo puoi tornare su questa pagina per rileggere materiali, descrizioni e
+            approfondimenti. Per richieste specifiche puoi scrivere a
+            <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>.
+          </p>
+        </section>
+
+        <section id="la-scena">
+          <h2>La scena</h2>
+          <figure class="inclusive-booklet-inline-image">
+            <img src="/img/matrimonio02.jpg" alt="Una scena dello spettacolo Il matrimonio con il gruppo in penombra su un palcoscenico scuro." />
+          </figure>
+          <p>
+            Lo spazio scenico è essenziale e prevalentemente buio. Le persone in scena compongono quadri
+            corali, spesso molto ravvicinati. Il movimento del gruppo crea l’atmosfera del rito, della festa
+            e del sogno inquieto che attraversa lo spettacolo.
+          </p>
+        </section>
+
+        <section id="personaggi">
+          <h2>Personaggi</h2>
+          <p>
+            I personaggi abitano una realtà instabile. Le relazioni familiari, sociali e politiche cambiano
+            continuamente. Il matrimonio diventa il punto in cui desiderio, potere e paura si incontrano.
+          </p>
+        </section>
+
+        <section id="accessibilita-disponibile">
+          <h2>Accessibilità disponibile</h2>
+          <p>
+            Per questo spettacolo è disponibile il sopratitolaggio in italiano, inglese e francese tramite
+            proiezione su schermo, su fondale o tramite piattaforma dedicata. Sono in corso di realizzazione
+            audiodescrizioni, disponibili prima delle rappresentazioni e su richiesta.
+          </p>
+        </section>
+      </article>
+
+      <aside class="inclusive-booklet-toc" aria-label="Indice del libretto">
+        <h2>Indice</h2>
+        <a href="#spettacolo-in-breve">Lo spettacolo in breve</a>
+        <a href="#cosa-aspettarsi">Cosa aspettarsi</a>
+        <a href="#prima-durante-dopo">Prima, durante e dopo</a>
+        <a href="#la-scena">La scena</a>
+        <a href="#personaggi">Personaggi</a>
+        <a href="#accessibilita-disponibile">Accessibilità disponibile</a>
+      </aside>
+    </div>
+  </main>
+
+  <style>
+    .inclusive-booklet-page { width: min(1120px, 100%); margin: 0 auto; padding: 3vw 0 1vw; font-size: 1.9rem; line-height: 1.6; }
+    .inclusive-booklet-page h1, .inclusive-booklet-page h2, .inclusive-booklet-page h3, .inclusive-booklet-page p, .inclusive-booklet-page dt, .inclusive-booklet-page dd { color: var(--color-base); }
+    .inclusive-booklet-page__back { margin: 0 0 2rem; font-family: var(--font-sans-serif); font-size: 1.35rem; }
+    .inclusive-booklet-page__back a { color: var(--color-base); text-decoration: none; opacity: 0.72; }
+    .inclusive-booklet-page__back a:hover, .inclusive-booklet-page__back a:focus { opacity: 1; text-decoration: none; }
+    .inclusive-booklet-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; padding: 7vw 0 4vw; border-bottom: 1px solid var(--color-border); }
+    .inclusive-booklet-hero__kicker, .inclusive-booklet-hero__subtitle { margin: 0; font-family: var(--font-sans-serif); font-size: 1.3rem; font-variant: small-caps; letter-spacing: 0.16em; text-transform: lowercase; opacity: 0.62; }
+    .inclusive-booklet-hero h1 { margin: 0; font-family: var(--font-serif); font-size: clamp(5rem, 10vw, 12rem); font-weight: var(--font-normal); line-height: 0.95; letter-spacing: -0.04em; }
+    .inclusive-booklet-hero__lede { max-width: 760px; margin: 2rem 0 0; font-family: var(--font-serif); font-size: clamp(2.6rem, 4vw, 4.8rem); line-height: 1.05; letter-spacing: -0.03em; }
+    .inclusive-booklet-tools { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 3rem 0 5rem; padding: 2.2rem; color: #fff; background: #111; border-radius: 10px; }
+    .inclusive-booklet-tools a { display: flex; align-items: center; gap: 1rem; min-height: 5.4rem; padding: 0 1.5rem; color: #fff; border-right: 1px solid rgba(255,255,255,0.28); font-family: var(--font-sans-serif); font-size: 1.45rem; line-height: 1.2; text-decoration: none; }
+    .inclusive-booklet-tools a:last-child { border-right: 0; }
+    .inclusive-booklet-tools a:hover, .inclusive-booklet-tools a:focus { background: rgba(255,255,255,0.12); text-decoration: none; }
+    .inclusive-booklet-tools span[aria-hidden='true'] { min-width: 2.2rem; font-family: var(--font-serif); font-size: 2.4rem; }
+    .inclusive-booklet-image, .inclusive-booklet-inline-image { margin: 0 0 5rem; }
+    .inclusive-booklet-image img, .inclusive-booklet-inline-image img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    .inclusive-booklet-layout { display: grid; grid-template-columns: minmax(0, 720px) minmax(220px, 1fr); gap: 5rem; align-items: start; }
+    .inclusive-booklet-main section { margin: 0 0 5.5rem; scroll-margin-top: 4rem; }
+    .inclusive-booklet-main h2 { margin: 0 0 1.4rem; font-family: var(--font-serif); font-size: clamp(3rem, 4vw, 5rem); font-weight: var(--font-normal); line-height: 1; letter-spacing: -0.03em; }
+    .inclusive-booklet-main p { margin: 0 0 1.2rem; font-size: 2.05rem; line-height: 1.62; }
+    .inclusive-booklet-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 2rem 0 0; border-top: 1px solid var(--color-border); }
+    .inclusive-booklet-facts div { padding: 1.8rem 1.8rem 1.8rem 0; border-bottom: 1px solid var(--color-border); }
+    .inclusive-booklet-facts dt { margin-bottom: 0.5rem; font-family: var(--font-sans-serif); font-size: 1.2rem; font-variant: small-caps; letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.64; }
+    .inclusive-booklet-facts dd { margin: 0; font-family: var(--font-serif); font-size: 2rem; line-height: 1.28; }
+    .inclusive-booklet-toc { position: sticky; top: 3rem; padding-left: 2rem; border-left: 1px solid var(--color-border); }
+    .inclusive-booklet-toc h2 { margin: 0 0 1.2rem; font-family: var(--font-serif); font-size: 2.2rem; font-weight: var(--font-normal); }
+    .inclusive-booklet-toc a { display: block; margin: 0 0 0.8rem; color: var(--color-base); font-family: var(--font-serif); font-size: 1.45rem; line-height: 1.35; text-decoration: none; opacity: 0.72; }
+    .inclusive-booklet-toc a:hover, .inclusive-booklet-toc a:focus { opacity: 1; text-decoration: none; }
+    [data-theme='dark'] .inclusive-booklet-tools { background: #050505; }
+    [data-theme='dark'] .inclusive-booklet-page__back a, [data-theme='dark'] .inclusive-booklet-toc a { color: #f5f5f5; }
+    @media (max-width: 980px) { .inclusive-booklet-layout { grid-template-columns: 1fr; } .inclusive-booklet-toc { position: static; padding-left: 0; border-left: 0; } .inclusive-booklet-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } .inclusive-booklet-tools a:nth-child(2) { border-right: 0; } }
+    @media (max-width: 640px) { .inclusive-booklet-page { font-size: 1.75rem; } .inclusive-booklet-tools, .inclusive-booklet-facts { grid-template-columns: 1fr; } .inclusive-booklet-tools { padding: 1.4rem; } .inclusive-booklet-tools a { padding: 1.25rem 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.28); } .inclusive-booklet-tools a:last-child { border-bottom: 0; } .inclusive-booklet-main p, .inclusive-booklet-facts dd { font-size: 1.9rem; } }
+  </style>
+</Layout>
