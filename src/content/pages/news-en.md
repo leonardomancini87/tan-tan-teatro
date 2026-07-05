@@ -24,7 +24,7 @@ description: "Where and when to find us: upcoming dates, past performances and s
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>08–13/07/2026</strong>
+<strong>10/07/2026</strong>
 <span>July</span>
 </div>
 <div class="appointment-content">
