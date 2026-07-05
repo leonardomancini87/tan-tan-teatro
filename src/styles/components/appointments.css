@@ -184,17 +184,18 @@
   }
 
   .appointment-row {
-    grid-template-columns: minmax(7.2rem, auto) minmax(0, 1fr);
-    gap: 1rem;
-    align-items: start;
+    grid-template-columns: minmax(8rem, 12rem) minmax(0, 1fr);
+    gap: 0;
+    align-items: center;
     padding: 1.25rem 1.35rem;
   }
 
   .appointment-date {
     border-right: 1px solid var(--color-border);
     border-bottom: 0;
-    padding-right: 1rem;
+    padding-right: 1.35rem;
     padding-bottom: 0;
+    text-align: right;
   }
 
   .appointment-date strong {
@@ -209,6 +210,7 @@
   }
 
   .appointment-content {
+    padding-left: 1.35rem;
     font-size: 1.35rem;
     line-height: 1.35;
   }
