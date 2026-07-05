@@ -71,8 +71,9 @@
 }
 
 .appointment-date strong {
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   line-height: 1.05;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -198,9 +199,11 @@
   }
 
   .appointment-date strong {
-    font-size: 1.55rem;
-    line-height: 1.05;
-  }
+  font-size: 1.55rem;
+  line-height: 1.05;
+  font-weight: 400;
+  white-space: nowrap;
+}
 
   .appointment-date span {
     margin-top: 0.35rem;
