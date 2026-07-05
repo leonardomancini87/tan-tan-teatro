@@ -20,16 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>03/07/2026</strong>
-<span>Luglio</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — Spazio Kairòs / Onda Larsen Teatro, Torino
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>08–13/07/2026</strong>
 <span>Luglio</span>
 </div>
@@ -99,6 +89,15 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <summary>2026</summary>
 <div class="appointments-list appointments-list--compact">
 
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>03/07/2026</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — Spazio Kairòs / Onda Larsen Teatro, Torino
+</div>
+</div>
 
 <div class="appointment-row">
 <div class="appointment-date">
