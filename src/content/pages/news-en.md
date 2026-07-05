@@ -24,36 +24,6 @@ description: "Where and when to find us: upcoming dates, past performances and s
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>28/06/2026</strong>
-<span>June</span>
-</div>
-<div class="appointment-content">
-<em>The Marriage</em> — San Pietro in Vincoli, Turin, Italy
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>03/07/2026</strong>
-<span>July</span>
-</div>
-<div class="appointment-content">
-<em>The Marriage</em> — Spazio Kairòs / Onda Larsen Teatro, Turin, Italy
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>05/07/2026</strong>
-<span>July</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — San Pietro in Vincoli, Turin, Italy
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>08–13/07/2026</strong>
 <span>July</span>
 </div>
@@ -203,6 +173,16 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <summary>2025</summary>
 
 <div class="appointments-list appointments-list--compact">
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>03/07/2026</strong>
+<span>July</span>
+</div>
+<div class="appointment-content">
+<em>The Marriage</em> — Spazio Kairòs / Onda Larsen Teatro, Turin, Italy
+</div>
+</div>
 
 <div class="appointment-row">
 <div class="appointment-date">

@@ -27,7 +27,7 @@ translationKey: "the-marriage-page"
 <b>Light design</b>: Marco Usmigli<br/>
 <b>Dramaturgical adaptation and direction</b>: Leonardo Mancini
 <br /><br />
-<i>Duration</i>: 1 hour
+<i>Duration</i>: 70 minutes
 
 <h3 class="toc-only">Trailer</h3>
 <div class="fluid-width-video-wrapper">
@@ -41,6 +41,7 @@ translationKey: "the-marriage-page"
 </div>
 
 <h3>Previous performances</h3>
+03/07/2026: Spazio Kairós, Torino
 27/06/2026: Villa Martini, Cavagnolo (Turin, Italy)
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lyon (France)<br/>
 28/02/2026: Teatro Giacosa, Ivrea (Italy)<br/>
