@@ -183,18 +183,40 @@
     gap: 1.2rem;
   }
 
-  .appointment-row,
+  .appointment-row {
+    grid-template-columns: minmax(7.2rem, auto) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    padding: 1.25rem 1.35rem;
+  }
+
+  .appointment-date {
+    border-right: 1px solid var(--color-border);
+    border-bottom: 0;
+    padding-right: 1rem;
+    padding-bottom: 0;
+  }
+
+  .appointment-date strong {
+    font-size: 1.55rem;
+    line-height: 1.05;
+  }
+
+  .appointment-date span {
+    margin-top: 0.35rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .appointment-content {
+    font-size: 1.35rem;
+    line-height: 1.35;
+  }
+
   .project-row {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 1.6rem;
-  }
-
-  .appointment-date {
-    border-right: 0;
-    border-bottom: 1px solid var(--color-border);
-    padding-right: 0;
-    padding-bottom: 1rem;
   }
 
   .project-row h3 {
