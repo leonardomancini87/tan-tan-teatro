@@ -96,6 +96,17 @@ description: "Where and when to find us: upcoming dates, past performances and s
 
 <div class="appointments-list appointments-list--compact">
 
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>10/07/2026</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Vilnius, International University Theatre Festival, Vilnius University
+</div>
+</div>
+
 <div class="appointment-row">
 <div class="appointment-date">
 <strong>27/06/2026</strong>

@@ -20,13 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>10/07/2026</strong>
-<span>Luglio</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — Vilnius, International University Theatre Festival, Vilnius University
-</div>
-</div>
 
 <div class="appointment-row">
 <div class="appointment-date">
@@ -88,6 +81,16 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <details open>
 <summary>2026</summary>
 <div class="appointments-list appointments-list--compact">
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>10/07/2026</strong>
+<span>Luglio</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Vilnius, International University Theatre Festival, Vilnius University
+</div>
+</div>
 
 <div class="appointment-row">
 <div class="appointment-date">
