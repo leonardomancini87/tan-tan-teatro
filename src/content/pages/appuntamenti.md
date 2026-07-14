@@ -20,9 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>02/08/2026</strong>
 <span>Agosto</span>
 </div>
@@ -121,7 +118,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <em>Macbett</em> — Accademia Ligustica di Belle Arti di Genova
 </div>
 </div>
-
 
 <div class="appointment-row">
 <div class="appointment-date">
