@@ -40,8 +40,8 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 </div>
 
 <h3>Precedenti rappresentazioni</h3>
-03/07/2026: Spazio Kairós, Torino
-27/06/2026: Villa Martini, Cavagnolo (Torino)
+03/07/2026: Spazio Kairós, Torino<br/>
+27/06/2026: Villa Martini, Cavagnolo (Torino)<br/>
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lione<br/>
 28/02/2026: Teatro Giacosa, Ivrea<br/>
 
