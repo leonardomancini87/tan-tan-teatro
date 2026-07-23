@@ -28,6 +28,8 @@ Duration: 1 hour<br/>
 <h3 class="toc-only">Trailer</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_p8u-0JkcHc?si=McDtFlGs14-PAhYK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <h3>Previous performances</h3>
+10/07/2026, International University Theatre Festival, (XIII World Congress of the International University Theatre  Association, AITU-IUTA), <a href="https://www.vu.lt/en/events/macbett" target="_blank">Vilnius University Theatre Hall</a>, Vilnius University, Lithuania<br/>
+11/06/2026, Academy "Ligustica" of Fine Arts of Genova (teaching event), Italy<br/>
 09/05/2026, <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Cavagnolo (Turin), Italy<br />
 21/02/2026: <a href="http://www.arhatteatro.it/?fbclid=IwY2xjawRQlXdleHRuA2FlbQIxMABicmlkETBVVWlhbk83SVFaWWZsekNoc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuDdArXwkeXCNv-unycShqgwOzyFvdjz9Mkmo4t83z9x3REUSkuYOASUxqrW_aem_ihTtIDvuoRrzA0hpMG-zZQ" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo, Italy<br />
 10-11/01/2026: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Turin, Italy<br/>
