@@ -44,7 +44,7 @@ translationKey: "the-marriage-page"
 03/07/2026: Spazio Kairós, Torino<br/>
 27/06/2026: Villa Martini, Cavagnolo (Turin, Italy)<br/>
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lyon (France)<br/>
-28/02/2026: Teatro Giacosa, Ivrea (Italy)<br/>
+28/02/2026: Teatro Giacosa, Ivrea (Italy) (preview: 20 minutes)<br/>
 
 <h3>Press review</h3>
 Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 May 2026, p. 2 <br/>
