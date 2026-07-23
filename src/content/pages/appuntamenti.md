@@ -24,7 +24,7 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <span>Agosto</span>
 </div>
 <div class="appointment-content">
-<em>Il Matrimonio</em> — Fuma che ‘nduma Scuole di circo, Busca (Cuneo)
+<em>Il Matrimonio</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Scuole di circo<a/>, Tendone di circo presso il Centro Ippico Equi Maresco, Prato del Maresco, Savigliano
 </div>
 </div>
 
