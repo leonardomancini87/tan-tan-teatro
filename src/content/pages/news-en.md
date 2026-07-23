@@ -28,7 +28,7 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <span>August</span>
 </div>
 <div class="appointment-content">
-<em>The Marriage</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Circus school<a/>, Centro Ippico Equi Maresco, Prato del Maresco, Savigliano, Italy
+<em>The Marriage</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Circus school</a>, Centro Ippico Equi Maresco, Prato del Maresco, Savigliano, Italy
 </div>
 </div>
 
