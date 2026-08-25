@@ -4,7 +4,6 @@ interface Props {
 }
 
 const { locale = 'it' } = Astro.props;
-
 const isEn = locale === 'en';
 
 const today = new Date().toLocaleDateString(
@@ -17,6 +16,11 @@ const homeHref = isEn ? '/en' : '/';
 const cookieHref = isEn
   ? '/en/cookie-policy'
   : '/cookie-policy';
+
+const appPrivacyHref = '/privacy-app';
+
+const iubendaPrivacyHref =
+  'https://www.iubenda.com/privacy-policy/15384815';
 ---
 
 <footer class="site-footer">
@@ -29,16 +33,25 @@ const cookieHref = isEn
       {isEn
         ? `Turin, Italy | Last website update: ${today}`
         : `Torino, Italia | Ultimo aggiornamento del sito web: ${today}`}
+
       <br /><br />
 
       <a href={cookieHref}>Cookie Policy</a>
+
       {" | "}
+
       <a
-        href="https://www.iubenda.com/privacy-policy/XXXXXXXX"
+        href={iubendaPrivacyHref}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <a href="https://www.iubenda.com/privacy-policy/15384815" target="_blank">Privacy Policy
+        Privacy Policy
+      </a>
+
+      {" | "}
+
+      <a href={appPrivacyHref}>
+        {isEn ? 'App Privacy Policy' : 'Privacy dell’app'}
       </a>
     </p>
   </div>
