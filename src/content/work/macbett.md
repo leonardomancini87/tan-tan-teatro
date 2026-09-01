@@ -37,9 +37,9 @@ Durata: 1 ora<br/>
 
 <h3>Precedenti rappresentazioni</h3>
 
-10/07/2026, <a href="https://www.vu.lt/en/events/macbett" target="_blank">International University Theatre Festival</a>, (XIII World Congress of the International University Theatre  Association, AITU-IUTA), Vilnius University Theatre Hall, Lituania<br/>
-11/06/2026, Accademia Ligustica di Belle Arti di Genova (iniziativa didattica)<br/>
-09/05/2026, <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Cavagnolo (Torino)<br/>
+10/07/2026: <a href="https://www.vu.lt/en/events/macbett" target="_blank">International University Theatre Festival</a>, (XIII World Congress of the International University Theatre  Association, AITU-IUTA), Vilnius University Theatre Hall, Lituania<br/>
+11/06/2026: Accademia Ligustica di Belle Arti di Genova (iniziativa didattica)<br/>
+09/05/2026: <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Cavagnolo (Torino)<br/>
 21/02/2026: <a href="http://www.arhatteatro.it/" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo<br/>
 10-11/01/2026: <a href="https://www.teatrocostumitorino.it/punti-di-vista" target="_blank">Piccolo Teatro Comico</a>, Torino<br/>
 07/09/2025: <a href="https://www.festivalmirabilia.it/evento/macbett-ionesco/" target="_blank">Festival Mirabilia</a>, Cuneo<br/>
