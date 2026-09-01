@@ -4,7 +4,7 @@
   "description": "A minimalist, high-performance Astro theme for photographers and artists.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node -e \"console.log('ENV PUBLIC_SUPABASE_URL:', process.env.PUBLIC_SUPABASE_URL ? 'PRESENTE' : 'MANCANTE'); console.log('ENV PUBLIC_SUPABASE_PUBLISHABLE_KEY:', process.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ? 'PRESENTE' : 'MANCANTE')\" && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
