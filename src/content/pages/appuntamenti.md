@@ -20,16 +20,6 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>02/08/2026</strong>
-<span>Agosto</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Scuole di circo</a>, Tendone di circo presso il Centro Ippico Equi Maresco, Prato del Maresco, Savigliano
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>05–06/09/2026</strong>
 <span>Settembre</span>
 </div>
@@ -45,6 +35,16 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 </div>
 <div class="appointment-content">
 <em>Macbett</em> — Teatro Dravelli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>12/12/2026</strong>
+<span>Dicembre</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Auditorium "Franca Rame", Rivalta di Torino
 </div>
 </div>
 
@@ -78,6 +78,16 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <details open>
 <summary>2026</summary>
 <div class="appointments-list appointments-list--compact">
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>02/08/2026</strong>
+<span>Agosto</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Scuole di circo</a>, Tendone di circo presso il Centro Ippico Equi Maresco, Prato del Maresco, Savigliano
+</div>
+</div>
 
 <div class="appointment-row">
 <div class="appointment-date">

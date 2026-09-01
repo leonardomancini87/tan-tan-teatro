@@ -40,6 +40,7 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 </div>
 
 <h3>Precedenti rappresentazioni</h3>
+02/08/2026: Fuma che 'nduma, Centro Ippico Equi Maresco, Savigliano<br />
 03/07/2026: Spazio Kairós, Torino<br/>
 27/06/2026: Villa Martini, Cavagnolo (Torino)<br/>
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lione<br/>
@@ -49,7 +50,7 @@ L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato
 <h3>Rassegna stampa</h3>
 Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 maggio 2026, p. 2 <br/>
 Intervista a Francesca Tomalino e a Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026<br/>
-Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Intervista a Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026
+Claudio Rocco, Intervista a Leonardo Mancini, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">"Radio Fuori Campo"</a>, 11/06/2026
 
 <style>
   @media (min-width: 900px) {
@@ -112,7 +113,7 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
   </a>
 </div>
 
-  <a class="material-link" href="/spettacoli/matrimonio/libretto">
+  <!--<a class="material-link" href="/spettacoli/matrimonio/libretto">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
@@ -124,8 +125,8 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
       <strong>Libretto di sala inclusivo</strong>
       <small>Pagina web</small>
     </span>
-  </a>
+  </a>-->
 
 <h3>Accessibilità</h3>
 
-Per lo spettacolo teatrale è disponibile il sopratitolaggio in italiano, in inglese e in francese, tramite proiezione su schermo (o su fondale) oppure tramite uso di un'apposita piattaforma per l'accessibilità (<a href="https://www.stentor.live/it/" target="_blank">Sténtor</a>), che è stata sviluppata nell'ambito del progetto di <em>public engagement</em> dell'Università degli Studi di Torino "<a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45" target="_blank">Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile</a>". Sono in corso di realizzazione audiodescrizioni, che saranno rese disponibili prima delle rappresentazioni e su richiesta. Per ulteriori informazioni: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
+Per l'accessibilità dello spettacolo, sono disponibili audiodescrizioni in italiano e sopratitoli in italiano, in inglese e in francese, tramite un'apposita piattaforma per l'accessibilità (<a href="https://www.stentor.live/it/" target="_blank">Sténtor</a>), che è stata sviluppata nell'ambito del progetto di <em>public engagement</em> dell'Università degli Studi di Torino "<a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45" target="_blank">Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile</a>". Sono inoltre state realizzate audiodescrizioni. Per ulteriori informazioni: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>

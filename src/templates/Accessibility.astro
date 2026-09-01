@@ -10,163 +10,406 @@ const { entry } = Astro.props;
 const currentLocale = entry.data.locale ?? 'it';
 const title = entry.data.title;
 const description = entry.data.description;
+
+const isEnglish = currentLocale === 'en';
+
+const content = isEnglish
+  ? {
+      kicker: 'Tan Tan Teatro',
+      title: 'Accessibility',
+      lede: 'Before, during and after the performance.',
+      intro:
+        'Information and resources to learn about our performances, know in advance what to expect in the theatre and discover the accessibility services available.',
+
+      index: 'Index',
+      indexExpect: 'What to expect',
+      indexBefore: 'Before entering the theatre',
+      indexServices: 'Audio description and surtitles',
+      indexInfo: 'Information and requests',
+
+      expectTitle: 'What to expect',
+      expectText:
+        'For each performance, we aim to provide information in advance about its duration, possible intervals, the use of lighting, music and loud sounds, and other elements that may help audiences prepare for the performance. Specific information may vary from one production to another and is provided on the relevant pages when necessary.',
+
+      beforeTitle: 'Before entering the theatre',
+      beforeText:
+        'For information about the venue, seating and available services, you can contact the theatre staff. Whenever possible, we provide information in advance about access to the venue and ways of experiencing the performance. If you have specific requirements, we recommend contacting us before the performance.',
+
+      servicesTitle: 'Audio description and surtitles',
+      servicesBeforeLink:
+        'Our performances offer audio description in Italian and surtitles in Italian, English and French. Accessible content is delivered through',
+      servicesAfterLink:
+        ', a platform developed as part of the University of Turin public engagement project “Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile”.',
+
+      infoTitle: 'Information and requests',
+      infoBeforeEmail:
+        'For information about audio description, surtitles, accessible materials or other specific requirements, please write to',
+    }
+  : {
+      kicker: 'Tan Tan Teatro',
+      title: 'Accessibilità',
+      lede: 'Prima, durante e dopo lo spettacolo.',
+      intro:
+        'Informazioni e materiali utili per conoscere gli spettacoli, sapere in anticipo cosa accadrà in sala e scoprire i servizi di accessibilità disponibili.',
+
+      index: 'Indice',
+      indexExpect: 'Cosa aspettarsi',
+      indexBefore: 'Prima di entrare in sala',
+      indexServices: 'Audiodescrizioni e sopratitoli',
+      indexInfo: 'Informazioni e richieste',
+
+      expectTitle: 'Cosa aspettarsi',
+      expectText:
+        "Per ogni spettacolo cerchiamo di rendere disponibili in anticipo informazioni utili sulla durata, sull'eventuale presenza di intervalli, sull'uso di luci, musica e suoni intensi e su altri elementi che possano aiutare il pubblico a prepararsi alla visione. Le informazioni specifiche possono variare da uno spettacolo all'altro e vengono indicate nelle rispettive pagine quando necessarie.",
+
+      beforeTitle: 'Prima di entrare in sala',
+      beforeText:
+        "Per informazioni sulla sala, sui posti e sui servizi disponibili è possibile rivolgersi al personale di accoglienza nei teatri. Quando possibile, cerchiamo di fornire in anticipo indicazioni utili sull'accesso agli spazi e sulle modalità di fruizione degli spettacoli. Per necessità specifiche consigliamo di contattarci prima delle rappresentazioni.",
+
+      servicesTitle: 'Audiodescrizioni e sopratitoli',
+      servicesBeforeLink:
+        'Per gli spettacoli sono disponibili audiodescrizioni in italiano e sopratitoli in italiano, inglese e francese. I contenuti accessibili vengono fruiti tramite',
+      servicesAfterLink:
+        ", una piattaforma sviluppata nell'ambito del progetto di public engagement dell'Università degli Studi di Torino “Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile”.",
+
+      infoTitle: 'Informazioni e richieste',
+      infoBeforeEmail:
+        'Per informazioni su audiodescrizioni, sopratitoli, materiali accessibili o altre necessità specifiche, scrivere a',
+    };
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
   <article class="accessibility-page" aria-labelledby="accessibility-title">
     <header class="accessibility-hero">
-      <p class="accessibility-kicker">Tan Tan Teatro</p>
-      <h1 id="accessibility-title">Accessibilità</h1>
-      <p class="accessibility-lede">Prima, durante e dopo lo spettacolo.</p>
+      <p class="accessibility-kicker">{content.kicker}</p>
+
+      <h1 id="accessibility-title">{content.title}</h1>
+
+      <p class="accessibility-lede">
+        {content.lede}
+      </p>
+
       <p class="accessibility-intro">
-        Questa pagina raccoglie strumenti e materiali pensati per preparare la visione, orientarsi tra i contenuti e scegliere la modalità di fruizione più adatta.
+        {content.intro}
       </p>
     </header>
 
     <section class="accessibility-tools" aria-labelledby="tools-title">
-      <h2 id="tools-title">Scegli come navigare</h2>
+      <h2 id="tools-title">{content.index}</h2>
+
       <div class="accessibility-tools-grid">
-        <a href="#spettacolo-in-breve"><span aria-hidden="true">01</span><strong>Lo spettacolo in breve</strong></a>
-        <a href="#cosa-aspettarsi"><span aria-hidden="true">02</span><strong>Cosa aspettarsi</strong></a>
-        <a href="#prima-della-sala"><span aria-hidden="true">03</span><strong>Prima di entrare in sala</strong></a>
-        <a href="#lis"><span aria-hidden="true">04</span><strong>Lingua dei segni</strong></a>
-      </div>
-    </section>
+        <a href="#cosa-aspettarsi">
+          <span aria-hidden="true">01</span>
+          <strong>{content.indexExpect}</strong>
+        </a>
 
-    <section class="accessibility-feature" aria-labelledby="featured-title">
-      <div>
-        <p class="accessibility-kicker">In evidenza</p>
-        <h2 id="featured-title">Il matrimonio</h2>
-        <p>
-          Un percorso di accessibilità accompagna lo spettacolo con informazioni semplici, materiali di preparazione alla visione e contenuti descrittivi.
-        </p>
-        <a class="accessibility-text-link" href="/spettacoli/matrimonio#accessibilita">Vai allo spettacolo</a>
-      </div>
-      <img src="/img/matrimonio01.jpg" alt="Una scena dello spettacolo Il matrimonio, con il gruppo in scena disposto intorno alla figura della sposa." />
-    </section>
+        <a href="#prima-della-sala">
+          <span aria-hidden="true">02</span>
+          <strong>{content.indexBefore}</strong>
+        </a>
 
-    <section class="accessibility-sections" aria-labelledby="sections-title">
-      <h2 id="sections-title">Cosa puoi trovare</h2>
-      <div class="accessibility-card-grid">
-        <a href="#spettacolo-in-breve" class="accessibility-card">
-          <span>01</span>
-          <h3>Lo spettacolo in breve</h3>
-          <p>Una sintesi chiara, con frasi brevi e informazioni essenziali.</p>
+        <a href="#servizi-accessibili">
+          <span aria-hidden="true">03</span>
+          <strong>{content.indexServices}</strong>
         </a>
-        <a href="#cosa-aspettarsi" class="accessibility-card">
-          <span>02</span>
-          <h3>Cosa aspettarsi</h3>
-          <p>Durata, suoni, luci, contatto con il pubblico e informazioni sensoriali.</p>
-        </a>
-        <a href="#prima-della-sala" class="accessibility-card">
-          <span>03</span>
-          <h3>Prima di entrare in sala</h3>
-          <p>Indicazioni per orientarsi e vivere l'arrivo con maggiore serenità.</p>
-        </a>
-        <a href="#immagini-descritte" class="accessibility-card">
-          <span>04</span>
-          <h3>Immagini descritte</h3>
-          <p>Fotografie con testo alternativo e descrizioni estese.</p>
+
+        <a href="#informazioni">
+          <span aria-hidden="true">04</span>
+          <strong>{content.indexInfo}</strong>
         </a>
       </div>
     </section>
 
-    <section id="spettacolo-in-breve" class="accessibility-reading-section">
-      <h2>Lo spettacolo in breve</h2>
+    <section
+      id="cosa-aspettarsi"
+      class="accessibility-reading-section"
+      aria-labelledby="expectations-title"
+    >
+      <h2 id="expectations-title">{content.expectTitle}</h2>
+
       <p>
-        <em>Il matrimonio</em> parte da un testo di Witold Gombrowicz. Al centro c'è un rito collettivo: il matrimonio. Durante la festa, le relazioni cambiano forma e diventano sempre più instabili. La scena alterna momenti grotteschi, tensione e comicità.
+        {content.expectText}
       </p>
     </section>
 
-    <section id="cosa-aspettarsi" class="accessibility-expectations" aria-labelledby="expectations-title">
-      <div class="accessibility-section-head">
-        <h2 id="expectations-title">Cosa aspettarsi</h2>
-        <p>Informazioni utili per sapere in anticipo cosa potrebbe accadere durante lo spettacolo.</p>
-      </div>
+    <section
+      id="prima-della-sala"
+      class="accessibility-reading-section accessibility-note"
+    >
+      <h2>{content.beforeTitle}</h2>
 
-      <dl class="accessibility-facts">
-        <div><dt>Durata</dt><dd>1 ora</dd></div>
-        <div><dt>Intervallo</dt><dd>No</dd></div>
-        <div><dt>Luci</dt><dd>Sono presenti cambi di luce.</dd></div>
-        <div><dt>Suono</dt><dd>Alcuni momenti possono avere musica intensa.</dd></div>
-        <div><dt>Contatto con il pubblico</dt><dd>Non previsto.</dd></div>
-        <div><dt>Lingua</dt><dd>Italiano, con sopratitoli disponibili su richiesta.</dd></div>
-      </dl>
-    </section>
-
-    <section id="prima-della-sala" class="accessibility-reading-section accessibility-note">
-      <h2>Prima di entrare in sala</h2>
       <p>
-        All'arrivo è possibile rivolgersi al personale di accoglienza. In caso di necessità, è possibile chiedere informazioni sulla sala, sui posti e sui servizi disponibili. Se durante la rappresentazione nasce la necessità di uscire, è possibile farlo in autonomia.
+        {content.beforeText}
       </p>
     </section>
 
-    <section id="immagini-descritte" class="accessibility-image-text">
-      <img src="/img/matrimonio02.jpg" alt="Una scena in bianco e nero dello spettacolo Il matrimonio, con le persone in scena distribuite nello spazio teatrale." />
-      <div>
-        <h2>Immagini descritte</h2>
-        <p>
-          Le immagini degli spettacoli possono essere accompagnate da testi alternativi e descrizioni più estese. Le descrizioni aiutano a comprendere atmosfera, disposizione nello spazio, costumi, oggetti scenici e relazioni tra le persone in scena.
-        </p>
-      </div>
-    </section>
+    <section
+      id="servizi-accessibili"
+      class="accessibility-reading-section"
+      aria-labelledby="services-title"
+    >
+      <h2 id="services-title">{content.servicesTitle}</h2>
 
-    <section id="lis" class="accessibility-reading-section">
-      <h2>Lingua dei segni italiana</h2>
       <p>
-        La sezione può ospitare video in LIS, quando disponibili. I contenuti possono essere inseriti accanto alla sinossi, alle informazioni pratiche o ai materiali di approfondimento.
+        {content.servicesBeforeLink}
+        {' '}
+        <a
+          href="https://www.stentor.live/it/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Sténtor
+        </a>
+        {content.servicesAfterLink}
       </p>
     </section>
 
-    <section class="accessibility-contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Informazioni e richieste</h2>
+    <section
+      id="informazioni"
+      class="accessibility-contact"
+      aria-labelledby="contact-title"
+    >
+      <h2 id="contact-title">{content.infoTitle}</h2>
+
       <p>
-        Per informazioni su sopratitoli, audiodescrizioni, materiali accessibili o necessità specifiche: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
+        {content.infoBeforeEmail}
+        {' '}
+        <a href="mailto:accessibilita@tantanteatro.it">
+          accessibilita@tantanteatro.it
+        </a>.
       </p>
     </section>
   </article>
 
   <style>
-    .accessibility-page { width: min(1120px, 100%); margin: 0 auto; padding: 3vw 0 1vw; font-size: 1.9rem; line-height: 1.55; }
-    .accessibility-page h1, .accessibility-page h2, .accessibility-page h3, .accessibility-page p { color: var(--color-base); }
-    .accessibility-page h1 { margin: 0; font-family: var(--font-serif); font-size: clamp(5.2rem, 9vw, 12rem); font-weight: var(--font-normal); line-height: 0.95; letter-spacing: -0.04em; }
-    .accessibility-page h2 { margin: 0 0 1.4rem; font-family: var(--font-serif); font-size: clamp(3.2rem, 4vw, 5.4rem); font-weight: var(--font-normal); line-height: 1; letter-spacing: -0.03em; }
-    .accessibility-page h3 { margin: 0 0 0.8rem; font-family: var(--font-serif); font-size: 2.35rem; font-weight: var(--font-bold); line-height: 1.05; }
-    .accessibility-page p { margin: 0 0 1.2rem; }
-    .accessibility-kicker { margin: 0 0 1.2rem !important; font-family: var(--font-sans-serif); font-size: 1.25rem; font-variant: small-caps; text-transform: lowercase; letter-spacing: 0.18em; opacity: 0.58; }
-    .accessibility-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); gap: 3rem 6rem; align-items: end; padding: 8vw 0 5vw; border-bottom: 1px solid var(--color-border); }
-    .accessibility-hero .accessibility-kicker, .accessibility-hero h1 { grid-column: 1 / -1; }
-    .accessibility-lede { font-family: var(--font-serif); font-size: clamp(3rem, 4vw, 5.2rem); line-height: 1.02; letter-spacing: -0.03em; }
-    .accessibility-intro { align-self: end; max-width: 34rem; font-family: var(--font-serif); font-size: 2.1rem; opacity: 0.76; }
-    .accessibility-tools { margin: 3rem 0 6rem; padding: 2.4rem; color: #fff; background: #111; border-radius: 10px; }
-    .accessibility-tools h2 { margin-bottom: 1.4rem; color: #fff; font-family: var(--font-sans-serif); font-size: 1.45rem; font-variant: small-caps; font-weight: var(--font-normal); letter-spacing: 0.12em; text-transform: lowercase; }
-    .accessibility-tools-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
-    .accessibility-tools-grid a { display: flex; align-items: center; gap: 1.1rem; min-height: 5.8rem; padding: 0 1.8rem; color: #fff; background: transparent; border-right: 1px solid rgba(255,255,255,0.28); border-radius: 0; font-family: var(--font-sans-serif); font-size: 1.55rem; line-height: 1.2; text-align: left; text-decoration: none; }
-    .accessibility-tools-grid a:last-child { border-right: 0; }
-    .accessibility-tools-grid a:hover, .accessibility-tools-grid a:focus { background: rgba(255,255,255,0.12); text-decoration: none; }
-    .accessibility-tools-grid span { min-width: 2.2rem; font-family: var(--font-serif); font-size: 2.6rem; line-height: 1; }
-    .accessibility-tools-grid strong { font-weight: var(--font-normal); }
-    .accessibility-feature, .accessibility-image-text { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 4rem; align-items: center; margin: 6rem 0; }
-    .accessibility-feature img, .accessibility-image-text img { display: block; width: 100%; height: auto; border-radius: 10px; }
-    .accessibility-text-link, .accessibility-text-link:visited { display: inline-flex; margin-top: 1rem; color: var(--color-base); font-family: var(--font-sans-serif); font-size: 1.45rem; font-variant: small-caps; letter-spacing: 0.1em; text-transform: lowercase; text-decoration: underline; text-underline-offset: 0.25em; }
-    .accessibility-sections, .accessibility-reading-section, .accessibility-expectations, .accessibility-contact { margin: 6rem 0; }
-    .accessibility-card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.4rem; }
-    .accessibility-card, .accessibility-card:visited { display: flex; min-height: 21rem; flex-direction: column; justify-content: space-between; padding: 1.8rem; color: var(--color-base); border: 1px solid var(--color-border); border-radius: 10px; text-decoration: none; }
-    .accessibility-card:hover, .accessibility-card:focus { text-decoration: none; border-color: var(--color-base); }
-    .accessibility-card span { font-family: var(--font-sans-serif); font-size: 1.2rem; letter-spacing: 0.16em; opacity: 0.52; }
-    .accessibility-card p { font-size: 1.55rem; line-height: 1.35; opacity: 0.72; }
-    .accessibility-reading-section { max-width: 720px; margin-right: auto; margin-left: auto; }
-    .accessibility-reading-section p, .accessibility-contact p { font-size: 2.15rem; line-height: 1.62; }
-    .accessibility-note { padding: 2.8rem; background: rgba(0,0,0,0.035); border-radius: 10px; }
-    .accessibility-section-head { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); gap: 3rem; align-items: end; margin-bottom: 3rem; }
-    .accessibility-section-head p { opacity: 0.75; }
-    .accessibility-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; border-top: 1px solid var(--color-border); }
-    .accessibility-facts div { padding: 2.2rem 2.2rem 2.2rem 0; border-bottom: 1px solid var(--color-border); }
-    .accessibility-facts dt { margin-bottom: 0.6rem; font-family: var(--font-sans-serif); font-size: 1.28rem; font-variant: small-caps; letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.64; }
-    .accessibility-facts dd { margin: 0; font-family: var(--font-serif); font-size: 2.15rem; line-height: 1.25; }
-    .accessibility-contact { max-width: 720px; margin-right: auto; margin-left: auto; padding-top: 4rem; border-top: 1px solid var(--color-border); }
-    [data-theme='dark'] .accessibility-note { background: rgba(255,255,255,0.06); }
-    @media (max-width: 980px) { .accessibility-hero, .accessibility-feature, .accessibility-image-text, .accessibility-section-head { grid-template-columns: 1fr; } .accessibility-tools-grid, .accessibility-card-grid, .accessibility-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .accessibility-tools-grid a:nth-child(2) { border-right: 0; } }
-    @media (max-width: 640px) { .accessibility-page { font-size: 1.75rem; } .accessibility-tools { padding: 1.4rem; } .accessibility-tools-grid, .accessibility-card-grid, .accessibility-facts { grid-template-columns: 1fr; } .accessibility-tools-grid a { padding: 1.3rem 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.28); } .accessibility-tools-grid a:last-child { border-bottom: 0; } .accessibility-card { min-height: 16rem; } .accessibility-reading-section p, .accessibility-contact p, .accessibility-facts dd { font-size: 1.9rem; } }
+    .accessibility-page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 1vw 0 1vw;
+      font-size: 1.9rem;
+      line-height: 1.55;
+    }
+
+    .accessibility-page h1,
+    .accessibility-page h2,
+    .accessibility-page p {
+      color: var(--color-base);
+    }
+
+    .accessibility-page h1 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(5.2rem, 9vw, 12rem);
+      font-weight: var(--font-normal);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .accessibility-page h2 {
+      margin: 0 0 1.4rem;
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 4vw, 5.4rem);
+      font-weight: var(--font-normal);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .accessibility-page p {
+      margin: 0 0 1.2rem;
+    }
+
+    .accessibility-kicker {
+      margin: 0 0 1.2rem !important;
+      font-family: var(--font-sans-serif);
+      font-size: 1.25rem;
+      font-variant: small-caps;
+      text-transform: lowercase;
+      letter-spacing: 0.18em;
+      opacity: 0.58;
+    }
+
+    .accessibility-hero {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(280px, 0.85fr);
+      gap: 3rem 6rem;
+      align-items: end;
+      padding: 4vw 0 4vw;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .accessibility-hero .accessibility-kicker,
+    .accessibility-hero h1 {
+      grid-column: 1 / -1;
+    }
+
+    .accessibility-lede {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 4vw, 5.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .accessibility-intro {
+      align-self: end;
+      max-width: 34rem;
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      opacity: 0.76;
+    }
+
+    .accessibility-tools {
+      margin: 3rem 0 6rem;
+      padding: 2.4rem;
+      color: #fff;
+      background: #111;
+      border-radius: 10px;
+    }
+
+    .accessibility-tools h2 {
+      margin-bottom: 1.4rem;
+      color: #fff;
+      font-family: var(--font-sans-serif);
+      font-size: 1.45rem;
+      font-variant: small-caps;
+      font-weight: var(--font-normal);
+      letter-spacing: 0.12em;
+      text-transform: lowercase;
+    }
+
+    .accessibility-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .accessibility-tools-grid a {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      min-height: 5.8rem;
+      padding: 0 1.8rem;
+      color: #fff;
+      background: transparent;
+      border-right: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 0;
+      font-family: var(--font-sans-serif);
+      font-size: 1.55rem;
+      line-height: 1.2;
+      text-align: left;
+      text-decoration: none;
+    }
+
+    .accessibility-tools-grid a:last-child {
+      border-right: 0;
+    }
+
+    .accessibility-tools-grid a:hover,
+    .accessibility-tools-grid a:focus {
+      background: rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+    }
+
+    .accessibility-tools-grid span {
+      min-width: 2.2rem;
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      line-height: 1;
+    }
+
+    .accessibility-tools-grid strong {
+      font-weight: var(--font-normal);
+    }
+
+    .accessibility-reading-section,
+    .accessibility-contact {
+      max-width: 720px;
+      margin: 6rem auto;
+    }
+
+    .accessibility-reading-section p,
+    .accessibility-contact p {
+      font-size: 2.15rem;
+      line-height: 1.62;
+    }
+
+    .accessibility-reading-section a,
+    .accessibility-reading-section a:visited,
+    .accessibility-contact a,
+    .accessibility-contact a:visited {
+      color: var(--color-base);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .accessibility-note {
+      padding: 2.8rem;
+      background: rgba(0, 0, 0, 0.035);
+      border-radius: 10px;
+    }
+
+    .accessibility-contact {
+      padding-top: 4rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    [data-theme='dark'] .accessibility-note {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    @media (max-width: 980px) {
+      .accessibility-hero {
+        grid-template-columns: 1fr;
+        padding: 5rem 0 4rem;
+      }
+
+      .accessibility-tools-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .accessibility-tools-grid a:nth-child(2) {
+        border-right: 0;
+      }
+
+      .accessibility-tools-grid a:nth-child(1),
+      .accessibility-tools-grid a:nth-child(2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .accessibility-page {
+        font-size: 1.75rem;
+        padding-top: 0;
+      }
+
+      .accessibility-hero {
+        padding: 3.5rem 0 3rem;
+      }
+
+      .accessibility-tools {
+        padding: 1.4rem;
+      }
+
+      .accessibility-tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .accessibility-tools-grid a {
+        padding: 1.3rem 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+      }
+
+      .accessibility-tools-grid a:last-child {
+        border-bottom: 0;
+      }
+
+      .accessibility-reading-section p,
+      .accessibility-contact p {
+        font-size: 1.9rem;
+      }
+    }
   </style>
 </Layout>

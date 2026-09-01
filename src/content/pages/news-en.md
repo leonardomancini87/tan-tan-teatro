@@ -24,16 +24,6 @@ description: "Where and when to find us: upcoming dates, past performances and s
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>02/08/2026</strong>
-<span>August</span>
-</div>
-<div class="appointment-content">
-<em>The Marriage</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Circus school</a>, Centro Ippico Equi Maresco, Prato del Maresco, Savigliano, Italy
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
 <strong>05–06/09/2026</strong>
 <span>September</span>
 </div>
@@ -49,6 +39,16 @@ description: "Where and when to find us: upcoming dates, past performances and s
 </div>
 <div class="appointment-content">
 <em>Macbett</em> — Teatro Dravelli, Torino
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>12/12/2026</strong>
+<span>December</span>
+</div>
+<div class="appointment-content">
+<em>Macbett</em> — Auditorium "Franca Rame", Rivalta di Torino
 </div>
 </div>
 
@@ -85,6 +85,16 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <summary>2026</summary>
 
 <div class="appointments-list appointments-list--compact">
+
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>02/08/2026</strong>
+<span>August</span>
+</div>
+<div class="appointment-content">
+<em>The Marriage</em> — <a href="https://www.instagram.com/fumachenduma/p/Da3BRayiCHS/" target="_blank">Fuma che ‘nduma Circus school</a>, Centro Ippico Equi Maresco, Prato del Maresco, Savigliano, Italy
+</div>
+</div>
 
 
 <div class="appointment-row">

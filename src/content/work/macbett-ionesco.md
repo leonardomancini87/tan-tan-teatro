@@ -58,7 +58,7 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, â€œLâ€
 <h3>Materials</h3>
 <div class="materials-list">
 
-  <a class="material-link" href="/spettacoli/en/macbett-ionesco/booklet">
+  <!--<a class="material-link" href="/spettacoli/en/macbett-ionesco/booklet">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
@@ -70,7 +70,7 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, â€œLâ€
       <strong>Inclusive programme</strong>
       <small>Web page</small>
     </span>
-  </a>
+  </a>-->
 
 <a class="material-link" href="/doc/Macbett (Ionesco), Tan Tan Teatro â€“ dossier.pdf" target="_blank">
     <span class="material-link__icon" aria-hidden="true">

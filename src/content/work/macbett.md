@@ -37,7 +37,7 @@ Durata: 1 ora<br/>
 
 <h3>Precedenti rappresentazioni</h3>
 
-10/07/2026, International University Theatre Festival, (XIII World Congress of the International University Theatre  Association, AITU-IUTA), <a href="https://www.vu.lt/en/events/macbett" target="_blank">Vilnius University Theatre Hall</a>, Vilnius University, Lituania<br/>
+10/07/2026, <a href="https://www.vu.lt/en/events/macbett" target="_blank">International University Theatre Festival</a>, (XIII World Congress of the International University Theatre  Association, AITU-IUTA), Vilnius University Theatre Hall, Lituania<br/>
 11/06/2026, Accademia Ligustica di Belle Arti di Genova (iniziativa didattica)<br/>
 09/05/2026, <a href="https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/" target="_blank">Teatro Martini</a>, Cavagnolo (Torino)<br/>
 21/02/2026: <a href="http://www.arhatteatro.it/" target="_blank">Àrhat Teatro</a>, Pontirolo Nuovo, Bergamo<br/>
@@ -70,7 +70,7 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L�
 
 <div class="materials-list">
 
-  <a class="material-link" href="/spettacoli/macbett/libretto">
+  <!--<a class="material-link" href="/spettacoli/macbett/libretto">
     <span class="material-link__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
@@ -82,7 +82,7 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L�
       <strong>Libretto di sala inclusivo</strong>
       <small>Pagina web</small>
     </span>
-  </a>
+  </a>-->
   
   <a class="material-link" href="/doc/Macbett (Ionesco), Tan Tan Teatro – dossier.pdf" target="_blank">
     <span class="material-link__icon" aria-hidden="true">
@@ -129,4 +129,4 @@ Micaela Vernice, <i>Tan Tan Teatro rilegge lo Shakespeare di Ionesco</i>, “L�
 
 <h3>Accessibilità</h3>
 
-Per lo spettacolo teatrale è disponibile il sopratitolaggio in italiano, in inglese e in francese, tramite proiezione su schermo (o su fondale) oppure tramite uso di un'apposita piattaforma per l'accessibilità (<a href="https://www.stentor.live/it/" target="_blank">Sténtor</a>), che è stata sviluppata nell'ambito del progetto di <em>public engagement</em> dell'Università degli Studi di Torino "<a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45" target="_blank">Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile</a>". Sono in corso di realizzazione audiodescrizioni, che saranno rese disponibili prima delle rappresentazioni e su richiesta. Per ulteriori informazioni: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
+Per l'accessibilità dello spettacolo, sono disponibili audiodescrizioni in italiano e sopratitoli in italiano, in inglese e in francese, tramite un'apposita piattaforma per l'accessibilità (<a href="https://www.stentor.live/it/" target="_blank">Sténtor</a>), che è stata sviluppata nell'ambito del progetto di <em>public engagement</em> dell'Università degli Studi di Torino "<a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45" target="_blank">Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile</a>". Sono inoltre state realizzate audiodescrizioni. Per ulteriori informazioni: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>

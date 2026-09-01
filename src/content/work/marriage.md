@@ -41,7 +41,8 @@ translationKey: "the-marriage-page"
 </div>
 
 <h3>Previous performances</h3>
-03/07/2026: Spazio Kairós, Torino<br/>
+02/08/2026: Fuma che 'nduma, Centro Ippico Equi Maresco, Savigliano, Italy<br />
+03/07/2026: Spazio Kairós, Turin, Italy<br/>
 27/06/2026: Villa Martini, Cavagnolo (Turin, Italy)<br/>
 28/05/2026, <a href="https://iiclione.esteri.it/it/gli_eventi/calendario/il-matrimonio-le-mariage-spettacolo-nellambito-del-festival-meraki-5/" target="_blank">Festival de théâtre universitaire "Meraki"</a>, MJC Monplaisir - Le Karbone, Lyon (France)<br/>
 28/02/2026: Teatro Giacosa, Ivrea (Italy) (preview: 20 minutes)<br/>
@@ -49,7 +50,7 @@ translationKey: "the-marriage-page"
 <h3>Press review</h3>
 Hugo Genève, <a href="/doc/2026.05.28 - ENTRACTE 3.pdf" target="_blank">Il matrimonio</a>, "L'Entracte", n. 3, 28 May 2026, p. 2 <br/>
 Interview with Francesca Tomalino and Olivia Del Sante, <a href="https://www.instagram.com/reels/DY7nt8KzigJ/" target="_blank">L'Entracte | Le Podcast</a>, 28/05/2026 [French]<br/>
-Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Interview to Leonardo Mancini</a>, "Radio Fuori Campo", 11/06/2026 [Italian]
+Claudio Rocco, Interview to Leonardo Mancini, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio" target="_blank">Radio Fuori Campo</a>, 11/06/2026 [Italian]
 
 <p class="photo-credit">
   <a href="https://www.instagram.com/sonodello/" target="_blank">
@@ -107,20 +108,7 @@ Claudio Rocco, <a href="https://podcast.ausha.co/radio-fuori-campo/il-matrimonio
     </span>
   </a>
 
-  <a class="material-link" href="/doc/Tan Tan Teatro, Il Matrimonio – Rassegna stampa.pdf" target="_blank">
-    <span class="material-link__icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4" />
-        <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4" />
-        <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-      </svg>
-    </span>
-    <span>
-      <strong>Dossier stampa</strong>
-      <small>PDF</small>
-    </span>
-  </a>
 </div>
 
 <h3>Accessibility</h3>
-Surtitling for the performance is available in Italian, English, and French, both via projection on a screen (or backdrop) and via an App (<a href="https://www.stentor.live/it/" target="_blank">Sténtor</a>), which has been developed as part of the University of Turin's public engagement project <a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45" target="_blank">"Etica. Theatrical Explorations and Innovation for an Accessible Culture"</a>. Audio descriptions are currently available in Italian, and are currently under development in other languages. For further information, please contact us at: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
+Surtitling and audiodescriptions are available in Italian, English, and French, both via projection on a screen (or backdrop) and via an App (<a href="https://www.stentor.live/it/" target="_blank">Sténtor</a>), which has been developed as part of the University of Turin's public engagement project <a href="https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45" target="_blank">"Etica. Theatrical Explorations and Innovation for an Accessible Culture"</a>. For further information, please contact us at: <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>
