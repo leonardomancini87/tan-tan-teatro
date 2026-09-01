@@ -6,3 +6,4 @@ dist/
 src.zip
 *.zip
 .DS_Store
+.env

@@ -837,3 +837,91 @@ html[data-theme="dark"] body .post-content-body h6 {
     height: auto;
     border-radius: 10px;
 }
+
+
+/* Prossime rappresentazioni dinamiche da Supabase */
+#supabase-upcoming-appointments {
+  margin-top: 2rem;
+}
+
+#supabase-upcoming-appointments .appointments-list {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#supabase-upcoming-appointments .appointment-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  min-height: 82px;
+}
+
+#supabase-upcoming-appointments .appointment-row + .appointment-row {
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+#supabase-upcoming-appointments .appointment-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 22px;
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+#supabase-upcoming-appointments .appointment-date strong {
+  display: block;
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+#supabase-upcoming-appointments .appointment-date span {
+  display: block;
+  margin-top: 7px;
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+#supabase-upcoming-appointments .appointment-info {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+#supabase-upcoming-appointments .appointment-info p {
+  margin: 0;
+}
+
+#supabase-upcoming-appointments .appointments-status {
+  padding: 1.25rem 0;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  #supabase-upcoming-appointments .appointment-row {
+    grid-template-columns: 118px 1fr;
+  }
+
+  #supabase-upcoming-appointments .appointment-date {
+    padding: 14px;
+  }
+
+  #supabase-upcoming-appointments .appointment-date strong {
+    font-size: 16px;
+  }
+
+  #supabase-upcoming-appointments .appointment-date span {
+    font-size: 10px;
+  }
+
+  #supabase-upcoming-appointments .appointment-info {
+    padding: 14px 16px;
+  }
+}

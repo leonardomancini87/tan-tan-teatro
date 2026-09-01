@@ -88,7 +88,7 @@
 }
 
 .appointment-content {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1.45;
 }
 
@@ -200,22 +200,23 @@
   }
 
   .appointment-date strong {
-    font-size: 1.75rem;
-    line-height: 1.05;
+    font-size: 1.9rem;
+    line-height: 1.1;
     font-weight: 400;
     white-space: nowrap;
   }
 
   .appointment-date span {
-    margin-top: 0.35rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    line-height: 1.1;
+    letter-spacing: 0.07em;
   }
 
   .appointment-content {
     padding-left: 1.35rem;
-    font-size: 1.35rem;
-    line-height: 1.35;
+    font-size: 1.6rem;
+    line-height: 1.45;
   }
 
   .project-row {

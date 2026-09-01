@@ -6,6 +6,7 @@ title: Appuntamenti
 description: "Dove e quando trovarci: prossime date, repliche passate ed eventi speciali."
 ---
 
+
 <div class="appointments-page">
 <nav class="appointments-tabs" aria-label="Sezioni appuntamenti">
 <a href="#prossime" class="appointments-tab is-active" data-tab="prossime">Prossime</a>
@@ -14,60 +15,13 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 </nav>
 
 <section class="appointments-panel is-active" data-panel="prossime">
+<div
+  id="supabase-upcoming-appointments"
+  class="appointments-upcoming"
+  aria-live="polite"
+>
 <h2>Prossime rappresentazioni</h2>
-
-<div class="appointments-list">
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>05–06/09/2026</strong>
-<span>Settembre</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — Festival Mirabilia, Cuneo
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>14/11/2026</strong>
-<span>Novembre</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — Teatro Dravelli, Torino
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>12/12/2026</strong>
-<span>Dicembre</span>
-</div>
-<div class="appointment-content">
-<em>Macbett</em> — Auditorium "Franca Rame", Rivalta di Torino
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>30/01/2027</strong>
-<span>Gennaio</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — Teatro Dravelli, Torino
-</div>
-</div>
-
-<div class="appointment-row">
-<div class="appointment-date">
-<strong>12-13/02/2027</strong>
-<span>Febbraio</span>
-</div>
-<div class="appointment-content">
-<em>Il Matrimonio</em> — Piccolo Teatro Comico, Torino
-</div>
-</div>
-
+<p class="appointments-status">Caricamento delle prossime date…</p>
 </div>
 </section>
 

@@ -11,6 +11,13 @@ const { Content } = await entry.render();
 
 const { title, description, thumbnail } = entry.data;
 const currentLocale = entry.data.locale ?? 'it';
+
+const isAppointmentsPage =
+  entry.slug === 'appuntamenti' && currentLocale === 'it';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const supabaseKey =
+  import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
@@ -32,4 +39,158 @@ const currentLocale = entry.data.locale ?? 'it';
     <footer class="post-content-footer">
     </footer>
   </article>
+
+  {isAppointmentsPage && (
+    <script
+      is:inline
+      define:vars={{ supabaseUrl, supabaseKey }}
+    >
+      (() => {
+        /* TanTanAppointmentsRuntime */
+
+        const root = document.getElementById(
+          'supabase-upcoming-appointments'
+        );
+
+        if (!root) return;
+
+        const escapeHtml = (value) =>
+          String(value ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+
+        const parseDate = (value) =>
+          new Date(`${value}T12:00:00`);
+
+        const formatDateRange = (item) => {
+          const start = parseDate(item.starts_on);
+          const end = item.ends_on
+            ? parseDate(item.ends_on)
+            : null;
+
+          const day = String(start.getDate()).padStart(2, '0');
+          const month = String(start.getMonth() + 1).padStart(2, '0');
+          const year = start.getFullYear();
+
+          if (!end || item.starts_on === item.ends_on) {
+            return `${day}/${month}/${year}`;
+          }
+
+          const endDay = String(end.getDate()).padStart(2, '0');
+          const endMonth = String(end.getMonth() + 1).padStart(2, '0');
+          const endYear = end.getFullYear();
+
+          if (
+            start.getFullYear() === end.getFullYear() &&
+            start.getMonth() === end.getMonth()
+          ) {
+            return `${day}-${endDay}/${month}/${year}`;
+          }
+
+          return `${day}/${month}/${year} - ${endDay}/${endMonth}/${endYear}`;
+        };
+
+        const formatMonth = (value) =>
+          new Intl.DateTimeFormat('it-IT', {
+            month: 'long',
+          })
+            .format(parseDate(value))
+            .toUpperCase();
+
+        const render = (items) => {
+          if (!items.length) {
+            root.innerHTML = `
+              <h2>Prossime rappresentazioni</h2>
+              <p class="appointments-status">
+                Non sono al momento previste nuove rappresentazioni.
+              </p>
+            `;
+            return;
+          }
+
+          const rows = items.map((item) => {
+            const place = [item.venue, item.city]
+              .filter(Boolean)
+              .map(escapeHtml)
+              .join(', ');
+
+            return `
+              <article class="appointment-row">
+                <div class="appointment-date">
+                  <strong>${formatDateRange(item)}</strong>
+                  <span>${formatMonth(item.starts_on)}</span>
+                </div>
+
+                <div class="appointment-info">
+                  <p>
+                    <em>${escapeHtml(item.title)}</em>
+                    ${place ? ` — ${place}` : ''}
+                  </p>
+                </div>
+              </article>
+            `;
+          }).join('');
+
+          root.innerHTML = `
+            <h2>Prossime rappresentazioni</h2>
+            <div class="appointments-list">
+              ${rows}
+            </div>
+          `;
+        };
+
+        const loadAppointments = async () => {
+          if (!supabaseUrl || !supabaseKey) {
+            throw new Error('Configurazione Supabase mancante');
+          }
+
+          const today = new Date()
+            .toISOString()
+            .slice(0, 10);
+
+          const params = new URLSearchParams({
+            select:
+              'id,title,venue,city,starts_on,ends_on,starts_at_time,is_published',
+            is_published: 'eq.true',
+            starts_on: `gte.${today}`,
+            order: 'starts_on.asc',
+          });
+
+          const response = await fetch(
+            `${supabaseUrl}/rest/v1/public_appointments?${params.toString()}`,
+            {
+              headers: {
+                apikey: supabaseKey,
+                Authorization: `Bearer ${supabaseKey}`,
+              },
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error(`Supabase HTTP ${response.status}`);
+          }
+
+          render(await response.json());
+        };
+
+        loadAppointments().catch((error) => {
+          console.error(
+            'Errore caricamento appuntamenti:',
+            error,
+          );
+
+          root.innerHTML = `
+            <h2>Prossime rappresentazioni</h2>
+            <p class="appointments-status">
+              Le prossime date non sono temporaneamente disponibili.
+            </p>
+          `;
+        });
+      })();
+    </script>
+  )}
+
 </Layout>
