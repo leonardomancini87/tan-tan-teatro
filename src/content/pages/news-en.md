@@ -92,7 +92,7 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <span>Settembre</span>
 </div>
 <div class="appointment-content">
-<em>Il Matrimonio</em> — <a href="https://www.festivalmirabilia.it/evento/il-matrimonio-di-witold-gombrowicz/2026-09-05/" target="_blank">Festival Mirabiliao</a>, Cuneo
+<em>Il Matrimonio</em> — <a href="https://www.festivalmirabilia.it/evento/il-matrimonio-di-witold-gombrowicz/2026-09-05/" target="_blank">Festival Mirabilia</a>, Cuneo
 </div>
 </div>
 
