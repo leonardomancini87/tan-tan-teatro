@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/iscrizioni/:slug",
+      "destination": "/iscrizioni/index.html"
+    }
+  ]
+}
