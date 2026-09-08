@@ -1,17 +1,26 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-const slug = '';
+
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 ---
+
 <Layout title="Iscrizioni | Tan Tan Teatro">
-  <main class="registration-shell" data-registration-page data-slug={slug} data-url={supabaseUrl} data-key={supabaseKey}>
+  <main
+    class="registration-shell"
+    data-registration-page
+    data-url={supabaseUrl}
+    data-key={supabaseKey}
+  >
     <section class="registration-card">
       <div class="registration-loading" data-loading>Caricamento…</div>
+
       <div class="registration-error" data-error hidden>
+        <p class="registration-kicker">ISCRIZIONI</p>
         <h1>Modulo non disponibile</h1>
         <p data-error-text>Questa iscrizione non è disponibile.</p>
       </div>
+
       <div data-form hidden>
         <p class="registration-kicker">ISCRIZIONI</p>
         <h1 data-title></h1>
@@ -19,7 +28,9 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         <p class="registration-places" data-places hidden></p>
         <form data-fields></form>
       </div>
+
       <div class="registration-success" data-success hidden>
+        <p class="registration-kicker">ISCRIZIONI</p>
         <h1>Iscrizione ricevuta</h1>
         <p data-success-text></p>
       </div>
@@ -28,81 +39,387 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 </Layout>
 
 <style>
-  .registration-shell{max-width:900px;margin:0 auto;padding:72px 24px 100px}.registration-card{border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:clamp(24px,5vw,52px);background:rgba(255,255,255,.035)}.registration-kicker{letter-spacing:.16em;font-size:.78rem;opacity:.62;margin:0 0 12px}.registration-card h1{font-size:clamp(2rem,5vw,4rem);line-height:1;margin:0 0 20px}.registration-description{font-size:1.08rem;line-height:1.6;max-width:720px;opacity:.78}.registration-places{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08)}form{display:grid;gap:22px;margin-top:38px}.field{display:grid;gap:8px}.field label{font-weight:650}.field small{opacity:.62;line-height:1.4}.field input,.field textarea,.field select{width:100%;box-sizing:border-box;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(255,255,255,.05);color:inherit;padding:13px 14px;font:inherit}.field textarea{min-height:130px;resize:vertical}.choice{display:flex;gap:9px;align-items:flex-start}.submit{margin-top:10px;border:0;border-radius:999px;padding:14px 24px;font:inherit;font-weight:700;cursor:pointer;background:#ffaba6;color:#171717;width:max-content}.submit:disabled{opacity:.5;cursor:wait}.registration-error,.registration-success{padding:34px 0}
+  .registration-shell {
+    width: min(900px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 72px 0 110px;
+  }
+
+  .registration-card {
+    padding: clamp(26px, 5vw, 54px);
+    border: 1px solid rgba(127,127,127,.25);
+    border-radius: 24px;
+  }
+
+  .registration-kicker {
+    margin: 0 0 16px;
+    font-size: clamp(.95rem, 1.3vw, 1.1rem);
+    line-height: 1.4;
+    letter-spacing: .13em;
+    opacity: 1;
+    font-weight: 600;
+  }
+
+  .registration-card h1 {
+    margin: 0 0 20px;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .registration-description {
+    max-width: 780px;
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    line-height: 1.55;
+    opacity: 1;
+    margin-bottom: 24px;
+  }
+
+  .registration-places {
+    display: inline-block;
+    margin: 12px 0 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(127,127,127,.12);
+  }
+
+  form {
+    display: grid;
+    gap: 24px;
+    margin-top: 42px;
+  }
+
+  .field {
+    display: grid;
+    gap: 9px;
+  }
+
+  .field > label {
+    font-weight: 600;
+  }
+
+  .field small {
+    opacity: .65;
+    line-height: 1.4;
+  }
+
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"],
+  .field input[type="date"],
+  .field textarea,
+  .field select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid rgba(127,127,127,.3);
+    border-radius: 12px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+
+  .field textarea {
+    min-height: 130px;
+    resize: vertical;
+  }
+
+  .choices {
+    display: grid;
+    gap: 10px;
+  }
+
+  .choice {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-weight: 400;
+  }
+
+  .submit {
+    width: max-content;
+    margin-top: 8px;
+    padding: 14px 25px;
+    border: 0;
+    border-radius: 999px;
+    background: #ffaba6;
+    color: #241919;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .submit:disabled {
+    opacity: .5;
+    cursor: wait;
+  }
+
+  .registration-error,
+  .registration-success {
+    padding: 30px 0;
+  }
 </style>
 
 <script>
   const root = document.querySelector('[data-registration-page]');
+
   if (root) {
-    const slug = root.dataset.slug || new URLSearchParams(window.location.search).get('slug') || '';
+    const params = new URLSearchParams(window.location.search);
+    const pieces = window.location.pathname.split('/').filter(Boolean);
+
+    const slug =
+      params.get('slug') ||
+      (pieces[0] === 'iscrizioni' && pieces[1] ? pieces[1] : '');
+
     const url = root.dataset.url;
     const key = root.dataset.key;
+
     const loading = root.querySelector('[data-loading]');
     const errorBox = root.querySelector('[data-error]');
     const errorText = root.querySelector('[data-error-text]');
     const formBox = root.querySelector('[data-form]');
     const successBox = root.querySelector('[data-success]');
     const fieldsRoot = root.querySelector('[data-fields]');
+
     let definition = null;
 
-    const callRpc = async (name, body) => {
+    const rpc = async (name, body) => {
       const response = await fetch(`${url}/rest/v1/rpc/${name}`, {
         method: 'POST',
-        headers: {'apikey': key, 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json'},
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(body),
       });
-      if (!response.ok) throw new Error((await response.text()) || 'Operazione non riuscita');
+
+      if (!response.ok) {
+        throw new Error((await response.text()) || 'Operazione non riuscita');
+      }
+
       return response.json();
     };
 
     const showError = (message) => {
-      loading.hidden = true; formBox.hidden = true; successBox.hidden = true; errorBox.hidden = false;
-      errorText.textContent = message || 'Questa iscrizione non è disponibile.';
+      loading.hidden = true;
+      formBox.hidden = true;
+      successBox.hidden = true;
+      errorBox.hidden = false;
+      errorText.textContent =
+        message || 'Questa iscrizione non è disponibile.';
     };
 
     const createField = (field) => {
-      const wrap = document.createElement('div'); wrap.className = 'field';
-      const label = document.createElement('label'); label.textContent = field.label + (field.required ? ' *' : ''); wrap.append(label);
-      if (field.help_text) { const small = document.createElement('small'); small.textContent = field.help_text; wrap.append(small); }
+      const wrap = document.createElement('div');
+      wrap.className = 'field';
+
+      const label = document.createElement('label');
+      label.textContent = field.label + (field.required ? ' *' : '');
+      wrap.append(label);
+
+      if (field.help_text && field.type !== 'checkbox') {
+        const small = document.createElement('small');
+        small.textContent = field.help_text;
+        wrap.append(small);
+      }
+
       let input;
-      if (field.type === 'long_text') { input = document.createElement('textarea'); }
-      else if (field.type === 'dropdown') { input = document.createElement('select'); const blank=document.createElement('option'); blank.value=''; blank.textContent='Seleziona'; input.append(blank); for(const o of field.options||[]){const opt=document.createElement('option');opt.value=o;opt.textContent=o;input.append(opt);} }
-      else if (field.type === 'single_choice' || field.type === 'multiple_choice') {
-        const holder=document.createElement('div');
-        for(const o of field.options||[]){const row=document.createElement('label');row.className='choice';const c=document.createElement('input');c.type=field.type==='single_choice'?'radio':'checkbox';c.name=`f_${field.id}`;c.value=o;row.append(c,document.createTextNode(o));holder.append(row);} input=holder;
-      } else if (field.type === 'checkbox') { const row=document.createElement('label');row.className='choice';const c=document.createElement('input');c.type='checkbox';c.name=`f_${field.id}`;row.append(c,document.createTextNode(field.help_text || 'Sì')); input=row; }
-      else { input=document.createElement('input'); input.type=field.type==='email'?'email':field.type==='phone'?'tel':field.type==='date'?'date':'text'; }
-      if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement || input instanceof HTMLSelectElement) { input.name=`f_${field.id}`; input.required=!!field.required; if(field.placeholder) input.placeholder=field.placeholder; }
-      wrap.append(input); return wrap;
+
+      if (field.type === 'long_text') {
+        input = document.createElement('textarea');
+      } else if (field.type === 'dropdown') {
+        input = document.createElement('select');
+
+        const blank = document.createElement('option');
+        blank.value = '';
+        blank.textContent = 'Seleziona';
+        input.append(blank);
+
+        for (const value of field.options || []) {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = value;
+          input.append(option);
+        }
+      } else if (
+        field.type === 'single_choice' ||
+        field.type === 'multiple_choice'
+      ) {
+        const holder = document.createElement('div');
+        holder.className = 'choices';
+
+        for (const value of field.options || []) {
+          const row = document.createElement('label');
+          row.className = 'choice';
+
+          const control = document.createElement('input');
+          control.type =
+            field.type === 'single_choice' ? 'radio' : 'checkbox';
+          control.name = `f_${field.id}`;
+          control.value = value;
+
+          row.append(control, document.createTextNode(value));
+          holder.append(row);
+        }
+
+        input = holder;
+      } else if (field.type === 'checkbox') {
+        const row = document.createElement('label');
+        row.className = 'choice';
+
+        const control = document.createElement('input');
+        control.type = 'checkbox';
+        control.name = `f_${field.id}`;
+
+        row.append(
+          control,
+          document.createTextNode(field.help_text || field.label)
+        );
+
+        input = row;
+      } else {
+        input = document.createElement('input');
+        input.type =
+          field.type === 'email'
+            ? 'email'
+            : field.type === 'phone'
+              ? 'tel'
+              : field.type === 'date'
+                ? 'date'
+                : 'text';
+      }
+
+      if (
+        input instanceof HTMLInputElement ||
+        input instanceof HTMLTextAreaElement ||
+        input instanceof HTMLSelectElement
+      ) {
+        input.name = `f_${field.id}`;
+        input.required = !!field.required;
+
+        if (field.placeholder) {
+          input.placeholder = field.placeholder;
+        }
+      }
+
+      wrap.append(input);
+      return wrap;
     };
 
     const valueFor = (field) => {
-      const name=`f_${field.id}`;
-      if(field.type==='multiple_choice') return [...fieldsRoot.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);
-      if(field.type==='single_choice') return fieldsRoot.querySelector(`input[name="${name}"]:checked`)?.value || '';
-      if(field.type==='checkbox') return !!fieldsRoot.querySelector(`input[name="${name}"]`)?.checked;
+      const name = `f_${field.id}`;
+
+      if (field.type === 'multiple_choice') {
+        return [
+          ...fieldsRoot.querySelectorAll(
+            `input[name="${name}"]:checked`
+          ),
+        ].map((x) => x.value);
+      }
+
+      if (field.type === 'single_choice') {
+        return (
+          fieldsRoot.querySelector(
+            `input[name="${name}"]:checked`
+          )?.value || ''
+        );
+      }
+
+      if (field.type === 'checkbox') {
+        return !!fieldsRoot.querySelector(
+          `input[name="${name}"]`
+        )?.checked;
+      }
+
       return fieldsRoot.querySelector(`[name="${name}"]`)?.value ?? '';
     };
 
     try {
-      if (!url || !key) throw new Error('Configurazione Supabase mancante.');
-      definition = await callRpc('get_public_registration_form', {p_slug: slug});
-      if (!definition) throw new Error('Questa iscrizione non è disponibile.');
-      root.querySelector('[data-title]').textContent = definition.title;
-      root.querySelector('[data-description]').textContent = definition.description || '';
-      const places = root.querySelector('[data-places]');
-      if (definition.remaining_places !== null && definition.remaining_places !== undefined) { places.hidden=false; places.textContent = definition.remaining_places > 0 ? `${definition.remaining_places} posti disponibili` : 'Posti esauriti'; }
-      for (const field of definition.fields || []) fieldsRoot.append(createField(field));
-      const submit=document.createElement('button');submit.className='submit';submit.type='submit';submit.textContent='Invia iscrizione';fieldsRoot.append(submit);
-      fieldsRoot.addEventListener('submit', async (event) => {
-        event.preventDefault(); submit.disabled=true; submit.textContent='Invio…';
-        try {
-          const answers=(definition.fields||[]).map(field=>({field_id:field.id,value:valueFor(field)}));
-          const result=await callRpc('submit_registration_form',{p_slug:slug,p_answers:answers});
-          formBox.hidden=true; successBox.hidden=false; root.querySelector('[data-success-text]').textContent=result.confirmation_message || 'Grazie. La tua iscrizione è stata ricevuta.';
-        } catch(e) { alert(e.message || 'Non è stato possibile inviare il modulo.'); submit.disabled=false; submit.textContent='Invia iscrizione'; }
+      if (!url || !key) {
+        throw new Error('Configurazione Supabase mancante.');
+      }
+
+      if (!slug) {
+        throw new Error('Indirizzo del modulo mancante.');
+      }
+
+      definition = await rpc('get_public_registration_form', {
+        p_slug: slug,
       });
-      loading.hidden=true; formBox.hidden=false;
-    } catch(e) { showError(e.message); }
+
+      if (!definition) {
+        throw new Error(
+          'Questo modulo non è disponibile oppure non è ancora stato pubblicato.'
+        );
+      }
+
+      root.querySelector('[data-title]').textContent =
+        definition.title;
+
+      root.querySelector('[data-description]').textContent =
+        definition.description || '';
+
+      const places = root.querySelector('[data-places]');
+
+      if (
+        definition.remaining_places !== null &&
+        definition.remaining_places !== undefined
+      ) {
+        places.hidden = false;
+        places.textContent =
+          definition.remaining_places > 0
+            ? `${definition.remaining_places} posti disponibili`
+            : 'Posti esauriti';
+      }
+
+      for (const field of definition.fields || []) {
+        fieldsRoot.append(createField(field));
+      }
+
+      const submit = document.createElement('button');
+      submit.className = 'submit';
+      submit.type = 'submit';
+      submit.textContent = 'Invia iscrizione';
+      fieldsRoot.append(submit);
+
+      fieldsRoot.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        submit.disabled = true;
+        submit.textContent = 'Invio…';
+
+        try {
+          const answers = (definition.fields || []).map((field) => ({
+            field_id: field.id,
+            value: valueFor(field),
+          }));
+
+          const result = await rpc('submit_registration_form', {
+            p_slug: slug,
+            p_answers: answers,
+          });
+
+          formBox.hidden = true;
+          successBox.hidden = false;
+
+          root.querySelector('[data-success-text]').textContent =
+            result.confirmation_message ||
+            'Grazie. La tua iscrizione è stata ricevuta.';
+        } catch (error) {
+          alert(
+            error?.message ||
+              'Non è stato possibile inviare il modulo.'
+          );
+
+          submit.disabled = false;
+          submit.textContent = 'Invia iscrizione';
+        }
+      });
+
+      loading.hidden = true;
+      formBox.hidden = false;
+    } catch (error) {
+      showError(error?.message);
+    }
   }
 </script>
