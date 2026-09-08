@@ -159,6 +159,85 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   }
 </style>
 
+<style is:global>
+  .registration-shell [data-fields] {
+    width: min(100%, 640px);
+  }
+
+  .registration-shell .field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .registration-shell .field label {
+    color: inherit;
+    font-weight: 600;
+  }
+
+  .registration-shell .field input[type="text"],
+  .registration-shell .field input[type="email"],
+  .registration-shell .field input[type="tel"],
+  .registration-shell .field input[type="date"],
+  .registration-shell .field textarea,
+  .registration-shell .field select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid rgba(127, 127, 127, .45);
+    border-radius: 10px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+
+  .registration-shell .choices {
+    display: grid;
+    gap: 10px;
+  }
+
+  .registration-shell .choice {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: inherit;
+  }
+
+  .registration-shell .submit {
+    width: auto;
+    min-width: 210px;
+    justify-self: start;
+    margin-top: 8px;
+    padding: 13px 24px;
+    border: 0;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .registration-description {
+    max-width: 720px;
+  }
+
+  .registration-description p {
+    margin: 0 0 1em;
+  }
+
+  .registration-description ul,
+  .registration-description ol {
+    padding-left: 1.4em;
+  }
+
+  @media (max-width: 640px) {
+    .registration-shell [data-fields],
+    .registration-shell .submit {
+      width: 100%;
+    }
+  }
+</style>
+
 <script>
   const root = document.querySelector('[data-registration-page]');
 
@@ -334,6 +413,37 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       return fieldsRoot.querySelector(`[name="${name}"]`)?.value ?? '';
     };
 
+    const renderDescription = (html) => {
+      const target = root.querySelector('[data-description]');
+      const template = document.createElement('template');
+      template.innerHTML = html;
+      const allowed = new Set([
+        'P', 'BR', 'STRONG', 'B', 'EM', 'I', 'U',
+        'UL', 'OL', 'LI', 'A'
+      ]);
+
+      for (const element of [...template.content.querySelectorAll('*')]) {
+        if (!allowed.has(element.tagName)) {
+          element.replaceWith(...element.childNodes);
+          continue;
+        }
+        for (const attribute of [...element.attributes]) {
+          if (element.tagName !== 'A' ||
+              !['href', 'title', 'target'].includes(attribute.name)) {
+            element.removeAttribute(attribute.name);
+          }
+        }
+        if (element.tagName === 'A') {
+          const href = element.getAttribute('href') || '';
+          if (!/^(https?:|mailto:|tel:|#)/i.test(href)) {
+            element.removeAttribute('href');
+          }
+          element.setAttribute('rel', 'noopener noreferrer');
+        }
+      }
+      target.replaceChildren(template.content);
+    };
+
     try {
       if (!url || !key) {
         throw new Error('Configurazione Supabase mancante.');
@@ -356,8 +466,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       root.querySelector('[data-title]').textContent =
         definition.title;
 
-      root.querySelector('[data-description]').textContent =
-        definition.description || '';
+      renderDescription(definition.description || '');
 
       const places = root.querySelector('[data-places]');
 
