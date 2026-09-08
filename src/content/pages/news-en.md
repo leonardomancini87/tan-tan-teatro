@@ -88,6 +88,16 @@ description: "Where and when to find us: upcoming dates, past performances and s
 
 <div class="appointment-row">
 <div class="appointment-date">
+<strong>05-6/08/2026</strong>
+<span>Settembre</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> — <a href="https://www.festivalmirabilia.it/evento/il-matrimonio-di-witold-gombrowicz/2026-09-05/" target="_blank">Festival Mirabiliao</a>, Cuneo
+</div>
+</div>
+
+<div class="appointment-row">
+<div class="appointment-date">
 <strong>02/08/2026</strong>
 <span>August</span>
 </div>
