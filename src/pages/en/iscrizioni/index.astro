@@ -24,7 +24,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       <div data-form hidden>
         <p class="registration-kicker">ISCRIZIONI</p>
         <h1 data-title></h1>
-        <p class="registration-description" data-description></p>
+        <div class="registration-description" data-description></div>
         <p class="registration-places" data-places hidden></p>
         <form data-fields></form>
       </div>
@@ -157,6 +157,14 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   .registration-success {
     padding: 30px 0;
   }
+
+  /* FORM_LAYOUT_SPACING_20260908 */
+  .registration-description { white-space: pre-line; }
+  .registration-description p { margin: 0 0 1em; }
+  .registration-description p:last-child { margin-bottom: 0; }
+  .registration-description ul, .registration-description ol { margin: .8em 0 1em; padding-left: 1.5em; }
+  form[data-fields] { width: 100%; max-width: 760px; }
+   (max-width: 800px) { form[data-fields] { max-width: none; } }
 </style>
 
 <style is:global>
