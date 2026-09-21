@@ -24,6 +24,12 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       <div data-form hidden>
         <p class="registration-kicker">ISCRIZIONI</p>
         <h1 data-title></h1>
+
+        <div class="registration-lab-meta" data-lab-meta hidden>
+          <p><strong>Iscrizioni aperte sino al 25 settembre 2026</strong></p>
+          <p>Incontri del laboratorio dal 30 settembre al 16 dicembre 2026</p>
+        </div>
+
         <div class="registration-description" data-description></div>
         <p class="registration-places" data-places hidden></p>
         <form data-fields></form>
@@ -159,12 +165,27 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   }
 
   /* FORM_LAYOUT_SPACING_20260908 */
+  .registration-lab-meta {
+    margin: 0.85rem 0 1.6rem;
+    padding: 1rem 1.15rem;
+    border-left: 2px solid currentColor;
+  }
+
+  .registration-lab-meta p {
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .registration-lab-meta p + p {
+    margin-top: 0.2rem;
+  }
+
   .registration-description { white-space: pre-line; }
   .registration-description p { margin: 0 0 1em; }
   .registration-description p:last-child { margin-bottom: 0; }
   .registration-description ul, .registration-description ol { margin: .8em 0 1em; padding-left: 1.5em; }
   form[data-fields] { width: 100%; max-width: 760px; }
-   (max-width: 800px) { form[data-fields] { max-width: none; } }
+   @media (max-width: 800px) { form[data-fields] { max-width: none; } }
 </style>
 
 <style is:global>
@@ -508,11 +529,21 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       root.querySelector('[data-title]').textContent =
         definition.title;
 
+      const isLabTraining = slug === 'lab-training';
+      const formKicker = root.querySelector('[data-form] .registration-kicker');
+      const labMeta = root.querySelector('[data-lab-meta]');
+
+      if (isLabTraining) {
+        if (formKicker) formKicker.textContent = 'NUOVA EDIZIONE 2026';
+        if (labMeta) labMeta.hidden = false;
+      }
+
       renderDescription(definition.description || '');
 
       const places = root.querySelector('[data-places]');
 
       if (
+        !isLabTraining &&
         definition.remaining_places !== null &&
         definition.remaining_places !== undefined
       ) {

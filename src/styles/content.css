@@ -925,3 +925,80 @@ html[data-theme="dark"] body .post-content-body h6 {
     padding: 14px 16px;
   }
 }
+
+
+/* LABORATORIO — NUOVA EDIZIONE 2026 */
+.lab-edition-card {
+  max-width: 760px;
+  margin: 3.2rem auto 4rem;
+  padding: 2.2rem 2.4rem 2.35rem;
+  border: 1px solid rgba(20, 20, 20, 0.14);
+  border-radius: 6px;
+  background: rgba(250, 248, 244, 0.72);
+}
+
+.lab-edition-kicker {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.lab-edition-card h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.08;
+}
+
+.lab-edition-dates {
+  margin: 0 0 1.7rem;
+  padding-left: 1.15rem;
+  border-left: 2px solid currentColor;
+}
+
+.lab-edition-dates p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.lab-edition-dates p + p {
+  margin-top: 0.25rem;
+}
+
+.lab-edition-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-width: 310px;
+  padding: 1rem 1.25rem;
+  border: 1px solid #1d1d1d;
+  border-radius: 3px;
+  background: #1d1d1d;
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.lab-edition-cta:hover,
+.lab-edition-cta:focus-visible {
+  background: transparent;
+  color: #1d1d1d;
+}
+
+@media (max-width: 760px) {
+  .lab-edition-card {
+    margin: 2.2rem 0 3rem;
+    padding: 1.6rem 1.35rem 1.7rem;
+  }
+
+  .lab-edition-cta {
+    width: 100%;
+    min-width: 0;
+  }
+}

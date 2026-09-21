@@ -1,0 +1,302 @@
+---
+// TANTAN_LAB_EDITORIAL_20260921_V1
+// TANTAN_LAB_COMPACT_20260921_V2
+// Layout source of truth: the approved editorial mockup.
+// Copy source of truth: ../content/pages/laboratorio.md (not duplicated here).
+// Astro v5: https://v5.docs.astro.build/en/guides/markdown-content/
+import Layout from "../layouts/Layout.astro";
+import { compiledContent, frontmatter } from '../content/pages/laboratorio.md';
+
+const heroImage = "/img/lab01.jpeg";
+const detailImage = "/img/laboratorio-editoriale-2026/percorso.jpg";
+let body = (await compiledContent()).trim();
+const heading = body.match(/^<h2\b[^>]*>([\s\S]*?)<\/h2>/i);
+const originalHeading = heading ? heading[1] : 'Corpo, movimento, voce';
+if (heading) body = body.slice(heading[0].length).trim();
+
+// Split the existing introduction at its natural opening, preserving all copy.
+// The remaining history, practical work and seminars stay visible below.
+const first = body.match(/^<p\b[^>]*>([\s\S]*?)<\/p>/i);
+let introHtml = '';
+let detailHtml = body;
+if (first) {
+  const pieces = first[1].split(/<\/?br\b[^>]*>/gi);
+  const firstParagraph = pieces.shift() || '';
+  const anchor = 'allo spazio.';
+  const anchorIndex = firstParagraph.indexOf(anchor);
+  const cut = anchorIndex >= 0 ? anchorIndex + anchor.length : firstParagraph.length;
+  introHtml = `<p>${firstParagraph.slice(0, cut).trim()}</p>`;
+  const remaining = [firstParagraph.slice(cut), ...pieces]
+    .map((part) => part.trim()).filter(Boolean)
+    .map((part) => `<p>${part}</p>`).join('\n');
+  detailHtml = remaining + '\n' + body.slice(first[0].length).trim();
+}
+// Correct the visual hierarchy of existing seminar subheadings, not their text.
+detailHtml = detailHtml.replace(/<(\/?)h5(\b[^>]*)>/gi, '<$1h3$2>');
+// TANTAN_LAB_COMPACT_SPLIT_BEGIN
+// Separate the existing seminar text without rewriting or duplicating it.
+const seminarImage = "/img/laboratorio-editoriale-2026/seminari.jpg";
+const seminarHeading = detailHtml.match(/<h([2-6])\b[^>]*>\s*Seminari\s+intensivi\s*<\/h\1>/i);
+if (!seminarHeading || seminarHeading.index === undefined) {
+  throw new Error('Laboratorio: titolo Seminari intensivi non riconosciuto. Nessun testo viene scartato.');
+}
+const percorsoHtml = detailHtml.slice(0, seminarHeading.index).trim();
+const seminariHtml = detailHtml.slice(seminarHeading.index + seminarHeading[0].length).trim();
+if (!percorsoHtml || !seminariHtml) {
+  throw new Error('Laboratorio: una delle sezioni originali risulta vuota.');
+}
+// TANTAN_LAB_COMPACT_SPLIT_END
+---
+
+<Layout title="Laboratorio | Tan Tan Teatro" description={frontmatter.description}>
+  <main id="tt-lab-editorial" data-lab-layout="editorial-2026">
+    <section class="tt-lab-hero" aria-labelledby="tt-lab-title">
+      <img class="tt-lab-hero-image" src={heroImage}
+        alt="Un momento del laboratorio di training Tan Tan Teatro"
+        loading="eager" fetchpriority="high" decoding="async" />
+      <div class="tt-lab-hero-shade" aria-hidden="true"></div>
+      <div class="tt-lab-width tt-lab-hero-copy">
+        <p class="tt-lab-kicker">LABORATORIO</p>
+        <h1 id="tt-lab-title">Laboratorio di training<br /><span>Corpo, movimento, voce</span></h1>
+      </div>
+    </section>
+
+    <div class="tt-lab-width tt-lab-content">
+      <section class="tt-lab-overview" aria-label="Il laboratorio e la nuova edizione">
+        <aside class="tt-lab-edition" aria-labelledby="tt-lab-edition-title">
+          <p class="tt-lab-kicker">NUOVA EDIZIONE 2026</p>
+          <h2 id="tt-lab-edition-title">Training fisico e movimento</h2>
+          <div class="tt-lab-dates">
+            <p class="tt-lab-deadline">Iscrizioni aperte sino al <time datetime="2026-09-25">25 settembre 2026</time></p>
+            <p class="tt-lab-period">Incontri del laboratorio dal <time datetime="2026-09-30">30 settembre</time> al <time datetime="2026-12-16">16 dicembre 2026</time></p>
+          </div>
+          <a class="tt-lab-cta" href="/iscrizioni/?slug=lab-training">
+            <span>ISCRIVITI AL LABORATORIO</span><span class="tt-lab-arrow" aria-hidden="true">&#8594;</span>
+          </a>
+        </aside>
+
+        <article class="tt-lab-intro" aria-labelledby="tt-lab-overview-title">
+          <p class="tt-lab-kicker">IL LABORATORIO</p>
+          <h2 id="tt-lab-overview-title">Un percorso di ricerca<br />per l&rsquo;attore e il performer.</h2>
+          <div class="tt-lab-prose" set:html={introHtml}></div>
+        </article>
+      </section>
+
+      <!-- TANTAN_LAB_COMPACT_HTML_BEGIN -->
+      <div class="tt-lab-lower" data-lab-details="compact-v2">
+        <section class="tt-lab-detail tt-lab-path" aria-labelledby="corpo-movimento-voce">
+          <figure class="tt-lab-detail-photo">
+            <img src={detailImage} alt="" width="1800" height="1273"
+              loading="lazy" decoding="async" />
+          </figure>
+          <div class="tt-lab-detail-copy">
+            <p class="tt-lab-kicker">IL PERCORSO</p>
+            <h2 id="corpo-movimento-voce" set:html={originalHeading}></h2>
+            <div class="tt-lab-prose" set:html={percorsoHtml}></div>
+          </div>
+        </section>
+
+        <section class="tt-lab-detail tt-lab-seminars" aria-labelledby="seminari-intensivi">
+          <figure class="tt-lab-detail-photo">
+            <img src={seminarImage} alt="" width="1800" height="1200"
+              loading="lazy" decoding="async" />
+          </figure>
+          <div class="tt-lab-detail-copy">
+            <p class="tt-lab-kicker">SEMINARI</p>
+            <h2 id="seminari-intensivi">Seminari intensivi</h2>
+            <div class="tt-lab-prose" set:html={seminariHtml}></div>
+          </div>
+        </section>
+      </div>
+      <!-- TANTAN_LAB_COMPACT_HTML_END -->
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  /* All rules are restricted to this page. Header, footer and other pages keep
+     their existing styles. Pixel-based type sizes avoid tiny rem-based text. */
+  #tt-lab-editorial {
+    --tt-paper: #faf9f6;
+    --tt-panel: #f2f0eb;
+    --tt-ink: #20201e;
+    --tt-rule: #dedbd5;
+    --tt-button: #20201e;
+    --tt-button-ink: #ffffff;
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: var(--tt-paper);
+    color: var(--tt-ink);
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: left;
+  }
+  #tt-lab-editorial *, #tt-lab-editorial *::before, #tt-lab-editorial *::after { box-sizing: border-box; }
+  #tt-lab-editorial .tt-lab-width { width: min(1280px, calc(100% - 64px)); max-width: none; margin-inline: auto; }
+  #tt-lab-editorial .tt-lab-hero {
+    position: relative; isolation: isolate; display: flex; align-items: center;
+    min-height: clamp(320px, 25vw, 440px); padding: 56px 0;
+    margin: 0; overflow: hidden; background: #30302e; color: #ffffff;
+  }
+  #tt-lab-editorial .tt-lab-hero-image {
+    position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+    margin: 0; border: 0; border-radius: 0; object-fit: cover;
+    object-position: 50% 66%; filter: grayscale(1);
+  }
+  #tt-lab-editorial .tt-lab-hero-shade {
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.53) 42%, rgba(0,0,0,.10) 100%);
+  }
+  #tt-lab-editorial .tt-lab-hero-copy { position: relative; z-index: 1; }
+  #tt-lab-editorial .tt-lab-kicker {
+    margin: 0 0 14px; color: inherit; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px; font-weight: 600; line-height: 1.5; letter-spacing: 2.2px;
+    text-transform: uppercase;
+  }
+  #tt-lab-editorial h1 {
+    max-width: 960px; margin: 0; padding: 0; color: #ffffff;
+    font-size: clamp(36px, 3.35vw, 60px); font-weight: 600;
+    line-height: 1.1; letter-spacing: -.7px; text-transform: none;
+  }
+  #tt-lab-editorial h1 span { color: inherit; }
+  #tt-lab-editorial .tt-lab-content { padding-block: 48px 88px; }
+  #tt-lab-editorial .tt-lab-overview {
+    display: grid; grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+    grid-template-areas: "intro edition"; gap: 64px; align-items: start;
+    margin: 0 0 60px; padding: 0;
+  }
+  #tt-lab-editorial .tt-lab-intro { grid-area: intro; min-width: 0; margin: 0; padding: 0; }
+  #tt-lab-editorial h2 {
+    max-width: none; margin: 0 0 20px; padding: 0; color: inherit;
+    font-size: clamp(29px, 2.25vw, 37px); font-weight: 600;
+    line-height: 1.14; letter-spacing: -.4px; text-transform: none;
+  }
+  #tt-lab-editorial .tt-lab-prose { max-width: none; margin: 0; padding: 0; color: inherit; }
+  #tt-lab-editorial .tt-lab-prose p {
+    max-width: none; margin: 0 0 18px; padding: 0; color: inherit;
+    font-size: 18px; line-height: 1.65; letter-spacing: normal;
+  }
+  #tt-lab-editorial .tt-lab-prose p:last-child { margin-bottom: 0; }
+  #tt-lab-editorial .tt-lab-prose h3 {
+    margin: 36px 0 14px; padding: 0; font-size: 29px;
+    line-height: 1.2; letter-spacing: -.2px; color: inherit;
+  }
+  #tt-lab-editorial .tt-lab-prose a { color: inherit; text-underline-offset: 4px; }
+  #tt-lab-editorial .tt-lab-edition {
+    grid-area: edition; min-width: 0; margin: 0; padding: 34px 36px 36px;
+    background: var(--tt-panel); border: 1px solid var(--tt-rule); border-radius: 6px;
+  }
+  #tt-lab-editorial .tt-lab-edition h2 { margin-bottom: 26px; font-size: clamp(29px, 2.2vw, 36px); }
+  #tt-lab-editorial .tt-lab-dates { margin: 0 0 26px; padding: 2px 0 2px 18px; border-left: 2px solid currentColor; }
+  #tt-lab-editorial .tt-lab-dates p { margin: 0; color: inherit; }
+  #tt-lab-editorial .tt-lab-deadline { font-size: 19px; font-weight: 600; line-height: 1.5; }
+  #tt-lab-editorial .tt-lab-period {
+    margin-top: 7px !important; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px; font-weight: 400; line-height: 1.6;
+  }
+  #tt-lab-editorial .tt-lab-cta,
+  #tt-lab-editorial .tt-lab-cta:visited {
+    display: inline-flex; align-items: center; justify-content: space-between; gap: 24px;
+    width: auto; max-width: 100%; min-height: 54px; margin: 0; padding: 15px 24px;
+    border: 1px solid var(--tt-button); border-radius: 3px;
+    background: var(--tt-button); color: var(--tt-button-ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 13px; font-weight: 600; line-height: 1.5; letter-spacing: 1.2px;
+    text-decoration: none; text-align: left; box-shadow: none;
+    transition: background 160ms ease, color 160ms ease;
+  }
+  #tt-lab-editorial .tt-lab-cta:hover { background: transparent; color: var(--tt-ink); }
+  #tt-lab-editorial .tt-lab-cta:focus-visible { outline: 3px solid var(--tt-ink); outline-offset: 5px; }
+  #tt-lab-editorial .tt-lab-arrow { flex-shrink: 0; font-size: 22px; line-height: 1; }
+  #tt-lab-editorial .tt-lab-detail {
+    display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+    gap: 50px; align-items: start; margin: 0; padding: 0;
+  }
+  #tt-lab-editorial .tt-lab-detail-photo { min-width: 0; margin: 0; padding: 0; }
+  #tt-lab-editorial .tt-lab-detail-photo img {
+    display: block; width: 100%; height: 380px; max-width: none; margin: 0;
+    object-fit: cover; object-position: 40% 65%; filter: grayscale(1); border-radius: 4px;
+  }
+  #tt-lab-editorial .tt-lab-detail-copy { min-width: 0; }
+  :is(html.dark, body.dark, html.dark-mode, body.dark-mode,
+      html[data-theme="dark"], body[data-theme="dark"],
+      html[data-color-scheme="dark"], body[data-color-scheme="dark"]) #tt-lab-editorial {
+    --tt-paper: #1c1c1b; --tt-panel: #272726; --tt-ink: #f3f1ec;
+    --tt-rule: #444440; --tt-button: #efede7; --tt-button-ink: #1c1c1b;
+  }
+  @media (max-width: 1000px) {
+    #tt-lab-editorial .tt-lab-overview { gap: 32px; }
+    #tt-lab-editorial .tt-lab-edition { padding: 28px; }
+    #tt-lab-editorial .tt-lab-detail { gap: 32px; }
+  }
+  @media (max-width: 820px) {
+    #tt-lab-editorial .tt-lab-width { width: calc(100% - 40px); }
+    #tt-lab-editorial .tt-lab-hero { min-height: 320px; padding-block: 48px; }
+    #tt-lab-editorial h1 { font-size: clamp(34px, 6vw, 48px); }
+    #tt-lab-editorial .tt-lab-hero-shade { background: rgba(0,0,0,.56); }
+    #tt-lab-editorial .tt-lab-content { padding-block: 28px 52px; }
+    #tt-lab-editorial .tt-lab-overview {
+      grid-template-columns: minmax(0, 1fr); grid-template-areas: "edition" "intro";
+      gap: 38px; margin-bottom: 38px;
+    }
+    #tt-lab-editorial .tt-lab-edition { padding: 26px 24px; }
+    #tt-lab-editorial .tt-lab-detail { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+    #tt-lab-editorial .tt-lab-detail-photo img { height: 300px; }
+    #tt-lab-editorial .tt-lab-prose p { font-size: 18px; }
+  }
+  @media (max-width: 440px) {
+    #tt-lab-editorial .tt-lab-hero { min-height: 300px; }
+    #tt-lab-editorial h1 { font-size: 34px; }
+    #tt-lab-editorial .tt-lab-cta { width: 100%; padding-inline: 16px; gap: 16px; font-size: 12px; }
+    #tt-lab-editorial .tt-lab-deadline { font-size: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #tt-lab-editorial .tt-lab-cta { transition: none; }
+  }
+
+  /* TANTAN_LAB_COMPACT_CSS_BEGIN */
+  /* The approved hero, header, enrollment card and prose sizes stay unchanged. */
+  #tt-lab-editorial .tt-lab-content { padding-bottom: 48px; }
+  #tt-lab-editorial .tt-lab-overview { margin-bottom: 28px; }
+  #tt-lab-editorial .tt-lab-lower {
+    padding-top: 28px; border-top: 1px solid var(--tt-rule);
+  }
+  #tt-lab-editorial .tt-lab-lower .tt-lab-detail {
+    grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+    gap: 36px; align-items: start;
+  }
+  #tt-lab-editorial .tt-lab-lower .tt-lab-detail + .tt-lab-detail {
+    margin-top: 26px; padding-top: 26px; border-top: 1px solid var(--tt-rule);
+  }
+  #tt-lab-editorial .tt-lab-lower .tt-lab-kicker { margin-bottom: 12px; }
+  #tt-lab-editorial .tt-lab-lower h2 { margin-bottom: 18px; }
+  #tt-lab-editorial .tt-lab-path .tt-lab-detail-photo img {
+    width: 100%; height: auto; aspect-ratio: 4 / 5; max-height: 540px;
+    object-fit: cover; object-position: 50% 45%;
+  }
+  #tt-lab-editorial .tt-lab-seminars .tt-lab-detail-photo img {
+    width: 100%; height: auto; aspect-ratio: 3 / 2; max-height: 320px;
+    object-fit: cover; object-position: 50% 45%;
+  }
+  @media (max-width: 1000px) {
+    #tt-lab-editorial .tt-lab-lower .tt-lab-detail { gap: 26px; }
+  }
+  @media (max-width: 820px) {
+    #tt-lab-editorial .tt-lab-content { padding-bottom: 36px; }
+    #tt-lab-editorial .tt-lab-overview { margin-bottom: 24px; }
+    #tt-lab-editorial .tt-lab-lower { padding-top: 24px; }
+    #tt-lab-editorial .tt-lab-lower .tt-lab-detail {
+      grid-template-columns: minmax(0, 1fr); gap: 22px;
+    }
+    #tt-lab-editorial .tt-lab-lower .tt-lab-detail + .tt-lab-detail {
+      margin-top: 24px; padding-top: 24px;
+    }
+    #tt-lab-editorial .tt-lab-lower .tt-lab-detail-photo img {
+      height: auto; aspect-ratio: 4 / 3; max-height: 340px;
+    }
+  }
+  /* TANTAN_LAB_COMPACT_CSS_END */
+</style>

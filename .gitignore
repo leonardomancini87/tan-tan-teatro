@@ -7,3 +7,6 @@ src.zip
 *.zip
 .DS_Store
 .env
+.env.local
+.vercel
+.env*
