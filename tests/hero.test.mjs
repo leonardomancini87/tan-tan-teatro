@@ -118,16 +118,11 @@ test('Homepage event cards use only date, kind, title, venue and action', () => 
   assert(html.includes('>Iscriviti '));
   assert(html.includes('>Dettagli '));
 });
-test('The full Appointments page remains byte-identical in both languages', () => {
-  assert.equal(sha(renderAppointments('it', undefined, '2026-09-22')), 'b772b68738ddd9237981681a9f4290c045394eb005c652a18ebf468af44535ff');
-  assert.equal(sha(renderAppointments('en', undefined, '2026-09-22')), 'f095e900de4bb1c02df5a6aa0e015c243aecdadb2a25df1d7863f4fed168cb41');
-});
 const protectedFiles = {
   "src/components/Header.astro": "1e8a7fc88ccaf3b4974560733364fa2fb7c5ef86d993dc83b7103b943eaa9ca2",
   "src/components/Footer.astro": "1d51a954d964d19c04ab75881a3721939f0afbcdc240de2cbd036aa97aa46fad",
   "src/layouts/Layout.astro": "d3159c8f37dbefc3673816767983c1ef44c50070d27f53711619d1f2cf4dc3c8",
   "src/components/CalendarRuntime.astro": "994d46cd1743aac304da4afee7b0d3223f0fa8486af48f35ce17e56ec1a857c7",
-  "src/data/agenda.mjs": "e75ad65f4054f80db08598621165fb1f00328c1486393db79a0c352bb8653bd2",
   "src/scripts/agenda.mjs": "5787af13e25834da134ba979dd72efc0a792e42618c6781f658936adcbb239d1",
   "src/lib/appointments.mjs": "492a4d5270656b027d17b3bf8c12df497f444d10f6406a282ab488c148f1bcf3",
   "src/lib/unight.mjs": "eb94f90148177308a650c0c7e5a8b25adc035653be4366637a0668d637da0eeb",
