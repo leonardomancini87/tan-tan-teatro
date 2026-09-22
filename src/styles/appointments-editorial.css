@@ -27,7 +27,7 @@
   min-height: 360px;
   background:
     linear-gradient(90deg, rgba(0,0,0,.02), rgba(0,0,0,.16)),
-    url('/img/macbett/macbett-03.jpg') 50% 46% / cover no-repeat;
+    url('/img/appuntamenti-hero.jpg') 50% 46% / cover no-repeat;
 }
 
 .tt-appointments-page .tt-page-heading > * {
