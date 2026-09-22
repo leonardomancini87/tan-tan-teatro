@@ -130,7 +130,7 @@ const protectedFiles = {
   "src/styles/vars.css": "bdb7b150160b28f81aefceb87cdaba0cb7799ef79ee70104efa59f2390fcb99c",
   "src/styles/content.css": "266f6499fed4f9da487b820f9bf66967b21fcdfbe169bbab47bea5e119a06539",
   "src/styles/layout.css": "fdee946ef5ecf007e67700bd9182ea645a5e0a4da2856825beb0ee6b03e96f3d",
-  "src/templates/Appointments.astro": "298b0afd91e6c54aa10825c127abec92957c5c8bf0cbb857aa68bf01b92c9753",
+  "src/templates/Appointments.astro": "1d06085239292cec4be4bdb7789d0921807aec183c379e5ab7428cc8e1dc8239",
   "src/templates/Unight.astro": "83dc38dba8223d642677223e117fb815174363854f3946fd1fc86c1ba0d3d45c",
   "src/pages/laboratorio.astro": "46018abd6f84269aad8f7ae29b2d308ee0852ab74cb4db67d418f891d0d872f5",
   "package.json": "862fe682f445af63ffdfc60cdaf38f9fdbd5c6467cba2afd32bc50aa989c1488",

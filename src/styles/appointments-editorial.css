@@ -1,0 +1,508 @@
+/* Appuntamenti 2026 — page-only editorial restyle.
+   The calendar data, expiry rules and runtime are intentionally untouched. */
+
+.tt-appointments-page {
+  --tt-agenda-card: var(--tt-paper);
+  --tt-agenda-card-soft: var(--tt-panel);
+}
+
+/* Editorial hero --------------------------------------------------------- */
+.tt-appointments-page .tt-page-heading {
+  display: grid;
+  grid-template-columns: minmax(320px, .74fr) minmax(420px, 1.26fr);
+  grid-template-rows: auto auto 1fr;
+  column-gap: clamp(42px, 6vw, 92px);
+  min-height: 360px;
+  padding: 46px 0 0;
+  background: transparent;
+  overflow: hidden;
+  border-bottom: 1px solid var(--tt-line);
+}
+
+.tt-appointments-page .tt-page-heading::after {
+  content: '';
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: stretch;
+  min-height: 360px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.02), rgba(0,0,0,.16)),
+    url('/img/macbett/macbett-03.jpg') 50% 46% / cover no-repeat;
+}
+
+.tt-appointments-page .tt-page-heading > * {
+  grid-column: 1;
+}
+
+.tt-appointments-page .tt-page-heading .tt-kicker {
+  align-self: end;
+  margin: 26px 0 18px;
+  font-size: 11px;
+  letter-spacing: 1.7px;
+}
+
+.tt-appointments-page .tt-page-heading h1 {
+  margin: 0;
+  font-size: clamp(58px, 6.2vw, 96px);
+  font-weight: 400;
+  line-height: .94;
+  letter-spacing: -.035em;
+}
+
+.tt-appointments-page .tt-page-heading > p:last-child {
+  max-width: 500px;
+  align-self: start;
+  margin: 30px 0 42px !important;
+  font-size: clamp(23px, 2vw, 31px);
+  line-height: 1.18;
+}
+
+/* Section navigation ---------------------------------------------------- */
+.tt-appointments-page .tt-page-index {
+  gap: 0;
+  padding: 22px 0 0;
+  border-bottom: 1px solid var(--tt-line);
+}
+
+.tt-appointments-page .tt-page-index a {
+  position: relative;
+  min-height: 54px;
+  margin-right: 38px;
+  padding: 0 0 14px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--tt-muted);
+  text-decoration: none;
+}
+
+.tt-appointments-page .tt-page-index a:first-child {
+  color: var(--tt-ink);
+  font-weight: 500;
+}
+
+.tt-appointments-page .tt-page-index a:first-child::after,
+.tt-appointments-page .tt-page-index a:hover::after,
+.tt-appointments-page .tt-page-index a:focus-visible::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: currentColor;
+}
+
+.tt-appointments-page .tt-page-index a:hover {
+  color: var(--tt-ink);
+  text-decoration: none;
+}
+
+/* Upcoming -------------------------------------------------------------- */
+.tt-appointments-page .tt-agenda-page-list {
+  padding: 54px 0 68px;
+}
+
+.tt-appointments-page .tt-agenda-page-list > h2 {
+  margin: 0 0 30px;
+  font-size: clamp(39px, 4vw, 57px);
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+
+.tt-appointments-page .tt-events--list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.tt-appointments-page .tt-events--list .tt-event {
+  display: grid;
+  grid-template-columns: minmax(125px, 31%) minmax(0, 1fr);
+  min-height: 285px;
+  overflow: hidden;
+  background: var(--tt-agenda-card);
+  border: 1px solid color-mix(in srgb, var(--tt-line) 62%, transparent);
+}
+
+.tt-appointments-page .tt-events--list .tt-event-photo {
+  min-height: 285px;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-photo img {
+  min-height: 100%;
+  filter: grayscale(1);
+  transition: transform .35s ease;
+}
+
+.tt-appointments-page .tt-events--list .tt-event:hover .tt-event-photo img {
+  transform: scale(1.018);
+}
+
+.tt-appointments-page .tt-events--list .tt-event-copy {
+  padding: 25px 25px 20px;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-dateline {
+  min-height: 0;
+  margin-bottom: 18px;
+}
+
+.tt-appointments-page .tt-events--list .tt-date {
+  gap: 10px;
+}
+
+.tt-appointments-page .tt-events--list .tt-date strong {
+  font-family: var(--font-serif);
+  font-size: clamp(39px, 3.5vw, 53px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+
+.tt-appointments-page .tt-events--list .tt-date > span {
+  font-size: 12px;
+  line-height: 1.05;
+}
+
+.tt-appointments-page .tt-events--list .tt-date small {
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.tt-appointments-page .tt-events--list .tt-date-until,
+.tt-appointments-page .tt-events--list .tt-ongoing {
+  font-size: 10px;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-kind {
+  margin-bottom: 10px !important;
+  font-size: 10px;
+  letter-spacing: 1.25px;
+}
+
+.tt-appointments-page .tt-events--list .tt-event h3 {
+  max-width: 520px;
+  margin-bottom: 7px;
+  font-size: clamp(26px, 2.45vw, 35px);
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -.02em;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-subtitle {
+  margin-bottom: 15px !important;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-venue,
+.tt-appointments-page .tt-events--list .tt-event-detail,
+.tt-appointments-page .tt-events--list .tt-deadline,
+.tt-appointments-page .tt-events--list .tt-event-link {
+  font-size: 13px;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-venue {
+  margin-top: 2px !important;
+}
+
+.tt-appointments-page .tt-events--list .tt-event-link {
+  padding-top: 16px;
+  font-weight: 500;
+}
+
+/* The first live event becomes the feature automatically. */
+.tt-appointments-page .tt-events--list > .tt-event:first-child {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  min-height: 390px;
+  background: var(--tt-agenda-card-soft);
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-photo {
+  min-height: 390px;
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-copy {
+  justify-content: center;
+  padding: clamp(34px, 4vw, 58px);
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-date strong {
+  font-size: clamp(58px, 6.2vw, 88px);
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-kind {
+  order: -1;
+  margin-bottom: 20px !important;
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-dateline {
+  margin-bottom: 20px;
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child h3 {
+  font-size: clamp(34px, 3.5vw, 49px);
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-subtitle {
+  font-size: 21px;
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link {
+  width: auto;
+  min-height: 44px;
+  margin-top: 24px;
+  padding: 11px 15px 10px;
+  gap: 26px;
+  background: var(--tt-button);
+  color: var(--tt-button-ink);
+  text-decoration: none;
+}
+
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Archives and project history ----------------------------------------- */
+.tt-appointments-page .tt-archive,
+.tt-appointments-page .tt-projects {
+  padding: 52px 0 58px;
+}
+
+.tt-appointments-page .tt-archive > h2,
+.tt-appointments-page .tt-projects > h2 {
+  margin-bottom: 28px;
+  font-size: clamp(35px, 3.4vw, 48px);
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+.tt-appointments-page .tt-archive {
+  background: color-mix(in srgb, var(--tt-panel) 50%, transparent);
+  padding-inline: clamp(18px, 3vw, 38px);
+  margin-inline: clamp(-38px, -3vw, -18px);
+}
+
+.tt-appointments-page .tt-archive .appointments-list,
+.tt-appointments-page .tt-archive .projects-list {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 28px;
+}
+
+.tt-appointments-page .tt-archive .appointment-row {
+  grid-template-columns: 180px minmax(0, 1fr);
+  padding: 18px 0;
+}
+
+.tt-appointments-page .tt-archive .appointment-date {
+  padding-right: 28px;
+}
+
+.tt-appointments-page .tt-project-links {
+  gap: 20px;
+}
+
+.tt-appointments-page .tt-project-links article {
+  min-height: 190px;
+  padding: 30px;
+  border: 1px solid color-mix(in srgb, var(--tt-line) 65%, transparent);
+}
+
+.tt-appointments-page .tt-project-links h3 {
+  margin-bottom: 14px;
+  font-size: clamp(27px, 2.4vw, 35px);
+  font-weight: 400;
+}
+
+.tt-appointments-page .tt-calendar-note {
+  margin: 6px 0 48px !important;
+  padding-top: 24px;
+  border-top: 1px solid var(--tt-line);
+}
+
+/* Responsive ------------------------------------------------------------ */
+@media (max-width: 1050px) {
+  .tt-appointments-page .tt-page-heading {
+    grid-template-columns: minmax(280px, .9fr) minmax(360px, 1.1fr);
+    column-gap: 34px;
+    min-height: 320px;
+  }
+
+  .tt-appointments-page .tt-page-heading::after {
+    min-height: 320px;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child {
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .tt-appointments-page .tt-page-heading {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 28px 0 0;
+    border-bottom: 0;
+  }
+
+  .tt-appointments-page .tt-page-heading::after {
+    order: 4;
+    width: 100%;
+    min-height: 250px;
+    margin-top: 12px;
+    background-position: 50% 42%;
+  }
+
+  .tt-appointments-page .tt-page-heading .tt-kicker {
+    align-self: auto;
+    margin: 4px 0 14px;
+  }
+
+  .tt-appointments-page .tt-page-heading h1 {
+    font-size: clamp(51px, 16vw, 72px);
+  }
+
+  .tt-appointments-page .tt-page-heading > p:last-child {
+    margin: 20px 0 18px !important;
+    font-size: 23px;
+  }
+
+  .tt-appointments-page .tt-page-index {
+    flex-wrap: nowrap;
+    gap: 25px;
+    overflow-x: auto;
+    padding-top: 18px;
+    scrollbar-width: none;
+  }
+
+  .tt-appointments-page .tt-page-index::-webkit-scrollbar { display: none; }
+
+  .tt-appointments-page .tt-page-index a {
+    flex: 0 0 auto;
+    margin-right: 0;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  .tt-appointments-page .tt-agenda-page-list {
+    padding: 42px 0 52px;
+  }
+
+  .tt-appointments-page .tt-events--list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child {
+    grid-column: auto;
+    grid-template-columns: 34% minmax(0, 1fr);
+    min-height: 260px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event-photo,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-photo {
+    min-height: 260px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event-copy,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-copy {
+    justify-content: flex-start;
+    padding: 22px 18px 17px;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-date strong,
+  .tt-appointments-page .tt-events--list .tt-date strong {
+    font-size: 40px;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-kind {
+    order: initial;
+    margin-bottom: 9px !important;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-dateline {
+    margin-bottom: 14px;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child h3,
+  .tt-appointments-page .tt-events--list .tt-event h3 {
+    font-size: 28px;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-subtitle {
+    font-size: 18px;
+  }
+
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link {
+    width: 100%;
+    margin-top: auto;
+    padding: 12px 0 0;
+    background: transparent;
+    color: var(--tt-ink);
+  }
+
+  .tt-appointments-page .tt-archive {
+    margin-inline: -20px;
+    padding-inline: 20px;
+    background: color-mix(in srgb, var(--tt-panel) 55%, transparent);
+  }
+
+  .tt-appointments-page .tt-archive .appointment-row {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+
+  .tt-appointments-page .tt-project-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .tt-appointments-page .tt-page-heading::after {
+    min-height: 215px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child {
+    grid-template-columns: 30% minmax(0, 1fr);
+    min-height: 245px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event-photo,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-photo {
+    min-height: 245px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event-copy,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-copy {
+    padding: 18px 14px 14px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-date strong,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-date strong {
+    font-size: 34px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event h3,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child h3 {
+    font-size: 24px;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event-subtitle,
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tt-appointments-page .tt-events--list .tt-event-photo img {
+    transition: none;
+  }
+
+  .tt-appointments-page .tt-events--list .tt-event:hover .tt-event-photo img {
+    transform: none;
+  }
+}
