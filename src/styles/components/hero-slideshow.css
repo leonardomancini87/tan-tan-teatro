@@ -3,7 +3,7 @@
  * var() fallbacks here: the existing PostCSS preserve:false setting would
  * compile those fallbacks instead of retaining each photograph's crop. */
 .tt-hero--slideshow { align-items:flex-end; }
-.tt-hero--slideshow .tt-hero-copy { position:relative; z-index:3; padding:0 6% 48px; pointer-events:none; }
+.tt-hero--slideshow .tt-hero-copy { position:relative; z-index:3; padding:0 32px 48px; pointer-events:none; }
 .tt-hero--slideshow .tt-hero-copy a { pointer-events:auto; }
 .tt-hero--slideshow .tt-hero-copy h1 { max-width:650px; margin-bottom:22px; }
 .tt-hero--slideshow .tt-hero-identity { max-width:610px; margin:0 0 15px; font-family:var(--font-sans-serif); font-size:clamp(20px,1.85vw,25px); font-weight:400; line-height:1.3; color:#fff; }
@@ -25,7 +25,7 @@
 .tt-hero--slideshow .tt-hero-caption:focus-visible { outline:2px solid #fff; outline-offset:3px; }
 @media (max-width:1100px) {
   .tt-hero--slideshow .tt-hero-caption { right:20px; }
-  .tt-hero--slideshow .tt-hero-copy { padding:0 5% 52px; }
+  .tt-hero--slideshow .tt-hero-copy { padding:0 32px 52px; }
 }
 @media (max-width:760px) {
   .tt-hero--slideshow .tt-hero-copy { padding:110px 25px 78px; }

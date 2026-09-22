@@ -14,7 +14,7 @@ export function renderHome(locale = 'it', today) {
 
     <section class="tt-section tt-activities" aria-labelledby="tt-activities-title">
       <div class="tt-section-heading"><div><p class="tt-kicker">${e(c.activitiesLabel)}</p><h2 id="tt-activities-title">${e(c.activitiesTitle)}</h2></div></div>
-      <div class="tt-activity-grid">${c.activities.map((a, index) => `<article class="tt-activity"><a href="${a.key === 'research' ? '#ricerca-accessibilita' : r[a.key]}" aria-label="${e(a.label)}"><img src="${PHOTOS[a.key]}" alt="" loading="lazy" decoding="async" width="640" height="520" /><div class="tt-activity-shade" aria-hidden="true"></div><div class="tt-activity-copy"><span class="tt-activity-number" aria-hidden="true">0${index + 1}</span><h3>${e(a.title)}</h3><p>${e(a.text)}</p><span class="tt-activity-link">${e(a.label)} ${arrow}</span></div></a></article>`).join('')}</div>
+      <div class="tt-activity-grid">${c.activities.map((a, index) => `<article class="tt-activity"><a href="${a.key === 'research' ? '#ricerca-accessibilita' : r[a.key]}" aria-label="${e(a.label)}"><img src="${PHOTOS[a.key]}" alt="" loading="lazy" decoding="async" width="640" height="520" /><div class="tt-activity-shade" aria-hidden="true"></div><div class="tt-activity-copy"><h3>${e(a.title)}</h3><p>${e(a.text)}</p><span class="tt-activity-link">${e(a.label)} ${arrow}</span></div></a></article>`).join('')}</div>
     </section>
 
     <section class="tt-about" aria-labelledby="tt-about-title">
