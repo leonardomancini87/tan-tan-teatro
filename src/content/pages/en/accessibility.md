@@ -1,6 +1,6 @@
 ---
 title: "Accessibility"
-description: "Before, during and after the performance."
+description: "Accessibility, research and tools supporting audiences before, during and after Tan Tan Teatro performances."
 templateKey: "accessibility-page"
 pagetype:
   - "page"

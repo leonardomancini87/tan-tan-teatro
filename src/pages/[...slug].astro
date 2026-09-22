@@ -10,8 +10,10 @@ import Appointments from "../templates/Appointments.astro";
 export async function getStaticPaths() {
   const pages = (await getCollection("pages")).filter((entry) => {
     // Explicit routes own these two paths; do not generate duplicates.
-    const isItalian = (entry.data.locale ?? 'it') === 'it';
-    return !(isItalian && ['index', 'laboratorio'].includes(entry.slug));
+    const locale = entry.data.locale ?? 'it';
+    const isItalian = locale === 'it';
+    const isAccessibility = entry.data.templateKey === 'accessibility-page';
+    return !isAccessibility && !(isItalian && ['index', 'laboratorio'].includes(entry.slug));
   });
 
   const newsEntries = await getCollection("news");
