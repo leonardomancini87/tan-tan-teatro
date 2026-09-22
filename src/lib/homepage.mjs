@@ -18,7 +18,7 @@ export function renderHome(locale = 'it', today) {
     </section>
 
     <section class="tt-about" aria-labelledby="tt-about-title">
-      <figure><img src="${PHOTOS.group}" alt="${e(c.aboutAlt)}" loading="lazy" decoding="async" width="1300" height="867" /><figcaption>${e(c.aboutCaption)}</figcaption></figure>
+      <figure><img src="${PHOTOS.group}" alt="${e(c.aboutAlt)}" loading="lazy" decoding="async" width="1300" height="867" />${c.aboutCaption ? `<figcaption>${e(c.aboutCaption)}</figcaption>` : ''}</figure>
       <div class="tt-about-copy"><p class="tt-kicker">${e(c.aboutLabel)}</p><h2 id="tt-about-title">${e(c.aboutTitle)}</h2><p class="tt-body-copy">${e(c.aboutText)}</p><a class="tt-button" href="${r.about}">${e(c.aboutLink)} ${arrow}</a></div>
     </section>
 
