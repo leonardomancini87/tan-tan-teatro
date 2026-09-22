@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CalendarRuntime from '../components/CalendarRuntime.astro';
+import { type CollectionEntry } from 'astro:content';
+import { compiledContent as italianContent } from '../content/pages/appuntamenti.md';
+import { compiledContent as englishContent } from '../content/pages/news-en.md';
+import { extractArchive, renderAppointments } from '../lib/appointments.mjs';
+interface Props { entry: CollectionEntry<'pages'>; }
+const { entry } = Astro.props;
+const locale = entry.data.locale ?? 'it';
+const body = await (locale === 'it' ? italianContent() : englishContent());
+const archive = extractArchive(body, locale);
+---
+<Layout title={`${locale === 'it' ? 'Appuntamenti' : 'Events'} | Tan Tan Teatro`} description={entry.data.description} locale={locale} editorial={true}>
+  <Fragment set:html={renderAppointments(locale, archive)} />
+  <CalendarRuntime />
+</Layout>

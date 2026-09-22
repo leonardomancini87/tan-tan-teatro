@@ -14,9 +14,11 @@ export interface Props {
     description?: string;
     locale?: "it" | "en";
     children?: any;
+    editorial?: boolean;
+    image?: string;
 }
 
-const { title, description, locale = "it" } = Astro.props;
+const { title, description, locale = "it", editorial = false, image } = Astro.props;
 ---
 
 <!doctype html>
@@ -30,26 +32,22 @@ const { title, description, locale = "it" } = Astro.props;
         <link rel="shortcut icon" href="/favicon.ico">
         <meta name="generator" content={Astro.generator} />
         <title>{title || "Clay"}</title>
+        {editorial && <link rel="stylesheet" href="/styles/tantan-editorial.css" />}
+        {image && <meta property="og:image" content={new URL(image, Astro.site ?? Astro.url).href} />}
+        {editorial && <meta property="og:title" content={title ?? 'Tan Tan Teatro'} />}
+        {editorial && description && <meta property="og:description" content={description} />}
         <ClientRouter />
         <script is:inline>
-            const theme = (() => {
-                if (
-                    typeof localStorage !== "undefined" &&
-                    localStorage.getItem("theme")
-                ) {
-                    return localStorage.getItem("theme");
-                }
-                return "light";
+            (() => {
+                let theme = 'light';
+                try { theme = localStorage.getItem('theme') || 'light'; } catch {}
+                if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+                else document.documentElement.removeAttribute('data-theme');
             })();
-
-            if (theme === "dark") {
-                document.documentElement.setAttribute("data-theme", "dark");
-            } else {
-                document.documentElement.removeAttribute("data-theme");
-            }
         </script>
     </head>
-    <body class="site-wrapper">
+    <body class:list={["site-wrapper", { "tt-editorial-shell": editorial }]}>
+        <a class="tt-skip-link" href="#site-main">{locale === 'it' ? 'Vai al contenuto' : 'Skip to content'}</a>
         <Header />
 
         <main id="site-main" class="site-main">
@@ -61,17 +59,43 @@ const { title, description, locale = "it" } = Astro.props;
         <Footer locale={locale} />
 
         <script>
-            import { navigate } from "astro:transitions/client";
-
+            let cleanUpNav: (() => void) | undefined;
             function initNav() {
-                const burger = document.querySelector(".nav-burger");
-                const wrapper = document.querySelector(".site-wrapper");
-                if (burger && wrapper) {
-                    burger.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        wrapper.classList.toggle("site-head-open");
-                    });
+                cleanUpNav?.();
+                const burger = document.querySelector<HTMLButtonElement>('.nav-burger');
+                const wrapper = document.querySelector<HTMLElement>('.site-wrapper');
+                const nav = document.querySelector<HTMLElement>('.site-head-left');
+                const actions = document.querySelector<HTMLElement>('.site-head-right');
+                if (!burger || !wrapper || !nav || !actions) return;
+                const breakpoint = wrapper.classList.contains('tt-editorial-shell') ? 1100 : 1600;
+                const media = window.matchMedia(`(max-width: ${breakpoint}px)`);
+                function sync() {
+                    const open = wrapper!.classList.contains('site-head-open');
+                    burger!.setAttribute('aria-expanded', String(open));
+                    nav!.inert = media.matches && !open;
+                    actions!.inert = media.matches && !open;
                 }
+                function toggle() { wrapper!.classList.toggle('site-head-open'); sync(); }
+                function onKey(event: KeyboardEvent) {
+                    if (event.key === 'Escape' && wrapper!.classList.contains('site-head-open')) {
+                        wrapper!.classList.remove('site-head-open'); sync(); burger!.focus();
+                    }
+                }
+                function onLink(event: MouseEvent) {
+                    if ((event.target as Element)?.closest('a')) { wrapper!.classList.remove('site-head-open'); sync(); }
+                }
+                function onMedia() { if (!media.matches) wrapper!.classList.remove('site-head-open'); sync(); }
+                burger.addEventListener('click', toggle);
+                document.addEventListener('keydown', onKey);
+                nav.addEventListener('click', onLink);
+                media.addEventListener('change', onMedia);
+                sync();
+                cleanUpNav = () => {
+                    burger.removeEventListener('click', toggle);
+                    document.removeEventListener('keydown', onKey);
+                    nav.removeEventListener('click', onLink);
+                    media.removeEventListener('change', onMedia);
+                };
             }
 
             function initTheme() {
@@ -82,10 +106,10 @@ const { title, description, locale = "it" } = Astro.props;
                         document.documentElement.getAttribute("data-theme") ===
                         "dark";
 
-                    const sun = document.querySelector(
+                    const sun = document.querySelector<SVGElement>(
                         ".sun-icon",
                     );
-                    const moon = document.querySelector(
+                    const moon = document.querySelector<SVGElement>(
                         ".moon-icon",
                     );
 
@@ -115,7 +139,7 @@ const { title, description, locale = "it" } = Astro.props;
                             );
                         }
 
-                        localStorage.setItem("theme", newTheme);
+                        try { localStorage.setItem("theme", newTheme); } catch {}
                         updateIcon();
                     });
                 }
@@ -127,19 +151,17 @@ const { title, description, locale = "it" } = Astro.props;
             });
 
             document.addEventListener("astro:after-swap", () => {
-                const theme = localStorage.getItem("theme");
-
-                if (
-                    theme === "dark" ||
-                    (!theme &&
-                        window.matchMedia("(prefers-color-scheme: dark)")
-                            .matches)
-                ) {
-                    document.documentElement.setAttribute("data-theme", "dark");
-                } else {
-                    document.documentElement.removeAttribute("data-theme");
-                }
+                let theme = 'light';
+                try { theme = localStorage.getItem('theme') || 'light'; } catch {}
+                if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+                else document.documentElement.removeAttribute('data-theme');
             });
         </script>
     </body>
 </html>
+<style is:global>
+  .tt-skip-link { position:fixed; top:12px; left:12px; z-index:100000; padding:12px 18px; background:var(--color-base); color:var(--color-bg); font:16px var(--font-sans-serif); transform:translateY(-200%); }
+  .tt-skip-link:focus { transform:translateY(0); }
+  button.nav-burger { border:0; background:transparent; color:inherit; box-shadow:none; min-width:44px; min-height:44px; }
+  .nav-burger:focus-visible, #theme-toggle:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+</style>

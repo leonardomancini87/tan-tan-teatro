@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { renderUnight } from '../lib/unight.mjs';
+interface Props { locale?: 'it' | 'en'; }
+const { locale = 'it' } = Astro.props;
+const description = locale === 'it'
+  ? 'Tan Tan Teatro a UNIGHT 2026: stand ETICA il 25 settembre e incontro al Castello del Valentino il 26 settembre.'
+  : 'Tan Tan Teatro at UNIGHT 2026: the ETICA stand on 25 September and a meeting at Castello del Valentino on 26 September.';
+---
+<Layout title="UNIGHT 2026 | Tan Tan Teatro" description={description} locale={locale} editorial={true} image="/img/macbett/macbett-03.jpg">
+  <Fragment set:html={renderUnight(locale)} />
+</Layout>

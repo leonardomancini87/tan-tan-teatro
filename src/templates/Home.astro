@@ -1,79 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PostCard from '../components/PostCard.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
-
-interface Props {
-  entry: CollectionEntry<'pages'>;
-}
-
+import CalendarRuntime from '../components/CalendarRuntime.astro';
+import HeroRuntime from '../components/HeroRuntime.astro';
+import '../styles/home-agenda-landscape.css';
+import { type CollectionEntry } from 'astro:content';
+import { renderHome } from '../lib/homepage.mjs';
+interface Props { entry: CollectionEntry<'pages'>; }
 const { entry } = Astro.props;
-
-const currentLocale = entry.data.locale ?? 'it';
-
-const allPages = await getCollection('pages');
-const allWork = await getCollection('work');
-
-const allowedWorkKeys = ['the-marriage-page', 'matrimonio-page', 'macbett-page'];
-
-const homeWorks = allWork
-  .filter((item) =>
-    (item.data.locale ?? 'it') === currentLocale &&
-    allowedWorkKeys.includes(item.data.translationKey ?? '')
-  )
-  .sort((a, b) => {
-    const numA = a.data.number || 9999;
-    const numB = b.data.number || 9999;
-    return numA - numB;
-  });
-
-const homePages = allPages
-  .filter((item) =>
-    (item.data.locale ?? 'it') === currentLocale &&
-    item.data.translationKey === 'laboratory-page'
-  )
-  .sort((a, b) => {
-    const numA = a.data.number || 9999;
-    const numB = b.data.number || 9999;
-    return numA - numB;
-  });
-
-const posts = [...homeWorks, ...homePages];
-
-const title = entry.data.title || 'Clay';
-const description = entry.data.description;
-
-let postCounter = 0;
+const locale = entry.data.locale ?? 'it';
 ---
-
-<Layout title={title} description={description} locale={currentLocale}>
-  <div class="post-feed">
-    {posts.map((post) => {
-      postCounter++;
-
-      let slug = post.slug;
-
-      if (post.collection === 'work') {
-        slug =
-          currentLocale === 'en'
-            ? `spettacoli/en/${post.slug}`
-            : `spettacoli/${post.slug}`;
-      }
-
-      if (post.collection === 'pages') {
-        slug =
-          currentLocale === 'en'
-            ? `en/${post.slug}`
-            : post.slug;
-      }
-
-      return (
-        <PostCard
-          count={postCounter}
-          post={post}
-          slug={slug}
-        />
-      );
-    })}
-  </div>
+<Layout title={entry.data.title} description={entry.data.description} locale={locale} editorial={true} image="/img/matrimonio01.jpg">
+  <Fragment set:html={renderHome(locale)} />
+  <CalendarRuntime />
+  <HeroRuntime />
 </Layout>

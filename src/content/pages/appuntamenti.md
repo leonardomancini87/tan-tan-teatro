@@ -6,24 +6,7 @@ title: Appuntamenti
 description: "Dove e quando trovarci: prossime date, repliche passate ed eventi speciali."
 ---
 
-
-<div class="appointments-page">
-<nav class="appointments-tabs" aria-label="Sezioni appuntamenti">
-<a href="#prossime" class="appointments-tab is-active" data-tab="prossime">Prossime</a>
-<a href="#passate" class="appointments-tab" data-tab="passate">Passate</a>
-<a href="#eventi" class="appointments-tab" data-tab="eventi">Eventi e progetti</a>
-</nav>
-
-<section class="appointments-panel is-active" data-panel="prossime">
-<div
-  id="supabase-upcoming-appointments"
-  class="appointments-upcoming"
-  aria-live="polite"
->
-<h2>Prossime rappresentazioni</h2>
-<p class="appointments-status">Caricamento delle prossime date…</p>
-</div>
-</section>
+<!-- Upcoming events: src/data/agenda.mjs + the existing public Supabase view. -->
 
 <section class="appointments-panel" data-panel="passate">
 <h2>Precedenti rappresentazioni</h2>
@@ -205,44 +188,3 @@ per una nuova fase di lavoro sullo spettacolo <em>Il Matrimonio</em>.
 </article>
 </div>
 </section>
-</div>
-
-<p class="appointments-note">
-Le date possono essere soggette a modifiche.<br />
-Invitiamo a consultare regolarmente questa pagina per aggiornamenti.
-</p>
-
-<script>
-function initAppointmentTabs() {
-  const root = document.querySelector('.appointments-page');
-  if (!root) return;
-
-  const tabs = root.querySelectorAll('.appointments-tab');
-  const panels = root.querySelectorAll('.appointments-panel');
-
-  function activateTab(tabName) {
-    tabs.forEach((tab) => {
-      const isActive = tab.dataset.tab === tabName;
-      tab.classList.toggle('is-active', isActive);
-      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-
-    panels.forEach((panel) => {
-      panel.classList.toggle('is-active', panel.dataset.panel === tabName);
-    });
-  }
-
-  tabs.forEach((tab) => {
-    tab.setAttribute('role', 'tab');
-    tab.setAttribute('aria-selected', tab.classList.contains('is-active') ? 'true' : 'false');
-
-    tab.addEventListener('click', (event) => {
-      event.preventDefault();
-      activateTab(tab.dataset.tab);
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', initAppointmentTabs);
-document.addEventListener('astro:page-load', initAppointmentTabs);
-</script>

@@ -3,6 +3,10 @@ const pathname = Astro.url.pathname;
 
 const routeMap: Record<string, string> = {
   '/': '/en',
+  '/appuntamenti/unight-2026': '/en/news/unight-2026/',
+  '/appuntamenti/unight-2026/': '/en/news/unight-2026/',
+  '/en/news/unight-2026': '/appuntamenti/unight-2026/',
+  '/en/news/unight-2026/': '/appuntamenti/unight-2026/',
   '/bio': '/en/about',
   '/bio/': '/en/about/',
   '/contatti': '/en/contact',

@@ -1,0 +1,9 @@
+---
+// These are the same PUBLIC, read-only credentials used by the existing site.
+const url = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+---
+<div hidden data-tt-calendar-config data-url={url} data-key={key}></div>
+<script>
+  import '../scripts/agenda.mjs';
+</script>

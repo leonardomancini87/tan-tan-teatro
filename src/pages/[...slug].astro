@@ -5,9 +5,14 @@ import Page from "../templates/Page.astro";
 import Contact from "../templates/Contact.astro";
 import List from "../templates/List.astro";
 import Accessibility from "../templates/Accessibility.astro";
+import Appointments from "../templates/Appointments.astro";
 
 export async function getStaticPaths() {
-  const pages = await getCollection("pages");
+  const pages = (await getCollection("pages")).filter((entry) => {
+    // Explicit routes own these two paths; do not generate duplicates.
+    const isItalian = (entry.data.locale ?? 'it') === 'it';
+    return !(isItalian && ['index', 'laboratorio'].includes(entry.slug));
+  });
 
   const newsEntries = await getCollection("news");
   const workEntries = await getCollection("work");
@@ -80,7 +85,9 @@ const templateKey = entry.data.templateKey;
 ---
 
 {
-  templateKey === "index-page" ? (
+  (entry.slug === "appuntamenti" || entry.slug === "news-en") ? (
+    <Appointments entry={entry} />
+  ) : templateKey === "index-page" ? (
     <Home entry={entry} />
   ) : templateKey === "contact-page" ? (
     <Contact entry={entry} />
