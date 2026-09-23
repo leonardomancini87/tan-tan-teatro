@@ -32,6 +32,16 @@ test('Homepage appointment cards stack on phone widths without fixed heights', (
   assert(css.includes('object-position: var(--tt-event-mobile-position)'));
 });
 
+
+test('Appointments mobile section index is locked to horizontal touch scrolling', () => {
+  const css = read('src/styles/appointments-editorial.css');
+  assert(css.includes('overflow-x: auto;'));
+  assert(css.includes('overflow-y: hidden;'));
+  assert(css.includes('touch-action: pan-x;'));
+  assert(css.includes('overscroll-behavior-x: contain;'));
+  assert(css.includes('overscroll-behavior-y: none;'));
+});
+
 test('Appointments cards use a tablet transition and stacked mobile image ratio', () => {
   const css = read('src/styles/appointments-editorial.css');
   assert(css.includes('@media (max-width: 900px) and (min-width: 641px)'));

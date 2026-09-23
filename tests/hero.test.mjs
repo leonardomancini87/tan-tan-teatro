@@ -124,7 +124,7 @@ const protectedFiles = {
   "src/layouts/Layout.astro": "d3159c8f37dbefc3673816767983c1ef44c50070d27f53711619d1f2cf4dc3c8",
   "src/components/CalendarRuntime.astro": "994d46cd1743aac304da4afee7b0d3223f0fa8486af48f35ce17e56ec1a857c7",
   "src/scripts/agenda.mjs": "5787af13e25834da134ba979dd72efc0a792e42618c6781f658936adcbb239d1",
-  "src/lib/appointments.mjs": "492a4d5270656b027d17b3bf8c12df497f444d10f6406a282ab488c148f1bcf3",
+  "src/lib/appointments.mjs": "2a6cf7581eececa873cfc16f2719c4c972748da5d9b1797e0437f286c506ae28",
   "src/lib/unight.mjs": "eb94f90148177308a650c0c7e5a8b25adc035653be4366637a0668d637da0eeb",
   "public/styles/tantan-editorial.css": "1f0f0424721e7d0b3b30478eac837a3553eb87d72cb635a57222e1af5900b6c6",
   "src/styles/vars.css": "bdb7b150160b28f81aefceb87cdaba0cb7799ef79ee70104efa59f2390fcb99c",
