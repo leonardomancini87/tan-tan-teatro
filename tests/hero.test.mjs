@@ -126,7 +126,7 @@ const protectedFiles = {
   "src/scripts/agenda.mjs": "5787af13e25834da134ba979dd72efc0a792e42618c6781f658936adcbb239d1",
   "src/lib/appointments.mjs": "492a4d5270656b027d17b3bf8c12df497f444d10f6406a282ab488c148f1bcf3",
   "src/lib/unight.mjs": "eb94f90148177308a650c0c7e5a8b25adc035653be4366637a0668d637da0eeb",
-  "public/styles/tantan-editorial.css": "6d79ef59772d85eb6b66bf5d0fe3b29aa5e3de8eb0dc3d918462a22d007b66db",
+  "public/styles/tantan-editorial.css": "1f0f0424721e7d0b3b30478eac837a3553eb87d72cb635a57222e1af5900b6c6",
   "src/styles/vars.css": "bdb7b150160b28f81aefceb87cdaba0cb7799ef79ee70104efa59f2390fcb99c",
   "src/styles/content.css": "266f6499fed4f9da487b820f9bf66967b21fcdfbe169bbab47bea5e119a06539",
   "src/styles/layout.css": "fdee946ef5ecf007e67700bd9182ea645a5e0a4da2856825beb0ee6b03e96f3d",

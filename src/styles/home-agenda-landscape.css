@@ -23,6 +23,7 @@
   height: 100%;
   min-height: 0;
   object-fit: cover;
+  object-position: var(--tt-event-position);
 }
 
 .tt-home .tt-agenda-band .tt-events--cards .tt-event-copy {
@@ -105,25 +106,66 @@
   }
 }
 
-@media (max-width: 560px) {
+/* Phones get a deliberately composed card rather than the desktop card
+   squeezed into two narrow columns. */
+@media (max-width: 600px) {
+  .tt-home .tt-agenda-band .tt-events--cards {
+    gap: 18px;
+  }
+
   .tt-home .tt-agenda-band .tt-events--cards .tt-event {
-    grid-template-columns: 42% minmax(0, 1fr);
-    min-height: 172px;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
 
   .tt-home .tt-agenda-band .tt-events--cards .tt-event-photo {
-    min-height: 172px;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .tt-home .tt-agenda-band .tt-events--cards .tt-event-photo img {
+    min-height: 0;
+    object-position: var(--tt-event-mobile-position);
   }
 
   .tt-home .tt-agenda-band .tt-events--cards .tt-event-copy {
-    padding: 12px 11px 9px;
+    padding: 18px 18px 14px;
+  }
+
+  .tt-home .tt-agenda-band .tt-events--cards .tt-event-dateline {
+    min-height: 0;
+    margin-bottom: 12px;
   }
 
   .tt-home .tt-agenda-band .tt-events--cards .tt-date strong {
-    font-size: 23px;
+    font-size: clamp(29px, 8.5vw, 36px);
+  }
+
+  .tt-home .tt-agenda-band .tt-events--cards .tt-date > span {
+    font-size: 12px;
+  }
+
+  .tt-home .tt-agenda-band .tt-events--cards .tt-event-kind {
+    margin-bottom: 7px !important;
+    font-size: 10px;
+    line-height: 1.35;
   }
 
   .tt-home .tt-agenda-band .tt-events--cards .tt-event h3 {
-    font-size: 20px;
+    margin-bottom: 9px;
+    font-size: clamp(25px, 7.4vw, 31px);
+    line-height: 1.08;
+  }
+
+  .tt-home .tt-agenda-band .tt-events--cards .tt-event-venue {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .tt-home .tt-agenda-band .tt-events--cards .tt-event-link {
+    min-height: 44px;
+    padding-top: 12px;
+    font-size: 14px;
   }
 }
