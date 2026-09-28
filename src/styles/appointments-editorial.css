@@ -640,3 +640,278 @@
     transform: none;
   }
 }
+
+/* === TT SHOW CARDS EDITORIAL V3 START === */
+
+/*
+ * Le informazioni editoriali aggiunte al markup restano invisibili
+ * per tutte le altre card, compreso il Laboratorio.
+ */
+.tt-appointments-page .tt-event-date-compact,
+.tt-appointments-page .tt-event-address {
+  display: none;
+}
+
+/* ----------------------------------------------------------
+   SOLO CARD SPETTACOLO
+   ---------------------------------------------------------- */
+
+.tt-appointments-page .tt-event.tt-event--show .tt-event-date {
+  display: none !important;
+}
+
+/* Data: piccola riga editoriale, niente numero gigante. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-date-compact {
+  display: block;
+  margin: 0 0 15px;
+  color: var(--tt-muted);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+/* Manteniamo esattamente la scala generale delle card esistenti. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-copy {
+  min-width: 0;
+  padding: clamp(22px, 2.2vw, 32px);
+}
+
+/* Categoria più discreta. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-kind {
+  margin: 0 0 10px;
+  color: var(--tt-muted);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+/* Il titolo prende il posto del numero come elemento principale. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-title,
+.tt-appointments-page .tt-event.tt-event--show .tt-event-copy > h2,
+.tt-appointments-page .tt-event.tt-event--show .tt-event-copy > h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: clamp(28px, 2.45vw, 39px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.025em;
+}
+
+/* Autore. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-subtitle {
+  margin: 0;
+  font-size: clamp(15px, 1.35vw, 19px);
+  line-height: 1.25;
+}
+
+/* Teatro. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-venue {
+  margin: 18px 0 0;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+/* Indirizzo: utile ma molto discreto. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-address {
+  display: block;
+  margin: 3px 0 0;
+  color: var(--tt-muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+/* L'eventuale ora è già nella riga della data. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-detail {
+  display: none;
+}
+
+/* ----------------------------------------------------------
+   AZIONI
+   Prenota = primaria
+   Dettagli = secondaria
+   ---------------------------------------------------------- */
+
+.tt-appointments-page .tt-event.tt-event--show .tt-event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  margin-top: 22px;
+}
+
+/* PRENOTA */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-link--booking {
+  order: -1;
+  width: auto;
+  min-width: 132px;
+  min-height: 39px;
+  margin: 0 !important;
+  padding: 0 14px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  border: 1px solid var(--tt-ink);
+  background: var(--tt-ink) !important;
+  color: var(--tt-paper) !important;
+  font-size: 11px;
+  font-weight: 700 !important;
+  line-height: 1;
+  letter-spacing: .08em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+
+/* DETTAGLI DELLO SPETTACOLO */
+.tt-appointments-page .tt-event.tt-event--show
+.tt-event-actions .tt-event-link:not(.tt-event-link--booking) {
+  width: auto;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 7px 0 5px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent !important;
+  color: var(--tt-ink) !important;
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: .055em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+
+.tt-appointments-page .tt-event.tt-event--show .tt-event-link--booking:hover {
+  opacity: .82;
+}
+
+.tt-appointments-page .tt-event.tt-event--show
+.tt-event-actions .tt-event-link:not(.tt-event-link--booking):hover {
+  opacity: .62;
+}
+
+/* ----------------------------------------------------------
+   MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-copy {
+    padding: 20px 18px 22px;
+  }
+
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-date-compact {
+    margin-bottom: 13px;
+  }
+
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-title,
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-copy > h2,
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-copy > h3 {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-link--booking {
+    min-width: 145px;
+  }
+}
+
+/* === TT SHOW CARDS EDITORIAL V3 END === */
+
+/* === TT SHOW CARDS V4 START === */
+
+/* Una sola data per gli spettacoli:
+   conserva la nuova riga editoriale e nasconde il vecchio blocco numerico. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-dateline {
+  display: none !important;
+}
+
+.tt-appointments-page .tt-event.tt-event--show .tt-event-date-compact {
+  display: block;
+  margin: 0 0 17px;
+  color: var(--tt-muted);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: .105em;
+  text-transform: uppercase;
+}
+
+/* Il titolo e' il collegamento alla pagina dello spettacolo. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-title-link {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: .12em;
+}
+
+.tt-appointments-page .tt-event.tt-event--show .tt-event-title-link:hover,
+.tt-appointments-page .tt-event.tt-event--show .tt-event-title-link:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+/* Teatro + indirizzo: stesso blocco informativo e leggibilita' maggiore. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-venue {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tt-appointments-page .tt-event.tt-event--show .tt-event-address {
+  display: block;
+  margin: 4px 0 0;
+  color: var(--tt-muted);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.4;
+}
+
+/* Prenota resta l'unica CTA esplicita nelle card degli spettacoli. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-actions {
+  margin-top: 22px;
+}
+
+@media (max-width: 720px) {
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-date-compact {
+    font-size: 11px;
+  }
+
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-venue,
+  .tt-appointments-page .tt-event.tt-event--show .tt-event-address {
+    font-size: 13px;
+  }
+}
+
+/* === TT SHOW CARDS V4 END === */
+
+/* === TT SHOW CTA BOTTOM ALIGN START === */
+
+/* Tutte le card spettacolo usano tutta l'altezza disponibile. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Prenota resta sempre appoggiato al fondo della card. */
+.tt-appointments-page .tt-event.tt-event--show .tt-event-actions {
+  width: 100%;
+  margin-top: auto !important;
+  padding-top: 24px;
+}
+
+/* === TT SHOW CTA BOTTOM ALIGN END === */

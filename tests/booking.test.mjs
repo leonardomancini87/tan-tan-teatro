@@ -52,3 +52,16 @@ test('Booking labels explicitly inherit the neutral site palette', () => {
   assert(booking.includes(':global(.tt-booking-spectators .tt-booking-field label)'));
   assert(booking.includes('color:var(--tt-ink, currentColor) !important;'));
 });
+
+test('Dravelli bookings show performance time, contribution and Arci admission information', () => {
+  assert(booking.includes('data-dravelli-details'));
+  assert(booking.includes('Ore spettacolo:'));
+  assert(booking.includes("ore 21."));
+  assert(booking.includes('Contributo richiesto:'));
+  assert(booking.includes('10 euro.'));
+  assert(booking.includes('Entrata riservata ai soci Arci.'));
+  assert(booking.includes('costo di 12 euro.'));
+  assert(booking.includes("locationText.includes('dravelli')"));
+  assert(booking.includes('pagamento sarà gestito in sede dal teatro ospitante'));
+});
+

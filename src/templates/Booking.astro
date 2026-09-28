@@ -44,11 +44,26 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
           <p data-date></p>
           <p data-location></p>
           <p class="tt-booking-limit" data-limit></p>
+          <div class="tt-booking-venue-notes" data-dravelli-details hidden>
+            <p>
+              <strong>{isEn ? 'Performance time:' : 'Ore spettacolo:'}</strong>
+              {isEn ? ' 9:00 pm.' : ' ore 21.'}
+            </p>
+            <p>
+              <strong>{isEn ? 'Requested contribution:' : 'Contributo richiesto:'}</strong>
+              {isEn ? ' €10.' : ' 10 euro.'}
+            </p>
+            <p>
+              {isEn
+                ? 'Admission is reserved for Arci members. If you do not have a membership card, you can obtain one at the venue for €12.'
+                : 'Entrata riservata ai soci Arci. Nel caso non si abbia la tessera è possibile ottenerla in loco al costo di 12 euro.'}
+            </p>
+          </div>
         </div>
         <p class="tt-booking-intro">
           {isEn
-            ? 'Request your seats now. No online payment is required: payment will be handled at the venue.'
-            : 'Richiedi ora i tuoi posti. Non è previsto alcun pagamento online: il pagamento sarà gestito in sede.'}
+            ? 'Request your seats now. No online payment is required: payment will be handled at the venue by the host theatre.'
+            : 'Richiedi ora i tuoi posti. Non è previsto alcun pagamento online: il pagamento sarà gestito in sede dal teatro ospitante.'}
         </p>
 
         <form data-form novalidate>
@@ -122,6 +137,21 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
   .tt-booking-event p { margin:0; line-height:1.55; }
   .tt-booking-event p + p { margin-top:2px; }
   .tt-booking-limit { font-weight:650; }
+  .tt-booking-venue-notes {
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+  .tt-booking-venue-notes p {
+    margin:0;
+    line-height:1.55;
+  }
+  .tt-booking-venue-notes p + p {
+    margin-top:5px;
+  }
+  .tt-booking-venue-notes strong {
+    font-weight:650;
+  }
   .tt-booking-intro { max-width:700px; margin:30px 0 0; font-size:clamp(19px, 2.2vw, 24px); line-height:1.45; }
   .tt-booking-page form { display:grid; gap:24px; max-width:720px; margin-top:42px; }
   .tt-booking-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
@@ -178,6 +208,24 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
     const formError = root.querySelector('[data-form-error]');
     const seatsInput = root.querySelector('[name="seats"]');
     const spectators = root.querySelector('[data-spectators]');
+    const bookingLocation = root.querySelector('[data-location]');
+    const dravelliDetails = root.querySelector('[data-dravelli-details]');
+
+    const syncDravelliDetails = () => {
+      const locationText = String(bookingLocation?.textContent || '').toLocaleLowerCase('it');
+      if (dravelliDetails instanceof HTMLElement) {
+        dravelliDetails.hidden = !locationText.includes('dravelli');
+      }
+    };
+
+    if (bookingLocation) {
+      new MutationObserver(syncDravelliDetails).observe(bookingLocation, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+    }
+    syncDravelliDetails();
     let appointment;
 
     const headers = {

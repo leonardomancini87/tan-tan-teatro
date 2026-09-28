@@ -16,16 +16,40 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
   const bookingLink = event.bookingHref
     ? `<a class="tt-event-link tt-event-link--booking" href="${e(event.bookingHref)}" aria-label="${e(`${event.bookingLabel}: ${compactTitle}`)}">${e(event.bookingLabel)} ${arrow}</a>`
     : '';
+  const standardEventLink = event.kind === 'show'
+    ? ''
+    : `<a class="tt-event-link" href="${e(event.href)}" aria-label="${e(`${compactLabel}: ${compactTitle}`)}">${e(compactLabel)} ${arrow}</a>`;
+  const editorialDate = (() => {
+    if (!event.start) return '';
+    const date = new Date(`${event.start}T12:00:00Z`);
+    if (Number.isNaN(date.getTime())) return '';
+    const localeCode = locale === 'it' ? 'it-IT' : 'en-GB';
+    const label = new Intl.DateTimeFormat(localeCode, {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Europe/Rome',
+    }).format(date);
+    const sentenceLabel =
+      label.charAt(0).toLocaleUpperCase(localeCode) + label.slice(1);
+    return event.detail ? `${sentenceLabel} · ${event.detail}` : sentenceLabel;
+  })();
+  const editorialAddress = /dravelli/i.test(event.venue ?? '')
+    ? 'Via Praciosa 11, 10024 Moncalieri (TO)'
+    : '';
   return `<article class="tt-event tt-event--${e(event.kind)}" data-event-id="${e(event.id)}">
     <div class="tt-event-photo"><img src="${e(event.image)}" alt="" loading="lazy" decoding="async" width="320" height="360" style="--tt-event-position:${e(event.imagePosition)};--tt-event-mobile-position:${e(event.mobileImagePosition ?? event.imagePosition)}" /></div>
     <div class="tt-event-copy">
+      <p class="tt-event-date-compact">${e(editorialDate)}</p>
       <div class="tt-event-dateline"><time class="tt-date" datetime="${e(event.start)}" aria-label="${e(d.long)}"><strong>${e(d.day)}</strong><span>${e(d.month)}<small>${e(d.year)}</small></span></time>${!compact && d.until ? `<span class="tt-date-until">${e(d.until)}</span>` : ''}${!compact && ongoing ? `<span class="tt-ongoing">${e(t.ongoing)}</span>` : ''}</div>
       <p class="tt-event-kind">${e(t.kind[event.kind] ?? t.kind.other)}</p>
       <h3><a href="${e(event.href)}" class="tt-event-title-link">${e(compactTitle)}</a></h3>
       ${compact ? '' : `<p class="tt-event-subtitle">${e(event.subtitle)}</p>`}
       <p class="tt-event-venue">${e(event.venue)}</p>
+      ${editorialAddress ? `<p class="tt-event-address">${e(editorialAddress)}</p>` : ''}
       ${compact ? '' : detail}
-      <div class="tt-event-actions"><a class="tt-event-link" href="${e(event.href)}" aria-label="${e(`${compactLabel}: ${compactTitle}`)}">${e(compactLabel)} ${arrow}</a>${bookingLink}</div>
+      <div class="tt-event-actions">${standardEventLink}${bookingLink}</div>
     </div>
   </article>`;
 }
