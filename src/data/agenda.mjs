@@ -39,11 +39,13 @@ export const PERFORMANCE_SNAPSHOT = [
 export const UI = {
   it: { upcoming: 'Prossimi appuntamenti', all: 'Tutti gli appuntamenti', programme: 'Scopri il programma',
     lab: 'Scopri il laboratorio', signup: 'Iscriviti al laboratorio', show: 'Dettagli dello spettacolo',
+    book: 'Prenota',
     event: 'Dettagli dell\u2019appuntamento', ongoing: 'In corso', empty: 'I prossimi appuntamenti saranno pubblicati qui.',
     emptyLink: 'Resta in contatto', monthYear: 'it-IT', kind: { research: 'Ricerca \u00b7 Public engagement', lab: 'Laboratorio', show: 'Spettacolo', other: 'Appuntamento' },
     status: 'Calendario in aggiornamento. Per le repliche, verifica le date con noi.', statusLink: 'Contattaci' },
   en: { upcoming: 'Upcoming events', all: 'All events', programme: 'Explore the programme',
     lab: 'Explore the laboratory', signup: 'Join the laboratory', show: 'Performance details',
+    book: 'Book',
     event: 'Event details', ongoing: 'In progress', empty: 'Our next events will be published here.',
     emptyLink: 'Stay in touch', monthYear: 'en-GB', kind: { research: 'Research \u00b7 Public engagement', lab: 'Laboratory', show: 'Performance', other: 'Event' },
     status: 'Calendar being updated. Please check performance dates with us.', statusLink: 'Contact us' },
@@ -112,6 +114,17 @@ export function normalizePerformances(rows, locale = 'it') {
     const macbett = key.includes('macbett'), marriage = key.includes('matrimonio') || key.includes('marriage');
     const venue = [safeText(row.venue), safeText(row.city)].filter(Boolean).join(' \u00b7 ');
     const time = typeof row.starts_at_time === 'string' && /^\d{2}:\d{2}(:\d{2})?$/.test(row.starts_at_time) ? row.starts_at_time.slice(0, 5) : '';
+    const sourceKey = safeText(String(row.source_key ?? row.id ?? index));
+    const rawBookingUrl = safeText(row.booking_url);
+    const bookingHost = (() => { try { return new URL(rawBookingUrl).host.toLowerCase(); } catch { return ''; } })();
+    const hasExternalBooking = rawBookingUrl && !(bookingHost === 'app.tantanteatro.it' && new URL(rawBookingUrl).pathname.startsWith('/prenota'));
+    const bookingHref = row.booking_enabled === true
+      ? hasExternalBooking
+        ? rawBookingUrl
+        : locale === 'en'
+          ? `/en/book/?event=${encodeURIComponent(sourceKey)}`
+          : `/prenota/?evento=${encodeURIComponent(sourceKey)}`
+      : '';
     return [{ id: `performance-${safeText(String(row.id ?? index))}`, start: row.starts_on,
       end: validDay(row.ends_on) && row.ends_on >= row.starts_on ? row.ends_on : row.starts_on,
       kind: 'show', title: !it && marriage ? 'The Marriage' : title,
@@ -119,7 +132,8 @@ export function normalizePerformances(rows, locale = 'it') {
       venue, detail: time, image: macbett ? '/img/macbett01.jpg' : marriage ? '/img/matrimonio01.jpg' : '/img/tantanteatro.jpeg',
       imagePosition: '50% 46%', mobileImagePosition: macbett ? '50% 48%' : marriage ? '50% 50%' : '50% 46%', imageAlt: title,
       href: macbett ? r.macbett : marriage ? r.marriage : r.contacts,
-      label: macbett || marriage ? UI[locale].show : UI[locale].event }];
+      label: macbett || marriage ? UI[locale].show : UI[locale].event,
+      bookingHref, bookingLabel: UI[locale].book }];
   });
 }
 export function upcomingEvents({ locale = 'it', rows = PERFORMANCE_SNAPSHOT, today = romeToday(), limit = 0 } = {}) {

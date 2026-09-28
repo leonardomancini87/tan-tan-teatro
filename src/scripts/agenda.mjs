@@ -10,7 +10,7 @@ async function loadPerformances() {
   if (!config?.dataset.url || !config.dataset.key) throw new Error('Calendar not configured');
   const url = new URL('/rest/v1/public_appointments', config.dataset.url);
   url.search = new URLSearchParams({
-    select: 'id,title,venue,city,starts_on,ends_on,starts_at_time,is_published',
+    select: 'id,source_key,title,venue,city,starts_on,ends_on,starts_at_time,is_published,booking_enabled,booking_url,booking_capacity,booking_max_per_request',
     is_published: 'eq.true', order: 'starts_on.asc',
   }).toString();
   const controller = new AbortController();

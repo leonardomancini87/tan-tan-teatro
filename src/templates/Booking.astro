@@ -1,0 +1,353 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Props { locale?: 'it' | 'en'; }
+const { locale = 'it' } = Astro.props;
+const isEn = locale === 'en';
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
+---
+
+<Layout
+  title={`${isEn ? 'Book a performance' : 'Prenota uno spettacolo'} | Tan Tan Teatro`}
+  description={isEn ? 'Request seats for a Tan Tan Teatro performance. Payment is made at the venue.' : 'Richiedi i posti per uno spettacolo di Tan Tan Teatro. Il pagamento avviene in sede.'}
+  locale={locale}
+  editorial={true}
+>
+  <main
+    class="tt-booking-page"
+    data-booking-page
+    data-locale={locale}
+    data-url={supabaseUrl}
+    data-key={supabaseKey}
+  >
+    <section class="tt-booking-card">
+      <a class="tt-booking-back" href={isEn ? '/en/news/' : '/appuntamenti/'}>
+        {isEn ? '← All events' : '← Tutti gli appuntamenti'}
+      </a>
+
+      <div class="tt-booking-loading" data-loading role="status">
+        {isEn ? 'Loading performance…' : 'Caricamento spettacolo…'}
+      </div>
+
+      <div class="tt-booking-error" data-error hidden>
+        <p class="tt-booking-kicker">{isEn ? 'BOOKING' : 'PRENOTAZIONE'}</p>
+        <h1>{isEn ? 'Booking unavailable' : 'Prenotazione non disponibile'}</h1>
+        <p data-error-text>{isEn ? 'This performance cannot be booked at the moment.' : 'Al momento non è possibile prenotare questo spettacolo.'}</p>
+      </div>
+
+      <div data-booking-form hidden>
+        <p class="tt-booking-kicker">{isEn ? 'BOOKING' : 'PRENOTAZIONE'}</p>
+        <h1 data-title></h1>
+        <div class="tt-booking-event" aria-live="polite">
+          <p data-date></p>
+          <p data-location></p>
+          <p class="tt-booking-limit" data-limit></p>
+        </div>
+        <p class="tt-booking-intro">
+          {isEn
+            ? 'Request your seats now. No online payment is required: payment will be handled at the venue.'
+            : 'Richiedi ora i tuoi posti. Non è previsto alcun pagamento online: il pagamento sarà gestito in sede.'}
+        </p>
+
+        <form data-form novalidate>
+          <fieldset class="tt-booking-person">
+            <legend>{isEn ? 'Spectator 1' : 'Spettatore 1'}</legend>
+            <div class="tt-booking-grid">
+              <div class="tt-booking-field">
+                <label for="booking-first-name">{isEn ? 'First name' : 'Nome'} *</label>
+                <input id="booking-first-name" name="first_name" type="text" autocomplete="given-name" minlength="2" maxlength="60" required />
+              </div>
+              <div class="tt-booking-field">
+                <label for="booking-last-name">{isEn ? 'Last name' : 'Cognome'} *</label>
+                <input id="booking-last-name" name="last_name" type="text" autocomplete="family-name" minlength="2" maxlength="60" required />
+              </div>
+            </div>
+          </fieldset>
+          <div class="tt-booking-grid">
+            <div class="tt-booking-field">
+              <label for="booking-email">Email *</label>
+              <input id="booking-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+            </div>
+            <div class="tt-booking-field">
+              <label for="booking-phone">{isEn ? 'Phone (optional)' : 'Telefono (facoltativo)'}</label>
+              <input id="booking-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+            </div>
+          </div>
+          <div class="tt-booking-field tt-booking-field--seats">
+            <label for="booking-seats">{isEn ? 'Number of seats' : 'Numero di posti'} *</label>
+            <input id="booking-seats" name="seats" type="number" inputmode="numeric" min="1" value="1" required />
+          </div>
+          <div class="tt-booking-spectators" data-spectators aria-live="polite"></div>
+          <div class="tt-booking-field">
+            <label for="booking-notes">{isEn ? 'Notes (optional)' : 'Note (facoltative)'}</label>
+            <textarea id="booking-notes" name="notes" rows="4" maxlength="1000"></textarea>
+          </div>
+          <div class="tt-booking-trap" aria-hidden="true">
+            <label for="booking-website">Website</label>
+            <input id="booking-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <p class="tt-booking-privacy">
+            {isEn ? 'The data entered will only be used to manage this booking (see the ' : 'I dati inseriti saranno usati esclusivamente per gestire questa prenotazione (consulta la '}<a href={privacyUrl} target="_blank" rel="noopener noreferrer">Privacy Policy</a>).
+          </p>
+          <p class="tt-booking-form-error" data-form-error role="alert" hidden></p>
+          <button class="tt-booking-submit" type="submit" data-submit>
+            {isEn ? 'Send booking request' : 'Invia richiesta di prenotazione'}
+          </button>
+        </form>
+      </div>
+
+      <div class="tt-booking-success" data-success hidden tabindex="-1">
+        <p class="tt-booking-kicker">{isEn ? 'REQUEST RECEIVED' : 'RICHIESTA RICEVUTA'}</p>
+        <h1>{isEn ? 'Thank you' : 'Grazie'}</h1>
+        <p>{isEn
+          ? 'Your request has been sent. It is not yet a confirmation: you will receive an email after it has been reviewed. Payment will be made at the venue.'
+          : 'La tua richiesta è stata inviata. Non è ancora una conferma: riceverai un’email dopo la verifica. Il pagamento avverrà in sede.'}</p>
+        <a class="tt-booking-return" href={isEn ? '/en/news/' : '/appuntamenti/'}>
+          {isEn ? 'Return to events' : 'Torna agli appuntamenti'}
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .tt-booking-page { width:min(940px, calc(100% - 40px)); margin:0 auto; padding:clamp(42px, 8vw, 92px) 0 110px; }
+  .tt-booking-card { padding:clamp(25px, 5vw, 56px); border:1px solid color-mix(in srgb, currentColor 22%, transparent); background:var(--tt-paper, transparent); }
+  .tt-booking-back, .tt-booking-return { display:inline-block; margin-bottom:38px; color:inherit; text-underline-offset:4px; }
+  .tt-booking-kicker { margin:0 0 15px; font-size:12px; font-weight:650; letter-spacing:.15em; }
+  .tt-booking-card h1 { max-width:760px; margin:0; font-size:clamp(42px, 7vw, 78px); font-weight:400; line-height:1; letter-spacing:-.035em; }
+  .tt-booking-event { margin:30px 0 0; padding:18px 20px; border-left:3px solid currentColor; background:color-mix(in srgb, currentColor 6%, transparent); }
+  .tt-booking-event p { margin:0; line-height:1.55; }
+  .tt-booking-event p + p { margin-top:2px; }
+  .tt-booking-limit { font-weight:650; }
+  .tt-booking-intro { max-width:700px; margin:30px 0 0; font-size:clamp(19px, 2.2vw, 24px); line-height:1.45; }
+  .tt-booking-page form { display:grid; gap:24px; max-width:720px; margin-top:42px; }
+  .tt-booking-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .tt-booking-field { display:grid; gap:8px; }
+  .tt-booking-field label,
+  .tt-booking-page :global(.tt-booking-spectators .tt-booking-field label) {
+    color:var(--tt-ink, currentColor) !important;
+    font-weight:650;
+  }
+  .tt-booking-field input, .tt-booking-field textarea,
+  .tt-booking-page :global(.tt-booking-spectators .tt-booking-field input) { width:100%; box-sizing:border-box; padding:13px 14px; border:1px solid color-mix(in srgb, currentColor 35%, transparent); border-radius:0; background:transparent; color:inherit; font:inherit; }
+  .tt-booking-field input:focus-visible, .tt-booking-field textarea:focus-visible, .tt-booking-submit:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+  .tt-booking-field--seats { max-width:220px; }
+  .tt-booking-person { min-width:0; margin:0; padding:0; border:0; }
+  .tt-booking-person legend { margin:0 0 12px; padding:0; color:var(--tt-ink, currentColor); font:inherit; font-weight:650; }
+  .tt-booking-spectators { display:grid; gap:18px; }
+  .tt-booking-spectators:empty { display:none; }
+  .tt-booking-trap { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+  .tt-booking-privacy { max-width:660px; margin:0; font-size:14px; line-height:1.55; }
+  .tt-booking-privacy a { color:inherit; }
+  .tt-booking-form-error { margin:0; padding:13px 15px; border-left:3px solid #b42318; background:rgba(180,35,24,.08); }
+  .tt-booking-submit { width:max-content; min-height:50px; padding:0 24px; border:1px solid var(--tt-button, #111); background:var(--tt-button, #111); color:var(--tt-button-ink, #fff); font:inherit; font-weight:650; cursor:pointer; }
+  .tt-booking-submit:disabled { opacity:.55; cursor:wait; }
+  .tt-booking-loading, .tt-booking-error, .tt-booking-success { padding:30px 0; }
+  .tt-booking-success p:not(.tt-booking-kicker), .tt-booking-error p:not(.tt-booking-kicker) { max-width:680px; font-size:clamp(18px, 2vw, 23px); line-height:1.5; }
+  .tt-booking-return { margin:18px 0 0; }
+  @media (max-width:640px) {
+    .tt-booking-page { width:min(100% - 28px, 940px); padding:28px 0 70px; }
+    .tt-booking-card { padding:24px 18px 30px; }
+    .tt-booking-back { margin-bottom:30px; }
+    .tt-booking-grid { grid-template-columns:1fr; }
+    .tt-booking-field--seats, .tt-booking-submit { width:100%; max-width:none; }
+  }
+</style>
+
+<script>
+  function initBookingPage() {
+    const root = document.querySelector('[data-booking-page]');
+    if (!(root instanceof HTMLElement) || root.dataset.ready === 'true') return;
+    root.dataset.ready = 'true';
+    const isEn = root.dataset.locale === 'en';
+    const copy = isEn
+      ? { unavailable:'This performance cannot be booked at the moment.', missing:'The event address is missing.', limit:(n) => `You may request up to ${n} ${n === 1 ? 'seat' : 'seats'}.`, spectator:(n) => `Spectator ${n}`, firstName:'First name', lastName:'Last name', others:'Other spectators', send:'Send booking request', sending:'Sending…', invalid:'Please check the required fields.', failed:'The request could not be sent. Please try again or contact info@tantanteatro.it.' }
+      : { unavailable:'Al momento non è possibile prenotare questo spettacolo.', missing:'Manca il riferimento allo spettacolo.', limit:(n) => `Puoi richiedere fino a ${n} ${n === 1 ? 'posto' : 'posti'}.`, spectator:(n) => `Spettatore ${n}`, firstName:'Nome', lastName:'Cognome', others:'Altri spettatori', send:'Invia richiesta di prenotazione', sending:'Invio…', invalid:'Controlla i campi obbligatori.', failed:'Non è stato possibile inviare la richiesta. Riprova oppure scrivi a info@tantanteatro.it.' };
+    const url = root.dataset.url;
+    const key = root.dataset.key;
+    const loading = root.querySelector('[data-loading]');
+    const errorBox = root.querySelector('[data-error]');
+    const errorText = root.querySelector('[data-error-text]');
+    const formBox = root.querySelector('[data-booking-form]');
+    const form = root.querySelector('[data-form]');
+    const success = root.querySelector('[data-success]');
+    const submit = root.querySelector('[data-submit]');
+    const formError = root.querySelector('[data-form-error]');
+    const seatsInput = root.querySelector('[name="seats"]');
+    const spectators = root.querySelector('[data-spectators]');
+    let appointment;
+
+    const headers = {
+      apikey:key || '',
+      'Content-Type':'application/json',
+      ...(key?.startsWith('eyJ') ? { Authorization:`Bearer ${key}` } : {}),
+    };
+    const showError = (message) => {
+      if (loading) loading.hidden = true;
+      if (formBox) formBox.hidden = true;
+      if (errorBox) errorBox.hidden = false;
+      if (errorText) errorText.textContent = message || copy.unavailable;
+    };
+    const formatDate = (day, time) => {
+      const date = new Date(`${day}T12:00:00Z`);
+      const label = new Intl.DateTimeFormat(isEn ? 'en-GB' : 'it-IT', { weekday:'long', day:'numeric', month:'long', year:'numeric', timeZone:'Europe/Rome' }).format(date);
+      const sentenceLabel = label.charAt(0).toLocaleUpperCase(isEn ? 'en-GB' : 'it-IT') + label.slice(1);
+      return time ? `${sentenceLabel} · ${String(time).slice(0, 5)}` : sentenceLabel;
+    };
+    const locationLabel = (item) => {
+      const venue = String(item.venue || '').trim();
+      const address = String(item.address || '').trim();
+      const city = String(item.city || '').trim();
+      const dravelliAddress = venue.toLocaleLowerCase('it').includes('dravelli')
+        ? 'Via Praciosa 11, 10024 Moncalieri (TO)'
+        : '';
+      return address
+        ? [venue, address, city].filter(Boolean).join(' · ')
+        : dravelliAddress
+          ? [venue, dravelliAddress].filter(Boolean).join(' · ')
+          : [venue, city].filter(Boolean).join(' · ');
+    };
+    const renderSpectators = () => {
+      if (!(seatsInput instanceof HTMLInputElement) || !(spectators instanceof HTMLElement)) return;
+      const previous = new Map([...spectators.querySelectorAll('[data-spectator-field]')].map((field) => [field.getAttribute('data-spectator-field'), field instanceof HTMLInputElement ? field.value : '']));
+      const maximum = Math.max(1, Number(seatsInput.max) || 100);
+      const count = Math.max(1, Math.min(maximum, Number(seatsInput.value) || 1));
+      seatsInput.value = String(count);
+      spectators.replaceChildren();
+      for (let number = 2; number <= count; number += 1) {
+        const person = document.createElement('fieldset');
+        person.className = 'tt-booking-person';
+        person.setAttribute('data-spectator-person', String(number));
+        const legend = document.createElement('legend');
+        legend.textContent = copy.spectator(number);
+        const grid = document.createElement('div');
+        grid.className = 'tt-booking-grid';
+        for (const [kind, fieldLabel] of [['first', copy.firstName], ['last', copy.lastName]]) {
+          const wrap = document.createElement('div');
+          wrap.className = 'tt-booking-field';
+          const label = document.createElement('label');
+          label.htmlFor = `booking-spectator-${number}-${kind}`;
+          label.textContent = `${fieldLabel} *`;
+          const input = document.createElement('input');
+          input.id = `booking-spectator-${number}-${kind}`;
+          input.name = `spectator_${number}_${kind}`;
+          input.type = 'text';
+          input.required = true;
+          input.minLength = 2;
+          input.maxLength = 60;
+          input.autocomplete = 'off';
+          input.setAttribute('data-spectator-field', `${number}:${kind}`);
+          input.value = previous.get(`${number}:${kind}`) || '';
+          wrap.append(label, input);
+          grid.append(wrap);
+        }
+        person.append(legend, grid);
+        spectators.append(person);
+      }
+    };
+    seatsInput?.addEventListener('input', renderSpectators);
+    seatsInput?.addEventListener('change', renderSpectators);
+
+    async function load() {
+      try {
+        if (!url || !key) throw new Error(copy.unavailable);
+        const params = new URLSearchParams(window.location.search);
+        const sourceKey = params.get(isEn ? 'event' : 'evento') || params.get('event') || params.get('evento');
+        if (!sourceKey) throw new Error(copy.missing);
+        const endpoint = new URL('/rest/v1/public_appointments', url);
+        endpoint.search = new URLSearchParams({
+          select:'id,source_key,title,venue,city,address,starts_on,starts_at_time,is_published,booking_enabled,booking_url,booking_capacity,booking_max_per_request',
+          source_key:`eq.${sourceKey}`,
+          is_published:'eq.true',
+          booking_enabled:'eq.true',
+          limit:'1',
+        }).toString();
+        const response = await fetch(endpoint, { headers, credentials:'omit', cache:'no-store' });
+        if (!response.ok) throw new Error(copy.unavailable);
+        const rows = await response.json();
+        appointment = Array.isArray(rows) ? rows[0] : null;
+        if (!appointment) throw new Error(copy.unavailable);
+        const manual = String(appointment.booking_url || '').trim();
+        if (manual) {
+          try {
+            const parsed = new URL(manual);
+            if (!(parsed.host.toLowerCase() === 'app.tantanteatro.it' && parsed.pathname.startsWith('/prenota'))) {
+              window.location.replace(parsed.href); return;
+            }
+          } catch {}
+        }
+        const title = root.querySelector('[data-title]');
+        const date = root.querySelector('[data-date]');
+        const location = root.querySelector('[data-location]');
+        const limit = root.querySelector('[data-limit]');
+        const maximum = Math.max(1, Math.min(Number(appointment.booking_max_per_request) || 10, Number(appointment.booking_capacity) || 100));
+        if (title) title.textContent = appointment.title;
+        if (date) date.textContent = formatDate(appointment.starts_on, appointment.starts_at_time);
+        if (location) location.textContent = locationLabel(appointment);
+        if (limit) limit.textContent = copy.limit(maximum);
+        if (seatsInput instanceof HTMLInputElement) seatsInput.max = String(maximum);
+        renderSpectators();
+        if (loading) loading.hidden = true;
+        if (formBox) formBox.hidden = false;
+      } catch (error) { showError(error instanceof Error ? error.message : copy.unavailable); }
+    }
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement) || !(submit instanceof HTMLButtonElement) || !appointment) return;
+      if (!form.reportValidity()) {
+        if (formError) { formError.textContent = copy.invalid; formError.hidden = false; }
+        return;
+      }
+      const values = new FormData(form);
+      if (String(values.get('website') || '')) return;
+      submit.disabled = true; submit.textContent = copy.sending;
+      if (formError) formError.hidden = true;
+      try {
+        const otherSpectators = [...form.querySelectorAll('[data-spectator-person]')]
+          .map((person) => {
+            const number = person.getAttribute('data-spectator-person');
+            const first = person.querySelector(`[data-spectator-field="${number}:first"]`);
+            const last = person.querySelector(`[data-spectator-field="${number}:last"]`);
+            return [
+              first instanceof HTMLInputElement ? first.value.trim() : '',
+              last instanceof HTMLInputElement ? last.value.trim() : '',
+            ].filter(Boolean).join(' ');
+          })
+          .filter(Boolean);
+        const fullName = [
+          String(values.get('first_name') || '').trim(),
+          String(values.get('last_name') || '').trim(),
+        ].filter(Boolean).join(' ');
+        const originalNotes = String(values.get('notes') || '').trim();
+        const spectatorNotes = otherSpectators.length
+          ? `${copy.others}:\n${otherSpectators.map((name, index) => `${index + 2}. ${name}`).join('\n')}`
+          : '';
+        const response = await fetch(`${url}/rest/v1/public_booking_requests`, {
+          method:'POST', headers:{ ...headers, Prefer:'return=minimal' }, credentials:'omit',
+          body:JSON.stringify({
+            appointment_id:appointment.id,
+            full_name:fullName,
+            email:String(values.get('email') || '').trim().toLowerCase(),
+            phone:String(values.get('phone') || '').trim() || null,
+            seats:Number(values.get('seats')),
+            notes:[spectatorNotes, originalNotes].filter(Boolean).join('\n\n') || null,
+          }),
+        });
+        if (!response.ok) throw new Error(copy.failed);
+        formBox.hidden = true;
+        if (success) { success.hidden = false; success.focus(); }
+        window.scrollTo({ top:0, behavior:'smooth' });
+      } catch {
+        if (formError) { formError.textContent = copy.failed; formError.hidden = false; }
+        submit.disabled = false; submit.textContent = copy.send;
+      }
+    });
+    load();
+  }
+  initBookingPage();
+  document.addEventListener('astro:page-load', initBookingPage);
+</script>

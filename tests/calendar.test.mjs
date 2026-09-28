@@ -56,6 +56,16 @@ test('Remote titles and venues cannot inject HTML', () => {
   assert(!html.includes('<script>'));assert(!html.includes('<img src=x'));assert(html.includes('&lt;script&gt;'));
 });
 test('Unexpected show title has a working contact link, never a made-up URL', () => assert.equal(normalizePerformances([row({title:'New show'})])[0].href,'/contatti'));
+test('Open internal bookings link to the website booking page', () => {
+  const item=normalizePerformances([row({source_key:'macbett-test',booking_enabled:true,booking_capacity:80,booking_max_per_request:6})])[0];
+  assert.equal(item.bookingHref,'/prenota/?evento=macbett-test');
+  assert(renderEvents({today,rows:[row({source_key:'macbett-test',booking_enabled:true})]}).includes('Prenota'));
+});
+test('English bookings are localized and external theatre links are respected', () => {
+  assert.equal(normalizePerformances([row({source_key:'macbett-test',booking_enabled:true})],'en')[0].bookingHref,'/en/book/?event=macbett-test');
+  assert.equal(normalizePerformances([row({booking_enabled:true,booking_url:'https://tickets.example.org/show'})])[0].bookingHref,'https://tickets.example.org/show');
+});
+test('Closed bookings do not expose a booking link', () => assert.equal(normalizePerformances([row({booking_enabled:false})])[0].bookingHref,''));
 test('Escape helper handles quotes', () => assert.equal(escapeHTML('<&"\''),'&lt;&amp;&quot;&#39;'));
 test('SSR agenda contains dates and links without JavaScript', () => {
   const html=renderAgenda({today});assert(html.includes('UNIGHT'));assert(html.includes('2026-11-14'));assert(!html.includes('Caricamento'));

@@ -1,6 +1,13 @@
 /* Homepage 2026. Scoped to editorial pages; existing show/lab layouts stay intact. */
 .tt-editorial-shell { --tt-paper:#faf9f6; --tt-panel:#f1efe9; --tt-ink:#20201e; --tt-muted:#595954; --tt-line:#dedbd3; --tt-button:#222220; --tt-button-ink:#fff; }
 [data-theme="dark"] .tt-editorial-shell { --tt-paper:#1c1c1b; --tt-panel:#252524; --tt-ink:#f0efeb; --tt-muted:#bfbbb3; --tt-line:#42423e; --tt-button:#efeee9; --tt-button-ink:#1c1c1b; }
+.tt-editorial-shell .tt-booking-spectators label { color:var(--tt-ink) !important; }
+.tt-editorial-shell .tt-booking-spectators .tt-booking-person { min-width:0; margin:0; padding:0; border:0; }
+.tt-editorial-shell .tt-booking-spectators .tt-booking-person legend { margin:0 0 12px; padding:0; color:var(--tt-ink); font:inherit; font-weight:650; }
+.tt-editorial-shell .tt-booking-spectators .tt-booking-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.tt-editorial-shell .tt-booking-spectators .tt-booking-field { display:grid; gap:8px; }
+.tt-editorial-shell .tt-booking-spectators input { width:100%; box-sizing:border-box; padding:13px 14px; border:1px solid color-mix(in srgb, currentColor 35%, transparent); border-radius:0; background:transparent; color:inherit; font:inherit; }
+@media (max-width:640px) { .tt-editorial-shell .tt-booking-spectators .tt-booking-grid { grid-template-columns:1fr; } }
 body.tt-editorial-shell { max-width:1720px; padding:32px clamp(22px,4vw,70px) 0; color:var(--tt-ink); }
 .tt-editorial-shell .site-main { padding:24px 0 0; }
 .tt-editorial-shell .site-head { margin:0; }

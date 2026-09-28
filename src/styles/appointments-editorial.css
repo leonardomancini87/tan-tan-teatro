@@ -212,6 +212,17 @@
   font-weight: 500;
 }
 
+.tt-appointments-page .tt-event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+
+.tt-appointments-page .tt-event-link--booking {
+  font-weight: 650 !important;
+}
+
 /* The first live event becomes the feature automatically. */
 .tt-appointments-page .tt-events--list > .tt-event:first-child {
   grid-column: 1 / -1;
@@ -250,7 +261,7 @@
   font-size: 21px;
 }
 
-.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link {
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link--booking {
   width: auto;
   min-height: 44px;
   margin-top: 24px;
@@ -261,7 +272,7 @@
   text-decoration: none;
 }
 
-.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link:hover {
+.tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link--booking:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -477,7 +488,7 @@
     font-size: 18px;
   }
 
-  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link {
+  .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link--booking {
     width: 100%;
     margin-top: auto;
     padding: 12px 0 0;
@@ -584,12 +595,18 @@
 
   .tt-appointments-page .tt-events--list .tt-event-link,
   .tt-appointments-page .tt-events--list > .tt-event:first-child .tt-event-link {
-    width: 100%;
+    width: auto;
     min-height: 44px;
     margin-top: 12px;
     padding: 12px 0 0;
     background: transparent;
     color: var(--tt-ink);
+  }
+
+  .tt-appointments-page .tt-event-actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
   }
 }
 

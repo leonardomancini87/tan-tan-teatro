@@ -13,6 +13,9 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
       : event.kind === 'show' ? (locale === 'it' ? 'Dettagli' : 'Details')
       : event.label)
     : event.label;
+  const bookingLink = event.bookingHref
+    ? `<a class="tt-event-link tt-event-link--booking" href="${e(event.bookingHref)}" aria-label="${e(`${event.bookingLabel}: ${compactTitle}`)}">${e(event.bookingLabel)} ${arrow}</a>`
+    : '';
   return `<article class="tt-event tt-event--${e(event.kind)}" data-event-id="${e(event.id)}">
     <div class="tt-event-photo"><img src="${e(event.image)}" alt="" loading="lazy" decoding="async" width="320" height="360" style="--tt-event-position:${e(event.imagePosition)};--tt-event-mobile-position:${e(event.mobileImagePosition ?? event.imagePosition)}" /></div>
     <div class="tt-event-copy">
@@ -22,7 +25,7 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
       ${compact ? '' : `<p class="tt-event-subtitle">${e(event.subtitle)}</p>`}
       <p class="tt-event-venue">${e(event.venue)}</p>
       ${compact ? '' : detail}
-      <a class="tt-event-link" href="${e(event.href)}" aria-label="${e(`${compactLabel}: ${compactTitle}`)}">${e(compactLabel)} ${arrow}</a>
+      <div class="tt-event-actions"><a class="tt-event-link" href="${e(event.href)}" aria-label="${e(`${compactLabel}: ${compactTitle}`)}">${e(compactLabel)} ${arrow}</a>${bookingLink}</div>
     </div>
   </article>`;
 }
