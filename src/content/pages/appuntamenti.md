@@ -18,7 +18,16 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 
 <div class="appointment-row">
 <div class="appointment-date">
-<strong>05-6/08/2026</strong>
+<strong>26/09/2026</strong>
+<span>Settembre</span>
+</div>
+<div class="appointment-content">
+<em>Il Matrimonio</em> (II atto) — UNight 2026 – Notte europea delle ricercatrici e dei ricercatori, Castello del Valentino, Torino
+</div>
+</div>
+<div class="appointment-row">
+<div class="appointment-date">
+<strong>05-06/09/2026</strong>
 <span>Settembre</span>
 </div>
 <div class="appointment-content">
