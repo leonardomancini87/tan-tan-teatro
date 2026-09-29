@@ -1,0 +1,233 @@
+/* Chi siamo — impaginazione editoriale dedicata */
+.bio-page {
+  --bio-max: 1320px;
+  --bio-reading: 760px;
+  width: min(var(--bio-max), calc(100% - 64px));
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 124px) 0 clamp(72px, 9vw, 140px);
+  color: var(--color-base);
+}
+
+.bio-page .bio-kicker {
+  margin: 0 0 clamp(24px, 3vw, 42px);
+  font-family: var(--font-sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.bio-page .bio-title {
+  max-width: 980px;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 5.2vw, 5.5rem);
+  font-weight: var(--font-normal);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.bio-page .bio-lead {
+  max-width: 920px;
+  margin: clamp(28px, 4vw, 52px) 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.65rem, 2.5vw, 2.55rem);
+  line-height: 1.22;
+  letter-spacing: -0.018em;
+}
+
+.bio-page .bio-photo {
+  margin: clamp(46px, 7vw, 96px) 0 0;
+}
+
+.bio-page .bio-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.bio-page .bio-photo--opening {
+  width: min(1040px, 86%);
+  margin-left: auto;
+  aspect-ratio: 2.35 / 1;
+  overflow: hidden;
+}
+
+.bio-page .bio-photo--opening img {
+  object-position: center bottom;
+}
+
+.bio-page .bio-copy {
+  width: min(var(--bio-reading), 68%);
+  margin: clamp(56px, 8vw, 112px) 0 0 clamp(40px, 8vw, 132px);
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2vw, 1.95rem);
+  line-height: 1.56;
+}
+
+.bio-page .bio-copy p {
+  margin: 0;
+}
+
+.bio-page .bio-copy p + p {
+  margin-top: 1.4em;
+}
+
+.bio-page .bio-copy em {
+  font-style: italic;
+}
+
+.bio-page .bio-photo--scene {
+  width: min(760px, 62%);
+  margin-left: auto;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.bio-page .bio-photo--scene img {
+  object-position: center center;
+}
+
+.bio-page .bio-members {
+  width: min(980px, 82%);
+  margin: clamp(68px, 9vw, 126px) 0 0;
+  padding-top: clamp(24px, 3vw, 38px);
+  border-top: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+}
+
+.bio-page .bio-members h2 {
+  margin: 0 0 clamp(26px, 3.5vw, 44px);
+  color: inherit;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: var(--font-normal);
+  line-height: 1.1;
+}
+
+.bio-page .bio-members-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
+  gap: clamp(32px, 6vw, 86px);
+}
+
+.bio-page .bio-member-line {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.12rem, 1.45vw, 1.42rem);
+  line-height: 1.55;
+}
+
+.bio-page .bio-member-line + .bio-member-line {
+  margin-top: 0.8em;
+}
+
+.bio-page .bio-member-line strong {
+  font-weight: 600;
+}
+
+[data-theme='dark'] .bio-page {
+  color: var(--color-text);
+}
+
+[data-theme='dark'] .bio-page .bio-members {
+  border-top-color: rgba(255, 255, 255, 0.28);
+}
+
+@media (max-width: 900px) {
+  .bio-page {
+    width: min(100% - 40px, var(--bio-max));
+    padding-top: 52px;
+  }
+
+  .bio-page .bio-title {
+    font-size: clamp(3rem, 11vw, 5rem);
+  }
+
+  .bio-page .bio-lead {
+    max-width: 760px;
+    font-size: clamp(1.65rem, 5vw, 2.35rem);
+  }
+
+  .bio-page .bio-photo--opening,
+  .bio-page .bio-photo--scene,
+  .bio-page .bio-copy,
+  .bio-page .bio-members {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .bio-page .bio-photo--opening {
+    aspect-ratio: 2 / 1;
+  }
+
+  .bio-page .bio-copy {
+    max-width: 720px;
+  }
+
+  .bio-page .bio-photo--scene {
+    width: min(100%, 680px);
+    margin-left: auto;
+  }
+
+  .bio-page .bio-members-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+@media (max-width: 560px) {
+  .bio-page {
+    width: calc(100% - 32px);
+    padding-top: 36px;
+    padding-bottom: 72px;
+  }
+
+  .bio-page .bio-kicker {
+    margin-bottom: 20px;
+    font-size: 0.7rem;
+  }
+
+  .bio-page .bio-title {
+    font-size: clamp(2.8rem, 14vw, 4.2rem);
+    line-height: 0.98;
+  }
+
+  .bio-page .bio-lead {
+    margin-top: 24px;
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    line-height: 1.28;
+  }
+
+  .bio-page .bio-photo {
+    margin-top: 40px;
+  }
+
+  .bio-page .bio-photo--opening {
+    aspect-ratio: 1.85 / 1;
+  }
+
+  .bio-page .bio-photo--opening img {
+    object-position: center bottom;
+  }
+
+  .bio-page .bio-copy {
+    margin-top: 46px;
+    font-size: 1.32rem;
+    line-height: 1.52;
+  }
+
+  .bio-page .bio-photo--scene {
+    aspect-ratio: 4 / 3;
+  }
+
+  .bio-page .bio-members {
+    margin-top: 56px;
+  }
+
+  .bio-page .bio-member-line {
+    font-size: 1.08rem;
+  }
+}

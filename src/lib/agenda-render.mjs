@@ -41,7 +41,7 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
   return `<article class="tt-event tt-event--${e(event.kind)}" data-event-id="${e(event.id)}">
     <div class="tt-event-photo"><img src="${e(event.image)}" alt="" loading="lazy" decoding="async" width="320" height="360" style="--tt-event-position:${e(event.imagePosition)};--tt-event-mobile-position:${e(event.mobileImagePosition ?? event.imagePosition)}" /></div>
     <div class="tt-event-copy">
-      <p class="tt-event-date-compact">${e(editorialDate)}</p>
+      ${compact ? '' : `<p class="tt-event-date-compact">${e(editorialDate)}</p>`}
       <div class="tt-event-dateline"><time class="tt-date" datetime="${e(event.start)}" aria-label="${e(d.long)}"><strong>${e(d.day)}</strong><span>${e(d.month)}<small>${e(d.year)}</small></span></time>${!compact && d.until ? `<span class="tt-date-until">${e(d.until)}</span>` : ''}${!compact && ongoing ? `<span class="tt-ongoing">${e(t.ongoing)}</span>` : ''}</div>
       <p class="tt-event-kind">${e(t.kind[event.kind] ?? t.kind.other)}</p>
       <h3><a href="${e(event.href)}" class="tt-event-title-link">${e(compactTitle)}</a></h3>

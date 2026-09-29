@@ -21,7 +21,7 @@ export const HOME_COPY = {
       { title: 'Ricerca e progetti speciali', text: 'Seminari, eventi e progetti di ricerca, dalla pratica alla teoria.', label: 'Leggi di più', key: 'research' },
     ],
     aboutLabel: 'Chi siamo', aboutTitle: 'Gruppo di teatro universitario.',
-    aboutText: 'Tan Tan Teatro riunisce studentesse e studenti universitari a Torino. Il lavoro d\u2019insieme, la formazione e la creazione scenica sono al centro del nostro percorso: un\u2019esperienza laboratoriale che prende forma negli spettacoli e nella condivisione della pratica teatrale.',
+    aboutText: "Tan Tan Teatro riunisce studentesse e studenti universitari a Torino. Il lavoro d’insieme, la formazione e la creazione scenica sono al centro del nostro percorso: un’esperienza laboratoriale che prende forma negli spettacoli e nella condivisione della pratica teatrale.",
     aboutLink: 'Scopri Tan Tan Teatro',
     aboutAlt: 'Il gruppo Tan Tan Teatro durante le prove de Il matrimonio',
     accessLabel: 'Accessibilit\u00e0', accessTitle: 'Per un teatro pi\u00f9 accessibile.',

@@ -2,11 +2,11 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Home from "../templates/Home.astro";
 import Page from "../templates/Page.astro";
-import Bio from "../templates/Bio.astro";
 import Contact from "../templates/Contact.astro";
 import List from "../templates/List.astro";
 import Accessibility from "../templates/Accessibility.astro";
 import Appointments from "../templates/Appointments.astro";
+
 export async function getStaticPaths() {
   const pages = (await getCollection("pages")).filter((entry) => {
     // Explicit routes own these two paths; do not generate duplicates.
@@ -15,6 +15,7 @@ export async function getStaticPaths() {
     const isAccessibility = entry.data.templateKey === 'accessibility-page';
     return !isAccessibility && !(isItalian && ['index', 'laboratorio'].includes(entry.slug));
   });
+
   const newsEntries = await getCollection("news");
   const workEntries = await getCollection("work");
   const soldEntries = await getCollection("sold");
@@ -23,6 +24,7 @@ export async function getStaticPaths() {
 
   const sortDate = (a: SortableEntry, b: SortableEntry) =>
     new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
+
   const sortedNews = [...newsEntries].sort(sortDate);
   const sortedWork = [...workEntries].sort(sortDate);
   const sortedSold = [...soldEntries].sort(sortDate);
@@ -32,6 +34,7 @@ export async function getStaticPaths() {
 
     let items: SortableEntry[] = [];
     let baseSlug = "";
+
     if (entry.data.templateKey === "news-page") {
       items = sortedNews.filter((item) => (item.data.locale ?? "it") === locale);
       baseSlug = locale === "en" ? "en/news" : "appuntamenti";
@@ -42,6 +45,7 @@ export async function getStaticPaths() {
       items = sortedSold.filter((item) => (item.data.locale ?? "it") === locale);
       baseSlug = locale === "en" ? "sold/en" : "sold";
     }
+
     let slugParam: string | undefined;
 
     const isItalianHome = entry.slug === "index" && locale === "it";
@@ -52,6 +56,7 @@ export async function getStaticPaths() {
 
     const isItalianNews = entry.slug === "appuntamenti" && locale === "it";
     const isEnglishNews = entry.slug === "news-en" && locale === "en";
+
     if (isItalianHome) {
       slugParam = undefined;
     } else if (isEnglishHome) {
@@ -61,12 +66,12 @@ export async function getStaticPaths() {
     } else if (isEnglishNews) {
       slugParam = "en/news";
     } else {
-      slugParam = locale === "en"
-        ? entry.slug.startsWith("en/")
-          ? entry.slug
-          : `en/${entry.slug}`
-        : entry.slug;
-    }
+  slugParam = locale === "en"
+    ? entry.slug.startsWith("en/")
+      ? entry.slug
+      : `en/${entry.slug}`
+    : entry.slug;
+}
 
     return {
       params: { slug: slugParam },
@@ -76,16 +81,16 @@ export async function getStaticPaths() {
 
   return paths;
 }
+
 const { entry, items, baseSlug } = Astro.props;
 const templateKey = entry.data.templateKey;
 ---
+
 {
   (entry.slug === "appuntamenti" || entry.slug === "news-en") ? (
     <Appointments entry={entry} />
   ) : templateKey === "index-page" ? (
     <Home entry={entry} />
-  ) : templateKey === "bio-page" ? (
-    <Bio entry={entry} />
   ) : templateKey === "contact-page" ? (
     <Contact entry={entry} />
   ) : templateKey === "news-page" ||

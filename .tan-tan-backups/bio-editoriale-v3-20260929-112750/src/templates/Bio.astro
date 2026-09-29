@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { type CollectionEntry } from 'astro:content';
+import '../styles/components/bio.css';
+
+interface Props {
+  entry: CollectionEntry<'pages'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, description } = entry.data;
+const currentLocale = entry.data.locale ?? 'it';
+---
+
+<Layout title={title} description={description} locale={currentLocale}>
+  <article class="bio-page">
+    <Content />
+  </article>
+</Layout>

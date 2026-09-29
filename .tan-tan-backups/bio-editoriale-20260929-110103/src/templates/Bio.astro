@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'pages'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const { title, description, thumbnail } = entry.data;
+const currentLocale = entry.data.locale ?? 'it';
+import "../styles/bio-editorial.css";
+---
+
+<Layout title={title} description={description} locale={currentLocale}>
+<main class="tt-bio-page">
+  <div class="tt-bio-shell">
+    <header class="tt-bio-hero">
+      <div class="tt-bio-hero-copy">
+        <p class="tt-bio-kicker">Tan Tan Teatro · Chi siamo</p>
+        <h1>Chi siamo</h1>
+        <p class="tt-bio-deck">Gruppo di teatro universitario nato a Torino nel 2023.</p>
+      </div>
+      <figure class="tt-bio-hero-media">
+        <img src="/img/bio-hero.jpg" alt="Tan Tan Teatro in scena" width="2048" height="996" loading="eager" decoding="async" />
+      </figure>
+    </header>
+
+    <nav class="tt-bio-index" aria-label="Sezioni della pagina Chi siamo">
+      <a href="#il-gruppo">Il gruppo</a>
+      <a href="#il-percorso">Il percorso</a>
+      <a href="#membri">Membri della compagnia</a>
+    </nav>
+
+    <section class="tt-bio-section" id="il-gruppo" aria-labelledby="tt-bio-group-title">
+      <div class="tt-bio-section-head">
+        <p class="tt-bio-section-label">Il gruppo</p>
+        <h2 id="tt-bio-group-title">Teatro come spazio di incontro, ricerca e creazione.</h2>
+      </div>
+
+      <div class="tt-bio-story-grid">
+        <div class="tt-bio-copy">
+          <p class="tt-bio-lead">Tan Tan Teatro è un gruppo di teatro universitario nato a Torino nel maggio 2023 come esperienza di incontro, ricerca e sviluppo condiviso di progetti artistici. Fondato e diretto da Leonardo Mancini, il gruppo riunisce studenti e giovani interessati alla pratica teatrale e concepisce il teatro anzitutto come uno spazio di formazione, confronto e creazione collettiva, nel quale il lavoro scenico possa intrecciarsi con la ricerca, lo studio dei testi e la sperimentazione.</p>
+          <p>A partire dal settembre 2024 Tan Tan Teatro ha avviato il proprio percorso di produzione teatrale con <em>Macbett</em> di Eugène Ionesco (1972), presentato per la prima volta a Lione nell’ambito del Festival internazionale di teatro universitario “Meraki” e successivamente portato in scena in Italia a Torino, Cuneo e Bergamo. A questa prima esperienza ha fatto seguito il lavoro su <em>Il matrimonio</em> di Witold Gombrowicz (1948), attraverso il quale il gruppo ha proseguito la propria ricerca intorno al rapporto tra testo drammaturgico, lavoro dell’attore, uso dello spazio scenico e costruzione dello spettacolo.</p>
+        </div>
+
+        <figure class="tt-bio-story-photo">
+          <img src="/img/bio-detail.jpg" alt="Interpreti di Tan Tan Teatro durante uno spettacolo" width="2048" height="1174" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+
+      <div class="tt-bio-copy-row">
+        <p class="tt-bio-section-label">Pratica e ricerca</p>
+        <div class="tt-bio-copy">
+          <p>L’attività di Tan Tan Teatro mantiene una forte impronta laboratoriale: il processo creativo non è concepito soltanto in funzione della realizzazione di uno spettacolo, ma come occasione di ricerca e di crescita condivisa, nella quale particolare attenzione viene dedicata al lavoro sul corpo e sulla voce, all’analisi drammaturgica, alla relazione tra gli interpreti e al rapporto con il pubblico.</p>
+          <p>Parallelamente alla creazione di spettacoli, Tan Tan Teatro promuove regolarmente attività laboratoriali, formative e di avvicinamento alla pratica teatrale. Dopo una prima fase di attività presso alcune Case di quartiere e centri di comunità della città di Torino, tra cui i Bagni Pubblici di via Agliè e Beeozanam, dal 2025 il gruppo ha concentrato una parte significativa delle proprie attività presso StudiumLab, laboratorio multidisciplinare situato a Palazzo Nuovo e afferente al Dipartimento di Studi Umanistici dell’Università degli Studi di Torino.</p>
+          <p>In questo contesto Tan Tan Teatro porta avanti un percorso che unisce produzione artistica, formazione e ricerca, mantenendo un legame costante con l’ambiente universitario e aprendosi al tempo stesso al confronto con realtà teatrali, culturali e formative esterne all’Università.</p>
+        </div>
+      </div>
+
+      <figure class="tt-bio-panorama">
+        <img src="/img/bio-wide.jpg" alt="La compagnia Tan Tan Teatro in scena" width="2048" height="1038" loading="lazy" decoding="async" />
+      </figure>
+    </section>
+
+    <section class="tt-bio-section tt-bio-path" id="il-percorso" aria-labelledby="tt-bio-path-title">
+      <div class="tt-bio-section-head">
+        <p class="tt-bio-section-label">Il percorso</p>
+        <h2 id="tt-bio-path-title">Dal laboratorio alla scena.</h2>
+      </div>
+      <div class="tt-bio-path-grid">
+        <article class="tt-bio-path-item"><span class="tt-bio-year">2023</span><p>Nasce Tan Tan Teatro a Torino come spazio universitario di incontro, pratica e creazione condivisa.</p></article>
+        <article class="tt-bio-path-item"><span class="tt-bio-year">2024–2025</span><p>Il lavoro su <em>Macbett</em>, il debutto al Festival Meraki di Lione e le successive rappresentazioni in Italia.</p></article>
+        <article class="tt-bio-path-item"><span class="tt-bio-year">Dal 2025</span><p>StudiumLab, i percorsi laboratoriali e la ricerca scenica sviluppata con <em>Il matrimonio</em>.</p></article>
+      </div>
+    </section>
+
+    <section class="tt-bio-members" id="membri" aria-labelledby="tt-bio-members-title">
+      <div class="tt-bio-members-layout">
+        <div>
+          <p class="tt-bio-section-label">La compagnia</p>
+          <h2 id="tt-bio-members-title">Membri della compagnia</h2>
+        </div>
+        <div class="tt-bio-members-list">
+          <div class="tt-bio-member-row"><span class="tt-bio-role">Attori</span><p>Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.</p></div>
+          <div class="tt-bio-member-row"><span class="tt-bio-role">Musiche</span><p>Andrea D’Oria</p></div>
+          <div class="tt-bio-member-row"><span class="tt-bio-role">Danza e coreografie</span><p>Francesca Tomalino</p></div>
+          <div class="tt-bio-member-row"><span class="tt-bio-role">Luci</span><p>Marco Usmigli</p></div>
+          <div class="tt-bio-member-row"><span class="tt-bio-role">Fotografie</span><p>Alessio Dell’Anna</p></div>
+          <div class="tt-bio-member-row"><span class="tt-bio-role">Direzione</span><p>Leonardo Mancini</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+</Layout>

@@ -3,7 +3,7 @@ templateKey: bio-page
 thumbnail: /img/tantanteatro.jpeg
 date: 2023-03-02T10:17:05.133Z
 title: About
-description: Tan Tan Teatro – University theatre company based in Turin, Italy
+description: Tan Tan Teatro – University theatre group based in Turin, Italy
 number: 1
 pagetype:
   - page
@@ -13,18 +13,44 @@ slug: "about"
 translationKey: "about-page"
 ---
 
-## Tan Tan Teatro
+<p class="bio-kicker">About</p>
 
-Tan Tan Teatro is a university theater group, founded and directed in Turin in May 2023 by Leonardo Mancini, as a meeting place and the development of artistic projects. Since September 2024, the group has been working on a production: <i>Macbett</i> by Eugène Ionesco (1972), which premiered in Lyon at the "Meraki" University Theater Festival and subsequently performed in Italy in Turin, Cuneo, and Bergamo. Currently, the group, which focuses on workshops and shared experiences, is working on a production of Witold Gombrowicz's <i>The Marriage</i> (1948), scheduled for premiere in May 2026.
-In addition to creating performances, Tan Tan Teatro regularly promotes and offers workshops and theater training programs. After a period of activity at some Neighborhood Houses and community centers in the city of Turin (Public Baths on Via Agliè, Beeozanam), the group has concentrated its activities since 2025 at the multidisciplinary laboratory StudiumLab in Palazzo Nuovo (Department of Humanistic Studies, University of Turin).
+<h1 class="bio-title">Tan Tan Teatro</h1>
 
-![Studio shelves](/img/macbett03.jpg)
+<p class="bio-lead">Tan Tan Teatro is a university theatre group founded in Turin in May 2023 as a space for meeting, research and the shared development of artistic projects.</p>
 
-### Members
+<figure class="bio-photo bio-photo--opening">
+  <img src="/img/tantanteatro.jpeg" alt="Tan Tan Teatro" loading="eager" />
+</figure>
 
-<b>Actors</b>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli<br/>
-<b>Music</b>: Andrea D'Oria<br/>
-<b>Dance and choreographies</b>: Francesca Tomalino<br/>
-<b>Lights</b>: Marco Usmigli<br/>
-<b>Photographs</b>: Alessio Dell'Anna<br/>
-<b>Direction</b>: Leonardo Mancini
+<div class="bio-story">
+<div class="bio-copy">
+  <p>The group brings together university students interested in theatre practice and sees theatre first and foremost as a space for training, exchange and collective creation, where stage work can intersect with research, the study of dramatic texts and experimentation.</p>
+
+  <p>In September 2024, Tan Tan Teatro began its production work with <em>Macbett</em> by Eugène Ionesco (1972), first presented in Lyon as part of the “Meraki” University Theatre Festival and subsequently performed in Italy in Turin, Cuneo and Bergamo. This first experience was followed by work on <em>The Marriage</em> by Witold Gombrowicz (1948), through which the group continued to explore the relationship between dramatic text, the actor’s work, stage space and the collective creation of a performance.</p>
+
+  <p>Alongside the creation of performances, Tan Tan Teatro develops and offers theatre workshops and training activities. After a period of activity at the Bagni Pubblici di Via Agliè and Beeozanam, since 2025 the group has carried out most of its activities at StudiumLab, Palazzo Nuovo, University of Turin.</p>
+
+  <p>Tan Tan Teatro’s work also develops through opportunities for exchange, training and collaboration with theatre, cultural and educational organisations outside the University.</p>
+</div>
+
+<figure class="bio-photo bio-photo--scene">
+  <img src="/img/macbett03.jpg" alt="A scene from Macbett by Tan Tan Teatro" loading="lazy" />
+</figure>
+</div>
+
+<section class="bio-members" aria-labelledby="bio-members-title">
+  <h2 id="bio-members-title">The group</h2>
+  <div class="bio-members-grid">
+    <div>
+      <p class="bio-member-line"><strong>Performers</strong>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.</p>
+    </div>
+    <div>
+      <p class="bio-member-line"><strong>Music</strong>: Andrea D'Oria</p>
+      <p class="bio-member-line"><strong>Dance and choreography</strong>: Francesca Tomalino</p>
+      <p class="bio-member-line"><strong>Lighting</strong>: Marco Usmigli</p>
+      <p class="bio-member-line"><strong>Photography</strong>: Alessio Dell'Anna</p>
+      <p class="bio-member-line"><strong>Direction</strong>: Leonardo Mancini</p>
+    </div>
+  </div>
+</section>

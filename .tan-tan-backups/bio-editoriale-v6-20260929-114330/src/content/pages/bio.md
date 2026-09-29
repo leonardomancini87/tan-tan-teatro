@@ -43,7 +43,7 @@ translationKey: "about-page"
   <h2 id="bio-members-title">Il gruppo</h2>
   <div class="bio-members-grid">
     <div>
-      <p class="bio-member-line"><strong>Interpreti</strong>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.</p>
+      <p class="bio-member-line"><strong>Attori</strong>: Gabriela Checchia, Pablo Comune, Siyuan Chen, Viola Cicoria, Eleonora Congiu, Olivia Del Sante, Arturo Gerace, Stefano Martelli, Anita Masi, Giovanni Pessina, Camilla Rizzo, Aurora Matilde Viola Sempio, Francesca Tomalino, Giulia Tonello, Gabriele Vaschetti, Giorgio Zaccarelli.</p>
     </div>
     <div>
       <p class="bio-member-line"><strong>Musiche</strong>: Andrea D'Oria</p>

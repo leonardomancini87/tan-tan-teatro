@@ -169,3 +169,8 @@
     font-size: 14px;
   }
 }
+
+/* Homepage: lower laboratory CTA */
+.tt-home .tt-agenda-band .tt-events--cards .tt-event--lab .tt-event-actions {
+  margin-top: 20px;
+}
