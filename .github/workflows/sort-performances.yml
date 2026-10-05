@@ -1,0 +1,47 @@
+name: Ordina rappresentazioni
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/content/work/*.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sort-performances-main
+  cancel-in-progress: false
+
+jobs:
+  sort:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Ordina le rappresentazioni
+        run: python3 scripts/sort-performances.py
+
+      - name: Salva il nuovo ordine
+        shell: bash
+        run: |
+          if git diff --quiet -- src/content/work; then
+            echo "Ordine già corretto."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add src/content/work
+          git commit -m "Normalize performance order"
+          git pull --rebase origin main
+          git push origin main
