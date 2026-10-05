@@ -6,7 +6,7 @@ pagetype:
   - main
 number: 2
 title: Macbett
-description: Eugène Ionesco, 1973
+description: Eugène Ionesco, 1972
 folder: macbett
 locale: it
 translationKey: macbett-page
