@@ -67,6 +67,11 @@ const relatedAlbumCover =
 
 const matrimonioCmsEntry = await getEntry('work', 'matrimonio');
 const cmsDuration = matrimonioCmsEntry?.data.duration ?? '75 minuti';
+const cmsTitle = matrimonioCmsEntry?.data.title ?? 'Il matrimonio';
+const cmsOriginalTitle = matrimonioCmsEntry?.data.originalTitle ?? 'Ślub';
+const cmsYear = matrimonioCmsEntry?.data.year ?? '1948';
+const cmsAuthor = matrimonioCmsEntry?.data.author ?? '{cmsAuthor}';
+
 
 ---
 
@@ -80,8 +85,8 @@ const cmsDuration = matrimonioCmsEntry?.data.duration ?? '75 minuti';
 
     <section class="show-hero">
       <div class="show-hero-copy">
-        <h1>Il matrimonio</h1>
-        <p class="show-original">(<em>Ślub</em>), 1948</p>
+        <h1>{cmsTitle}</h1>
+        <p class="show-original"><em>{cmsOriginalTitle}</em>, {cmsYear}</p>
         <p class="show-author">Witold Gombrowicz</p>
       </div>
 

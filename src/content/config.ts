@@ -26,6 +26,10 @@ const commonSchema = z.object({
 
 const workSchema = commonSchema.extend({
   cmsStructured: z.boolean().optional(),
+  originalTitle: z.string().optional(),
+  year: z.coerce.string().optional(),
+  author: z.string().optional(),
+
   synopsis: z.string().optional(),
 
   credits: z.array(z.object({

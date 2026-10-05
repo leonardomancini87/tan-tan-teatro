@@ -178,6 +178,18 @@ content:
         label: "Autore / opera / anno"
         type: string
         required: true
+
+      - name: originalTitle
+        label: Titolo originale
+        type: string
+
+      - name: year
+        label: Anno
+        type: string
+
+      - name: author
+        label: Autore
+        type: string
       - name: thumbnail
         label: Immagine
         type: image

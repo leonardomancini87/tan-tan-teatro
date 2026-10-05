@@ -7,6 +7,9 @@ number: 1
 date: 2023-01-03T15:04:10.000Z
 title: Il matrimonio
 description: Witold Gombrowicz, 1948
+author: "Witold Gombrowicz"
+year: "1948"
+originalTitle: "Ślub"
 folder: matrimonio
 locale: it
 translationKey: the-marriage-page
