@@ -61,6 +61,9 @@ performances:
   - date: 28/02/2026
     name: Teatro Giacosa
     details: "Ivrea (anteprima: 20 minuti)"
+  - date: 26/09/2026
+    name: "UNight 2026 – Notte europea delle ricercatrici e dei ricercatori "
+    details: Castello del Valentino, Salone d'onore
 press:
   - author: Hugo Genève
     title: Il matrimonio
