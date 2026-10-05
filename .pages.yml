@@ -1,0 +1,49 @@
+media:
+  - name: images
+    label: Immagini
+    input: public/img
+    output: /img
+    categories: [image]
+    rename: false
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      update: "Aggiorna {path} da Pages CMS"
+
+content:
+  - name: macbett
+    label: "Spettacoli — Macbett"
+    type: file
+    path: src/content/work/macbett.md
+    format: yaml-frontmatter
+
+    operations:
+      delete: false
+      rename: false
+
+    fields:
+      - name: title
+        label: Titolo
+        type: string
+        required: true
+
+      - name: description
+        label: "Autore / opera / anno"
+        type: string
+
+      - name: thumbnail
+        label: Immagine principale
+        type: image
+        options:
+          media: images
+
+      - name: body
+        label: "Contenuto della pagina — protetto durante il test"
+        type: code
+        readonly: true
+        options:
+          format: markdown
