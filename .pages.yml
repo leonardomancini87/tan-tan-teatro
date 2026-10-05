@@ -339,3 +339,68 @@ content:
         readonly: true
         options:
           format: markdown
+
+  - name: bio
+    label: "Pagine — Chi siamo"
+    type: file
+    path: src/content/pages/bio.md
+    format: yaml-frontmatter
+    fields:
+      - name: templateKey
+        label: Template
+        type: string
+        hidden: true
+
+      - name: thumbnail
+        label: Immagine principale
+        type: image
+        description: "Immagine principale della pagina."
+
+      - name: date
+        label: Data tecnica
+        type: string
+        hidden: true
+
+      - name: title
+        label: Titolo
+        type: string
+        required: true
+
+      - name: description
+        label: Descrizione
+        type: string
+
+      - name: number
+        label: Ordinamento
+        type: number
+        hidden: true
+
+      - name: pagetype
+        label: Tipo pagina
+        type: string
+        list: true
+        hidden: true
+
+      - name: featuredimage
+        label: Immagine in evidenza
+        type: image
+        description: "Immagine in evidenza della pagina Chi siamo."
+
+      - name: locale
+        label: Lingua
+        type: string
+        hidden: true
+
+      - name: translationKey
+        label: Chiave traduzione
+        type: string
+        hidden: true
+
+      - name: body
+        label: Contenuto della pagina
+        type: rich-text
+        required: true
+        description: "Testo completo della pagina, compresa la sezione Membri della compagnia."
+        options:
+          format: markdown
+          switcher: true
