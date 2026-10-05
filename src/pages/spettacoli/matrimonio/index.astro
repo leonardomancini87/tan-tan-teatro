@@ -24,6 +24,45 @@ const bandImage =
 const finalGallery = galleryImages
   .filter((_, index) => index !== 2)
   .slice(0, 3);
+
+// MATRIMONIO_RELATED_ALBUMS_START
+const relatedAlbumSlug = 'matrimonio/studiumlab-prove-2026-05-22';
+const relatedAlbumDir = path.join(process.cwd(), 'public', 'img', relatedAlbumSlug);
+
+const relatedAlbumCaptions: Record<string, string> = {
+  'ambasciatore.jpg': 'Stefano Martelli, Eleonora Congiu, Aurora Sempio, Arturo Gerace, Viola Cicoria, Anita Masi, Giulia Tonello, Francesca Tomalino, Camilla Rizzo, Pablo Comune, Siyuan Chen, Giorgio Zaccarelli, Gabriela Checcia. Fotografia: Alessio Dell’Anna',
+  'aurora-sempio.jpg': 'Aurora Sempio. Fotografia: Alessio Dell’Anna',
+  'cortei.jpg': 'Davanti: Camilla Rizzo, Francesca Tomalino, Anita Masi. Fotografia: Alessio Dell’Anna',
+  'genitori.jpg': 'Gabriela Checchia, Pablo Comune. Fotografia: Alessio Dell’Anna',
+  'giannetto.jpg': 'Eleonora Congiu. Fotografia: Alessio Dell’Anna',
+  'lucista.jpg': 'Marco Usmigli. Fotografia: Alessio Dell’Anna',
+  'regista.jpg': 'Leonardo Mancini. Fotografia: Alessio Dell’Anna',
+  'ripasso.jpg': 'Fotografia: Alessio Dell’Anna',
+  'studio-testo.jpg': 'Olivia Del Sante. Fotografia: Alessio Dell’Anna',
+  'testo-ubriaco.jpg': 'Fotografia: Alessio Dell’Anna',
+  'tradimento.jpg': 'Siyuan Chen, Francesca Tomalino, Gabriele Vaschetti, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+  'ubriaco.jpg': 'Stefano Martelli. Fotografia: Alessio Dell’Anna',
+  'vescovo.jpg': 'Francesca Tomalino, Giulia Tonello, Camilla Rizzo, Gabriela Checchia, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+};
+
+const relatedAlbumImages = fs.existsSync(relatedAlbumDir)
+  ? fs
+      .readdirSync(relatedAlbumDir)
+      .filter((file) => /\.(jpe?g|png|webp|avif)$/i.test(file))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+      .map((file) => ({
+        src: `/img/${relatedAlbumSlug}/${file}`,
+        alt:
+          relatedAlbumCaptions[file] ||
+          file.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim(),
+      }))
+  : [];
+
+const relatedAlbumCover =
+  relatedAlbumImages.find((image) => image.src.endsWith('/ripasso.jpg')) ||
+  relatedAlbumImages[0];
+// MATRIMONIO_RELATED_ALBUMS_END
+
 ---
 
 <Layout
@@ -258,12 +297,219 @@ const finalGallery = galleryImages
   />
 </section>
 
+
+{relatedAlbumCover && (
+  <section class="show-related-albums" aria-labelledby="related-photo-albums-title">
+    <div class="show-related-albums__head">
+      <p class="show-related-albums__eyebrow">Archivio fotografico</p>
+      <h2 id="related-photo-albums-title">Altri album fotografici</h2>
+    </div>
+
+    <div class="show-related-albums__list">
+      <a
+        class="show-related-album"
+        href={relatedAlbumCover.src}
+        data-fancybox="matrimonio-studiumlab-prove-2026-05-22"
+        data-caption={relatedAlbumCover.alt}
+      >
+        <div class="show-related-album__image">
+          <img
+            src={relatedAlbumCover.src}
+            alt="Il matrimonio — prove StudiumLab, 22 maggio 2026"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="show-related-album__copy">
+          <p class="show-related-album__meta">Torino · 22 maggio 2026</p>
+          <h3>StudiumLab — prove</h3>
+          <span class="show-related-album__action">Apri album →</span>
+        </div>
+      </a>
+
+      {relatedAlbumImages
+        .filter((image) => image.src !== relatedAlbumCover.src)
+        .map((image) => (
+          <a
+            href={image.src}
+            data-fancybox="matrimonio-studiumlab-prove-2026-05-22"
+            data-caption={image.alt}
+            class="show-related-album__hidden"
+            tabindex="-1"
+            aria-hidden="true"
+          ></a>
+        ))}
+    </div>
+  </section>
+)}
+
+<script>
+  import { Fancybox } from '@fancyapps/ui';
+
+  function initMarriageRelatedAlbums() {
+    document.querySelectorAll('.show-related-albums__list').forEach((root) => {
+      Fancybox.unbind(root);
+
+      Fancybox.bind(root, 'a[data-fancybox]', {
+        Hash: false,
+        Thumbs: {
+          autoStart: true,
+        },
+        Toolbar: {
+          display: {
+            left: ['infobar'],
+            middle: [],
+            right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
+          },
+        },
+      });
+    });
+  }
+
+  initMarriageRelatedAlbums();
+  document.addEventListener('astro:page-load', initMarriageRelatedAlbums);
+</script>
+
 <div class="show-page show-after-gallery">
 <nav class="show-next" aria-label="Navigazione spettacoli">
       <a href="/spettacoli">← Spettacoli</a>
       <a href="/spettacoli/macbett">Macbett →</a>
     </nav>
 </div>
+
+<style>
+  .show-related-albums {
+    width: min(1320px, calc(100vw - 64px));
+    margin: clamp(3.5rem, 7vw, 7rem) auto clamp(4rem, 7vw, 7rem);
+  }
+
+  .show-related-albums__head {
+    display: grid;
+    grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+    padding-bottom: clamp(1.2rem, 2vw, 1.8rem);
+    border-bottom: 1px solid rgba(18, 18, 18, .18);
+  }
+
+  .show-related-albums__eyebrow {
+    margin: 0;
+    font-size: .76rem;
+    line-height: 1.3;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .58;
+  }
+
+  .show-related-albums__head h2 {
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 4.2rem);
+    line-height: .98;
+    letter-spacing: -.025em;
+    font-weight: 400;
+  }
+
+  .show-related-albums__list {
+    margin-top: clamp(1.5rem, 3vw, 2.8rem);
+  }
+
+  .show-related-album {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
+    min-height: clamp(340px, 38vw, 540px);
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(18, 18, 18, .18);
+  }
+
+  .show-related-album__image {
+    min-width: 0;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .show-related-album__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: clamp(340px, 38vw, 540px);
+    object-fit: cover;
+    transition: transform .6s ease;
+  }
+
+  .show-related-album:hover .show-related-album__image img {
+    transform: scale(1.015);
+  }
+
+  .show-related-album__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.6rem, 3.2vw, 3.2rem);
+    border-top: 1px solid rgba(18, 18, 18, .18);
+  }
+
+  .show-related-album__meta {
+    margin: 0 0 .9rem;
+    font-size: .78rem;
+    line-height: 1.3;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .58;
+  }
+
+  .show-related-album__copy h3 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    font-weight: 400;
+  }
+
+  .show-related-album__action {
+    margin-top: clamp(2rem, 5vw, 5rem);
+    font-size: .88rem;
+    letter-spacing: .04em;
+  }
+
+  .show-related-album__hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 800px) {
+    .show-related-albums {
+      width: calc(100vw - 32px);
+      margin-top: 4rem;
+    }
+
+    .show-related-albums__head,
+    .show-related-album {
+      grid-template-columns: 1fr;
+    }
+
+    .show-related-albums__head {
+      gap: .7rem;
+    }
+
+    .show-related-album {
+      min-height: 0;
+    }
+
+    .show-related-album__image img {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .show-related-album__copy {
+      min-height: 230px;
+    }
+
+    .show-related-album__action {
+      margin-top: 3rem;
+    }
+  }
+</style>
+
 </Layout>
 
 <style is:global>
