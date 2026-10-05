@@ -64,6 +64,17 @@ const workSchema = commonSchema.extend({
     url: z.string(),
   })).optional(),
 
+  photoAlbums: z.array(z.object({
+    title: z.string(),
+    meta: z.string().optional(),
+    folder: z.string().optional(),
+    cover: z.string().optional(),
+    images: z.array(z.object({
+      src: z.string(),
+      caption: z.string().optional(),
+    })).optional(),
+  })).optional(),
+
   accessibility: z.string().optional(),
 });
 

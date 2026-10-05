@@ -160,3 +160,170 @@ content:
         readonly: true
         options:
           format: markdown
+
+  - name: matrimonio
+    label: "Spettacoli — Il matrimonio"
+    type: file
+    path: src/content/work/matrimonio.md
+    format: yaml-frontmatter
+    operations:
+      delete: false
+      rename: false
+    fields:
+      - name: title
+        label: Titolo
+        type: string
+        required: true
+      - name: description
+        label: "Autore / opera / anno"
+        type: string
+        required: true
+      - name: thumbnail
+        label: Immagine
+        type: image
+        options:
+          media: images
+      - name: synopsis
+        label: Sinossi
+        type: rich-text
+      - name: credits
+        label: Scheda artistica
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: Ruolo
+            type: string
+          - name: value
+            label: Nomi / contenuto
+            type: text
+      - name: duration
+        label: Durata
+        type: string
+      - name: trailer
+        label: Trailer
+        type: object
+        fields:
+          - name: title
+            label: Titolo
+            type: string
+          - name: url
+            label: URL video
+            type: string
+      - name: performances
+        label: Precedenti rappresentazioni
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{date} — {name}"
+        fields:
+          - name: date
+            label: Data
+            type: string
+          - name: name
+            label: Evento / teatro
+            type: string
+          - name: details
+            label: Luogo / dettagli
+            type: text
+          - name: url
+            label: Link
+            type: string
+      - name: press
+        label: Rassegna stampa
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{author} — {title}"
+        fields:
+          - name: author
+            label: Autore / descrizione
+            type: string
+          - name: title
+            label: Titolo
+            type: string
+          - name: publication
+            label: Testata
+            type: string
+          - name: issue
+            label: Numero
+            type: string
+          - name: date
+            label: Data
+            type: string
+          - name: page
+            label: Pagina
+            type: string
+          - name: url
+            label: Link
+            type: string
+      - name: materials
+        label: Materiali
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: Titolo
+            type: string
+          - name: kind
+            label: Tipo
+            type: string
+          - name: url
+            label: File / URL
+            type: string
+      - name: accessibility
+        label: Accessibilità
+        type: rich-text
+      - name: photoAlbums
+        label: Album fotografici
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Titolo album
+            type: string
+          - name: meta
+            label: Data / luogo
+            type: string
+          - name: folder
+            label: Cartella
+            type: string
+          - name: cover
+            label: Immagine di copertina
+            type: image
+            options:
+              media: images
+          - name: images
+            label: Fotografie dell'album
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{src}"
+            fields:
+              - name: src
+                label: Fotografia
+                type: image
+                options:
+                  media: images
+              - name: caption
+                label: Didascalia
+                type: text
+      - name: body
+        label: Corpo storico
+        type: code
+        hidden: true
+        readonly: true
+        options:
+          format: markdown
