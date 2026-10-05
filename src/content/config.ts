@@ -24,29 +24,52 @@ const commonSchema = z.object({
   translationKey: z.string().optional(),
 });
 
-const news = defineCollection({
-  type: 'content',
-  schema: commonSchema,
+const workSchema = commonSchema.extend({
+  cmsStructured: z.boolean().optional(),
+  synopsis: z.string().optional(),
+
+  credits: z.array(z.object({
+    label: z.string(),
+    value: z.string(),
+  })).optional(),
+
+  duration: z.string().optional(),
+  thanks: z.string().optional(),
+
+  trailer: z.object({
+    title: z.string().optional(),
+    url: z.string(),
+  }).optional(),
+
+  performances: z.array(z.object({
+    date: z.string(),
+    name: z.string(),
+    url: z.string().optional(),
+    details: z.string().optional(),
+  })).optional(),
+
+  press: z.array(z.object({
+    author: z.string(),
+    title: z.string(),
+    publication: z.string().optional(),
+    issue: z.string().optional(),
+    date: z.string().optional(),
+    page: z.string().optional(),
+    url: z.string().optional(),
+  })).optional(),
+
+  materials: z.array(z.object({
+    label: z.string(),
+    kind: z.string().optional(),
+    url: z.string(),
+  })).optional(),
+
+  accessibility: z.string().optional(),
 });
 
-const work = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
+const news = defineCollection({ type: 'content', schema: commonSchema });
+const work = defineCollection({ type: 'content', schema: workSchema });
+const sold = defineCollection({ type: 'content', schema: commonSchema });
+const pages = defineCollection({ type: 'content', schema: commonSchema });
 
-const sold = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
-const pages = defineCollection({
-  type: 'content',
-  schema: commonSchema,
-});
-
-export const collections = {
-  news,
-  work,
-  sold,
-  pages,
-};
+export const collections = { news, work, sold, pages };

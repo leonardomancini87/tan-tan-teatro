@@ -10,6 +10,102 @@ description: Eugène Ionesco, 1972
 folder: macbett
 locale: it
 translationKey: macbett-page
+cmsStructured: true
+
+synopsis: >-
+  Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziabile per il potere, il *Macbett* di Eugène Ionesco (1972) offre una riscrittura moderna della tragedia shakespeariana di particolare attualità. Il caos del mondo contemporaneo, segnato anche dalla perdita di autenticità del logos, è qui rappresentato in una chiave grottesca, con una poetica che è per molti versi debitrice dell’archetipo della cupidigia materialista e politica del *père Ubu* di Alfred Jarry (1896). Nel contesto di un’assurdità burlesca ed esuberante, il carattere dei grandi personaggi tragici si trova così ridotto a fanfara e a solennità ridicola e tronfia. Dopotutto, per dirla con Ionesco, è proprio l’*humour* che «rende consapevoli, con libera lucidità, della condizione tragica o derisoria dell'uomo». La messa in scena del *Macbett* da noi proposta presenta una versione essenziale dell’opera di Ionesco, con una regia incentrata sul gioco dell’attore in stretto dialogo con il testo originale e con l’accompagnamento sonoro, rumoristico e musicale.
+
+credits:
+  - label: "Con"
+    value: "Siyuan Chen, Viola Cicoria, Olivia Del Sante, Pablo Comune, Stefano Martelli, Giovanni Pessina, Aurora Matilde Viola Sempio, Giulia Tonello, Gabriele Vaschetti"
+  - label: "Musiche"
+    value: "Andrea D'Oria"
+  - label: "Luci (ideazione)"
+    value: "Sara Marenco"
+  - label: "Datore luci"
+    value: "Marco Usmigli (da maggio 2026)"
+  - label: "Costumi"
+    value: "Sara Marenco, Giulia Tonello"
+  - label: "Regia"
+    value: "Leonardo Mancini"
+
+duration: "1 ora"
+
+thanks: >-
+  Ivana Ferri, Bruno Maria Ferraro (Teatro Tangram, Torino); Silvia Battaglio.
+
+trailer:
+  title: "Trailer Macbett"
+  url: "https://www.youtube.com/embed/_p8u-0JkcHc"
+
+performances:
+  - date: "10/07/2026"
+    name: "International University Theatre Festival"
+    url: "https://www.vu.lt/en/events/macbett"
+    details: "(XIII World Congress of the International University Theatre Association, AITU-IUTA), Vilnius University Theatre Hall, Lituania"
+  - date: "11/06/2026"
+    name: "Accademia Ligustica di Belle Arti di Genova"
+    details: "(iniziativa didattica)"
+  - date: "09/05/2026"
+    name: "Teatro Martini"
+    url: "https://comune.cavagnolo.to.it/novita/tan-tan-teatro-macbett-09-maggio-2026/"
+    details: "Cavagnolo (Torino)"
+  - date: "21/02/2026"
+    name: "Àrhat Teatro"
+    url: "http://www.arhatteatro.it/"
+    details: "Pontirolo Nuovo, Bergamo"
+  - date: "10-11/01/2026"
+    name: "Piccolo Teatro Comico"
+    url: "https://www.teatrocostumitorino.it/punti-di-vista"
+    details: "Torino"
+  - date: "07/09/2025"
+    name: "Festival Mirabilia"
+    url: "https://www.festivalmirabilia.it/evento/macbett-ionesco/"
+    details: "Cuneo"
+  - date: "02/07/2025"
+    name: "Tingeltangel"
+    url: "https://www.officinaperlascena.it/wordpress/tingeltangel/"
+    details: "Torino (prova a porte chiuse)"
+  - date: "22/05/2025"
+    name: "Festival de théâtre universitaire Meraki"
+    url: "https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/"
+    details: "Lione"
+
+press:
+  - author: "Micaela Vernice"
+    title: "Tan Tan Teatro rilegge lo Shakespeare di Ionesco"
+    publication: "L’Eco di Bergamo"
+    date: "21 febbraio 2026"
+    page: "35"
+  - author: "Micaela Vernice"
+    title: "«Macbett è l’insensatezza della brama di potere»"
+    publication: "L’Eco di Bergamo"
+    date: "25 febbraio 2026"
+    page: "47"
+  - author: "Daniele Stellato"
+    title: "«Gemme di teatro» parte col botto"
+    publication: "Giornale di Treviglio"
+    page: "35"
+  - author: "Marion Dumartin"
+    title: "Danse entre Ionesco et Shakespeare"
+    publication: "L'Entracte"
+    issue: "4"
+    date: "22 mai 2025"
+    page: "2"
+
+materials:
+  - label: "Scheda dello spettacolo"
+    kind: "PDF"
+    url: "/doc/Macbett (Ionesco), Tan Tan Teatro – dossier.pdf"
+  - label: "Scheda tecnica"
+    kind: "PDF"
+    url: "/doc/Macbett-Tech-rider.pdf"
+  - label: "Dossier stampa"
+    kind: "PDF"
+    url: "/doc/macbett-rassegna.pdf"
+
+accessibility: >-
+  Per l'accessibilità dello spettacolo, sono disponibili audiodescrizioni in italiano e sopratitoli in italiano, in inglese e in francese, tramite un'apposita piattaforma per l'accessibilità ([Sténtor](https://www.stentor.live/it/)), che è stata sviluppata nell'ambito del progetto di *public engagement* dell'Università degli Studi di Torino "[Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile](https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45)". Sono inoltre state realizzate audiodescrizioni. Per ulteriori informazioni: [accessibilita@tantanteatro.it](mailto:accessibilita@tantanteatro.it)
 ---
 ## <i>Macbett</i>, di Eugène Ionesco, 1972
 <h3 class="toc-only">Sinossi</h3>
