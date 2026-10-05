@@ -44,6 +44,7 @@ performances:
   - date: 26/09/2026
     name: "UNight 2026 – Notte europea delle ricercatrici e dei ricercatori "
     details: Castello del Valentino, Salone d'onore
+    url: https://unightproject.eu/it/eventi/la-notte-europea-delle-ricercatrici-e-dei-ricercatori-2026?query=matrimonio&sort=default
   - date: 05-06/09/2026
     name: Festival Mirabilia
     details: Cuneo
