@@ -6,12 +6,11 @@ pagetype:
   - main
 number: 2
 title: Macbett
-description: Eugène Ionesco, 1972
+description: Eugène Ionesco, 1973
 folder: macbett
-locale: "it"
-translationKey: "macbett-page"
+locale: it
+translationKey: macbett-page
 ---
-
 ## <i>Macbett</i>, di Eugène Ionesco, 1972
 <h3 class="toc-only">Sinossi</h3>
 Riflessione lucida sulla follia e sull’insensatezza umana nella brama insaziabile per il potere, il <i>Macbett</i> di Eugène Ionesco (1972) offre una riscrittura moderna della tragedia shakespeariana di particolare attualità. Il caos del mondo contemporaneo, segnato anche dalla perdita di autenticità del logos, è qui rappresentato in una chiave grottesca, con una poetica che è per molti versi debitrice dell’archetipo della cupidigia materialista e politica del <i>père Ubu</i> di Alfred Jarry (1896). Nel contesto di un’assurdità burlesca ed esuberante, il carattere dei grandi personaggi tragici si trova così ridotto a fanfara e a solennità ridicola e tronfia. Dopotutto, per dirla con Ionesco, è proprio l’humour che «rende consapevoli, con libera lucidità, della condizione tragica o derisoria dell'uomo». La messa in scena del <i>Macbett</i> da noi proposta presenta una versione essenziale dell’opera di Ionesco, con una regia incentrata sul gioco dell’attore in stretto dialogo con il testo originale e con l’accompagnamento sonoro, rumoristico e musicale.<br/><br/>
