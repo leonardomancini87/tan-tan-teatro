@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
 import Gallery from '../components/Gallery.astro';
 import AutoGallery from '../components/AutoGallery.astro';
+import StructuredWorkContent from '../components/StructuredWorkContent.astro';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -206,7 +207,11 @@ const relatedPhotoAlbums = [
     <div class="work-content-layout">
       <div class="work-main-column">
         <div class="post-content-body" id="post-body">
-          <Content />
+          {entry.data.cmsStructured ? (
+            <StructuredWorkContent entry={entry} />
+          ) : (
+            <Content />
+          )}
         </div>
 
         {entry.data.gallery && (

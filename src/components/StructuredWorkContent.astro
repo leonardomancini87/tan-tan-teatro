@@ -1,0 +1,249 @@
+---
+const { entry } = Astro.props;
+const data = entry.data as any;
+
+function escapeHtml(value: string) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function renderInline(value: string) {
+  let text = escapeHtml(value);
+
+  text = text.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^)\s]+|mailto:[^)\s]+)\)/g,
+    (_match, label, url) => {
+      const external = String(url).startsWith('http');
+      return `<a href="${url}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`;
+    }
+  );
+
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  return text;
+}
+
+function renderRichText(value?: string) {
+  const source = String(value ?? '').trim();
+  if (!source) return '';
+
+  return source
+    .split(/\n\s*\n/)
+    .map((block) => {
+      const lines = block.split('\n').map((line) => line.trim()).filter(Boolean);
+
+      if (lines.length && lines.every((line) => /^[-*]\s+/.test(line))) {
+        return `<ul>${lines
+          .map((line) => `<li>${renderInline(line.replace(/^[-*]\s+/, ''))}</li>`)
+          .join('')}</ul>`;
+      }
+
+      if (lines.length && lines.every((line) => /^\d+\.\s+/.test(line))) {
+        return `<ol>${lines
+          .map((line) => `<li>${renderInline(line.replace(/^\d+\.\s+/, ''))}</li>`)
+          .join('')}</ol>`;
+      }
+
+      return `<p>${lines.map(renderInline).join('<br />')}</p>`;
+    })
+    .join('\n');
+}
+
+const synopsisHtml = renderRichText(data.synopsis);
+const accessibilityHtml = renderRichText(data.accessibility);
+---
+
+<h2>
+  <i>{data.title}</i>{data.description ? `, di ${data.description}` : ''}
+</h2>
+
+{data.synopsis && (
+  <>
+    <h3 class="toc-only">Sinossi</h3>
+    <div class="cms-richtext" set:html={synopsisHtml} />
+  </>
+)}
+
+{data.credits?.length > 0 && (
+  <>
+    <h3 class="toc-only">Scheda artistica</h3>
+
+    <div class="structured-credits">
+      {data.credits.map((credit: any) => (
+        <div class="structured-credit">
+          <b>{credit.label}</b>: {credit.value}<br />
+        </div>
+      ))}
+    </div>
+
+    {(data.duration || data.thanks) && <br />}
+
+    {data.duration && (
+      <>
+        Durata: {data.duration}<br />
+      </>
+    )}
+
+    {data.thanks && (
+      <>
+        <i>Ringraziamenti</i>: {data.thanks}
+      </>
+    )}
+  </>
+)}
+
+{data.trailer?.url && (
+  <>
+    <h3 class="toc-only">Trailer</h3>
+
+    <div class="fluid-width-video-wrapper">
+      <iframe
+        src={data.trailer.url}
+        title={data.trailer.title || `Trailer ${data.title}`}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </>
+)}
+
+{data.performances?.length > 0 && (
+  <>
+    <h3>Precedenti rappresentazioni</h3>
+
+    <div class="structured-performances">
+      {data.performances.map((performance: any) => (
+        <div>
+          {performance.date}: {
+            performance.url ? (
+              <a href={performance.url} target="_blank" rel="noopener noreferrer">
+                {performance.name}
+              </a>
+            ) : (
+              performance.name
+            )
+          }{performance.details ? `, ${performance.details}` : ''}<br />
+        </div>
+      ))}
+    </div>
+  </>
+)}
+
+{data.press?.length > 0 && (
+  <>
+    <h3>Rassegna stampa</h3>
+
+    <p class="structured-press">
+      {data.press.map((item: any, index: number) => (
+        <>
+          {index > 0 && '; '}
+          {item.author}{item.author ? ', ' : ''}
+          {item.url ? (
+            <a href={item.url} target="_blank" rel="noopener noreferrer">
+              <i>{item.title}</i>
+            </a>
+          ) : (
+            <i>{item.title}</i>
+          )}
+          {item.publication ? `, “${item.publication}”` : ''}
+          {item.issue ? `, n. ${item.issue}` : ''}
+          {item.date ? `, ${item.date}` : ''}
+          {item.page ? `, p. ${item.page}` : ''}
+        </>
+      ))}
+      .
+    </p>
+  </>
+)}
+
+{data.materials?.length > 0 && (
+  <>
+    <h3>Materiali</h3>
+
+    <div class="materials-list">
+      {data.materials.map((material: any) => (
+        <a class="material-link" href={material.url} target="_blank" rel="noopener noreferrer">
+          <span class="material-link__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" stroke="currentColor" stroke-width="1.4"></path>
+              <path d="M13.5 3.5V8H18" stroke="currentColor" stroke-width="1.4"></path>
+              <path d="M9.5 12h6M9.5 15h6M9.5 18h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            </svg>
+          </span>
+
+          <span>
+            <strong>{material.label}</strong>
+            {material.kind && <small>{material.kind}</small>}
+          </span>
+        </a>
+      ))}
+    </div>
+  </>
+)}
+
+{data.accessibility && (
+  <>
+    <h3>Accessibilità</h3>
+    <div class="cms-richtext" set:html={accessibilityHtml} />
+  </>
+)}
+
+<style>
+  .structured-credit,
+  .structured-performances > div {
+    line-height: inherit;
+  }
+
+  .cms-richtext :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .cms-richtext :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .materials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.15rem;
+  }
+
+  .material-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    text-decoration: none;
+  }
+
+  .material-link__icon {
+    display: inline-flex;
+  }
+
+  .material-link span:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .material-link small {
+    display: block;
+  }
+
+  @media (min-width: 900px) {
+    .materials-list {
+      flex-wrap: nowrap;
+      width: max-content;
+      max-width: calc(100vw - 4rem);
+    }
+
+    .material-link {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+  }
+</style>
