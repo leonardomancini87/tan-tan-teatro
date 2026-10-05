@@ -352,9 +352,9 @@ content:
         hidden: true
 
       - name: thumbnail
-        label: Immagine principale
+        label: Immagine principale tecnica
         type: image
-        description: "Immagine principale della pagina."
+        hidden: true
 
       - name: date
         label: Data tecnica
@@ -362,12 +362,12 @@ content:
         hidden: true
 
       - name: title
-        label: Titolo
+        label: Titolo pagina
         type: string
         required: true
 
       - name: description
-        label: Descrizione
+        label: Descrizione SEO
         type: string
 
       - name: number
@@ -382,9 +382,9 @@ content:
         hidden: true
 
       - name: featuredimage
-        label: Immagine in evidenza
+        label: Immagine tecnica
         type: image
-        description: "Immagine in evidenza della pagina Chi siamo."
+        hidden: true
 
       - name: locale
         label: Lingua
@@ -396,11 +396,84 @@ content:
         type: string
         hidden: true
 
-      - name: body
-        label: Contenuto della pagina
-        type: rich-text
+      - name: bioKicker
+        label: Etichetta
+        type: string
         required: true
-        description: "Testo completo della pagina, compresa la sezione Membri della compagnia."
+
+      - name: bioHeading
+        label: Titolo grande
+        type: string
+        required: true
+
+      - name: bioLead
+        label: Testo introduttivo
+        type: text
+        required: true
+
+      - name: bioOpeningImage
+        label: Foto principale
+        type: image
+        required: true
+
+      - name: bioStoryIntro
+        label: Presentazione del gruppo
+        type: text
+        required: true
+
+      - name: bioProduction
+        label: Spettacoli e produzione
+        type: text
+        required: true
+
+      - name: bioTraining
+        label: Laboratorio e formazione
+        type: text
+        required: true
+
+      - name: bioPath
+        label: Percorso e collaborazioni
+        type: text
+        required: true
+
+      - name: bioSceneImage
+        label: Seconda fotografia
+        type: image
+        required: true
+
+      - name: bioMembersHeading
+        label: Titolo sezione gruppo
+        type: string
+        required: true
+
+      - name: bioPerformers
+        label: Interpreti
+        type: text
+        required: true
+
+      - name: bioMusic
+        label: Musiche
+        type: string
+
+      - name: bioDance
+        label: Danza e coreografie
+        type: string
+
+      - name: bioLighting
+        label: Luci
+        type: string
+
+      - name: bioPhotography
+        label: Fotografie
+        type: string
+
+      - name: bioDirection
+        label: Direzione
+        type: string
+
+      - name: body
+        label: Contenuto tecnico precedente
+        type: code
+        hidden: true
         options:
           format: markdown
-          switcher: true

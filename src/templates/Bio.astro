@@ -11,10 +11,104 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const { title, description } = entry.data;
 const currentLocale = entry.data.locale ?? 'it';
+
+const hasStructuredBio =
+  currentLocale === 'it' &&
+  Boolean(entry.data.bioHeading);
+
+const escapeHTML = (value = '') =>
+  String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+
+const formatProduction = (value = '') =>
+  escapeHTML(value)
+    .replaceAll('Macbett', '<em>Macbett</em>')
+    .replaceAll('Il matrimonio', '<em>Il matrimonio</em>');
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
   <article class="bio-page">
-    <Content />
+    {hasStructuredBio ? (
+      <>
+        <p class="bio-kicker">{entry.data.bioKicker}</p>
+
+        <h1 class="bio-title">{entry.data.bioHeading}</h1>
+
+        <p class="bio-lead">{entry.data.bioLead}</p>
+
+        <figure class="bio-photo bio-photo--opening">
+          <img
+            src={entry.data.bioOpeningImage}
+            alt={entry.data.bioHeading}
+            loading="eager"
+          />
+        </figure>
+
+        <div class="bio-story">
+          <div class="bio-copy">
+            <p>{entry.data.bioStoryIntro}</p>
+
+            <p set:html={formatProduction(entry.data.bioProduction ?? '')}></p>
+
+            <p>{entry.data.bioTraining}</p>
+
+            <p>{entry.data.bioPath}</p>
+          </div>
+
+          <figure class="bio-photo bio-photo--scene">
+            <img
+              src={entry.data.bioSceneImage}
+              alt="Una scena di Macbett di Tan Tan Teatro"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+
+        <section
+          class="bio-members"
+          aria-labelledby="bio-members-title"
+        >
+          <h2 id="bio-members-title">
+            {entry.data.bioMembersHeading}
+          </h2>
+
+          <div class="bio-members-grid">
+            <div>
+              <p class="bio-member-line">
+                <strong>Interpreti</strong>: {entry.data.bioPerformers}
+              </p>
+            </div>
+
+            <div>
+              <p class="bio-member-line">
+                <strong>Musiche</strong>: {entry.data.bioMusic}
+              </p>
+
+              <p class="bio-member-line">
+                <strong>Danza e coreografie</strong>: {entry.data.bioDance}
+              </p>
+
+              <p class="bio-member-line">
+                <strong>Luci</strong>: {entry.data.bioLighting}
+              </p>
+
+              <p class="bio-member-line">
+                <strong>Fotografie</strong>: {entry.data.bioPhotography}
+              </p>
+
+              <p class="bio-member-line">
+                <strong>Direzione</strong>: {entry.data.bioDirection}
+              </p>
+            </div>
+          </div>
+        </section>
+      </>
+    ) : (
+      <Content />
+    )}
   </article>
 </Layout>

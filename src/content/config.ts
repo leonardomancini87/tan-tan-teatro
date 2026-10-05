@@ -22,6 +22,23 @@ const commonSchema = z.object({
   gallery: z.array(galleryItemSchema).optional(),
   locale: z.enum(['it', 'en']).optional(),
   translationKey: z.string().optional(),
+
+  bioKicker: z.string().optional(),
+  bioHeading: z.string().optional(),
+  bioLead: z.string().optional(),
+  bioOpeningImage: z.string().optional(),
+  bioStoryIntro: z.string().optional(),
+  bioProduction: z.string().optional(),
+  bioTraining: z.string().optional(),
+  bioPath: z.string().optional(),
+  bioSceneImage: z.string().optional(),
+  bioMembersHeading: z.string().optional(),
+  bioPerformers: z.string().optional(),
+  bioMusic: z.string().optional(),
+  bioDance: z.string().optional(),
+  bioLighting: z.string().optional(),
+  bioPhotography: z.string().optional(),
+  bioDirection: z.string().optional(),
 });
 
 const workSchema = commonSchema.extend({
