@@ -41,6 +41,9 @@ trailer:
   title: Trailer Il matrimonio
   url: https://www.youtube.com/embed/K0mLRFFcIG4?si=9ctbi23Yk4KGJ7Wt
 performances:
+  - date: 26/09/2026
+    name: "UNight 2026 – Notte europea delle ricercatrici e dei ricercatori "
+    details: Castello del Valentino, Salone d'onore
   - date: 05-06/09/2026
     name: Festival Mirabilia
     details: Cuneo
@@ -61,9 +64,6 @@ performances:
   - date: 28/02/2026
     name: Teatro Giacosa
     details: "Ivrea (anteprima: 20 minuti)"
-  - date: 26/09/2026
-    name: "UNight 2026 – Notte europea delle ricercatrici e dei ricercatori "
-    details: Castello del Valentino, Salone d'onore
 press:
   - author: Hugo Genève
     title: Il matrimonio
