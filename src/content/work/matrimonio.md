@@ -41,6 +41,10 @@ trailer:
   title: Trailer Il matrimonio
   url: https://www.youtube.com/embed/K0mLRFFcIG4?si=9ctbi23Yk4KGJ7Wt
 performances:
+  - date: 05-06/09/2026
+    name: Festival Mirabilia
+    details: Cuneo
+    url: https://www.festivalmirabilia.it/evento/il-matrimonio-di-witold-gombrowicz/
   - date: 02/08/2026
     name: Fuma che 'nduma
     details: Centro Ippico Equi Maresco, Savigliano
