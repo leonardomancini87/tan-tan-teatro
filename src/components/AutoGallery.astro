@@ -5,7 +5,12 @@ import { fileURLToPath } from "node:url";
 import Gallery from "./Gallery.astro";
 import { galleryCaptions } from "../data/gallery-captions.js";
 
-const { slug, title = "Galleria fotografica", group = slug } = Astro.props;
+const {
+  slug,
+  title = "Galleria fotografica",
+  group = slug,
+  variant = "default",
+} = Astro.props;
 
 const projectRoot = fileURLToPath(new URL("../../", import.meta.url));
 const galleryDir = path.join(projectRoot, "public", "img", slug);
@@ -44,4 +49,11 @@ try {
 }
 ---
 
-{items.length > 0 && <Gallery items={items} group={group} title={title} />}
+{items.length > 0 && (
+  <Gallery
+    items={items}
+    group={group}
+    title={title}
+    variant={variant}
+  />
+)}

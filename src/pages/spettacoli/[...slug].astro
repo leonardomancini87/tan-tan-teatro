@@ -9,7 +9,9 @@ export async function getStaticPaths() {
     return new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
   });
 
-  return sortedEntries.map((entry) => {
+  return sortedEntries
+    .filter((entry) => !((entry.data.locale ?? 'it') === 'it' && entry.slug === 'matrimonio'))
+    .map((entry) => {
     const locale = entry.data.locale ?? 'it';
     const publicSlug = entry.slug;
 
