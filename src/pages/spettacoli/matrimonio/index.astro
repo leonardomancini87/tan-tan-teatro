@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import AutoGallery from '../../../components/AutoGallery.astro';
+import { getEntry } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -62,6 +63,10 @@ const relatedAlbumCover =
   relatedAlbumImages.find((image) => image.src.endsWith('/ripasso.jpg')) ||
   relatedAlbumImages[0];
 // MATRIMONIO_RELATED_ALBUMS_END
+
+
+const matrimonioCmsEntry = await getEntry('work', 'matrimonio');
+const cmsDuration = matrimonioCmsEntry?.data.duration ?? '75 minuti';
 
 ---
 
@@ -131,7 +136,7 @@ const relatedAlbumCover =
 
           <div class="show-credit">
             <em>Durata</em>
-            <p>75 minuti.</p>
+            <p>{cmsDuration}.</p>
           </div>
         </div>
       </div>
