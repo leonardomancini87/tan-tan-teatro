@@ -22,7 +22,7 @@ export const UNIGHT = Object.freeze({
   // See NOTE-HOMEPAGE.md before publication; do not silently change the time.
 });
 export const LAB = Object.freeze({
-  id: 'laboratorio-autunno-2026', start: '2026-09-30', end: '2026-12-16',
+  id: 'laboratorio-autunno-2026', start: '2026-10-02', end: '2026-12-16',
   deadline: '2026-09-25',
   registration: { it: '/iscrizioni/?slug=lab-training', en: '/en/iscrizioni/?slug=lab-training' },
 });
@@ -35,6 +35,23 @@ export const PERFORMANCE_SNAPSHOT = [
   { id: 'snapshot-matrimonio-dravelli', title: 'Il matrimonio', venue: 'Teatro Dravelli', city: 'Torino', starts_on: '2027-01-30', ends_on: null, is_published: true },
   { id: 'snapshot-matrimonio-ptc', title: 'Il matrimonio', venue: 'Piccolo Teatro Comico', city: 'Torino', starts_on: '2027-02-12', ends_on: '2027-02-13', is_published: true },
 ];
+
+const LAB_OCCURRENCES_2026 = [
+  '2026-10-02',
+  '2026-10-07',
+  '2026-10-14',
+  '2026-10-21',
+  '2026-10-28',
+  '2026-11-11',
+  '2026-11-18',
+  '2026-12-02',
+  '2026-12-09',
+  '2026-12-16',
+];
+
+function nextLabOccurrence(today) {
+  return LAB_OCCURRENCES_2026.find((day) => day >= today) ?? null;
+}
 
 export const UI = {
   it: { upcoming: 'Prossimi appuntamenti', all: 'Tutti gli appuntamenti', programme: 'Scopri il programma',
@@ -93,7 +110,7 @@ export function editorialEvents(locale = 'it', today = romeToday()) {
       imageAlt: it ? 'Macbett con sopratitoli in scena' : 'Macbett with projected surtitles',
       href: r.unight, label: t.programme,
       detail: it ? 'Due incontri, un unico programma' : 'Two events, one programme' },
-    { id: LAB.id, start: LAB.start, end: LAB.end, kind: 'lab',
+    { id: LAB.id, start: nextLabOccurrence(today) ?? LAB.end, end: nextLabOccurrence(today) ?? LAB.end, kind: 'lab',
       title: it ? 'Laboratorio. Training e movimento' : 'Laboratory. Training and movement',
       subtitle: it ? 'Nuova edizione settembre\u2013dicembre 2026' : 'New edition September\u2013December 2026',
       venue: it ? 'Palazzo Nuovo · Torino' : 'Turin', image: '/img/lab01.jpeg', imagePosition: '52% 54%', mobileImagePosition: '52% 56%',

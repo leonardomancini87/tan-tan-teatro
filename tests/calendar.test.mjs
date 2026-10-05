@@ -13,7 +13,7 @@ const today = '2026-09-22';
 const row = (props = {}) => ({ id:'test', title:'Macbett', starts_on:'2026-11-14', ends_on:null, is_published:true, ...props });
 test('Initial homepage order: UNIGHT, laboratory, Macbett', () => {
   const items=upcomingEvents({today,limit:3});
-  assert.deepEqual(items.map(x=>x.start),['2026-09-25','2026-09-30','2026-11-14']);
+  assert.deepEqual(items.map(x=>x.start),['2026-09-25','2026-10-02','2026-11-14']);
 });
 test('Full calendar also includes December and 2027', () => assert.equal(upcomingEvents({today}).length,6));
 test('Passed two-day event disappears on 27 September', () => assert(!upcomingEvents({today:'2026-09-27'}).some(x=>x.id===UNIGHT.id)));
