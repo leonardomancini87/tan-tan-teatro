@@ -10,6 +10,7 @@ export class HeroSlideshow {
   constructor(root) {
     this.root = root;
     this.panels = Array.from(root.querySelectorAll('.tt-hero-slide'));
+    this.counter = root.querySelector('[data-hero-counter]');
     this.interval = Math.max(8000, Number(root.dataset.heroInterval) || 8000);
     this.fade = Math.max(0, Number(root.dataset.heroFade) || 1400);
     this.mobileQuery = window.matchMedia('(max-width:760px)');
@@ -110,6 +111,12 @@ export class HeroSlideshow {
     clearTimeout(this.timer);
     clearTimeout(this.preloadTimer);
     if (this.destroyed) return;
+    if (this.counter) {
+      const slides = this.available.filter((index) => !this.failed.has(index));
+      const current = Math.max(1, slides.indexOf(this.active) + 1);
+      this.counter.textContent = `${String(current).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      this.counter.setAttribute('aria-label', `${this.root.dataset.heroLocale === 'en' ? 'Photo' : 'Foto'} ${current} / ${slides.length}`);
+    }
     this.root.dataset.heroRunning = String(this.canRotate());
     if (!this.canRotate()) return;
     this.preloadTimer = setTimeout(() => {

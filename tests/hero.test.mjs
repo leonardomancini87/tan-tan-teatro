@@ -58,12 +58,14 @@ test('Only the first image loads in the server-rendered hero', () => {
   assert(initial.includes('fetchpriority="high"'));
   assert(initial.includes('loading="eager"'));
 });
-test('Hero exposes no visible slideshow controls or slide counter', () => {
+test('Hero exposes a minimal photo counter without navigation controls', () => {
   const html = renderHero();
   assert(!html.includes('data-hero-controls'));
   assert(!html.includes('data-hero-toggle'));
   assert(!html.includes('data-hero-index'));
-  assert(!html.includes('data-hero-count'));
+  assert(!html.includes('data-hero-count='));
+  assert(html.includes('data-hero-counter'));
+  assert(html.includes('>01 / 04</span>'));
 });
 test('Slides keep accessible names without visible navigation controls', () => {
   const html = renderHero();

@@ -39,6 +39,7 @@ export function renderHero(locale = 'it', photos = {}) {
         </div>`;
       }).join('')}</div>
       <div class="tt-hero-shade" aria-hidden="true"></div>
+      <span class="tt-hero-counter" data-hero-counter aria-label="${lang === 'en' ? 'Photo' : 'Foto'} 1 / ${slides.length}">01 / ${String(slides.length).padStart(2, '0')}</span>
       <p class="tt-hero-sr" data-hero-status role="status" aria-live="polite" aria-atomic="true"></p>
       <script type="application/json" data-hero-labels>${JSON.stringify(ui).replace(/</g, '\\u003c')}</script>
     </section>`;
