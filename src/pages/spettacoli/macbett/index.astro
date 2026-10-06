@@ -271,8 +271,13 @@ const albums = albumDefinitions.map((album) => {
   }
 
   .macbett-stage-band {
+    width: min(780px, calc(100% - 64px));
+    margin: 0 auto;
     aspect-ratio: 3 / 2 !important;
     max-height: none !important;
+  }
+  @media (max-width: 720px) {
+    .macbett-stage-band { width: calc(100% - 30px); }
   }
   .macbett-stage-band img { object-position: center 40% !important; }
   .macbett-thanks { margin-top: 1.5rem; font-size: 18px; line-height: 1.5; }
