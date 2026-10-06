@@ -120,6 +120,26 @@ const albums = albumDefinitions.map((album) => {
 
 <script>
   import { Fancybox } from '@fancyapps/ui';
+  const performanceObservers = new Map<HTMLElement, ResizeObserver>();
+  function clearPerformanceObservers() {
+    performanceObservers.forEach((observer) => observer.disconnect());
+    performanceObservers.clear();
+  }
+  function fitMacbettPerformances() {
+    clearPerformanceObservers();
+    document.querySelectorAll<HTMLElement>('.macbett-page .show-performance-list').forEach((list) => {
+      const rows = Array.from(list.querySelectorAll<HTMLElement>('.show-performance')).slice(0, 4);
+      if (!rows.length) return;
+      const update = () => {
+        const height = rows.reduce((sum, row) => sum + row.getBoundingClientRect().height, 0);
+        list.style.setProperty('--macbett-history-height', `${Math.ceil(height + 2)}px`);
+      };
+      const observer = new ResizeObserver(update);
+      rows.forEach((row) => observer.observe(row));
+      performanceObservers.set(list, observer);
+      update();
+    });
+  }
   function initMacbettAlbums() {
     document.querySelectorAll('.show-related-albums__list').forEach((root) => {
       Fancybox.unbind(root);
@@ -130,7 +150,10 @@ const albums = albumDefinitions.map((album) => {
     });
   }
   initMacbettAlbums();
+  fitMacbettPerformances();
   document.addEventListener('astro:page-load', initMacbettAlbums);
+  document.addEventListener('astro:page-load', fitMacbettPerformances);
+  document.addEventListener('astro:before-swap', clearPerformanceObservers);
 </script>
 
 <style>
@@ -286,6 +309,12 @@ const albums = albumDefinitions.map((album) => {
 </style>
 
 <style is:global>
+  @media (min-width: 721px) {
+    body:has(.macbett-page) .macbett-page .show-performance-list {
+      height: var(--macbett-history-height) !important;
+      max-height: none !important;
+    }
+  }
   body:has(.macbett-page) .show-press-grid article {
     min-height: 170px !important;
     padding: 18px !important;
