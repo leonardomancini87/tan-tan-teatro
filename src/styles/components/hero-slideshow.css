@@ -3,13 +3,13 @@
  * var() fallbacks here: the existing PostCSS preserve:false setting would
  * compile those fallbacks instead of retaining each photograph's crop. */
 .tt-hero--slideshow { align-items:flex-end; }
-.tt-hero--slideshow .tt-hero-navigation { position:absolute; top:18px; right:24px; z-index:4; display:flex; align-items:center; }
+.tt-hero--slideshow .tt-hero-navigation { position:absolute; bottom:8px; left:0; right:0; z-index:4; display:flex; justify-content:center; align-items:center; pointer-events:none; }
 .tt-hero--slideshow .tt-hero-navigation[hidden], .tt-hero--slideshow .tt-hero-navigation button[hidden] { display:none; }
-.tt-hero--slideshow .tt-hero-navigation button { display:grid; place-items:center; width:36px; height:44px; padding:0; border:0; background:transparent; cursor:pointer; }
-.tt-hero--slideshow .tt-hero-navigation button span { display:block; width:22px; height:2px; background:rgba(255,255,255,.45); box-shadow:0 1px 3px rgba(0,0,0,.5); }
-.tt-hero--slideshow .tt-hero-navigation button[aria-pressed="true"] span, .tt-hero--slideshow .tt-hero-navigation button:hover span { background:#fff; }
-.tt-hero--slideshow .tt-hero-navigation button:focus-visible { outline:1px solid #fff; outline-offset:-4px; }
-@media (max-width:760px) { .tt-hero--slideshow .tt-hero-navigation { top:14px; right:14px; } }
+.tt-hero--slideshow .tt-hero-navigation button { display:grid; place-items:center; width:28px; height:44px; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; outline:none; transition:none; cursor:pointer; pointer-events:auto; }
+.tt-hero--slideshow .tt-hero-navigation button:hover, .tt-hero--slideshow .tt-hero-navigation button:active, .tt-hero--slideshow .tt-hero-navigation button:focus { background:transparent; box-shadow:none; }
+.tt-hero--slideshow .tt-hero-navigation button span { display:block; width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.7); }
+.tt-hero--slideshow .tt-hero-navigation button:focus-visible span { outline:1px solid #fff; outline-offset:4px; }
+@media (max-width:760px) { .tt-hero--slideshow .tt-hero-navigation { bottom:2px; } }
 .tt-hero--slideshow .tt-hero-copy { position:relative; z-index:3; padding:0 56px 48px; pointer-events:none; }
 .tt-hero--slideshow .tt-hero-copy a { pointer-events:auto; }
 .tt-hero--slideshow .tt-hero-copy h1 { max-width:650px; margin-bottom:22px; }
