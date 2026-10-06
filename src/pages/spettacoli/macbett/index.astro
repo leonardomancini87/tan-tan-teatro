@@ -131,8 +131,13 @@ const albums = albumDefinitions.map((album) => {
       const rows = Array.from(list.querySelectorAll<HTMLElement>('.show-performance')).slice(0, 4);
       if (!rows.length) return;
       const update = () => {
-        const height = rows.reduce((sum, row) => sum + row.getBoundingClientRect().height, 0);
-        list.style.setProperty('--macbett-history-height', `${Math.ceil(height + 2)}px`);
+        if (window.matchMedia('(max-width: 720px)').matches) {
+          list.style.removeProperty('height');
+          return;
+        }
+        const first = rows[0].getBoundingClientRect();
+        const last = rows[rows.length - 1].getBoundingClientRect();
+        list.style.setProperty('height', `${Math.ceil(last.bottom - first.top + 4)}px`, 'important');
       };
       const observer = new ResizeObserver(update);
       rows.forEach((row) => observer.observe(row));
@@ -311,7 +316,7 @@ const albums = albumDefinitions.map((album) => {
 <style is:global>
   @media (min-width: 721px) {
     body:has(.macbett-page) .macbett-page .show-performance-list {
-      height: var(--macbett-history-height) !important;
+      height: 440px !important;
       max-height: none !important;
     }
   }
