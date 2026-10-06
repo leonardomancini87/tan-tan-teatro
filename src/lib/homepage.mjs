@@ -2,10 +2,14 @@ import { renderHero } from './hero.mjs';
 import { HOME_COPY, PHOTOS } from '../data/homepage.mjs';
 import { escapeHTML as e, routes, UI, SOURCES } from '../data/agenda.mjs';
 import { arrow, renderAgenda } from './agenda-render.mjs';
-export function renderHome(locale = 'it', today) {
+export function renderHome(locale = 'it', today, settings = {}) {
+  const photos = { ...PHOTOS };
+  for (const key of ['shows', 'lab', 'research', 'group']) {
+    if (settings.homePhotos?.[key]) photos[key] = settings.homePhotos[key];
+  }
   const c = HOME_COPY[locale], r = routes(locale);
   return `<div class="tt-editorial tt-home" data-home-version="20260922">
-    ${renderHero(locale)}
+    ${renderHero(locale, settings.homeHero)}
 
     <section class="tt-section tt-agenda-band" id="prossimi-appuntamenti" aria-labelledby="tt-agenda-title">
       <div class="tt-section-heading"><div><p class="tt-kicker">${e(c.agendaHint)}</p><h2 id="tt-agenda-title">${e(UI[locale].upcoming)}</h2></div><a class="tt-text-link" href="${r.agenda}">${e(UI[locale].all)} ${arrow}</a></div>
@@ -14,11 +18,11 @@ export function renderHome(locale = 'it', today) {
 
     <section class="tt-section tt-activities" aria-labelledby="tt-activities-title">
       <div class="tt-section-heading"><div><p class="tt-kicker">${e(c.activitiesLabel)}</p><h2 id="tt-activities-title">${e(c.activitiesTitle)}</h2></div></div>
-      <div class="tt-activity-grid">${c.activities.map((a, index) => `<article class="tt-activity"><a href="${a.key === 'research' ? '#ricerca-accessibilita' : r[a.key]}" aria-label="${e(a.label)}"><img src="${PHOTOS[a.key]}" alt="" loading="lazy" decoding="async" width="640" height="520" /><div class="tt-activity-shade" aria-hidden="true"></div><div class="tt-activity-copy"><h3>${e(a.title)}</h3><p>${e(a.text)}</p><span class="tt-activity-link">${e(a.label)} ${arrow}</span></div></a></article>`).join('')}</div>
+      <div class="tt-activity-grid">${c.activities.map((a, index) => `<article class="tt-activity"><a href="${a.key === 'research' ? '#ricerca-accessibilita' : r[a.key]}" aria-label="${e(a.label)}"><img src="${e(photos[a.key])}" alt="" loading="lazy" decoding="async" width="640" height="520" /><div class="tt-activity-shade" aria-hidden="true"></div><div class="tt-activity-copy"><h3>${e(a.title)}</h3><p>${e(a.text)}</p><span class="tt-activity-link">${e(a.label)} ${arrow}</span></div></a></article>`).join('')}</div>
     </section>
 
     <section class="tt-about" aria-labelledby="tt-about-title">
-      <figure><img src="${PHOTOS.group}" alt="${e(c.aboutAlt)}" loading="lazy" decoding="async" width="1300" height="867" />${c.aboutCaption ? `<figcaption>${e(c.aboutCaption)}</figcaption>` : ''}</figure>
+      <figure><img src="${e(photos.group)}" alt="${e(c.aboutAlt)}" loading="lazy" decoding="async" width="1300" height="867" />${c.aboutCaption ? `<figcaption>${e(c.aboutCaption)}</figcaption>` : ''}</figure>
       <div class="tt-about-copy"><p class="tt-kicker">${e(c.aboutLabel)}</p><h2 id="tt-about-title">${e(c.aboutTitle)}</h2><p class="tt-body-copy">${e(c.aboutText)}</p><a class="tt-button" href="${r.about}">${e(c.aboutLink)} ${arrow}</a></div>
     </section>
 

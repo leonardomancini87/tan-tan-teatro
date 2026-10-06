@@ -6,9 +6,23 @@ import { arrow } from './agenda-render.mjs';
 /** Server-rendered first photograph and copy work without JavaScript.
  * Other photographs live in inert templates until they are actually needed.
  */
-export function renderHero(locale = 'it') {
+export function renderHero(locale = 'it', photos = {}) {
   const lang = locale === 'en' ? 'en' : 'it';
   const c = HOME_COPY[lang], ui = HERO_UI[lang], r = routes(lang);
+  const slides = HERO_SLIDES.map((slide) => {
+    const photo = photos[slide.id];
+    if (!photo) return slide;
+    const desktop = slide.desktopPosition.split(' ').map(parseFloat);
+    const mobile = slide.mobilePosition.split(' ').map(parseFloat);
+    return {
+      ...slide,
+      src: photo.src || slide.src,
+      desktopPosition: `${photo.desktopX ?? desktop[0]}% ${photo.desktopY ?? desktop[1]}%`,
+      mobilePosition: `${photo.mobileX ?? mobile[0]}% ${photo.mobileY ?? mobile[1]}%`,
+      it: { ...slide.it, alt: photo.altIt || slide.it.alt },
+      en: { ...slide.en, alt: photo.altEn || slide.en.alt },
+    };
+  });
   return `<section class="tt-hero tt-hero--slideshow" data-tt-hero data-hero-locale="${lang}" data-hero-interval="${HERO_TIMING.interval}" data-hero-fade="${HERO_TIMING.fade}" style="--tt-hero-fade:${HERO_TIMING.fade}ms" aria-labelledby="tt-home-title" aria-roledescription="${e(ui.carousel)}">
       <div class="tt-hero-copy">
         <h1 id="tt-home-title">${c.title.map(e).join(' ')}</h1>
@@ -16,9 +30,9 @@ export function renderHero(locale = 'it') {
         <p class="tt-hero-intro">${e(c.intro)}</p>
         <div class="tt-hero-actions"><a class="tt-button tt-button--light" href="#prossimi-appuntamenti">${e(c.primary)} ${arrow}</a><a class="tt-hero-secondary" href="${r.about}">${e(c.secondary)} ${arrow}</a></div>
       </div>
-      <div class="tt-hero-slides" data-hero-slides>${HERO_SLIDES.map((slide, index) => {
+      <div class="tt-hero-slides" data-hero-slides>${slides.map((slide, index) => {
         const text = slide[lang];
-        const img = `<img class="tt-hero-image" src="${slide.src}" alt="${e(text.alt)}" width="${slide.width}" height="${slide.height}" fetchpriority="${index === 0 ? 'high' : 'low'}" loading="eager" decoding="async" />`;
+        const img = `<img class="tt-hero-image" src="${e(slide.src)}" alt="${e(text.alt)}" width="${slide.width}" height="${slide.height}" fetchpriority="${index === 0 ? 'high' : 'low'}" loading="eager" decoding="async" />`;
         return `<div class="tt-hero-slide${index === 0 ? ' is-active' : ''}" id="tt-hero-slide-${slide.id}" role="group" aria-label="${e(text.name)}" aria-hidden="${index !== 0}"${index !== 0 ? ' inert' : ''} data-mobile="${slide.mobile}" data-hero-name="${e(text.name)}" style="--tt-hero-position:${slide.desktopPosition};--tt-hero-mobile-position:${slide.mobilePosition}">
           ${index === 0 ? img : `<template data-hero-photo>${img}</template>`}
           <a class="tt-hero-caption" href="${slide.route === 'research' ? '#ricerca-accessibilita' : r[slide.route]}"${index !== 0 ? ' tabindex="-1"' : ''}><span class="tt-hero-caption-label">${e(text.label)}</span><span class="tt-hero-caption-title">${e(text.name)}</span><small>${e(text.detail)}</small></a>

@@ -3,14 +3,18 @@ import Layout from '../layouts/Layout.astro';
 import CalendarRuntime from '../components/CalendarRuntime.astro';
 import HeroRuntime from '../components/HeroRuntime.astro';
 import '../styles/home-agenda-landscape.css';
-import { type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { renderHome } from '../lib/homepage.mjs';
 interface Props { entry: CollectionEntry<'pages'>; }
 const { entry } = Astro.props;
 const locale = entry.data.locale ?? 'it';
+// Both languages use the photographs managed in the Italian homepage entry.
+const settings = locale === 'it' ? entry.data :
+  (await getCollection('pages')).find((page) => page.slug === 'index' && (page.data.locale ?? 'it') === 'it')?.data ?? entry.data;
+const shareImage = settings.homeHero?.matrimonio?.src || '/img/matrimonio01.jpg';
 ---
-<Layout title={entry.data.title} description={entry.data.description} locale={locale} editorial={true} image="/img/matrimonio01.jpg">
-  <Fragment set:html={renderHome(locale)} />
+<Layout title={entry.data.title} description={entry.data.description} locale={locale} editorial={true} image={shareImage}>
+  <Fragment set:html={renderHome(locale, undefined, settings)} />
   <CalendarRuntime />
   <HeroRuntime />
 </Layout>

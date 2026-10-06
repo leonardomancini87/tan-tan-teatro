@@ -6,7 +6,29 @@ const galleryItemSchema = z.object({
   caption: z.string().optional(),
 });
 
+const homePhotoSchema = z.object({
+  src: z.string().optional(),
+  altIt: z.string().optional(),
+  altEn: z.string().optional(),
+  desktopX: z.number().min(0).max(100).optional(),
+  desktopY: z.number().min(0).max(100).optional(),
+  mobileX: z.number().min(0).max(100).optional(),
+  mobileY: z.number().min(0).max(100).optional(),
+});
+
 const commonSchema = z.object({
+  homeHero: z.object({
+    matrimonio: homePhotoSchema.optional(),
+    macbett: homePhotoSchema.optional(),
+    laboratorio: homePhotoSchema.optional(),
+    accessibilita: homePhotoSchema.optional(),
+  }).optional(),
+  homePhotos: z.object({
+    shows: z.string().optional(),
+    lab: z.string().optional(),
+    research: z.string().optional(),
+    group: z.string().optional(),
+  }).optional(),
   title: z.string(),
   description: z.string().optional(),
   date: z.coerce.date().optional(),

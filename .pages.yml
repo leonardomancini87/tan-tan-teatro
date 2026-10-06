@@ -477,3 +477,213 @@ content:
         hidden: true
         options:
           format: markdown
+
+  - name: homepage
+    label: "Pagine — Homepage: fotografie"
+    type: file
+    path: src/content/pages/index.md
+    format: yaml-frontmatter
+    operations:
+      delete: false
+      rename: false
+    fields:
+      - name: homeHero
+        label: Foto a rotazione in apertura
+        type: object
+        fields:
+          - name: matrimonio
+            label: "Il matrimonio"
+            type: object
+            fields:
+              - name: src
+                label: Fotografia
+                type: image
+                required: true
+                options:
+                  media: images
+              - name: altIt
+                label: Descrizione accessibile — italiano
+                type: text
+                required: true
+              - name: altEn
+                label: Descrizione accessibile — inglese
+                type: text
+                required: true
+              - name: desktopX
+                label: "Posizione orizzontale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: desktopY
+                label: "Posizione verticale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileX
+                label: "Posizione orizzontale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileY
+                label: "Posizione verticale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+          - name: macbett
+            label: "Macbett"
+            type: object
+            fields:
+              - name: src
+                label: Fotografia
+                type: image
+                required: true
+                options:
+                  media: images
+              - name: altIt
+                label: Descrizione accessibile — italiano
+                type: text
+                required: true
+              - name: altEn
+                label: Descrizione accessibile — inglese
+                type: text
+                required: true
+              - name: desktopX
+                label: "Posizione orizzontale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: desktopY
+                label: "Posizione verticale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileX
+                label: "Posizione orizzontale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileY
+                label: "Posizione verticale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+          - name: laboratorio
+            label: "Training e movimento"
+            type: object
+            fields:
+              - name: src
+                label: Fotografia
+                type: image
+                required: true
+                options:
+                  media: images
+              - name: altIt
+                label: Descrizione accessibile — italiano
+                type: text
+                required: true
+              - name: altEn
+                label: Descrizione accessibile — inglese
+                type: text
+                required: true
+              - name: desktopX
+                label: "Posizione orizzontale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: desktopY
+                label: "Posizione verticale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileX
+                label: "Posizione orizzontale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileY
+                label: "Posizione verticale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+          - name: accessibilita
+            label: "ETICA · Sténtor"
+            type: object
+            fields:
+              - name: src
+                label: Fotografia
+                type: image
+                required: true
+                options:
+                  media: images
+              - name: altIt
+                label: Descrizione accessibile — italiano
+                type: text
+                required: true
+              - name: altEn
+                label: Descrizione accessibile — inglese
+                type: text
+                required: true
+              - name: desktopX
+                label: "Posizione orizzontale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: desktopY
+                label: "Posizione verticale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileX
+                label: "Posizione orizzontale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileY
+                label: "Posizione verticale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+      - name: homePhotos
+        label: Fotografie delle sezioni
+        type: object
+        fields:
+          - name: shows
+            label: "Spettacoli"
+            type: image
+            required: true
+            options:
+              media: images
+          - name: lab
+            label: "Laboratorio"
+            type: image
+            required: true
+            options:
+              media: images
+          - name: research
+            label: "Ricerca"
+            type: image
+            required: true
+            options:
+              media: images
+          - name: group
+            label: "Il gruppo"
+            type: image
+            required: true
+            options:
+              media: images
