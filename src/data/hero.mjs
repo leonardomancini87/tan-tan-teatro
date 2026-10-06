@@ -10,10 +10,10 @@ export const HERO_SLIDES = Object.freeze([
     en: { name: 'The Marriage', label: 'Performances', detail: 'Witold Gombrowicz', alt: 'An ensemble scene from The Marriage by Tan Tan Teatro' },
   },
   {
-    id: 'macbett', src: '/img/home/macbett-ghigliottine.jpg', width: 2000, height: 1333,
-    desktopPosition: '50% 45%', mobilePosition: '58% 40%', mobile: true, route: 'macbett',
-    it: { name: 'Macbett', label: 'Spettacoli', detail: 'Eugène Ionesco', alt: 'Gli interpreti nella scena delle ghigliottine di Macbett a Cavagnolo' },
-    en: { name: 'Macbett', label: 'Performances', detail: 'Eugène Ionesco', alt: 'The performers in the guillotine scene from Macbett in Cavagnolo' },
+    id: 'macbett', src: '/img/home/macbett-fantasma.jpg', width: 2000, height: 1333,
+    desktopPosition: '50% 20%', mobilePosition: '52% 25%', mobile: true, route: 'macbett',
+    it: { name: 'Macbett', label: 'Spettacoli', detail: 'Eugène Ionesco', alt: 'Gli interpreti nella scena del fantasma di Macbett a Cavagnolo' },
+    en: { name: 'Macbett', label: 'Performances', detail: 'Eugène Ionesco', alt: 'The performers in the ghost scene from Macbett in Cavagnolo' },
   },
   {
     id: 'matrimonioFinale', src: '/img/home/matrimonio-ivrea.jpg', width: 2000, height: 1333,

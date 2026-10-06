@@ -84,7 +84,7 @@ test('Desktop and mobile both have the four selected photos', () => {
 test('The selected photographs follow the requested order, with training last', () => {
   assert.deepEqual(HERO_SLIDES.map((slide) => slide.src), [
     '/img/matrimonio01.jpg',
-    '/img/home/macbett-ghigliottine.jpg',
+    '/img/home/macbett-fantasma.jpg',
     '/img/home/matrimonio-ivrea.jpg',
     '/img/home/training-movimento.jpg',
   ]);

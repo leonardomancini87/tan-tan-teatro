@@ -35,7 +35,7 @@ export function renderHero(locale = 'it', photos = {}) {
         const img = `<img class="tt-hero-image" src="${e(slide.src)}" alt="${e(text.alt)}" width="${slide.width}" height="${slide.height}" fetchpriority="${index === 0 ? 'high' : 'low'}" loading="eager" decoding="async" />`;
         const responsiveBase = {
           '/img/matrimonio01.jpg': '/img/matrimonio01',
-          '/img/home/macbett-ghigliottine.jpg': '/img/home/macbett-ghigliottine',
+          '/img/home/macbett-fantasma.jpg': '/img/home/macbett-fantasma',
           '/img/home/matrimonio-ivrea.jpg': '/img/home/matrimonio-ivrea',
           '/img/home/training-movimento.jpg': '/img/home/training-movimento',
         }[slide.src];

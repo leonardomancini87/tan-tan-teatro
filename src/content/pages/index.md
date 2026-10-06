@@ -17,13 +17,13 @@ homeHero:
     mobileX: 59
     mobileY: 35
   macbett:
-    src: "/img/home/macbett-ghigliottine.jpg"
-    altIt: "Gli interpreti nella scena delle ghigliottine di Macbett a Cavagnolo"
-    altEn: "The performers in the guillotine scene from Macbett in Cavagnolo"
+    src: "/img/home/macbett-fantasma.jpg"
+    altIt: "Gli interpreti nella scena del fantasma di Macbett a Cavagnolo"
+    altEn: "The performers in the ghost scene from Macbett in Cavagnolo"
     desktopX: 50
-    desktopY: 45
-    mobileX: 58
-    mobileY: 40
+    desktopY: 20
+    mobileX: 52
+    mobileY: 25
   matrimonioFinale:
     src: "/img/home/matrimonio-ivrea.jpg"
     altIt: "Gli interpreti de Il matrimonio a Ivrea con le braccia alzate"
