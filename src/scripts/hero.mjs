@@ -10,7 +10,7 @@ export class HeroSlideshow {
   constructor(root) {
     this.root = root;
     this.panels = Array.from(root.querySelectorAll('.tt-hero-slide'));
-    this.counter = root.querySelector('[data-hero-counter]');
+    this.selectors = Array.from(root.querySelectorAll('[data-hero-select]'));
     this.interval = Math.max(8000, Number(root.dataset.heroInterval) || 8000);
     this.fade = Math.max(0, Number(root.dataset.heroFade) || 1400);
     this.mobileQuery = window.matchMedia('(max-width:760px)');
@@ -41,13 +41,9 @@ export class HeroSlideshow {
   listen(target, event, listener) { target.addEventListener(event, listener, { signal: this.signal }); }
 
   bindEvents() {
-    for (const [selector, direction] of [['[data-hero-prev]', -1], ['[data-hero-next]', 1]]) {
-      const button = this.root.querySelector(selector);
-      if (button) this.listen(button, 'click', () => {
-        const slides = this.available.filter((index) => !this.failed.has(index));
-        if (slides.length < 2) return;
-        const current = Math.max(0, slides.indexOf(this.active));
-        void this.show(slides[(current + direction + slides.length) % slides.length], { manual: true });
+    for (const button of this.selectors) {
+      this.listen(button, 'click', () => {
+        void this.show(Number(button.dataset.heroSelect), { manual: true });
       });
     }
     this.listen(this.root, 'pointerenter', (event) => {
@@ -122,11 +118,10 @@ export class HeroSlideshow {
     clearTimeout(this.timer);
     clearTimeout(this.preloadTimer);
     if (this.destroyed) return;
-    if (this.counter) {
-      const slides = this.available.filter((index) => !this.failed.has(index));
-      const current = Math.max(1, slides.indexOf(this.active) + 1);
-      this.counter.textContent = `${String(current).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-      this.counter.setAttribute('aria-label', `${this.root.dataset.heroLocale === 'en' ? 'Photo' : 'Foto'} ${current} / ${slides.length}`);
+    for (const button of this.selectors) {
+      const index = Number(button.dataset.heroSelect);
+      button.hidden = !this.available.includes(index) || this.failed.has(index);
+      button.setAttribute('aria-pressed', String(index === this.active));
     }
     this.root.dataset.heroRunning = String(this.canRotate());
     if (!this.canRotate()) return;

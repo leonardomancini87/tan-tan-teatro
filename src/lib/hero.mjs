@@ -39,10 +39,8 @@ export function renderHero(locale = 'it', photos = {}) {
         </div>`;
       }).join('')}</div>
       <div class="tt-hero-shade" aria-hidden="true"></div>
-      <div class="tt-hero-navigation" data-hero-navigation hidden>
-        <button type="button" data-hero-prev aria-label="${lang === 'en' ? 'Previous photo' : 'Foto precedente'}">←</button>
-        <span class="tt-hero-counter" data-hero-counter aria-label="${lang === 'en' ? 'Photo' : 'Foto'} 1 / ${slides.length}">01 / ${String(slides.length).padStart(2, '0')}</span>
-        <button type="button" data-hero-next aria-label="${lang === 'en' ? 'Next photo' : 'Foto successiva'}">→</button>
+      <div class="tt-hero-navigation" data-hero-navigation hidden role="group" aria-label="${lang === 'en' ? 'Choose photo' : 'Scegli una foto'}">
+        ${slides.map((slide, index) => `<button type="button" data-hero-select="${index}" data-mobile="${slide.mobile}" aria-label="${lang === 'en' ? 'Show photo' : 'Mostra foto'} ${index + 1}: ${e(slide[lang].name)}" aria-pressed="${index === 0}"><span aria-hidden="true"></span></button>`).join('')}
       </div>
       <p class="tt-hero-sr" data-hero-status role="status" aria-live="polite" aria-atomic="true"></p>
       <script type="application/json" data-hero-labels>${JSON.stringify(ui).replace(/</g, '\\u003c')}</script>

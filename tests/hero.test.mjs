@@ -58,20 +58,21 @@ test('Only the first image loads in the server-rendered hero', () => {
   assert(initial.includes('fetchpriority="high"'));
   assert(initial.includes('loading="eager"'));
 });
-test('Hero exposes a minimal photo counter with previous and next buttons', () => {
+test('Hero exposes direct photo selectors without numbers or arrows', () => {
   const html = renderHero();
   assert(!html.includes('data-hero-controls'));
   assert(!html.includes('data-hero-toggle'));
   assert(!html.includes('data-hero-index'));
   assert(!html.includes('data-hero-count='));
-  assert(html.includes('data-hero-counter'));
-  assert(html.includes('>01 / 04</span>'));
-  assert(html.includes('data-hero-prev'));
-  assert(html.includes('data-hero-next'));
+  assert(!html.includes('data-hero-counter'));
+  assert(!html.includes('data-hero-prev'));
+  assert(!html.includes('data-hero-next'));
+  assert.equal((html.match(/data-hero-select=/g) || []).length, HERO_SLIDES.length);
+
 });
 test('Slides keep accessible names without visible navigation controls', () => {
   const html = renderHero();
-  assert.equal((html.match(/role="group"/g) || []).length, HERO_SLIDES.length);
+  assert.equal((html.match(/class="tt-hero-slide[^>]*role="group"/g) || []).length, HERO_SLIDES.length);
   assert.equal((html.match(/aria-hidden="true" inert/g) || []).length, 3);
   for (const slide of HERO_SLIDES) assert(html.includes(`id="tt-hero-slide-${slide.id}"`));
 });

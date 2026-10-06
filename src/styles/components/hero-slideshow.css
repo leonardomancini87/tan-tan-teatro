@@ -3,12 +3,12 @@
  * var() fallbacks here: the existing PostCSS preserve:false setting would
  * compile those fallbacks instead of retaining each photograph's crop. */
 .tt-hero--slideshow { align-items:flex-end; }
-.tt-hero--slideshow .tt-hero-navigation { position:absolute; top:18px; right:24px; z-index:4; display:flex; align-items:center; color:#fff; border-radius:2px; background:rgba(0,0,0,.35); }
-.tt-hero--slideshow .tt-hero-navigation[hidden] { display:none; }
-.tt-hero--slideshow .tt-hero-counter { font-family:var(--font-sans-serif); font-size:12px; font-weight:400; font-variant-numeric:tabular-nums; letter-spacing:.12em; line-height:1; pointer-events:none; }
-.tt-hero--slideshow .tt-hero-navigation button { display:grid; place-items:center; width:44px; height:44px; padding:0; border:0; background:transparent; color:inherit; font-size:20px; cursor:pointer; }
-.tt-hero--slideshow .tt-hero-navigation button:hover { background:rgba(255,255,255,.12); }
-.tt-hero--slideshow .tt-hero-navigation button:focus-visible { outline:2px solid #fff; outline-offset:-3px; }
+.tt-hero--slideshow .tt-hero-navigation { position:absolute; top:18px; right:24px; z-index:4; display:flex; align-items:center; }
+.tt-hero--slideshow .tt-hero-navigation[hidden], .tt-hero--slideshow .tt-hero-navigation button[hidden] { display:none; }
+.tt-hero--slideshow .tt-hero-navigation button { display:grid; place-items:center; width:36px; height:44px; padding:0; border:0; background:transparent; cursor:pointer; }
+.tt-hero--slideshow .tt-hero-navigation button span { display:block; width:22px; height:2px; background:rgba(255,255,255,.45); box-shadow:0 1px 3px rgba(0,0,0,.5); }
+.tt-hero--slideshow .tt-hero-navigation button[aria-pressed="true"] span, .tt-hero--slideshow .tt-hero-navigation button:hover span { background:#fff; }
+.tt-hero--slideshow .tt-hero-navigation button:focus-visible { outline:1px solid #fff; outline-offset:-4px; }
 @media (max-width:760px) { .tt-hero--slideshow .tt-hero-navigation { top:14px; right:14px; } }
 .tt-hero--slideshow .tt-hero-copy { position:relative; z-index:3; padding:0 56px 48px; pointer-events:none; }
 .tt-hero--slideshow .tt-hero-copy a { pointer-events:auto; }
