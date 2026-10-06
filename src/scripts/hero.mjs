@@ -1,4 +1,4 @@
-/** Dependency-free, hero-only slideshow. No visible carousel controls. */
+/** Dependency-free, hero-only slideshow. */
 export function availableSlideIndices(slides, mobile) {
   return slides.flatMap((slide, index) => !mobile || slide.dataset.mobile !== 'false' ? [index] : []);
 }
@@ -32,6 +32,8 @@ export class HeroSlideshow {
     const rect = root.getBoundingClientRect();
     this.inView = rect.bottom > 0 && rect.top < window.innerHeight;
     this.bindEvents();
+    const navigation = root.querySelector('[data-hero-navigation]');
+    if (navigation) navigation.hidden = false;
     root.dataset.heroReady = 'true';
     this.syncRotation();
   }
@@ -39,6 +41,15 @@ export class HeroSlideshow {
   listen(target, event, listener) { target.addEventListener(event, listener, { signal: this.signal }); }
 
   bindEvents() {
+    for (const [selector, direction] of [['[data-hero-prev]', -1], ['[data-hero-next]', 1]]) {
+      const button = this.root.querySelector(selector);
+      if (button) this.listen(button, 'click', () => {
+        const slides = this.available.filter((index) => !this.failed.has(index));
+        if (slides.length < 2) return;
+        const current = Math.max(0, slides.indexOf(this.active));
+        void this.show(slides[(current + direction + slides.length) % slides.length], { manual: true });
+      });
+    }
     this.listen(this.root, 'pointerenter', (event) => {
       if (event.pointerType === 'touch' || !this.hoverQuery.matches) return;
       this.hovered = true;
@@ -164,13 +175,13 @@ export class HeroSlideshow {
     return promise;
   }
 
-  async show(index) {
+  async show(index, { manual = false } = {}) {
     if (!this.available.includes(index) || this.destroyed) return;
     const ticket = ++this.ticket;
     if (index === this.active) { this.syncRotation(); return; }
     const ready = await this.ensureImage(index);
     if (this.destroyed || ticket !== this.ticket || !this.available.includes(index)) return;
-    if (!this.canRotate()) return;
+    if (!manual && !this.canRotate()) return;
     if (!ready) {
       this.failed.add(index);
       this.syncRotation();

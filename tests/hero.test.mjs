@@ -58,7 +58,7 @@ test('Only the first image loads in the server-rendered hero', () => {
   assert(initial.includes('fetchpriority="high"'));
   assert(initial.includes('loading="eager"'));
 });
-test('Hero exposes a minimal photo counter without navigation controls', () => {
+test('Hero exposes a minimal photo counter with previous and next buttons', () => {
   const html = renderHero();
   assert(!html.includes('data-hero-controls'));
   assert(!html.includes('data-hero-toggle'));
@@ -66,6 +66,8 @@ test('Hero exposes a minimal photo counter without navigation controls', () => {
   assert(!html.includes('data-hero-count='));
   assert(html.includes('data-hero-counter'));
   assert(html.includes('>01 / 04</span>'));
+  assert(html.includes('data-hero-prev'));
+  assert(html.includes('data-hero-next'));
 });
 test('Slides keep accessible names without visible navigation controls', () => {
   const html = renderHero();
@@ -154,6 +156,19 @@ test('Choosing the current slide cancels an older pending image selection', asyn
   resolveImage(true);
   await pending;
   assert.equal(fake.active, 0);
+});
+
+test('Manual navigation works while autoplay is paused, but automatic navigation does not', async () => {
+  const fake = {
+    available: [0, 1], active: 0, ticket: 0, destroyed: false,
+    ensureImage: async () => true,
+    commit(index) { this.active = index; },
+    syncRotation() {}, canRotate() { return false; },
+  };
+  await HeroSlideshow.prototype.show.call(fake, 1);
+  assert.equal(fake.active, 0);
+  await HeroSlideshow.prototype.show.call(fake, 1, { manual: true });
+  assert.equal(fake.active, 1);
 });
 
 test('Per-photo runtime crops survive the existing PostCSS preserve:false configuration', () => {
