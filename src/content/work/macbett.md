@@ -102,6 +102,9 @@ press:
     page: "2"
 
 materials:
+  - label: "Libretto di sala accessibile"
+    kind: "Online"
+    url: "/spettacoli/macbett/libretto"
   - label: "Scheda dello spettacolo"
     kind: "PDF"
     url: "/doc/Macbett (Ionesco), Tan Tan Teatro – dossier.pdf"
