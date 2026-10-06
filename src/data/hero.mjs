@@ -10,10 +10,10 @@ export const HERO_SLIDES = Object.freeze([
     en: { name: 'The Marriage', label: 'Performances', detail: 'Witold Gombrowicz', alt: 'An ensemble scene from The Marriage by Tan Tan Teatro' },
   },
   {
-    id: 'macbett', src: '/img/macbett/macbett-01.jpg', width: 1300, height: 952,
-    desktopPosition: '50% 24%', mobilePosition: '65% 20%', mobile: true, route: 'macbett',
-    it: { name: 'Macbett', label: 'Spettacoli', detail: 'Eug\u00e8ne Ionesco', alt: 'Due interpreti in una scena di Macbett di Tan Tan Teatro' },
-    en: { name: 'Macbett', label: 'Performances', detail: 'Eug\u00e8ne Ionesco', alt: 'Two performers in a scene from Macbett by Tan Tan Teatro' },
+    id: 'macbett', src: '/img/home/cavagnolo-lady.jpg', width: 2000, height: 1333,
+    desktopPosition: '50% 35%', mobilePosition: '55% 35%', mobile: true, route: 'macbett',
+    it: { name: 'Macbett', label: 'Spettacoli', detail: 'Eug\u00e8ne Ionesco', alt: 'Lady e altri interpreti in una scena di Macbett al Teatro Martini di Cavagnolo' },
+    en: { name: 'Macbett', label: 'Performances', detail: 'Eug\u00e8ne Ionesco', alt: 'Lady and other performers in a scene from Macbett at Teatro Martini in Cavagnolo' },
   },
   {
     id: 'laboratorio', src: '/img/lab01.jpeg', width: 1300, height: 975,

@@ -17,13 +17,13 @@ homeHero:
     mobileX: 59
     mobileY: 35
   macbett:
-    src: "/img/macbett/macbett-01.jpg"
-    altIt: "Due interpreti in una scena di Macbett di Tan Tan Teatro"
-    altEn: "Two performers in a scene from Macbett by Tan Tan Teatro"
+    src: "/img/home/cavagnolo-lady.jpg"
+    altIt: "Lady e altri interpreti in una scena di Macbett al Teatro Martini di Cavagnolo"
+    altEn: "Lady and other performers in a scene from Macbett at Teatro Martini in Cavagnolo"
     desktopX: 50
-    desktopY: 24
-    mobileX: 65
-    mobileY: 20
+    desktopY: 35
+    mobileX: 55
+    mobileY: 35
   laboratorio:
     src: "/img/lab01.jpeg"
     altIt: "Il gruppo durante il training fisico e gli esercizi di movimento in laboratorio"

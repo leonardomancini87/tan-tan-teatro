@@ -33,8 +33,12 @@ export function renderHero(locale = 'it', photos = {}) {
       <div class="tt-hero-slides" data-hero-slides>${slides.map((slide, index) => {
         const text = slide[lang];
         const img = `<img class="tt-hero-image" src="${e(slide.src)}" alt="${e(text.alt)}" width="${slide.width}" height="${slide.height}" fetchpriority="${index === 0 ? 'high' : 'low'}" loading="eager" decoding="async" />`;
-        const photo = slide.src === '/img/matrimonio01.jpg'
-          ? `<picture><source type="image/webp" srcset="/img/matrimonio01-640.webp 640w, /img/matrimonio01-1200.webp 1200w, /img/matrimonio01-2000.webp 2000w" sizes="(max-width:760px) 780px, (min-width:1720px) 1580px, 92vw" />${img}</picture>`
+        const responsiveBase = {
+          '/img/matrimonio01.jpg': '/img/matrimonio01',
+          '/img/home/cavagnolo-lady.jpg': '/img/home/cavagnolo-lady',
+        }[slide.src];
+        const photo = responsiveBase
+          ? `<picture><source type="image/webp" srcset="${responsiveBase}-640.webp 640w, ${responsiveBase}-1200.webp 1200w, ${responsiveBase}-2000.webp 2000w" sizes="(max-width:760px) 780px, (min-width:1720px) 1580px, 92vw" />${img}</picture>`
           : img;
         return `<div class="tt-hero-slide${index === 0 ? ' is-active' : ''}" id="tt-hero-slide-${slide.id}" role="group" aria-label="${e(text.name)}" aria-hidden="${index !== 0}"${index !== 0 ? ' inert' : ''} data-mobile="${slide.mobile}" data-hero-name="${e(text.name)}" style="--tt-hero-position:${slide.desktopPosition};--tt-hero-mobile-position:${slide.mobilePosition}">
           ${index === 0 ? photo : `<template data-hero-photo>${photo}</template>`}
