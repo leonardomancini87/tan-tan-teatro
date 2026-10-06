@@ -102,9 +102,6 @@ press:
     page: "2"
 
 materials:
-  - label: "Libretto di sala accessibile"
-    kind: "Online"
-    url: "/spettacoli/macbett/libretto"
   - label: "Scheda dello spettacolo"
     kind: "PDF"
     url: "/doc/Macbett (Ionesco), Tan Tan Teatro – dossier.pdf"
@@ -114,6 +111,9 @@ materials:
   - label: "Dossier stampa"
     kind: "PDF"
     url: "/doc/macbett-rassegna.pdf"
+  - label: "Libretto di sala accessibile"
+    kind: "Online"
+    url: "/spettacoli/macbett/libretto"
 
 accessibility: >-
   Per l'accessibilità dello spettacolo, sono disponibili audiodescrizioni in italiano e sopratitoli in italiano, in inglese e in francese, tramite un'apposita piattaforma per l'accessibilità ([Sténtor](https://www.stentor.live/it/)), che è stata sviluppata nell'ambito del progetto di *public engagement* dell'Università degli Studi di Torino "[Etica. Esplorazioni Teatrali e Innovazione per una Cultura Accessibile](https://www.unito.it/territorio-e-societa/condivisione-e-partecipazione/progetti-di-public-engagement-di-ateneo-45)". Sono inoltre state realizzate audiodescrizioni. Per ulteriori informazioni: [accessibilita@tantanteatro.it](mailto:accessibilita@tantanteatro.it)
