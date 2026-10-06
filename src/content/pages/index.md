@@ -17,29 +17,29 @@ homeHero:
     mobileX: 59
     mobileY: 35
   macbett:
-    src: "/img/home/cavagnolo-lady.jpg"
-    altIt: "Lady e altri interpreti in una scena di Macbett al Teatro Martini di Cavagnolo"
-    altEn: "Lady and other performers in a scene from Macbett at Teatro Martini in Cavagnolo"
+    src: "/img/home/macbett-ghigliottine.jpg"
+    altIt: "Gli interpreti nella scena delle ghigliottine di Macbett a Cavagnolo"
+    altEn: "The performers in the guillotine scene from Macbett in Cavagnolo"
     desktopX: 50
-    desktopY: 35
-    mobileX: 55
-    mobileY: 35
-  laboratorio:
-    src: "/img/lab01.jpeg"
-    altIt: "Il gruppo durante il training fisico e gli esercizi di movimento in laboratorio"
-    altEn: "The group practising physical training and movement exercises in the laboratory"
-    desktopX: 50
-    desktopY: 46
-    mobileX: 64
+    desktopY: 45
+    mobileX: 58
     mobileY: 40
-  accessibilita:
-    src: "/img/macbett/macbett-03.jpg"
-    altIt: "Una scena di Macbett con sopratitoli proiettati sopra gli interpreti"
-    altEn: "A scene from Macbett with surtitles projected above the performers"
+  matrimonioFinale:
+    src: "/img/home/matrimonio-ivrea.jpg"
+    altIt: "Gli interpreti de Il matrimonio a Ivrea con le braccia alzate"
+    altEn: "The performers of The Marriage in Ivrea with their arms raised"
     desktopX: 50
-    desktopY: 6
-    mobileX: 55
-    mobileY: 15
+    desktopY: 45
+    mobileX: 65
+    mobileY: 40
+  laboratorio:
+    src: "/img/home/training-movimento.jpg"
+    altIt: "Il gruppo durante gli esercizi di movimento in laboratorio"
+    altEn: "The group practising movement exercises in the laboratory"
+    desktopX: 50
+    desktopY: 68
+    mobileX: 64
+    mobileY: 55
 homePhotos:
   shows: "/img/macbett01.jpg"
   lab: "/img/lab01.jpeg"

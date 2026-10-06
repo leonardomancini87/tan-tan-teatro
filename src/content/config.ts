@@ -22,6 +22,7 @@ const commonSchema = z.object({
     macbett: homePhotoSchema.optional(),
     laboratorio: homePhotoSchema.optional(),
     accessibilita: homePhotoSchema.optional(),
+    matrimonioFinale: homePhotoSchema.optional(),
   }).optional(),
   homePhotos: z.object({
     shows: z.string().optional(),

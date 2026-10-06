@@ -507,7 +507,7 @@ content:
         type: object
         fields:
           - name: matrimonio
-            label: "Il matrimonio"
+            label: "Il matrimonio (prima slide)"
             type: object
             fields:
               - name: src
@@ -549,7 +549,49 @@ content:
                   min: 0
                   max: 100
           - name: macbett
-            label: "Macbett"
+            label: "Macbett (seconda slide)"
+            type: object
+            fields:
+              - name: src
+                label: Fotografia
+                type: image
+                required: true
+                options:
+                  media: images
+              - name: altIt
+                label: Descrizione accessibile — italiano
+                type: text
+                required: true
+              - name: altEn
+                label: Descrizione accessibile — inglese
+                type: text
+                required: true
+              - name: desktopX
+                label: "Posizione orizzontale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: desktopY
+                label: "Posizione verticale — desktop (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileX
+                label: "Posizione orizzontale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+              - name: mobileY
+                label: "Posizione verticale — telefono (0–100%)"
+                type: number
+                options:
+                  min: 0
+                  max: 100
+          - name: matrimonioFinale
+            label: "Il matrimonio — Ivrea (terza slide)"
             type: object
             fields:
               - name: src
@@ -591,49 +633,7 @@ content:
                   min: 0
                   max: 100
           - name: laboratorio
-            label: "Training e movimento"
-            type: object
-            fields:
-              - name: src
-                label: Fotografia
-                type: image
-                required: true
-                options:
-                  media: images
-              - name: altIt
-                label: Descrizione accessibile — italiano
-                type: text
-                required: true
-              - name: altEn
-                label: Descrizione accessibile — inglese
-                type: text
-                required: true
-              - name: desktopX
-                label: "Posizione orizzontale — desktop (0–100%)"
-                type: number
-                options:
-                  min: 0
-                  max: 100
-              - name: desktopY
-                label: "Posizione verticale — desktop (0–100%)"
-                type: number
-                options:
-                  min: 0
-                  max: 100
-              - name: mobileX
-                label: "Posizione orizzontale — telefono (0–100%)"
-                type: number
-                options:
-                  min: 0
-                  max: 100
-              - name: mobileY
-                label: "Posizione verticale — telefono (0–100%)"
-                type: number
-                options:
-                  min: 0
-                  max: 100
-          - name: accessibilita
-            label: "ETICA · Sténtor"
+            label: "Training e movimento (quarta slide)"
             type: object
             fields:
               - name: src

@@ -76,10 +76,19 @@ test('Slides keep accessible names without visible navigation controls', () => {
   assert.equal((html.match(/aria-hidden="true" inert/g) || []).length, 3);
   for (const slide of HERO_SLIDES) assert(html.includes(`id="tt-hero-slide-${slide.id}"`));
 });
-test('Desktop has four slides, mobile has three', () => {
+test('Desktop and mobile both have the four selected photos', () => {
   const panels = HERO_SLIDES.map((s) => ({ dataset: { mobile: String(s.mobile) } }));
   assert.deepEqual(availableSlideIndices(panels, false), [0, 1, 2, 3]);
-  assert.deepEqual(availableSlideIndices(panels, true), [0, 1, 2]);
+  assert.deepEqual(availableSlideIndices(panels, true), [0, 1, 2, 3]);
+});
+test('The selected photographs follow the requested order, with training last', () => {
+  assert.deepEqual(HERO_SLIDES.map((slide) => slide.src), [
+    '/img/matrimonio01.jpg',
+    '/img/home/macbett-ghigliottine.jpg',
+    '/img/home/matrimonio-ivrea.jpg',
+    '/img/home/training-movimento.jpg',
+  ]);
+  assert.deepEqual(HERO_SLIDES.map((slide) => slide.route), ['marriage', 'macbett', 'marriage', 'lab']);
 });
 test('Timing is eight seconds, with a 1.4-second fade only', () => {
   assert.equal(HERO_TIMING.interval, 8000);
