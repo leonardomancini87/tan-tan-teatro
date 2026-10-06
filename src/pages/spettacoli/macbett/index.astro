@@ -274,3 +274,13 @@ const albums = albumDefinitions.map((album) => {
   .macbett-thanks :global(p) { margin: .45rem 0 0; }
   .macbett-page .show-performance-list:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 </style>
+
+<style is:global>
+  body:has(.macbett-page) .show-press-grid article {
+    min-height: 170px !important;
+    padding: 18px !important;
+  }
+  body:has(.macbett-page) .show-press-grid p {
+    margin-bottom: 16px;
+  }
+</style>
