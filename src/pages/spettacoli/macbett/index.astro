@@ -103,7 +103,7 @@ const albums = albumDefinitions.map((album) => {
   </section>
 
   {albums.length > 0 && <section class="show-related-albums" aria-labelledby="macbett-albums-title">
-    <div class="show-related-albums__head"><p class="show-related-albums__eyebrow">Archivio fotografico</p><h3 id="macbett-albums-title">Altre raccolte</h3></div>
+    <div class="show-related-albums__head"><p id="macbett-albums-title" class="show-related-albums__eyebrow">Archivio fotografico</p></div>
     <div class="show-related-albums__list">
       {albums.map((album) => <>
         <a class="show-related-album" href={album.coverImage!.src} data-fancybox={album.folder} data-caption={album.coverImage!.alt}>
@@ -156,13 +156,6 @@ const albums = albumDefinitions.map((album) => {
     letter-spacing: .14em;
     text-transform: uppercase;
     opacity: .58;
-  }
-
-  .show-related-albums__head h3 {
-    margin: 0;
-    line-height: 1.2;
-    letter-spacing: normal;
-    font-weight: 400;
   }
 
   .show-related-albums__list {
