@@ -42,6 +42,21 @@ content:
         options:
           media: images
 
+      - name: author
+        label: Autore
+        type: string
+      - name: year
+        label: Anno dell’opera
+        type: string
+      - name: stageImage
+        label: Fotografia dopo la sinossi
+        type: image
+        options:
+          media: images
+      - name: stageImageAlt
+        label: Descrizione della fotografia
+        type: text
+
       - name: synopsis
         label: Sinossi
         type: rich-text

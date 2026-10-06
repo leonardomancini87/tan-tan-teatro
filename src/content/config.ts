@@ -65,6 +65,8 @@ const commonSchema = z.object({
 
 const workSchema = commonSchema.extend({
   cmsStructured: z.boolean().optional(),
+  stageImage: z.string().optional(),
+  stageImageAlt: z.string().optional(),
   originalTitle: z.string().optional(),
   year: z.coerce.string().optional(),
   author: z.string().optional(),

@@ -1,0 +1,276 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import AutoGallery from '../../../components/AutoGallery.astro';
+import Gallery from '../../../components/Gallery.astro';
+import { getEntry } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+import { renderRichText } from '../../../lib/cms-richtext';
+import { macbettAlbumCaptions } from '../../../data/macbett-albums';
+import '../../../styles/components/show-editorial.css';
+
+const entry = await getEntry('work', 'macbett');
+if (!entry) throw new Error('Macbett content not found.');
+const data = entry.data;
+const cast = data.credits?.filter((credit) => /^(con|interpreti)$/i.test(credit.label)) ?? [];
+const credits = data.credits?.filter((credit) => !cast.includes(credit)) ?? [];
+const albumDefinitions = [
+  { folder: 'macbett/cavagnolo-2026-05-09', title: 'Teatro Martini — Comune di Cavagnolo (TO)', meta: '9 maggio 2026', cover: 'Cavagnolo-soldato.jpg' },
+  { folder: 'macbett/tangram-2025-03', title: 'Prove al Teatro Tangram', meta: 'Torino · marzo 2025' },
+];
+const albums = albumDefinitions.map((album) => {
+  const directory = path.join(process.cwd(), 'public', 'img', album.folder);
+  const captions = macbettAlbumCaptions[album.folder] ?? {};
+  const images = fs.existsSync(directory) ? fs.readdirSync(directory, { withFileTypes: true })
+    .filter((file) => file.isFile() && /\.(jpe?g|png|webp|avif)$/i.test(file.name))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+    .map((file) => ({ src: `/img/${album.folder}/${file.name}`, alt: captions[file.name] || file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ') })) : [];
+  return { ...album, images, coverImage: images.find((image) => image.src.endsWith('/' + album.cover)) ?? images[0] };
+}).filter((album) => album.coverImage);
+---
+
+<Layout title={`${data.title} | Tan Tan Teatro`} description={data.description} locale="it" image={data.thumbnail}>
+  <article class="show-page macbett-page">
+    <section class="show-hero">
+      <div class="show-hero-copy">
+        <h1>{data.title}</h1>
+        <p class="show-original">{data.year ?? '1972'}</p>
+        <p class="show-author">{data.author ?? 'Eugène Ionesco'}</p>
+      </div>
+      {data.thumbnail && <figure class="show-hero-image"><img src={data.thumbnail} alt={`Una scena di ${data.title}`} fetchpriority="high" /></figure>}
+    </section>
+
+    {data.synopsis && <section class="show-synopsis-standalone" aria-label="Sinossi">
+      <div class="show-synopsis-copy" set:html={renderRichText(data.synopsis)} />
+    </section>}
+
+    {data.stageImage && <figure class="show-stage-band macbett-stage-band">
+      <img src={data.stageImage} alt={data.stageImageAlt || `Una scena di ${data.title}`} loading="lazy" />
+    </figure>}
+
+    <section class="show-credits-horizontal" aria-labelledby="macbett-credits-title">
+      <h2 id="macbett-credits-title">Scheda artistica</h2>
+      <div class="show-credits-grid">
+        {cast.map((credit) => <div class="show-credit show-credit-cast"><strong>{credit.label}</strong><p>{credit.value}</p></div>)}
+        {credits.map((credit) => <div class="show-credit"><strong>{credit.label}</strong><p>{credit.value}</p></div>)}
+        {data.duration && <div class="show-credit"><strong>Durata</strong><p>{data.duration}</p></div>}
+      </div>
+      {data.thanks && <div class="macbett-thanks"><strong>Ringraziamenti</strong><div set:html={renderRichText(data.thanks)} /></div>}
+    </section>
+
+    {data.trailer?.url && <section class="show-trailer">
+      <div class="show-trailer-copy"><span>TRAILER</span><h2>{data.title}</h2></div>
+      <div class="show-video"><iframe src={data.trailer.url} title={data.trailer.title || `Trailer ${data.title}`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen /></div>
+    </section>}
+
+    <section class="show-history">
+      <div class="show-performances">
+        <h2>Precedenti rappresentazioni</h2>
+        <div class="show-performance-list" tabindex="0" role="region" aria-label="Precedenti rappresentazioni di Macbett">
+          {data.performances?.map((performance) => <div class="show-performance">
+            <strong>{performance.date}:</strong>
+            <span>{performance.url ? <a href={performance.url} target="_blank" rel="noopener noreferrer">{performance.name}</a> : performance.name}{performance.details ? `, ${performance.details}` : ''}</span>
+          </div>)}
+        </div>
+      </div>
+      <div class="show-press">
+        <h2>Rassegna stampa</h2>
+        <div class="show-press-grid">
+          {data.press?.map((item) => <article>
+            <p>{item.author}{item.author ? ', ' : ''}{item.url ? <a href={item.url} target="_blank" rel="noopener noreferrer"><em>{item.title}</em></a> : <em>{item.title}</em>}{item.publication ? `, “${item.publication}”` : ''}{item.issue ? `, n. ${item.issue}` : ''}{item.date ? `, ${item.date}` : ''}{item.page ? `, p. ${item.page}` : ''}.</p>
+            {item.url && <a class="show-press-arrow" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Apri: ${item.title}`}>→</a>}
+          </article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="show-info">
+      <div class="show-accessibility"><h2>Accessibilità</h2><div set:html={renderRichText(data.accessibility)} /></div>
+      <div class="show-materials">
+        <h2>Materiali</h2>
+        <div class="show-material-links">
+          {data.materials?.map((material) => <a href={material.url} target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h6.5L18 8v12.5H7V3.5Z" /><path d="M13.5 3.5V8H18" /><path d="M9.5 12h6M9.5 15h6M9.5 18h4" /></svg>
+            <span><strong>{material.label}</strong>{material.kind && <small>{material.kind}</small>}</span>
+          </a>)}
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="show-gallery-horizontal">
+    {data.gallery?.length ? <Gallery items={data.gallery} group="macbett" title="Galleria fotografica" variant="horizontal-full" /> : <AutoGallery slug={data.folder || 'macbett'} title="Galleria fotografica" group="macbett" variant="horizontal-full" />}
+  </section>
+
+  {albums.length > 0 && <section class="show-related-albums" aria-labelledby="macbett-albums-title">
+    <div class="show-related-albums__head"><p class="show-related-albums__eyebrow">Archivio fotografico</p><h3 id="macbett-albums-title">Altre raccolte</h3></div>
+    <div class="show-related-albums__list">
+      {albums.map((album) => <>
+        <a class="show-related-album" href={album.coverImage!.src} data-fancybox={album.folder} data-caption={album.coverImage!.alt}>
+          <div class="show-related-album__image"><img src={album.coverImage!.src} alt={album.coverImage!.alt} loading="lazy" /></div>
+          <div class="show-related-album__copy"><p class="show-related-album__meta">{album.meta}</p><h3>{album.title}</h3><span class="show-related-album__action">Apri album →</span></div>
+        </a>
+        {album.images.filter((image) => image.src !== album.coverImage!.src).map((image) => <a href={image.src} data-fancybox={album.folder} data-caption={image.alt} class="show-related-album__hidden" tabindex="-1" aria-hidden="true" />)}
+      </>)}
+    </div>
+  </section>}
+
+  <div class="show-page show-after-gallery"><nav class="show-next" aria-label="Navigazione spettacoli"><a href="/spettacoli">← Spettacoli</a><a href="/spettacoli/matrimonio">Il matrimonio →</a></nav></div>
+</Layout>
+
+<script>
+  import { Fancybox } from '@fancyapps/ui';
+  function initMacbettAlbums() {
+    document.querySelectorAll('.show-related-albums__list').forEach((root) => {
+      Fancybox.unbind(root);
+      Fancybox.bind(root, 'a[data-fancybox]', {
+        Hash: false, Thumbs: { autoStart: true },
+        Toolbar: { display: { left: ['infobar'], middle: [], right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'] } },
+      });
+    });
+  }
+  initMacbettAlbums();
+  document.addEventListener('astro:page-load', initMacbettAlbums);
+</script>
+
+<style>
+
+  .show-related-albums {
+    width: min(1320px, calc(100vw - 64px));
+    margin: clamp(3.5rem, 7vw, 7rem) auto clamp(4rem, 7vw, 7rem);
+  }
+
+  .show-related-albums__head {
+    display: grid;
+    grid-template-columns: minmax(180px, .35fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+    padding-bottom: clamp(1.2rem, 2vw, 1.8rem);
+    border-bottom: 1px solid rgba(18, 18, 18, .18);
+  }
+
+  .show-related-albums__eyebrow {
+    margin: 0;
+    font-size: .76rem;
+    line-height: 1.3;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .58;
+  }
+
+  .show-related-albums__head h3 {
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+
+  .show-related-albums__list {
+    margin-top: clamp(1.5rem, 3vw, 2.8rem);
+  }
+
+  .show-related-album {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
+    min-height: clamp(340px, 38vw, 540px);
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(18, 18, 18, .18);
+  }
+
+  .show-related-album__image {
+    min-width: 0;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .show-related-album__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: clamp(340px, 38vw, 540px);
+    object-fit: cover;
+    transition: transform .6s ease;
+  }
+
+  .show-related-album:hover .show-related-album__image img {
+    transform: scale(1.015);
+  }
+
+  .show-related-album__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.6rem, 3.2vw, 3.2rem);
+    border-top: 1px solid rgba(18, 18, 18, .18);
+  }
+
+  .show-related-album__meta {
+    margin: 0 0 .9rem;
+    font-size: .78rem;
+    line-height: 1.3;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .58;
+  }
+
+  .show-related-album__copy h3 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    font-weight: 400;
+  }
+
+  .show-related-album__action {
+    margin-top: clamp(2rem, 5vw, 5rem);
+    font-size: .88rem;
+    letter-spacing: .04em;
+  }
+
+  .show-related-album__hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 800px) {
+    .show-related-albums {
+      width: calc(100vw - 32px);
+      margin-top: 4rem;
+    }
+
+    .show-related-albums__head,
+    .show-related-album {
+      grid-template-columns: 1fr;
+    }
+
+    .show-related-albums__head {
+      gap: .7rem;
+    }
+
+    .show-related-album {
+      min-height: 0;
+    }
+
+    .show-related-album__image img {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .show-related-album__copy {
+      min-height: 230px;
+    }
+
+    .show-related-album__action {
+      margin-top: 3rem;
+    }
+  }
+
+  .macbett-stage-band {
+    aspect-ratio: 3 / 2 !important;
+    max-height: none !important;
+  }
+  .macbett-stage-band img { object-position: center 40% !important; }
+  .macbett-thanks { margin-top: 1.5rem; font-size: 18px; line-height: 1.5; }
+  .macbett-thanks :global(p) { margin: .45rem 0 0; }
+  .macbett-page .show-performance-list:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+</style>

@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   });
 
   return sortedEntries
-    .filter((entry) => !((entry.data.locale ?? 'it') === 'it' && entry.slug === 'matrimonio'))
+    .filter((entry) => !((entry.data.locale ?? 'it') === 'it' && ['matrimonio', 'macbett'].includes(entry.slug)))
     .map((entry) => {
     const locale = entry.data.locale ?? 'it';
     const publicSlug = entry.slug;

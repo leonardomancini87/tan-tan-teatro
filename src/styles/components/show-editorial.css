@@ -1,0 +1,1657 @@
+/* Shared editorial layout, originally used by Il matrimonio. */
+
+  .show-page {
+    width: min(1380px, 100%);
+    margin: 0 auto;
+    color: var(--color-base);
+    font-family: var(--font-serif);
+  }
+
+  .show-page *,
+  .show-page *::before,
+  .show-page *::after {
+    box-sizing: border-box;
+  }
+
+  .show-page h1,
+  .show-page h2,
+  .show-page p,
+  .show-page figure {
+    margin-top: 0;
+  }
+
+  .show-page h2 {
+    margin-bottom: 1.5rem;
+    color: var(--color-base);
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 2.4vw, 3.35rem);
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+  }
+
+  .show-page a {
+    color: inherit;
+  }
+
+  /* HERO */
+
+  .show-hero {
+    display: grid;
+    grid-template-columns: 36% 64%;
+    min-height: 430px;
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .show-hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5rem 3.8rem;
+  }
+
+  .show-hero h1 {
+    margin: 0 0 1.35rem;
+    color: var(--color-base);
+    font-family: var(--font-serif);
+    font-size: clamp(4.4rem, 4.9vw, 7rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+  }
+
+  .show-original,
+  .show-author {
+    margin: 0;
+    font-size: clamp(1.85rem, 1.8vw, 2.55rem);
+    line-height: 1.2;
+  }
+
+  .show-author {
+    margin-top: 0.25rem;
+  }
+
+  .show-hero-image {
+    position: relative;
+    min-height: 430px;
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .show-hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* SINOSSI */
+
+  .show-synopsis {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 820px);
+    justify-content: center;
+    gap: 4.5rem;
+    padding: 4.7rem 3rem 5rem;
+  }
+
+  .show-synopsis-copy {
+    font-size: clamp(1.65rem, 1.35vw, 2rem);
+    line-height: 1.48;
+  }
+
+  .show-synopsis-copy p {
+    margin-bottom: 1.5rem;
+  }
+
+  .show-synopsis-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* FOTO PANORAMICA */
+
+  .show-stage-band {
+    width: 100%;
+    aspect-ratio: 4.5 / 1;
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .show-stage-band img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* SCHEDA ARTISTICA */
+
+  .show-credits {
+    padding: 3.8rem 2.8rem 4.3rem;
+  }
+
+  .show-credits-grid {
+    display: grid;
+    grid-template-columns: 1.65fr 0.72fr 0.9fr;
+    gap: 4.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .show-credit {
+    padding: 1.1rem 0 1.3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .show-credit:last-child {
+    border-bottom: 0;
+  }
+
+  .show-credit strong,
+  .show-credit em {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-sans-serif);
+    font-size: 1.1rem;
+    line-height: 1.25;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .show-credit p {
+    margin: 0;
+    font-size: 1.45rem;
+    line-height: 1.42;
+  }
+
+  /* TRAILER */
+
+  .show-trailer {
+    display: grid;
+    grid-template-columns: 38% 62%;
+    min-height: 360px;
+    overflow: hidden;
+    background: #111;
+    color: #fff;
+  }
+
+  .show-trailer-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5rem 4rem;
+  }
+
+  .show-trailer-copy > span {
+    margin-bottom: 1.5rem;
+    font-family: var(--font-sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+  }
+
+  .show-trailer h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(3.5rem, 4vw, 5.5rem);
+  }
+
+  .show-video {
+    min-height: 360px;
+  }
+
+  .show-video iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    border: 0;
+  }
+
+  /* RAPPRESENTAZIONI + STAMPA */
+
+  .show-history {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 4.5rem;
+    padding: 4rem 2.8rem 4.5rem;
+  }
+
+  .show-history h2 {
+    font-size: 2.5rem;
+  }
+
+  .show-performance {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    padding: 0.95rem 0;
+    border-top: 1px solid var(--color-border);
+    font-size: 1.25rem;
+    line-height: 1.38;
+  }
+
+  .show-performance strong {
+    font-family: var(--font-sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .show-press-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .show-press-grid article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .show-press-grid p {
+    margin: 0 0 2rem;
+    font-size: 1.15rem;
+    line-height: 1.42;
+  }
+
+  .show-press-grid article > span {
+    font-size: 2rem;
+  }
+
+  /* ACCESSIBILITA + MATERIALI */
+
+  .show-info {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(127, 127, 127, 0.045);
+  }
+
+  .show-accessibility,
+  .show-materials {
+    padding: 3.5rem 3rem;
+  }
+
+  .show-materials {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .show-info h2 {
+    font-size: 2.8rem;
+  }
+
+  .show-accessibility p {
+    max-width: 760px;
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.48;
+  }
+
+  .show-material-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .show-material-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 48px;
+    padding: 0.85rem 1rem;
+    border: 1px solid currentColor;
+    text-decoration: none;
+    font-family: var(--font-sans-serif);
+  }
+
+  .show-material-links svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+  }
+
+  .show-material-links strong {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.1;
+  }
+
+  .show-material-links small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    opacity: 0.55;
+  }
+
+  /* GALLERIA */
+
+  .show-gallery {
+    padding: 4rem 0 1rem;
+  }
+
+  .show-gallery h2 {
+    padding: 0 2.8rem;
+  }
+
+  .show-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .show-gallery-grid a {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .show-gallery-grid img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .show-gallery-grid a:hover img {
+    transform: scale(1.015);
+  }
+
+  /* NAV FINALE */
+
+  .show-next {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 3rem 2.8rem 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .show-next a {
+    font-size: 1.7rem;
+    text-decoration: none;
+  }
+
+  /* TABLET */
+
+  @media (max-width: 1050px) {
+    .show-hero {
+      grid-template-columns: 42% 58%;
+      min-height: 360px;
+    }
+
+    .show-hero-copy {
+      padding: 3.5rem 2.4rem;
+    }
+
+    .show-hero h1 {
+      font-size: clamp(3.7rem, 5.3vw, 5.2rem);
+    }
+
+    .show-hero-image,
+    .show-hero-image img {
+      min-height: 360px;
+    }
+
+    .show-synopsis {
+      grid-template-columns: 150px 1fr;
+      gap: 3rem;
+    }
+
+    .show-credits-grid {
+      grid-template-columns: 1.35fr 0.75fr 0.9fr;
+      gap: 2.5rem;
+    }
+
+    .show-history {
+      grid-template-columns: 1fr;
+    }
+
+    .show-info {
+      grid-template-columns: 1fr;
+    }
+
+    .show-materials {
+      border-left: 0;
+      border-top: 1px solid var(--color-border);
+    }
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 720px) {
+    .show-page {
+      width: 100%;
+    }
+
+    .show-hero {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .show-hero-copy {
+      padding: 3.4rem 1.5rem 2.8rem;
+    }
+
+    .show-hero h1 {
+      font-size: clamp(3.2rem, 13vw, 4.3rem);
+      white-space: nowrap;
+    }
+
+    .show-original,
+    .show-author {
+      font-size: 1.65rem;
+    }
+
+    .show-hero-image,
+    .show-hero-image img {
+      min-height: 280px;
+    }
+
+    .show-synopsis {
+      display: block;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .show-synopsis header {
+      margin-bottom: 2rem;
+    }
+
+    .show-stage-band {
+      aspect-ratio: 1.7 / 1;
+    }
+
+    .show-credits {
+      padding: 3.4rem 1.5rem;
+    }
+
+    .show-credits-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .show-trailer {
+      grid-template-columns: 1fr;
+    }
+
+    .show-trailer-copy {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .show-video,
+    .show-video iframe {
+      min-height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
+    .show-history {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .show-performance {
+      grid-template-columns: 95px 1fr;
+    }
+
+    .show-press-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .show-press-grid article {
+      min-height: 0;
+    }
+
+    .show-accessibility,
+    .show-materials {
+      padding: 3.3rem 1.5rem;
+    }
+
+    .show-material-links {
+      flex-direction: column;
+    }
+
+    .show-material-links a {
+      width: 100%;
+    }
+
+    .show-gallery {
+      padding-top: 3.5rem;
+    }
+
+    .show-gallery h2 {
+      padding: 0 1.5rem;
+    }
+
+    .show-gallery-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .show-next {
+      padding: 2.5rem 1.5rem 0;
+    }
+  }
+
+
+  /* MATRIMONIO POLISH START */
+
+  /*
+   * Rifinitura proporzioni della pagina dedicata.
+   * Non modifica nessun contenuto testuale.
+   */
+
+  body:has(.show-page) main {
+    width: 100% !important;
+    max-width: none !important;
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .show-page {
+    width: min(1600px, calc(100vw - 40px)) !important;
+    max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .show-page img {
+    border-radius: 0 !important;
+  }
+
+  /* HERO */
+
+  .show-hero {
+    grid-template-columns: 35% 65% !important;
+    min-height: 470px !important;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .show-hero-copy {
+    padding: 4.2rem 3.2rem !important;
+  }
+
+  .show-hero h1 {
+    font-size: clamp(5rem, 5.5vw, 8rem) !important;
+    line-height: 0.9 !important;
+    white-space: nowrap !important;
+  }
+
+  .show-original,
+  .show-author {
+    font-size: clamp(2rem, 1.65vw, 2.7rem) !important;
+  }
+
+  .show-hero-image,
+  .show-hero-image img {
+    min-height: 470px !important;
+    border-radius: 0 !important;
+  }
+
+  .show-hero-image img {
+    object-position: center 50% !important;
+  }
+
+  /* SINOSSI */
+
+  .show-synopsis {
+    grid-template-columns: 190px minmax(0, 900px) !important;
+    gap: 5rem !important;
+    padding: 4.2rem 3rem 4.6rem !important;
+  }
+
+  .show-synopsis h2 {
+    font-size: clamp(2.8rem, 2.4vw, 3.6rem) !important;
+  }
+
+  .show-synopsis-copy {
+    font-size: clamp(1.85rem, 1.28vw, 2.1rem) !important;
+    line-height: 1.5 !important;
+  }
+
+  /* FOTO PANORAMICA */
+
+  .show-stage-band {
+    aspect-ratio: 3.25 / 1 !important;
+    max-height: 500px !important;
+  }
+
+  .show-stage-band img {
+    object-fit: cover !important;
+    object-position: center 48% !important;
+  }
+
+  /* SCHEDA ARTISTICA */
+
+  .show-credits {
+    padding: 3.5rem 3rem 4rem !important;
+  }
+
+  .show-credits h2 {
+    font-size: 3rem !important;
+    margin-bottom: 1.3rem !important;
+  }
+
+  .show-credits-grid {
+    grid-template-columns: 1.7fr 0.72fr 0.9fr !important;
+    gap: 4rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .show-credit {
+    padding: 1rem 0 1.15rem !important;
+  }
+
+  .show-credit strong,
+  .show-credit em {
+    font-size: 1.18rem !important;
+  }
+
+  .show-credit p {
+    font-size: 1.55rem !important;
+    line-height: 1.42 !important;
+  }
+
+  /* TRAILER */
+
+  .show-trailer {
+    grid-template-columns: 38% 62% !important;
+    min-height: 390px !important;
+  }
+
+  .show-trailer-copy {
+    padding: 4rem 3.5rem !important;
+  }
+
+  .show-trailer h2 {
+    font-size: clamp(4rem, 4vw, 6rem) !important;
+  }
+
+  .show-video,
+  .show-video iframe {
+    min-height: 390px !important;
+  }
+
+  /* RAPPRESENTAZIONI + STAMPA */
+
+  .show-history {
+    grid-template-columns: 0.93fr 1.07fr !important;
+    gap: 4.5rem !important;
+    padding: 3.8rem 3rem 4.2rem !important;
+  }
+
+  .show-history h2 {
+    font-size: 2.75rem !important;
+  }
+
+  .show-performance {
+    grid-template-columns: 130px 1fr !important;
+    padding: 1.05rem 0 !important;
+    font-size: 1.4rem !important;
+  }
+
+  .show-performance strong {
+    font-size: 1.08rem !important;
+  }
+
+  .show-press-grid {
+    gap: 1.2rem !important;
+  }
+
+  .show-press-grid article {
+    min-height: 220px !important;
+    padding: 1.65rem !important;
+  }
+
+  .show-press-grid p {
+    font-size: 1.28rem !important;
+    line-height: 1.46 !important;
+  }
+
+  /* ACCESSIBILITA + MATERIALI */
+
+  .show-info {
+    grid-template-columns: 1.3fr 0.8fr !important;
+  }
+
+  .show-accessibility,
+  .show-materials {
+    padding: 3.6rem 3rem !important;
+  }
+
+  .show-info h2 {
+    font-size: 2.9rem !important;
+  }
+
+  .show-accessibility p {
+    font-size: 1.35rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .show-material-links a {
+    min-height: 54px !important;
+    padding: 1rem 1.15rem !important;
+  }
+
+  .show-material-links strong {
+    font-size: 1.05rem !important;
+  }
+
+  /* GALLERIA */
+
+  .show-gallery {
+    padding: 3.8rem 0 0 !important;
+  }
+
+  .show-gallery h2 {
+    padding: 0 3rem !important;
+    margin-bottom: 1.6rem !important;
+    font-size: 3rem !important;
+  }
+
+  .show-gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 3px !important;
+  }
+
+  .show-gallery-grid a {
+    aspect-ratio: 1.55 / 1 !important;
+  }
+
+  .show-gallery-grid img {
+    object-position: center !important;
+  }
+
+  /* NAV FINALE + FOOTER */
+
+  .show-next {
+    padding: 2.4rem 3rem 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  body:has(.show-page) footer {
+    margin-top: 1.5rem !important;
+  }
+
+  /* TABLET */
+
+  @media (max-width: 1050px) {
+    .show-page {
+      width: calc(100vw - 32px) !important;
+    }
+
+    .show-hero {
+      grid-template-columns: 40% 60% !important;
+      min-height: 390px !important;
+    }
+
+    .show-hero-image,
+    .show-hero-image img {
+      min-height: 390px !important;
+    }
+
+    .show-synopsis {
+      grid-template-columns: 160px 1fr !important;
+      gap: 3rem !important;
+    }
+
+    .show-credits-grid {
+      gap: 2.4rem !important;
+    }
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 720px) {
+    .show-page {
+      width: 100% !important;
+    }
+
+    .show-hero {
+      display: flex !important;
+      min-height: 0 !important;
+    }
+
+    .show-hero-copy {
+      padding: 3.2rem 1.5rem 2.8rem !important;
+    }
+
+    .show-hero h1 {
+      font-size: clamp(3.2rem, 13vw, 4.3rem) !important;
+    }
+
+    .show-hero-image,
+    .show-hero-image img {
+      min-height: 280px !important;
+    }
+
+    .show-synopsis {
+      display: block !important;
+      padding: 3.5rem 1.5rem !important;
+    }
+
+    .show-synopsis header {
+      margin-bottom: 2rem !important;
+    }
+
+    .show-stage-band {
+      aspect-ratio: 1.65 / 1 !important;
+      max-height: none !important;
+    }
+
+    .show-credits {
+      padding: 3.4rem 1.5rem !important;
+    }
+
+    .show-credits-grid {
+      grid-template-columns: 1fr !important;
+      gap: 0 !important;
+    }
+
+    .show-trailer {
+      grid-template-columns: 1fr !important;
+      min-height: 0 !important;
+    }
+
+    .show-video,
+    .show-video iframe {
+      min-height: auto !important;
+      aspect-ratio: 16 / 9 !important;
+    }
+
+    .show-history {
+      grid-template-columns: 1fr !important;
+      padding: 3.5rem 1.5rem !important;
+    }
+
+    .show-info {
+      grid-template-columns: 1fr !important;
+    }
+
+    .show-materials {
+      border-left: 0 !important;
+      border-top: 1px solid var(--color-border) !important;
+    }
+
+    .show-gallery h2 {
+      padding: 0 1.5rem !important;
+    }
+
+    .show-gallery-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .show-gallery-grid a {
+      aspect-ratio: 1.45 / 1 !important;
+    }
+
+    .show-next {
+      padding: 2.2rem 1.5rem 1rem !important;
+    }
+  }
+
+  /* MATRIMONIO POLISH END */
+
+
+  /* SYNOPSIS PHOTO PATCH START */
+
+  /*
+   * Sinossi senza intestazione:
+   * diventa un blocco editoriale autonomo.
+   */
+
+  .show-synopsis {
+    display: block !important;
+    padding: 4.8rem 3rem 5.2rem !important;
+  }
+
+  .show-synopsis-copy {
+    width: min(920px, 100%) !important;
+    margin: 0 auto !important;
+    font-size: clamp(1.9rem, 1.32vw, 2.15rem) !important;
+    line-height: 1.52 !important;
+  }
+
+  .show-synopsis-copy p {
+    margin-bottom: 1.65rem !important;
+  }
+
+  .show-synopsis-copy p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /*
+   * Nuova fotografia panoramica.
+   * Crop più naturale e leggermente meno estremo.
+   */
+
+  .show-stage-band {
+    aspect-ratio: 3.45 / 1 !important;
+    max-height: 520px !important;
+  }
+
+  .show-stage-band img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 50% !important;
+  }
+
+  @media (max-width: 720px) {
+    .show-synopsis {
+      padding: 3.5rem 1.5rem 4rem !important;
+    }
+
+    .show-synopsis-copy {
+      font-size: 1.65rem !important;
+    }
+
+    .show-stage-band {
+      aspect-ratio: 1.65 / 1 !important;
+      max-height: none !important;
+    }
+  }
+
+  /* SYNOPSIS PHOTO PATCH END */
+
+
+  /* HORIZONTAL CREDITS START */
+
+  /* =========================
+     SINOSSI
+     ========================= */
+
+  .show-synopsis-standalone {
+    width: 100%;
+    padding: 4.8rem 3.2rem 5.2rem;
+  }
+
+  .show-synopsis-standalone .show-synopsis-copy {
+    width: min(940px, 100%) !important;
+    margin: 0 !important;
+
+    font-size: clamp(1.9rem, 1.3vw, 2.15rem) !important;
+    line-height: 1.52 !important;
+  }
+
+  .show-synopsis-standalone .show-synopsis-copy p {
+    margin: 0 0 1.65rem !important;
+  }
+
+  .show-synopsis-standalone .show-synopsis-copy p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+
+  /* =========================
+     SCHEDA ARTISTICA
+     ========================= */
+
+  .show-credits-horizontal {
+    width: 100%;
+    padding: 4rem 3.2rem 4.8rem;
+  }
+
+  .show-credits-horizontal > h2 {
+    margin: 0 0 1.8rem !important;
+
+    font-size: clamp(3rem, 2.5vw, 3.7rem) !important;
+    line-height: 1.05 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .show-credits-horizontal .show-credits-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    column-gap: 34px !important;
+    row-gap: 0 !important;
+
+    padding-top: 1.2rem !important;
+    border-top: 1px solid var(--color-border) !important;
+  }
+
+  /* Cast: tutta la larghezza */
+  .show-credits-horizontal .show-credit-cast {
+    grid-column: 1 / -1 !important;
+
+    padding: 1.2rem 0 1.8rem !important;
+    margin-bottom: 0.3rem;
+
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+
+  .show-credits-horizontal .show-credit-cast p {
+    max-width: 1250px;
+
+    font-size: 20px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Le vecchie colonne diventano trasparenti nella griglia */
+  .show-credits-horizontal .show-credit-column {
+    display: contents !important;
+  }
+
+  .show-credits-horizontal .show-credit {
+    min-width: 0;
+    padding: 1.35rem 0 1.5rem !important;
+
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+
+  .show-credits-horizontal .show-credit strong,
+  .show-credits-horizontal .show-credit em {
+    display: block !important;
+
+    margin-bottom: 0.45rem !important;
+
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+  }
+
+  .show-credits-horizontal .show-credit p {
+    margin: 0 !important;
+
+    font-size: 21px !important;
+    line-height: 1.42 !important;
+  }
+
+
+  /* =========================
+     TABLET
+     ========================= */
+
+  @media (max-width: 1050px) {
+
+    .show-synopsis-standalone {
+      padding: 4rem 2.4rem 4.4rem;
+    }
+
+    .show-credits-horizontal {
+      padding: 3.6rem 2.4rem 4rem;
+    }
+
+    .show-credits-horizontal .show-credits-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      column-gap: 28px !important;
+    }
+
+    .show-credits-horizontal .show-credit-cast {
+      grid-column: 1 / -1 !important;
+    }
+
+  }
+
+
+  /* =========================
+     MOBILE
+     ========================= */
+
+  @media (max-width: 720px) {
+
+    .show-synopsis-standalone {
+      padding: 3.5rem 1.5rem 4rem;
+    }
+
+    .show-synopsis-standalone .show-synopsis-copy {
+      font-size: 1.65rem !important;
+    }
+
+    .show-credits-horizontal {
+      padding: 3.4rem 1.5rem 3.8rem;
+    }
+
+    .show-credits-horizontal > h2 {
+      font-size: 2.8rem !important;
+    }
+
+    .show-credits-horizontal .show-credits-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .show-credits-horizontal .show-credit-cast {
+      grid-column: auto !important;
+    }
+
+    .show-credits-horizontal .show-credit-cast p,
+    .show-credits-horizontal .show-credit p {
+      font-size: 18px !important;
+    }
+
+    .show-credits-horizontal .show-credit strong,
+    .show-credits-horizontal .show-credit em {
+      font-size: 15px !important;
+    }
+
+  }
+
+  /* HORIZONTAL CREDITS END */
+
+
+  /* LOWER SECTIONS LARGE TYPE START */
+
+  /* TITOLI */
+  body:has(.show-page) .show-history h2,
+  body:has(.show-page) .show-info h2 {
+    font-size: 34px !important;
+    line-height: 1.08 !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* PRECEDENTI RAPPRESENTAZIONI */
+  body:has(.show-page) .show-performance {
+    grid-template-columns: 150px 1fr !important;
+    gap: 20px !important;
+    padding: 15px 0 !important;
+
+    font-size: 18px !important;
+    line-height: 1.45 !important;
+  }
+
+  body:has(.show-page) .show-performance strong {
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* RASSEGNA STAMPA */
+  body:has(.show-page) .show-press-grid article {
+    min-height: 220px !important;
+    padding: 20px !important;
+  }
+
+  body:has(.show-page) .show-press-grid p {
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+  }
+
+  body:has(.show-page) .show-press-grid article > span {
+    font-size: 28px !important;
+  }
+
+  /* ACCESSIBILITA */
+  body:has(.show-page) .show-accessibility p {
+    max-width: 900px !important;
+    font-size: 18px !important;
+    line-height: 1.58 !important;
+  }
+
+  /* MATERIALI */
+  body:has(.show-page) .show-material-links {
+    gap: 12px !important;
+  }
+
+  body:has(.show-page) .show-material-links a {
+    min-height: 62px !important;
+    padding: 13px 16px !important;
+  }
+
+  body:has(.show-page) .show-material-links strong {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  body:has(.show-page) .show-material-links small {
+    font-size: 12px !important;
+    margin-top: 4px !important;
+  }
+
+  body:has(.show-page) .show-material-links svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  @media (max-width: 1050px) {
+    body:has(.show-page) .show-performance {
+      font-size: 16px !important;
+    }
+
+    body:has(.show-page) .show-press-grid p {
+      font-size: 16px !important;
+    }
+
+    body:has(.show-page) .show-accessibility p {
+      font-size: 16px !important;
+    }
+  }
+
+  @media (max-width: 720px) {
+    body:has(.show-page) .show-performance {
+      grid-template-columns: 105px 1fr !important;
+      font-size: 16px !important;
+    }
+
+    body:has(.show-page) .show-press-grid p {
+      font-size: 16px !important;
+    }
+
+    body:has(.show-page) .show-accessibility p {
+      font-size: 16px !important;
+    }
+
+    body:has(.show-page) .show-material-links strong {
+      font-size: 15px !important;
+    }
+  }
+
+  /* LOWER SECTIONS LARGE TYPE END */
+
+
+  /* HERO TOP SPACE START */
+
+  body:has(.show-page) .show-page {
+    padding-top: 32px !important;
+  }
+
+  @media (max-width: 720px) {
+    body:has(.show-page) .show-page {
+      padding-top: 20px !important;
+    }
+  }
+
+  /* HERO TOP SPACE END */
+
+
+  /* PAGE WIDTH MATCH START */
+
+  /*
+   * Il Matrimonio usa ora esattamente la larghezza
+   * disponibile nel contenitore generale del sito,
+   * come Laboratorio e le altre pagine.
+   */
+
+  body:has(.show-page) .show-page {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /*
+   * Annulla il precedente valore speciale:
+   * width: min(1600px, calc(100vw - 40px))
+   */
+  body:has(.show-page) #site-main,
+  body:has(.show-page) #swup {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /*
+   * Le sezioni principali seguono tutte
+   * la stessa larghezza della pagina.
+   */
+  body:has(.show-page) .show-hero,
+  body:has(.show-page) .show-synopsis-standalone,
+  body:has(.show-page) .show-stage-band,
+  body:has(.show-page) .show-credits-horizontal,
+  body:has(.show-page) .show-trailer,
+  body:has(.show-page) .show-history,
+  body:has(.show-page) .show-info,
+  body:has(.show-page) .show-gallery,
+  body:has(.show-page) .show-next {
+    max-width: 100% !important;
+  }
+
+  @media (max-width: 720px) {
+    body:has(.show-page) .show-page {
+      width: 100% !important;
+    }
+  }
+
+  /* PAGE WIDTH MATCH END */
+
+
+  /* PRESS ARROW LINKS START */
+
+  .show-press-grid article {
+    position: relative;
+  }
+
+  .show-press-grid .show-press-arrow,
+  .show-press-grid .show-press-arrow:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: fit-content;
+    margin-top: auto;
+
+    color: inherit;
+    font-size: 30px !important;
+    line-height: 1;
+
+    text-decoration: none !important;
+    cursor: pointer;
+
+    transition:
+      transform 160ms ease,
+      opacity 160ms ease;
+  }
+
+  .show-press-grid .show-press-arrow:hover {
+    transform: translateX(5px);
+    opacity: 0.65;
+  }
+
+  .show-press-grid .show-press-arrow:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 5px;
+  }
+
+  /* PRESS ARROW LINKS END */
+
+
+  /* PERFORMANCE SCROLL FINAL START */
+
+  body:has(.show-page) .show-history {
+    align-items: start !important;
+  }
+
+  /*
+   * Titolo fuori dallo scroll.
+   * La lista sottostante resta sempre della stessa altezza.
+   */
+  body:has(.show-page) .show-performance-list {
+    height: 330px !important;
+    max-height: 330px !important;
+
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+
+    padding-right: 18px !important;
+    padding-bottom: 2px !important;
+
+    scrollbar-gutter: stable !important;
+
+    scroll-snap-type: y proximity;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+
+    /*
+     * Firefox
+     */
+    scrollbar-width: thin;
+    scrollbar-color:
+      rgba(20, 20, 20, 0.48)
+      rgba(20, 20, 20, 0.10);
+  }
+
+  /*
+   * Safari / Chrome:
+   * barra verticale sempre visibile.
+   */
+  body:has(.show-page) .show-performance-list::-webkit-scrollbar {
+    width: 9px !important;
+    -webkit-appearance: none;
+  }
+
+  body:has(.show-page) .show-performance-list::-webkit-scrollbar-track {
+    background: rgba(20, 20, 20, 0.08) !important;
+    border-radius: 999px;
+  }
+
+  body:has(.show-page) .show-performance-list::-webkit-scrollbar-thumb {
+    background: rgba(20, 20, 20, 0.42) !important;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  body:has(.show-page) .show-performance-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(20, 20, 20, 0.62) !important;
+    background-clip: padding-box;
+  }
+
+  /*
+   * Ogni rappresentazione resta un blocco indivisibile.
+   * Niente testo tagliato a metà.
+   */
+  body:has(.show-page) .show-performance-list .show-performance {
+    min-height: 94px !important;
+    height: auto !important;
+
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+
+    align-items: start !important;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+
+  /*
+   * La prima riga mantiene il filetto superiore.
+   */
+  body:has(.show-page) .show-performance-list .show-performance:first-child {
+    border-top: 1px solid var(--color-border) !important;
+  }
+
+  /*
+   * Su tablet un po' più alta.
+   */
+  @media (max-width: 1050px) {
+    body:has(.show-page) .show-performance-list {
+      height: 350px !important;
+      max-height: 350px !important;
+    }
+  }
+
+  /*
+   * Su smartphone evitiamo lo scroll annidato:
+   * lista completamente visibile.
+   */
+  @media (max-width: 720px) {
+    body:has(.show-page) .show-performance-list {
+      height: auto !important;
+      max-height: none !important;
+
+      overflow: visible !important;
+
+      padding-right: 0 !important;
+
+      scrollbar-gutter: auto !important;
+    }
+
+    body:has(.show-page) .show-performance-list .show-performance {
+      min-height: 0 !important;
+    }
+  }
+
+  /* PERFORMANCE SCROLL FINAL END */
+
+
+  /* FINAL FULL VIEWPORT GALLERY START */
+
+  /*
+   * Nessun contenitore superiore può tagliare
+   * la sezione che esce dalla normale pagina.
+   */
+  body:has(.show-gallery-horizontal),
+  body:has(.show-gallery-horizontal) main,
+  body:has(.show-gallery-horizontal) #site-main,
+  body:has(.show-gallery-horizontal) #swup,
+  body:has(.show-gallery-horizontal) .site-wrapper {
+    overflow-x: visible !important;
+  }
+
+  html {
+    overflow-x: clip;
+  }
+
+  /*
+   * La sezione è ora esterna a .show-page.
+   * La portiamo esattamente da bordo a bordo.
+   */
+  body:has(.show-page) .show-gallery-horizontal {
+    box-sizing: border-box !important;
+
+    position: relative !important;
+    left: 50% !important;
+
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: none !important;
+
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+
+    padding: 4rem 0 1rem !important;
+
+    overflow: visible !important;
+  }
+
+  /*
+   * Titolo.
+   */
+  body:has(.show-page) .show-gallery-horizontal .gallery-title {
+    box-sizing: border-box !important;
+
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 0 1.6rem !important;
+    padding: 0 3rem !important;
+
+    font-size: 3rem !important;
+    line-height: 1.05 !important;
+    font-weight: 400 !important;
+  }
+
+  /*
+   * STRISCIA FOTOGRAFICA:
+   * larghezza effettiva della finestra.
+   */
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid,
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid--horizontal-full {
+    box-sizing: border-box !important;
+
+    display: flex !important;
+
+    position: static !important;
+
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 0 0 12px !important;
+
+    gap: 6px !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 0 !important;
+
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body:has(.show-page) .show-gallery-horizontal .gallery-item,
+  body:has(.show-page) .show-gallery-horizontal .gallery-item--large {
+    box-sizing: border-box !important;
+
+    flex: 0 0 34vw !important;
+
+    width: 34vw !important;
+    min-width: 420px !important;
+    max-width: 680px !important;
+
+    margin: 0 !important;
+
+    grid-column: auto !important;
+
+    scroll-snap-align: start;
+  }
+
+  body:has(.show-page) .show-gallery-horizontal .gallery-item img,
+  body:has(.show-page) .show-gallery-horizontal .gallery-item--large img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    aspect-ratio: 4 / 3 !important;
+    object-fit: cover !important;
+
+    border-radius: 0 !important;
+  }
+
+  /*
+   * Nessuno spazio prima della prima foto.
+   */
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid > :first-child,
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid--horizontal-full > :first-child {
+    margin-left: 0 !important;
+  }
+
+  /*
+   * Scrollbar orizzontale.
+   */
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid::-webkit-scrollbar,
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid--horizontal-full::-webkit-scrollbar {
+    height: 8px !important;
+  }
+
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid::-webkit-scrollbar-track,
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid--horizontal-full::-webkit-scrollbar-track {
+    background: rgba(20,20,20,.07) !important;
+  }
+
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid::-webkit-scrollbar-thumb,
+  body:has(.show-page) .show-gallery-horizontal .gallery-grid--horizontal-full::-webkit-scrollbar-thumb {
+    background: rgba(20,20,20,.42) !important;
+    border-radius: 999px;
+  }
+
+  /*
+   * Navigazione successiva torna nel normale
+   * contenitore della pagina.
+   */
+  body:has(.show-page) .show-after-gallery {
+    padding-top: 0 !important;
+  }
+
+  body:has(.show-page) .show-after-gallery .show-next {
+    margin-top: 0 !important;
+  }
+
+  @media (max-width: 720px) {
+    body:has(.show-page) .show-gallery-horizontal {
+      padding-top: 3rem !important;
+    }
+
+    body:has(.show-page) .show-gallery-horizontal .gallery-title {
+      padding: 0 1.5rem !important;
+      font-size: 2.8rem !important;
+    }
+
+    body:has(.show-page) .show-gallery-horizontal .gallery-item,
+    body:has(.show-page) .show-gallery-horizontal .gallery-item--large {
+      flex-basis: 88vw !important;
+      width: 88vw !important;
+      min-width: 88vw !important;
+      max-width: none !important;
+    }
+  }
+
+  /* FINAL FULL VIEWPORT GALLERY END */

@@ -1,0 +1,37 @@
+export const macbettAlbumCaptions: Record<string, Record<string, string>> = {
+  'macbett/cavagnolo-2026-05-09': {
+    'Cavagnolo-soldato.jpg': 'Giulia Tonello (Soldato ferito). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Chen-2.jpg': 'Siyuan Chen (Macol). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Chen.jpg': 'Siyuan Chen (Macol). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-limonate.jpg': 'Giulia Tonello (Soldato) e Aurora Sempio (Venditore di limonate). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Cicoria.jpg': 'Viola Cicoria (Dama di compagnia). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Comune.jpg': 'Pablo Comune (Duncan). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-giustizia.jpg': 'Olivia Del Sante (Lady Duncan), Pablo Comune (Duncan) e Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-ghigliottine-2.jpg': 'Stefano Martelli (Macbett), Giovanni Pessina (Candor), Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-ghigliottine.jpg': 'Stefano Martelli (Macbett), Giovanni Pessina (Candor), Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Lady.jpg': 'Gabriele Vaschetti (Banco), Giovanni Pessina (Candor), Stefano Martelli (Macbett), Olivia Del Sante (Lady Duncan). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Martelli-Vaschetti.jpg': 'Stefano Martelli (Macbett) e Gabriele Vaschetti (Banco). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-martelli.jpg': 'Stefano Martelli (Macbett). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-Pessina.jpg': 'Giovanni Pessina (Candor). Fotografia: Alessio Dell’Anna',
+    'cavagnolo-tre.jpg': 'Olivia Del Sante (Lady Duncan), Gabriele Vaschetti (Banco), Viola Cicoria (Dama di compagnia). Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-uccisione-banco.jpg': 'Gabriele Vaschetti (Banco), Stefano Martelli (Macbett). Fotografia: Alessio Dell’Anna',
+  },
+
+  'macbett/tangram-2025-03': {
+    'macbett-tangram-01.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-02.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-03.jpg': 'Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-04.jpeg': 'Gianluca Fiore. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-05.jpg': 'Giulia Tonello, Olivia Del Sante, Viola Cicoria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-06.jpg': 'Leonardo Mancini, Siyuan Chen. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-07.jpg': 'Andrea D\'Oria. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-08.jpg': 'Aurora Sempio. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-09.JPG': 'Gianluca Fiore, Giulia Tonello, Sara Marenco, Leonardo Mancini. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-10.jpg': 'Leonardo Mancini, Aurora Sempio. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-11.JPG': 'Viola Cicoria, Aurora Sempio, Leonardo Mancini. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-12.JPG': 'Stefano Martelli, Viola Cicoria, Giovanni Pessina, Olivia Del Sante. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-13.JPG': 'Stefano Martelli. Fotografia: Gabriele Vaschetti',
+    'macbett-tangram-14.JPG': 'Aurora Sempio, Giulia Tonello, Stefano Martelli, Viola Cicoria, Giovanni Pessina. Fotografia: Gabriele Vaschetti',
+  },
+
+};
