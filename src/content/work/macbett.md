@@ -1,6 +1,6 @@
 ---
 templateKey: work-sub-page
-thumbnail: /img/home/macbett-copertina-cavagnolo.webp
+thumbnail: /img/home/macbett-copertina-fantasma.webp
 date: 2023-01-02T15:04:10.000Z
 pagetype:
   - main
