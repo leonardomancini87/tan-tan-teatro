@@ -61,6 +61,11 @@ const martiniImages = Array.from({ length: 20 }, (_, index) => ({
   src: `/img/${martiniSlug}/martini-${String(index + 1).padStart(2, '0')}.jpg`,
   caption: `Il Matrimonio — Villa Martini, Comune di Cavagnolo, 27 giugno 2026. Fotografie: Alessio Dell'Anna. ${index + 1} / 20`,
 }));
+const trailerSlug = 'matrimonio/trailer-2026-05-11';
+const trailerImages = Array.from({ length: 29 }, (_, index) => ({
+  src: `/img/${trailerSlug}/trailer-${String(index + 1).padStart(2, '0')}.jpg`,
+  caption: `Il Matrimonio — Riprese filmiche per il trailer, Il ramo d'oro, Torino, 11 maggio 2026. Fotografie: Alessio Dell'Anna. ${index + 1} / 29`,
+}));
 // MATRIMONIO_RELATED_ALBUMS_END
 
 
@@ -388,6 +393,24 @@ const cmsAuthor = matrimonioCmsEntry?.data.author ?? '{cmsAuthor}';
           class="show-related-album__hidden" tabindex="-1" aria-hidden="true"></a>
       ))}
       </>)}
+      <a class="show-related-album" href={trailerImages[0].src}
+        data-photo-viewer="matrimonio-trailer" data-caption={trailerImages[0].caption}>
+        <div class="show-related-album__image">
+          <img src={`/img/${trailerSlug}/copertina-26.webp`}
+            alt="Scena corale durante le riprese del trailer de Il Matrimonio"
+            loading="lazy" decoding="async" />
+        </div>
+        <div class="show-related-album__copy">
+          <p class="show-related-album__meta">Torino · 11 maggio 2026</p>
+          <h3>Riprese filmiche per il trailer</h3>
+          <p class="show-related-album__credit">Il ramo d'oro<br />Fotografie: Alessio Dell'Anna</p>
+          <span class="show-related-album__action">Apri album · {trailerImages.length} fotografie →</span>
+        </div>
+      </a>
+      {trailerImages.slice(1).map((image) => (
+        <a href={image.src} data-photo-viewer="matrimonio-trailer" data-caption={image.caption}
+          class="show-related-album__hidden" tabindex="-1" aria-hidden="true"></a>
+      ))}
     </div>
   </section>
 )}
