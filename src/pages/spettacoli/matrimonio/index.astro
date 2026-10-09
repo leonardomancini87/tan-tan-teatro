@@ -333,8 +333,8 @@ const cmsAuthor = matrimonioCmsEntry?.data.author ?? '{cmsAuthor}';
         </div>
         <div class="show-related-album__copy">
           <p class="show-related-album__meta">Torino · 3 luglio 2026</p>
-          <h3>Spazio Kairos</h3>
-          <p class="show-related-album__credit">Onda Larsen Teatro<br />Fotografie: Alessio Dell'Anna</p>
+          <h3 class="show-related-album__title--kairos">Spazio Kairos / Onda Larsen Teatro</h3>
+          <p class="show-related-album__credit">Fotografie: Alessio Dell'Anna</p>
           <span class="show-related-album__action">Apri album · 18 fotografie →</span>
         </div>
       </a>
@@ -443,6 +443,7 @@ const cmsAuthor = matrimonioCmsEntry?.data.author ?? '{cmsAuthor}';
     display: flex;
     flex-direction: column;
     min-width: 0;
+    container-type: inline-size;
     color: inherit;
     text-decoration: none;
   }
@@ -493,6 +494,11 @@ const cmsAuthor = matrimonioCmsEntry?.data.author ?? '{cmsAuthor}';
     line-height: 1.15;
     letter-spacing: -.015em;
     font-weight: 400;
+  }
+
+  .show-related-album__copy .show-related-album__title--kairos {
+    font-size: 5.4cqi;
+    white-space: nowrap;
   }
 
   .show-related-album__credit {
