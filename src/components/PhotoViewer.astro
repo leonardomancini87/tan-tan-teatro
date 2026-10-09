@@ -1,0 +1,162 @@
+<script>
+  type Photo = { src: string; caption: string };
+  let dialog: HTMLDialogElement | undefined;
+  let photos: Photo[] = [];
+  let index = 0;
+  let opener: HTMLElement | undefined;
+  let previousOverflow = '';
+  let previousBodyStyle = '';
+  let scrollX = 0;
+  let scrollY = 0;
+  let restorePosition = true;
+
+  function renderPhoto() {
+    if (!dialog || !photos.length) return;
+    const photo = photos[index];
+    const image = dialog.querySelector<HTMLImageElement>('[data-viewer-image]')!;
+    image.src = photo.src;
+    image.alt = photo.caption;
+    dialog.querySelector('[data-viewer-caption]')!.textContent = photo.caption;
+    dialog.querySelector('[data-viewer-count]')!.textContent = `${index + 1} / ${photos.length}`;
+    dialog.querySelector<HTMLButtonElement>('[data-viewer-prev]')!.disabled = index === 0;
+    dialog.querySelector<HTMLButtonElement>('[data-viewer-next]')!.disabled = index === photos.length - 1;
+  }
+
+  function stepPhoto(delta: number) {
+    index = Math.max(0, Math.min(photos.length - 1, index + delta));
+    renderPhoto();
+  }
+
+  function getDialog() {
+    if (dialog?.isConnected) return dialog;
+    dialog = document.createElement('dialog');
+    dialog.className = 'tt-photo-viewer';
+    dialog.setAttribute('aria-label', 'Galleria fotografica');
+    dialog.setAttribute('tabindex', '-1');
+    dialog.innerHTML = `
+      <div class="tt-photo-viewer__top">
+        <span data-viewer-count aria-live="polite"></span>
+        <button type="button" data-viewer-close aria-label="Chiudi galleria">Chiudi ×</button>
+      </div>
+      <div class="tt-photo-viewer__stage">
+        <button type="button" data-viewer-prev aria-label="Fotografia precedente">‹</button>
+        <img data-viewer-image alt="" />
+        <button type="button" data-viewer-next aria-label="Fotografia successiva">›</button>
+      </div>
+      <p data-viewer-caption class="tt-photo-viewer__caption"></p>`;
+    document.body.append(dialog);
+    dialog.querySelector('[data-viewer-close]')!.addEventListener('click', () => dialog?.close());
+    dialog.querySelector('[data-viewer-prev]')!.addEventListener('click', () => stepPhoto(-1));
+    dialog.querySelector('[data-viewer-next]')!.addEventListener('click', () => stepPhoto(1));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog || (event.target instanceof HTMLElement && event.target.classList.contains('tt-photo-viewer__stage'))) dialog?.close();
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); stepPhoto(1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); stepPhoto(-1); }
+    });
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const stage = dialog.querySelector<HTMLElement>('.tt-photo-viewer__stage')!;
+    stage.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+      touchStartY = event.changedTouches[0].clientY;
+    }, { passive: true });
+    stage.addEventListener('touchend', (event) => {
+      const dx = event.changedTouches[0].clientX - touchStartX;
+      const dy = event.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) stepPhoto(dx < 0 ? 1 : -1);
+    }, { passive: true });
+    dialog.addEventListener('close', () => {
+      document.body.style.cssText = previousBodyStyle;
+      document.documentElement.style.overflow = previousOverflow;
+      if (restorePosition) {
+        opener?.focus({ preventScroll: true });
+        window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+        requestAnimationFrame(() => {
+          if (!dialog?.open) window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+        });
+      }
+    });
+    return dialog;
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>('a[data-photo-viewer]');
+    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    // Intercept before Astro's document-level navigation handler.
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const group = link.dataset.photoViewer;
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-photo-viewer]'))
+      .filter((item) => item.dataset.photoViewer === group);
+    photos = links.map((item) => ({
+      src: item.href,
+      caption: item.dataset.caption || item.querySelector('img')?.alt || '',
+    }));
+    index = links.indexOf(link);
+    opener = link;
+    const viewer = getDialog();
+    renderPhoto();
+    if (!viewer.open) {
+      scrollX = window.scrollX;
+      scrollY = window.scrollY;
+      restorePosition = true;
+      previousOverflow = document.documentElement.style.overflow;
+      previousBodyStyle = document.body.style.cssText;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = `-${scrollX}px`;
+      document.body.style.width = '100%';
+      document.documentElement.style.overflow = 'hidden';
+      viewer.showModal();
+      viewer.focus({ preventScroll: true });
+    }
+  }, { capture: true });
+  document.addEventListener('astro:before-swap', () => {
+    restorePosition = false;
+    if (dialog?.open) dialog.close();
+  });
+</script>
+
+<style is:global>
+  dialog.tt-photo-viewer {
+    position: fixed; inset: 0; width: 100vw; max-width: none;
+    height: 100dvh; max-height: none; margin: 0; padding: 1rem;
+    box-sizing: border-box; border: 0; background: transparent; color: white;
+  }
+  dialog.tt-photo-viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: .75rem; }
+  dialog.tt-photo-viewer::backdrop { background: rgba(10, 10, 12, .88); }
+  .tt-photo-viewer__top { display: flex; align-items: center; justify-content: space-between; font-size: 1.1rem; }
+  .tt-photo-viewer__stage { display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; gap: 1rem; min-height: 0; }
+  .tt-photo-viewer__stage img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+  dialog.tt-photo-viewer button {
+    appearance: none; display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,.5); border-radius: 6px;
+    padding: .6rem .9rem; margin: 0; background: rgba(0,0,0,.45);
+    color: white; font-family: inherit; font-size: 1.1rem; line-height: 1.2;
+    cursor: pointer; text-transform: none; letter-spacing: normal;
+  }
+  dialog.tt-photo-viewer .tt-photo-viewer__stage button { width: 52px; height: 64px; padding: 0; font-size: 3rem; }
+  dialog.tt-photo-viewer button:disabled { opacity: .3; cursor: default; }
+  dialog.tt-photo-viewer button:focus-visible { outline: 1px solid rgba(255,255,255,.65); outline-offset: 3px; }
+  dialog.tt-photo-viewer:focus { outline: none; }
+  dialog.tt-photo-viewer button[data-viewer-close] {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: .5rem .7rem;
+    opacity: .85;
+  }
+  dialog.tt-photo-viewer button[data-viewer-close]:hover { opacity: 1; }
+  dialog.tt-photo-viewer button[data-viewer-close]:focus:not(:focus-visible) { outline: none; }
+  .tt-photo-viewer__caption { margin: 0; text-align: center; font-size: 1rem; line-height: 1.4; max-height: 20dvh; overflow-y: auto; }
+  @media (max-width: 600px) {
+    dialog.tt-photo-viewer { padding: .75rem .5rem; }
+    .tt-photo-viewer__stage { grid-template-columns: 36px minmax(0, 1fr) 36px; gap: .35rem; }
+    dialog.tt-photo-viewer .tt-photo-viewer__stage button { width: 36px; height: 52px; font-size: 2.5rem; }
+    .tt-photo-viewer__caption { font-size: .9rem; }
+  }
+</style>

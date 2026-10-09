@@ -1,5 +1,5 @@
 ---
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import PhotoViewer from "./PhotoViewer.astro";
 
 export interface GalleryItem {
   src: string;
@@ -22,6 +22,8 @@ const {
 } = Astro.props;
 ---
 
+<PhotoViewer />
+
 {title && <h3 class="gallery-title">{title}</h3>}
 
 <div
@@ -32,6 +34,7 @@ const {
     <a
       href={item.src}
       data-fancybox={group}
+      data-photo-viewer={group}
       data-caption={item.caption ?? item.alt}
       class={`gallery-item ${index % 5 === 0 ? "gallery-item--large" : ""}`}
       aria-label={item.alt}
@@ -41,32 +44,7 @@ const {
   ))}
 </div>
 
-<script>
-  import { Fancybox } from "@fancyapps/ui";
 
-  function initGalleries() {
-    document.querySelectorAll(".gallery-grid").forEach((grid) => {
-      Fancybox.unbind(grid);
-
-      Fancybox.bind(grid, "[data-fancybox]", {
-        groupAll: true,
-        Thumbs: {
-          autoStart: true,
-        },
-        Toolbar: {
-          display: {
-            left: ["infobar"],
-            middle: [],
-            right: ["zoom", "slideshow", "fullscreen", "thumbs", "close"],
-          },
-        },
-      });
-    });
-  }
-
-  initGalleries();
-  document.addEventListener("astro:page-load", initGalleries);
-</script>
 
 <style>
   .gallery-title {

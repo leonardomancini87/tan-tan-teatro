@@ -1,0 +1,15 @@
+export const studiumCaptions: Record<string, string> = {
+  'ambasciatore.jpg': 'Stefano Martelli, Eleonora Congiu, Aurora Sempio, Arturo Gerace, Viola Cicoria, Anita Masi, Giulia Tonello, Francesca Tomalino, Camilla Rizzo, Pablo Comune, Siyuan Chen, Giorgio Zaccarelli, Gabriela Checcia. Fotografia: Alessio Dell’Anna',
+  'aurora-sempio.jpg': 'Aurora Sempio. Fotografia: Alessio Dell’Anna',
+  'cortei.jpg': 'Davanti: Camilla Rizzo, Francesca Tomalino, Anita Masi. Fotografia: Alessio Dell’Anna',
+  'genitori.jpg': 'Gabriela Checchia, Pablo Comune. Fotografia: Alessio Dell’Anna',
+  'giannetto.jpg': 'Eleonora Congiu. Fotografia: Alessio Dell’Anna',
+  'lucista.jpg': 'Marco Usmigli. Fotografia: Alessio Dell’Anna',
+  'regista.jpg': 'Leonardo Mancini. Fotografia: Alessio Dell’Anna',
+  'ripasso.jpg': 'Fotografia: Alessio Dell’Anna',
+  'studio-testo.jpg': 'Olivia Del Sante. Fotografia: Alessio Dell’Anna',
+  'testo-ubriaco.jpg': 'Fotografia: Alessio Dell’Anna',
+  'tradimento.jpg': 'Siyuan Chen, Francesca Tomalino, Gabriele Vaschetti, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+  'ubriaco.jpg': 'Stefano Martelli. Fotografia: Alessio Dell’Anna',
+  'vescovo.jpg': 'Francesca Tomalino, Giulia Tonello, Camilla Rizzo, Gabriela Checchia, Arturo Gerace. Fotografia: Alessio Dell’Anna',
+};
