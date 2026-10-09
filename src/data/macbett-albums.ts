@@ -1,5 +1,14 @@
 export const macbettAlbumCaptions: Record<string, Record<string, string>> = {
   'macbett/cavagnolo-2026-05-09': {
+    'Cavagnolo-riprese-183.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-185.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-189.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-193.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-199.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-212.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-217.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+    'Cavagnolo-riprese-225.jpg': 'Macbett — Teatro Martini, Cavagnolo, 9 maggio 2026. Fotografia: Alessio Dell’Anna',
+
     'Cavagnolo-soldato.jpg': 'Giulia Tonello (Soldato ferito). Fotografia: Alessio Dell’Anna',
     'Cavagnolo-Chen-2.jpg': 'Siyuan Chen (Macol). Fotografia: Alessio Dell’Anna',
     'Cavagnolo-Chen.jpg': 'Siyuan Chen (Macol). Fotografia: Alessio Dell’Anna',
