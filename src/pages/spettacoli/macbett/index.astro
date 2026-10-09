@@ -106,11 +106,11 @@ const albums = albumDefinitions.map((album) => {
     <div class="show-related-albums__head"><p id="macbett-albums-title" class="show-related-albums__eyebrow">Archivio fotografico</p></div>
     <div class="show-related-albums__list">
       {albums.map((album) => <>
-        <a class="show-related-album" href={album.coverImage!.src} data-fancybox={album.folder} data-caption={album.coverImage!.alt}>
+        <a class="show-related-album" href={album.coverImage!.src} data-photo-viewer={album.folder} data-caption={album.coverImage!.alt}>
           <div class="show-related-album__image"><img src={album.coverImage!.src} alt={album.coverImage!.alt} loading="lazy" /></div>
           <div class="show-related-album__copy"><p class="show-related-album__meta">{album.meta}</p><h3>{album.title}</h3><span class="show-related-album__action">Apri album →</span></div>
         </a>
-        {album.images.filter((image) => image.src !== album.coverImage!.src).map((image) => <a href={image.src} data-fancybox={album.folder} data-caption={image.alt} class="show-related-album__hidden" tabindex="-1" aria-hidden="true" />)}
+        {album.images.filter((image) => image.src !== album.coverImage!.src).map((image) => <a href={image.src} data-photo-viewer={album.folder} data-caption={image.alt} class="show-related-album__hidden" tabindex="-1" aria-hidden="true" />)}
       </>)}
     </div>
   </section>}
@@ -119,7 +119,6 @@ const albums = albumDefinitions.map((album) => {
 </Layout>
 
 <script>
-  import { Fancybox } from '@fancyapps/ui';
   const performanceObservers = new Map<HTMLElement, ResizeObserver>();
   function clearPerformanceObservers() {
     performanceObservers.forEach((observer) => observer.disconnect());
@@ -145,18 +144,7 @@ const albums = albumDefinitions.map((album) => {
       update();
     });
   }
-  function initMacbettAlbums() {
-    document.querySelectorAll('.show-related-albums__list').forEach((root) => {
-      Fancybox.unbind(root);
-      Fancybox.bind(root, 'a[data-fancybox]', {
-        Hash: false, Thumbs: { autoStart: true },
-        Toolbar: { display: { left: ['infobar'], middle: [], right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'] } },
-      });
-    });
-  }
-  initMacbettAlbums();
   fitMacbettPerformances();
-  document.addEventListener('astro:page-load', initMacbettAlbums);
   document.addEventListener('astro:page-load', fitMacbettPerformances);
   document.addEventListener('astro:before-swap', clearPerformanceObservers);
 </script>

@@ -4,7 +4,7 @@ import { type CollectionEntry } from 'astro:content';
 import Gallery from '../components/Gallery.astro';
 import AutoGallery from '../components/AutoGallery.astro';
 import StructuredWorkContent from '../components/StructuredWorkContent.astro';
-import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import PhotoViewer from '../components/PhotoViewer.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -193,6 +193,7 @@ const relatedPhotoAlbums = [
 ---
 
 <Layout title={title} description={description} locale={currentLocale}>
+  <PhotoViewer />
   <article class={`post-content ${thumbnail ? '' : 'no-image'}`}>
     {description && (
       <p class="post-content-excerpt">{description}</p>
@@ -241,7 +242,7 @@ const relatedPhotoAlbums = [
                   <a
                     class="related-photo-album"
                     href={album.cover}
-                    data-fancybox={album.group}
+                    data-photo-viewer={album.group}
                     data-caption={album.images.find((image) => image.src === album.cover)?.alt || album.title}
                   >
                     <img src={album.cover} alt={album.alt} />
@@ -254,7 +255,7 @@ const relatedPhotoAlbums = [
                     .map((image) => (
                       <a
                         href={image.src}
-                        data-fancybox={album.group}
+                        data-photo-viewer={album.group}
                         data-caption={image.alt}
                         style="display: none;"
                       />
@@ -296,36 +297,7 @@ const relatedPhotoAlbums = [
       </aside>
     </div>
 
-    <script>
-      import { Fancybox } from '@fancyapps/ui';
 
-      function initRelatedPhotoAlbums() {
-        document
-          .querySelectorAll('.related-photo-albums__grid')
-          .forEach((grid) => {
-            Fancybox.unbind(grid);
-
-            Fancybox.bind(grid, 'a[data-fancybox]', {
-              Hash: false,
-
-              Thumbs: {
-                autoStart: true,
-              },
-
-              Toolbar: {
-                display: {
-                  left: ['infobar'],
-                  middle: [],
-                  right: ['zoom', 'slideshow', 'fullscreen', 'thumbs', 'close'],
-                },
-              },
-            });
-          });
-      }
-
-      initRelatedPhotoAlbums();
-      document.addEventListener('astro:page-load', initRelatedPhotoAlbums);
-    </script>
 
     <script is:inline>
       function initWorkToc() {
