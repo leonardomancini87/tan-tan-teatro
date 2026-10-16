@@ -3,6 +3,10 @@
     {
       "source": "/iscrizioni/:slug",
       "destination": "/iscrizioni/index.html"
+    },
+    {
+      "source": "/lab/:code",
+      "destination": "/lab/index.html"
     }
   ]
 }

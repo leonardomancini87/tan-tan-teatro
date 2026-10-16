@@ -16,9 +16,10 @@ export interface Props {
     children?: any;
     editorial?: boolean;
     image?: string;
+    noindex?: boolean;
 }
 
-const { title, description, locale = "it", editorial = false, image } = Astro.props;
+const { title, description, locale = "it", editorial = false, image, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,6 +28,7 @@ const { title, description, locale = "it", editorial = false, image } = Astro.pr
         <meta charset="UTF-8" />
         <meta name="description" content={description || "Clay Theme"} />
         <meta name="viewport" content="width=device-width" />
+        {noindex && <meta name="robots" content="noindex, nofollow" />}
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="shortcut icon" href="/favicon.ico">
