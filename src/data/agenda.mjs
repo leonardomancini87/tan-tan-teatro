@@ -45,7 +45,7 @@ export const PERFORMANCE_SNAPSHOT = [
   { id: 'snapshot-matrimonio-ptc', title: 'Il matrimonio', venue: 'Piccolo Teatro Comico', city: 'Torino', starts_on: '2027-02-12', ends_on: '2027-02-13', is_published: true },
 ];
 
-const LAB_OCCURRENCES_2026 = [
+export const LAB_OCCURRENCES_2026 = [
   '2026-10-02',
   '2026-10-07',
   '2026-10-14',

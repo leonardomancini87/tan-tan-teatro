@@ -1,10 +1,11 @@
-import { editorialEvents, oneOffEvents } from '../data/agenda.mjs';
+import { editorialEvents, oneOffEvents, LAB, LAB_OCCURRENCES_2026, routes } from '../data/agenda.mjs';
 
 /**
  * Public feed of the website's own events (readings, research, one-off
- * appointments), read by the Tan Tan Teatro app's home. Shows and the
- * laboratory are excluded: the app already gets them from Supabase.
- * Generated at build time; the app filters out past events itself.
+ * appointments and the laboratory with its dates), read by the Tan Tan Teatro
+ * app's home. Shows are excluded: the app already gets them from Supabase.
+ * Generated at build time; the app filters out past events itself and, for
+ * the laboratory, picks the next date from `occurrences`.
  */
 export const prerender = true;
 
@@ -13,7 +14,11 @@ const abs = (path: string) => (/^https?:\/\//.test(path) ? path : `${SITE}${path
 
 export function GET() {
   const pick = (locale: 'it' | 'en') =>
-    [...editorialEvents(locale, '2000-01-01'), ...oneOffEvents(locale)].filter((e) => e.kind !== 'lab' && e.kind !== 'show');
+    [...editorialEvents(locale, '2000-01-01'), ...oneOffEvents(locale)]
+      .filter((e) => e.kind !== 'show')
+      .map((e) => (e.id === LAB.id
+        ? { ...e, start: LAB.start, end: LAB.end, href: routes(locale).lab, detail: '', occurrences: LAB_OCCURRENCES_2026 }
+        : e));
   const it = pick('it');
   const en = new Map(pick('en').map((e) => [e.id, e]));
   const events = it.map((e) => {
@@ -30,6 +35,7 @@ export function GET() {
       address: e.address ?? '',
       image: abs(e.image),
       url: { it: abs(e.href), en: abs(x.href) },
+      ...(e.occurrences ? { occurrences: e.occurrences } : {}),
     };
   });
   return new Response(JSON.stringify({ version: 1, events }, null, 2), {
