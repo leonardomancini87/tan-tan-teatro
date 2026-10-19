@@ -11,11 +11,11 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const today = '2026-09-22';
 const row = (props = {}) => ({ id:'test', title:'Macbett', starts_on:'2026-11-14', ends_on:null, is_published:true, ...props });
-test('Initial homepage order: UNIGHT, laboratory, Macbett', () => {
+test('Initial homepage order: UNIGHT, laboratory, library readings', () => {
   const items=upcomingEvents({today,limit:3});
-  assert.deepEqual(items.map(x=>x.start),['2026-09-25','2026-10-02','2026-11-14']);
+  assert.deepEqual(items.map(x=>x.start),['2026-09-25','2026-10-02','2026-10-28']);
 });
-test('Full calendar also includes December and 2027', () => assert.equal(upcomingEvents({today}).length,6));
+test('Full calendar also includes December and 2027', () => assert.equal(upcomingEvents({today}).length,7));
 test('Passed two-day event disappears on 27 September', () => assert(!upcomingEvents({today:'2026-09-27'}).some(x=>x.id===UNIGHT.id)));
 test('Two-day event stays visible on its final day', () => assert(upcomingEvents({today:'2026-09-26'}).some(x=>x.id===UNIGHT.id)));
 test('Ongoing laboratory remains visible', () => assert(upcomingEvents({today:'2026-11-01'}).some(x=>x.id===LAB.id)));
@@ -52,14 +52,14 @@ test('Date range formatting works across years', () => {
   const d=dateLabel('2026-12-30','2027-01-02','it');assert(d.until.includes('2027'));assert(d.long.includes('2026'));
 });
 test('Remote titles and venues cannot inject HTML', () => {
-  const html=renderEvents({today,rows:[row({title:'<script>alert(1)</script>',venue:'<img src=x onerror=alert(1)>', city:'" onmouseover="boom'})]});
+  const html=renderEvents({today,limit:0,rows:[row({title:'<script>alert(1)</script>',venue:'<img src=x onerror=alert(1)>', city:'" onmouseover="boom'})]});
   assert(!html.includes('<script>'));assert(!html.includes('<img src=x'));assert(html.includes('&lt;script&gt;'));
 });
 test('Unexpected show title has a working contact link, never a made-up URL', () => assert.equal(normalizePerformances([row({title:'New show'})])[0].href,'/contatti'));
 test('Open internal bookings link to the website booking page', () => {
   const item=normalizePerformances([row({source_key:'macbett-test',booking_enabled:true,booking_capacity:80,booking_max_per_request:6})])[0];
   assert.equal(item.bookingHref,'/prenota/?evento=macbett-test');
-  assert(renderEvents({today,rows:[row({source_key:'macbett-test',booking_enabled:true})]}).includes('Prenota'));
+  assert(renderEvents({today,limit:0,rows:[row({source_key:'macbett-test',booking_enabled:true})]}).includes('Prenota'));
 });
 test('English bookings are localized and external theatre links are respected', () => {
   assert.equal(normalizePerformances([row({source_key:'macbett-test',booking_enabled:true})],'en')[0].bookingHref,'/en/book/?event=macbett-test');
@@ -68,7 +68,7 @@ test('English bookings are localized and external theatre links are respected', 
 test('Closed bookings do not expose a booking link', () => assert.equal(normalizePerformances([row({booking_enabled:false})])[0].bookingHref,''));
 test('Escape helper handles quotes', () => assert.equal(escapeHTML('<&"\''),'&lt;&amp;&quot;&#39;'));
 test('SSR agenda contains dates and links without JavaScript', () => {
-  const html=renderAgenda({today});assert(html.includes('UNIGHT'));assert(html.includes('2026-11-14'));assert(!html.includes('Caricamento'));
+  const html=renderAgenda({today});assert(html.includes('UNIGHT'));assert(html.includes('2026-10-28'));assert(!html.includes('Caricamento'));
 });
 test('Calendar empty state is useful after all dates have ended', () => assert(renderEvents({today:'2030-01-01'}).includes('Resta in contatto')));
 test('Homepage has one h1 and no fake newsletter or invented photos', () => {
@@ -86,6 +86,12 @@ test('Old archives are preserved and extracted in both languages', () => {
     const archive=extractArchive(md,locale);assert(archive.past.includes('2025'));assert(archive.projects.includes('Kathakali'));
     const html=renderAppointments(locale,archive,today);assert(html.includes('unight-2026'));assert(html.includes('2027-02-12'));
   }
+});
+test('Library readings: 28 October, 11-13, address and external link; gone on 29 October', () => {
+  const ev=upcomingEvents({today:'2026-10-28'}).find(x=>x.id==='biblioteca-scienze-letterarie-20-anni');
+  assert(ev);assert.equal(ev.detail,'11:00\u201313:00');assert(ev.href.startsWith('https://www.bibliosum.unito.it/'));
+  const html=renderEvents({today:'2026-10-28',mode:'list',limit:0});assert(html.includes('Via Eusebio Bava 31, 10124 Torino'));
+  assert(!upcomingEvents({today:'2026-10-29'}).some(x=>x.id==='biblioteca-scienze-letterarie-20-anni'));
 });
 test('Broken archive shape is detected, never silently discarded', () => assert.throws(()=>extractArchive('no archive')));
 test('First performance snapshot matches the existing site', () => assert.equal(PERFORMANCE_SNAPSHOT[0].starts_on,'2026-11-14'));

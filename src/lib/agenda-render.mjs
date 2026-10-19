@@ -37,7 +37,7 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
   })();
   const editorialAddress = /dravelli/i.test(event.venue ?? '')
     ? 'Via Praciosa 11, 10024 Moncalieri (TO)'
-    : '';
+    : event.address ?? '';
   return `<article class="tt-event tt-event--${e(event.kind)}" data-event-id="${e(event.id)}">
     <div class="tt-event-photo"><img src="${e(event.image)}" alt="" loading="lazy" decoding="async" width="320" height="360" style="--tt-event-position:${e(event.imagePosition)};--tt-event-mobile-position:${e(event.mobileImagePosition ?? event.imagePosition)}" /></div>
     <div class="tt-event-copy">

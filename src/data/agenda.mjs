@@ -27,6 +27,13 @@ export const LAB = Object.freeze({
   registration: { it: '/iscrizioni/?slug=lab-training', en: '/en/iscrizioni/?slug=lab-training' },
 });
 
+export const BIBLIOTECA_20 = Object.freeze({
+  id: 'biblioteca-scienze-letterarie-20-anni', start: '2026-10-28', end: '2026-10-28',
+  time: '11:00\u201313:00',
+  url: 'https://www.bibliosum.unito.it/it/biblioteche-e-mediateca/biblioteca-di-scienze-letterarie-e-filologiche-del-dipartimento-di-studi',
+  address: 'Via Eusebio Bava 31, 10124 Torino',
+});
+
 // Source: upcoming dates already present in the uploaded site (news-en.md).
 // This is a resilience snapshot, NOT a second live calendar to maintain.
 export const PERFORMANCE_SNAPSHOT = [
@@ -120,6 +127,22 @@ export function editorialEvents(locale = 'it', today = romeToday()) {
       registrationOpen: open, secondaryHref: r.lab },
   ].map((e) => ({ ...e, title: !it && e.id === UNIGHT.id ? 'Tan Tan Teatro at UNIGHT 2026' : e.title }));
 }
+/** One-off public appointments: shown in the upcoming lists only, not in "Eventi e progetti". */
+export function oneOffEvents(locale = 'it') {
+  const it = locale === 'it';
+  return [
+    { id: BIBLIOTECA_20.id, start: BIBLIOTECA_20.start, end: BIBLIOTECA_20.end, kind: 'other',
+      title: it ? 'Letture per i vent\u2019anni della Biblioteca di Scienze letterarie e filologiche'
+        : 'Readings for the 20th anniversary of the Library of Literary and Philological Studies',
+      subtitle: it ? 'Universit\u00e0 degli Studi di Torino' : 'University of Turin',
+      venue: it ? 'Biblioteca di Scienze letterarie e filologiche \u00b7 Torino' : 'Library of Literary and Philological Studies \u00b7 Turin',
+      address: BIBLIOTECA_20.address,
+      image: '/img/bio-detail.jpg', imagePosition: '50% 40%', mobileImagePosition: '50% 40%',
+      imageAlt: it ? 'Attori e attrici di Tan Tan Teatro in scena' : 'Tan Tan Teatro performers on stage',
+      href: BIBLIOTECA_20.url, label: it ? 'Scopri la biblioteca' : 'About the library',
+      detail: BIBLIOTECA_20.time },
+  ];
+}
 export function normalizePerformances(rows, locale = 'it') {
   if (!Array.isArray(rows)) throw new TypeError('Invalid calendar response');
   const r = routes(locale), it = locale === 'it';
@@ -159,7 +182,7 @@ export function normalizePerformances(rows, locale = 'it') {
 }
 export function upcomingEvents({ locale = 'it', rows = PERFORMANCE_SNAPSHOT, today = romeToday(), limit = 0 } = {}) {
   const seen = new Set();
-  const events = [...editorialEvents(locale, today), ...normalizePerformances(rows, locale)]
+  const events = [...editorialEvents(locale, today), ...oneOffEvents(locale), ...normalizePerformances(rows, locale)]
     .filter((e) => e.end >= today)
     .sort((a, b) => a.start.localeCompare(b.start) || a.title.localeCompare(b.title))
     .filter((e) => {
