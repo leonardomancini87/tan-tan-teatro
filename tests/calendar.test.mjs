@@ -87,11 +87,18 @@ test('Old archives are preserved and extracted in both languages', () => {
     const html=renderAppointments(locale,archive,today);assert(html.includes('unight-2026'));assert(html.includes('2027-02-12'));
   }
 });
-test('Library readings: 28 October, 11-13, address and external link; gone on 29 October', () => {
+test('Library readings: 28 October, 11-13, address and dedicated page; gone on 29 October', () => {
   const ev=upcomingEvents({today:'2026-10-28'}).find(x=>x.id==='biblioteca-scienze-letterarie-20-anni');
-  assert(ev);assert.equal(ev.detail,'11:00\u201313:00');assert(ev.href.startsWith('https://www.bibliosum.unito.it/'));
+  assert(ev);assert.equal(ev.detail,'11:00\u201313:00');assert.equal(ev.href,'/appuntamenti/biblioteca-20-anni/');assert(existsSync(resolve(root,'public',ev.image.slice(1))));
   const html=renderEvents({today:'2026-10-28',mode:'list',limit:0});assert(html.includes('Via Eusebio Bava 31, 10124 Torino'));
   assert(!upcomingEvents({today:'2026-10-29'}).some(x=>x.id==='biblioteca-scienze-letterarie-20-anni'));
 });
+test('Library readings page: both languages, date, time, address, library link', async () => {
+  const { renderBiblioteca } = await import('../src/lib/biblioteca.mjs');
+  for (const locale of ['it','en']) { const html=renderBiblioteca(locale); for (const s of ['11:00\u201313:00','Via Eusebio Bava 31, 10124 Torino','https://www.bibliosum.unito.it/','2026-10-28T11:00']) assert(html.includes(s), s); assert(existsSync(resolve(root,'public',src(html)))); }
+  assert(renderBiblioteca('it').includes('Mercoled\u00ec 28 ottobre 2026'));
+  for (const p of ['src/pages/appuntamenti/biblioteca-20-anni.astro','src/pages/en/news/library-20-years.astro']) assert(existsSync(resolve(root,p)), p);
+});
+const src=(html)=>html.match(/<img[^>]+src="\/([^"]+)"/)[1];
 test('Broken archive shape is detected, never silently discarded', () => assert.throws(()=>extractArchive('no archive')));
 test('First performance snapshot matches the existing site', () => assert.equal(PERFORMANCE_SNAPSHOT[0].starts_on,'2026-11-14'));

@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { renderBiblioteca } from '../lib/biblioteca.mjs';
+import { BIBLIOTECA_20 } from '../data/agenda.mjs';
+interface Props { locale?: 'it' | 'en'; }
+const { locale = 'it' } = Astro.props;
+const title = locale === 'it'
+  ? 'Letture per i vent’anni della Biblioteca di Scienze letterarie e filologiche | Tan Tan Teatro'
+  : 'Readings for the Library’s 20th anniversary | Tan Tan Teatro';
+const description = locale === 'it'
+  ? 'Mercoledì 28 ottobre 2026, 11:00–13:00: Tan Tan Teatro partecipa con alcune letture ai vent’anni della Biblioteca di Scienze letterarie e filologiche, Via Eusebio Bava 31, Torino.'
+  : 'Wednesday 28 October 2026, 11:00–13:00: Tan Tan Teatro takes part with readings in the 20th anniversary of the Library of Literary and Philological Studies, Via Eusebio Bava 31, Turin.';
+---
+<Layout title={title} description={description} locale={locale} editorial={true} image={BIBLIOTECA_20.image}>
+  <Fragment set:html={renderBiblioteca(locale)} />
+</Layout>

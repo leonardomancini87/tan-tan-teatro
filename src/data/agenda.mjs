@@ -29,7 +29,9 @@ export const LAB = Object.freeze({
 
 export const BIBLIOTECA_20 = Object.freeze({
   id: 'biblioteca-scienze-letterarie-20-anni', start: '2026-10-28', end: '2026-10-28',
-  time: '11:00\u201313:00',
+  time: '11:00\u201313:00', startsAt: '2026-10-28T11:00:00+01:00',
+  // Hands and script only: no performer is recognisable.
+  image: '/img/letture-biblioteca.jpg', imageWidth: 1300, imageHeight: 867, imagePosition: '62% 50%',
   url: 'https://www.bibliosum.unito.it/it/biblioteche-e-mediateca/biblioteca-di-scienze-letterarie-e-filologiche-del-dipartimento-di-studi',
   address: 'Via Eusebio Bava 31, 10124 Torino',
 });
@@ -137,9 +139,10 @@ export function oneOffEvents(locale = 'it') {
       subtitle: it ? 'Universit\u00e0 degli Studi di Torino' : 'University of Turin',
       venue: it ? 'Biblioteca di Scienze letterarie e filologiche \u00b7 Torino' : 'Library of Literary and Philological Studies \u00b7 Turin',
       address: BIBLIOTECA_20.address,
-      image: '/img/bio-detail.jpg', imagePosition: '50% 40%', mobileImagePosition: '50% 40%',
-      imageAlt: it ? 'Attori e attrici di Tan Tan Teatro in scena' : 'Tan Tan Teatro performers on stage',
-      href: BIBLIOTECA_20.url, label: it ? 'Scopri la biblioteca' : 'About the library',
+      image: BIBLIOTECA_20.image, imagePosition: BIBLIOTECA_20.imagePosition, mobileImagePosition: BIBLIOTECA_20.imagePosition,
+      imageAlt: it ? 'Mani che sfogliano un copione' : 'Hands leafing through a script',
+      href: locale === 'en' ? '/en/news/library-20-years/' : '/appuntamenti/biblioteca-20-anni/',
+      label: UI[locale].event,
       detail: BIBLIOTECA_20.time },
   ];
 }
