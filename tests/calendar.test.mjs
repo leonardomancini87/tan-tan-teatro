@@ -97,6 +97,7 @@ test('Library readings page: both languages, date, time, address, library link',
   const { renderBiblioteca } = await import('../src/lib/biblioteca.mjs');
   for (const locale of ['it','en']) { const html=renderBiblioteca(locale); for (const s of ['11:00\u201313:00','Via Eusebio Bava 31, 10124 Torino','https://www.bibliosum.unito.it/','2026-10-28T11:00']) assert(html.includes(s), s); assert(existsSync(resolve(root,'public',src(html)))); }
   assert(renderBiblioteca('it').includes('Mercoled\u00ec 28 ottobre 2026'));
+  for (const s of ['Canto XXXIV','Capitolo VIII','Arnaut Daniel','Canzoni VIII e XIII','Balletto','Cesare Pavese','La Terra Santa','Alda Merini']) assert(renderBiblioteca('it').includes(s), s);
   for (const p of ['src/pages/appuntamenti/biblioteca-20-anni.astro','src/pages/en/news/library-20-years.astro']) assert(existsSync(resolve(root,p)), p);
 });
 const src=(html)=>html.match(/<img[^>]+src="\/([^"]+)"/)[1];
