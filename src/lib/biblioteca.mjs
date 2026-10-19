@@ -27,14 +27,14 @@ export function renderBiblioteca(locale = 'it') {
     access: 'For information about accessibility, write to', caption: 'Hands leafing through a script',
   };
   const programme = it ? [
-    { author: 'Dante Alighieri', work: 'Inferno', title: 'Canto XXXIV', note: 'In alternanza con il capitolo VIII del Don Chisciotte.' },
-    { author: 'Miguel de Cervantes', work: 'Don Chisciotte della Mancia', title: 'Capitolo VIII', note: 'In alternanza con il canto XXXIV dell\u2019Inferno.' },
+    { author: 'Dante Alighieri', work: 'Inferno', title: 'Canto XXXIV', note: '' },
+    { author: 'Miguel de Cervantes', work: 'Don Chisciotte della Mancia', title: 'Capitolo VIII', note: '' },
     { author: 'Arnaut Daniel', work: 'Canzoni', title: 'Canzoni VIII e XIII', note: '' },
     { author: 'Cesare Pavese', work: 'Poesia', title: 'Balletto', note: '' },
     { author: 'Alda Merini', work: 'Poesia', title: 'La Terra Santa', note: '' },
   ] : [
-    { author: 'Dante Alighieri', work: 'Inferno', title: 'Canto XXXIV', note: 'Alternating with chapter VIII of Don Quixote.' },
-    { author: 'Miguel de Cervantes', work: 'Don Quixote', title: 'Chapter VIII', note: 'Alternating with canto XXXIV of the Inferno.' },
+    { author: 'Dante Alighieri', work: 'Inferno', title: 'Canto XXXIV', note: '' },
+    { author: 'Miguel de Cervantes', work: 'Don Quixote', title: 'Chapter VIII', note: '' },
     { author: 'Arnaut Daniel', work: 'Songs', title: 'Songs VIII and XIII', note: '' },
     { author: 'Cesare Pavese', work: 'Poem', title: 'Balletto', note: '' },
     { author: 'Alda Merini', work: 'Poem', title: 'La Terra Santa', note: '' },
