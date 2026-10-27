@@ -368,3 +368,8 @@ tt-agenda { display:block; }
   .tt-editorial-shell .transition-fade { animation:none !important; transform:none !important; transition:none !important; }
   .tt-editorial *, .tt-editorial *::before, .tt-editorial *::after { transition:none !important; animation:none !important; scroll-behavior:auto !important; }
 }
+/* Biblioteca 20 anni: riga del cast sotto l'orario */
+.tt-biblioteca-programme .tt-section-heading h2 time { font:inherit; }
+.tt-biblioteca-cast { font-family:var(--font-sans-serif); font-size:17px; line-height:1.5; color:var(--tt-muted); max-width:760px; padding:22px 0 4px; margin:0; }
+.tt-biblioteca-programme .tt-venue { margin-top:16px; font-size:14px; }
+.tt-biblioteca-programme + .tt-biblioteca-programme { padding-top:40px; }
