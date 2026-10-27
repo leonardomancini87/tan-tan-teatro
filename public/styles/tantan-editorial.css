@@ -373,3 +373,5 @@ tt-agenda { display:block; }
 .tt-biblioteca-cast { font-family:var(--font-sans-serif); font-size:17px; line-height:1.5; color:var(--tt-muted); max-width:760px; padding:22px 0 4px; margin:0; }
 .tt-biblioteca-programme .tt-venue { margin-top:16px; font-size:14px; }
 .tt-biblioteca-programme + .tt-biblioteca-programme { padding-top:40px; }
+.tt-biblioteca-poster { padding:34px 38px 0; }
+@media (max-width: 600px) { .tt-biblioteca-poster { padding:28px 4px 0; } }

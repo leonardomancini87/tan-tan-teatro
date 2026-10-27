@@ -59,6 +59,8 @@ export function renderBiblioteca(locale = 'it') {
   const programmeTitle = it ? 'Programma' : 'Programme';
   const at = it ? 'Ore' : 'At';
   const shelfLabel = it ? 'Collocazione' : 'Shelf mark';
+  const poster = { href: '/doc/20 anni di via Bava in Biblioteca – Locandina.pdf',
+    label: it ? 'Scarica la locandina (PDF)' : 'Download the poster (PDF, in Italian)' };
   const ext = `target="_blank" rel="noopener noreferrer"`;
   return `<article class="tt-editorial tt-unight tt-biblioteca">
     <a class="tt-back-link" href="${r.agenda}"><span aria-hidden="true">←</span> ${e(c.back)}</a>
@@ -70,6 +72,7 @@ export function renderBiblioteca(locale = 'it') {
       <p class="tt-biblioteca-cast">${e(slot.cast)}</p>
       ${slot.readings.map((x) => `<article class="tt-programme-row"><div class="tt-programme-date"><p>${e(x.author)}</p><span class="tt-kicker">${e(x.work)}</span></div><div class="tt-programme-copy"><h3>${e(x.title)}</h3>${x.note ? `<p>${e(x.note)}</p>` : ''}${x.shelf ? `<div class="tt-venue"><span>${e(shelfLabel)}: <strong>${e(x.shelf)}</strong></span></div>` : ''}</div></article>`).join('')}
     </section>`).join('')}
+    <div class="tt-biblioteca-poster"><a class="tt-button tt-button--outline" href="${encodeURI(poster.href)}" download>${e(poster.label)} ${arrow}</a></div>
     <section class="tt-unight-notes"><div><p class="tt-kicker">${e(c.subtitle)}</p><h2>${e(c.library)}</h2><p class="tt-body-copy">${e(c.libraryText)}</p><a class="tt-text-link" href="${b.url}" ${ext}>${e(c.libraryLink)} ${arrow}</a></div><aside><h2>${e(c.practical)}</h2><p>${e(c.info)}</p><a class="tt-button tt-button--outline" href="${r.agenda}">${e(c.back)} ${arrow}</a><p class="tt-access-mail">${e(c.access)} <a href="mailto:accessibilita@tantanteatro.it">accessibilita@tantanteatro.it</a>.</p></aside></section>
   </article>`;
 }
