@@ -15,6 +15,20 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     data-url={supabaseUrl}
     data-key={supabaseKey}
   >
+    <div class="nb-cover" data-cover hidden>
+      <picture class="nb-cover-photo" aria-hidden="true">
+        <img src="/img/quaderno/copertina.webp" alt="" data-cover-img decoding="async" fetchpriority="high" />
+      </picture>
+      <div class="nb-cover-text">
+        <p class="nb-cover-kicker">Tan Tan Teatro · Quaderno del laboratorio</p>
+        <p class="nb-cover-title" data-cover-title></p>
+      </div>
+      <button type="button" class="nb-cover-enter" data-cover-enter>
+        Quaderno
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </button>
+    </div>
+
     <p class="nb-status" data-loading><span></span><span></span><span></span><b class="nb-sr">Apro il quaderno…</b></p>
 
     <div class="nb-missing" data-missing hidden>
@@ -139,6 +153,59 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   .nb-sr {
     position: absolute; width: 1px; height: 1px; overflow: hidden;
     clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  /* Copertina: il pavimento della sala */
+  .nb-cover[hidden] { display: none !important; }
+  .nb-cover {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: clamp(28px, 7vw, 80px) clamp(24px, 7vw, 96px) calc(clamp(28px, 6vw, 64px) + env(safe-area-inset-bottom, 0px));
+    color: #f4f2ec; cursor: pointer; overflow: hidden;
+    /* Linoleum disegnato: resta sotto la foto e la sostituisce finché la foto non c'è */
+    background-color: #3a3833;
+    background-image:
+      radial-gradient(120% 80% at 30% 20%, rgba(255,246,228,.10), transparent 60%),
+      radial-gradient(90% 70% at 80% 90%, rgba(0,0,0,.35), transparent 70%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      linear-gradient(176deg, transparent 0 47%, rgba(232,196,64,.55) 47% 47.6%, transparent 47.6%),
+      linear-gradient(94deg, transparent 0 63%, rgba(255,255,255,.28) 63% 63.4%, transparent 63.4%);
+    transition: transform .9s cubic-bezier(.7,0,.2,1), opacity .6s ease;
+  }
+  .nb-cover::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+  }
+  .nb-cover-photo, .nb-cover-photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .nb-cover-photo img { object-position: 50% 72%; transition: opacity 1.2s ease; }
+  .nb-cover-photo img[data-pending] { opacity: 0; }
+  .nb-cover-text { position: relative; z-index: 1; max-width: 14em; }
+  .nb-cover-kicker {
+    margin: 0 0 18px; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: rgba(244,242,236,.85);
+  }
+  .nb-cover-title {
+    margin: 0; font-family: var(--font-serif); font-weight: 400;
+    font-size: clamp(52px, 11vw, 120px); line-height: .98; letter-spacing: -.01em; text-wrap: balance;
+    text-shadow: 0 2px 30px rgba(0,0,0,.25);
+  }
+  .nb-cover .nb-cover-enter {
+    position: relative; z-index: 1; align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 10px; margin-top: clamp(28px, 5vw, 48px);
+    min-height: 48px; padding: 0 2px; border: 0; border-bottom: 1px solid rgba(244,242,236,.6); border-radius: 0;
+    background: transparent; color: #f4f2ec !important; box-shadow: none; height: auto; line-height: 1.2;
+    font-family: var(--font-sans-serif); font-size: 15px; letter-spacing: .06em; text-transform: none; cursor: pointer;
+  }
+  .nb-cover .nb-cover-enter svg { animation: nb-nudge 2.4s ease-in-out infinite; }
+  .nb-cover .nb-cover-enter:focus-visible { outline: 2px solid #f4f2ec; outline-offset: 4px; }
+  .nb-cover.nb-cover-out { transform: translateY(-100%); }
+  @keyframes nb-nudge { 0%, 100% { transform: none; } 50% { transform: translateY(4px); } }
+  html.nb-cover-lock, html.nb-cover-lock body { overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    .nb-cover { transition: opacity .4s ease; }
+    .nb-cover.nb-cover-out { transform: none; opacity: 0; }
+    .nb-cover .nb-cover-enter svg { animation: none; }
   }
 
   /* Caricamento: tre punti che respirano */
@@ -645,11 +712,14 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
     // ---- apertura ----
     (async () => {
-      if (!code) { loading.hidden = true; missing.hidden = false; return; }
+      const dropCover = () => { document.querySelector('[data-cover]')?.remove(); document.documentElement.classList.remove('nb-cover-lock'); };
+      if (!code) { dropCover(); loading.hidden = true; missing.hidden = false; return; }
       try {
         const data = await rpc('workshop_notebook_get', { p_code: code });
         loading.hidden = true;
-        if (!data) { missing.hidden = false; return; }
+        if (!data) { dropCover(); missing.hidden = false; return; }
+        const coverTitle = document.querySelector('[data-cover-title]');
+        if (coverTitle) coverTitle.textContent = data.title || 'Il quaderno';
         $('[data-title]').textContent = data.title || 'Il quaderno';
         $('[data-period]').textContent = period(data.starts_on, data.ends_on);
         $('[data-invitation]').textContent = data.invitation || 'Condividi testo, immagini, link o altro.';
@@ -663,12 +733,69 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         content.hidden = false;
         if (location.hash) root.querySelector(location.hash)?.scrollIntoView();
       } catch {
+        dropCover();
         loading.replaceChildren(document.createTextNode('Non riesco ad aprire il quaderno in questo momento. Riprova tra poco.'));
         loading.classList.add('nb-status-text');
       }
     })();
   }
 
+  // ---- copertina: mostrata una volta per visita, si apre con un gesto ----
+  const COVER_KEY = 'tantan-quaderno-copertina';
+  function initCover() {
+    const cover = document.querySelector<HTMLElement>('[data-cover]');
+    if (!cover || cover.dataset.ready) return;
+    cover.dataset.ready = '1';
+    let seen = false;
+    try { seen = sessionStorage.getItem(COVER_KEY) === '1'; } catch {}
+    if (seen) { cover.remove(); return; }
+
+    const img = cover.querySelector<HTMLImageElement>('[data-cover-img]')!;
+    if (!img.complete) {
+      img.dataset.pending = '';
+      img.addEventListener('load', () => delete img.dataset.pending, { once: true });
+    }
+    img.addEventListener('error', () => img.closest('picture')?.remove(), { once: true });
+    if (img.complete && img.naturalWidth === 0) img.closest('picture')?.remove();
+
+    // fuori dal contenitore della pagina, perché nessun antenato ne limiti la posizione fissa
+    document.body.append(cover);
+    cover.hidden = false;
+    document.documentElement.classList.add('nb-cover-lock');
+    cover.querySelector<HTMLButtonElement>('[data-cover-enter]')?.focus({ preventScroll: true });
+
+    let gone = false;
+    let touchY = 0;
+    function enter() {
+      if (gone) return;
+      gone = true;
+      try { sessionStorage.setItem(COVER_KEY, '1'); } catch {}
+      cover!.classList.add('nb-cover-out');
+      document.documentElement.classList.remove('nb-cover-lock');
+      window.scrollTo(0, 0);
+      cleanup();
+      setTimeout(() => cover!.remove(), 1000);
+    }
+    const onWheel = (e: WheelEvent) => { if (e.deltaY > 4) enter(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (['ArrowDown', 'PageDown', ' ', 'Enter', 'Escape'].includes(e.key)) { e.preventDefault(); enter(); }
+    };
+    const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0].clientY; };
+    const onTouchMove = (e: TouchEvent) => { if (touchY - e.touches[0].clientY > 30) enter(); };
+    function cleanup() {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', onKey);
+      cover!.removeEventListener('touchstart', onTouchStart);
+      cover!.removeEventListener('touchmove', onTouchMove);
+    }
+    cover.addEventListener('click', enter);
+    window.addEventListener('wheel', onWheel, { passive: true });
+    window.addEventListener('keydown', onKey);
+    cover.addEventListener('touchstart', onTouchStart, { passive: true });
+    cover.addEventListener('touchmove', onTouchMove, { passive: true });
+  }
+
+  initCover();
   init();
-  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:page-load', () => { initCover(); init(); });
 </script>
