@@ -163,6 +163,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: clamp(28px, 7vw, 80px) clamp(24px, 7vw, 96px) calc(clamp(28px, 6vw, 64px) + env(safe-area-inset-bottom, 0px));
     color: #f4f2ec; cursor: pointer; overflow: hidden;
+    font-family: var(--font-sans-serif); font-size: 16px;
     /* Linoleum disegnato: resta sotto la foto e la sostituisce finché la foto non c'è */
     background-color: #3a3833;
     background-image:
@@ -182,7 +183,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   }
   .nb-cover-photo img { object-position: 50% 50%; transition: opacity 1.2s ease; }
   .nb-cover-photo img[data-pending] { opacity: 0; }
-  .nb-cover-text { position: relative; z-index: 1; max-width: 14em; }
+  .nb-cover-text { position: relative; z-index: 1; max-width: min(100%, 1100px); }
   .nb-cover-kicker {
     margin: 0 0 18px; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: rgba(244,242,236,.85);
   }
@@ -763,7 +764,6 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     document.body.append(cover);
     cover.hidden = false;
     document.documentElement.classList.add('nb-cover-lock');
-    cover.querySelector<HTMLButtonElement>('[data-cover-enter]')?.focus({ preventScroll: true });
 
     let gone = false;
     let touchY = 0;
