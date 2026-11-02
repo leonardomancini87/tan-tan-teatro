@@ -183,6 +183,15 @@ description: "Where and when to find us: upcoming dates, past performances and s
 <div class="projects-list">
 <article class="project-row">
 <div>
+<h3>Readings for the Library’s 20th anniversary</h3>
+<p>A staged reading with chorus and dance by Compagnia Tan Tan Teatro and Compagnia Sperimentale K. for the 20th anniversary of the Library of Literary and Philological Studies of the University of Turin.</p>
+<p><a href="/en/news/library-20-years/">Programme and details →</a></p>
+</div>
+<p class="project-meta">28 October 2026, Turin</p>
+</article>
+
+<article class="project-row">
+<div>
 <h3>Residency at Fuma che ’nduma</h3>
 <p>
 From 28 July to 2 August 2026, we will be in residence at Fuma che ’nduma, in Busca (Cuneo), for a new phase of work on the production <em>The Marriage</em>.

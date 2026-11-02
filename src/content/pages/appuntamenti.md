@@ -179,13 +179,22 @@ description: "Dove e quando trovarci: prossime date, repliche passate ed eventi 
 <div class="projects-list">
 <article class="project-row">
 <div>
+<h3>Letture per i vent’anni della Biblioteca di Scienze letterarie e filologiche</h3>
+<p>Lettura scenica, coro e danza a cura della Compagnia Tan Tan Teatro e della Compagnia Sperimentale K. per i vent’anni della Biblioteca di Scienze letterarie e filologiche dell’Università degli Studi di Torino.</p>
+<p><a href="/appuntamenti/biblioteca-20-anni/">Programma e dettagli →</a></p>
+</div>
+<p class="project-meta">28 ottobre 2026, &nbsp;Torino</p>
+</article>
+
+<article class="project-row">
+<div>
 <h3>Residenza a Fuma che ’nduma</h3>
 <p>
 Dal 28 luglio al 2 agosto 2026 saremo in residenza a Fuma che ’nduma, a Busca (Cuneo),
 per una nuova fase di lavoro sullo spettacolo <em>Il Matrimonio</em>.
 </p>
 </div>
-<p class="project-meta">28 July – 2 August 2026, &nbsp;Busca (Cuneo)</p>
+<p class="project-meta">28 luglio – 2 agosto 2026, &nbsp;Busca (Cuneo)</p>
 </article>
 
 <article class="project-row">
