@@ -15,32 +15,22 @@ export async function getStaticPaths() {
     const isAccessibility = entry.data.templateKey === 'accessibility-page';
     return !isAccessibility && !(isItalian && ['index', 'laboratorio'].includes(entry.slug));
   });
-  const newsEntries = await getCollection("news");
   const workEntries = await getCollection("work");
-  const soldEntries = await getCollection("sold");
 
-  type SortableEntry = CollectionEntry<"news" | "work" | "sold">;
+  type SortableEntry = CollectionEntry<"work">;
 
   const sortDate = (a: SortableEntry, b: SortableEntry) =>
     new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
-  const sortedNews = [...newsEntries].sort(sortDate);
   const sortedWork = [...workEntries].sort(sortDate);
-  const sortedSold = [...soldEntries].sort(sortDate);
 
   const paths = pages.map((entry) => {
     const locale = entry.data.locale ?? "it";
 
     let items: SortableEntry[] = [];
     let baseSlug = "";
-    if (entry.data.templateKey === "news-page") {
-      items = sortedNews.filter((item) => (item.data.locale ?? "it") === locale);
-      baseSlug = locale === "en" ? "en/news" : "appuntamenti";
-    } else if (entry.data.templateKey === "work-page") {
+    if (entry.data.templateKey === "work-page") {
       items = sortedWork.filter((item) => (item.data.locale ?? "it") === locale);
       baseSlug = locale === "en" ? "spettacoli/en" : "spettacoli";
-    } else if (entry.data.templateKey === "exhibitions-page") {
-      items = sortedSold.filter((item) => (item.data.locale ?? "it") === locale);
-      baseSlug = locale === "en" ? "sold/en" : "sold";
     }
     let slugParam: string | undefined;
 
@@ -88,9 +78,7 @@ const templateKey = entry.data.templateKey;
     <Bio entry={entry} />
   ) : templateKey === "contact-page" ? (
     <Contact entry={entry} />
-  ) : templateKey === "news-page" ||
-    templateKey === "work-page" ||
-    templateKey === "exhibitions-page" ? (
+  ) : templateKey === "news-page" || templateKey === "work-page" ? (
     <List entry={entry} items={items} baseSlug={baseSlug} />
   ) : templateKey === "accessibility-page" ? (
     <Accessibility entry={entry} />

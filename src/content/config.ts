@@ -124,9 +124,7 @@ const workSchema = commonSchema.extend({
   accessibility: z.string().optional(),
 });
 
-const news = defineCollection({ type: 'content', schema: commonSchema });
 const work = defineCollection({ type: 'content', schema: workSchema });
-const sold = defineCollection({ type: 'content', schema: commonSchema });
 const pages = defineCollection({ type: 'content', schema: commonSchema });
 
-export const collections = { news, work, sold, pages };
+export const collections = { work, pages };

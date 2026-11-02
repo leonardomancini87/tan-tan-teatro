@@ -20,20 +20,23 @@ export interface Props {
 }
 
 const { title, description, locale = "it", editorial = false, image, noindex = false } = Astro.props;
+const fallbackDescription = locale === "en"
+    ? "Tan Tan Teatro is a university theatre company that promotes performances and workshops based in Turin, Italy."
+    : "Tan Tan Teatro è una compagnia di teatro universitario che promuove spettacoli e laboratori con sede a Torino.";
 ---
 
 <!doctype html>
 <html lang={locale}>
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content={description || "Clay Theme"} />
+        <meta name="description" content={description || fallbackDescription} />
         <meta name="viewport" content="width=device-width" />
         {noindex && <meta name="robots" content="noindex, nofollow" />}
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="shortcut icon" href="/favicon.ico">
         <meta name="generator" content={Astro.generator} />
-        <title>{title || "Clay"}</title>
+        <title>{title || "Tan Tan Teatro"}</title>
         {editorial && <link rel="stylesheet" href="/styles/tantan-editorial.css" />}
         {image && <meta property="og:image" content={new URL(image, Astro.site ?? Astro.url).href} />}
         {editorial && <meta property="og:title" content={title ?? 'Tan Tan Teatro'} />}
@@ -147,9 +150,34 @@ const { title, description, locale = "it", editorial = false, image, noindex = f
                 }
             }
 
+            // Link verso una sezione di un'altra pagina (es. /appuntamenti#archivio-rappresentazioni):
+            // la navigazione di Astro scorre alla sezione prima che gli stili della nuova
+            // pagina siano applicati, e la sezione finisce più in basso. La riallineiamo,
+            // a meno che nel frattempo chi legge non abbia iniziato a scorrere.
+            let alignHash = false;
+            document.addEventListener("astro:before-preparation", (event) => {
+                const e = event as Event & { navigationType?: string; from?: URL; to?: URL };
+                alignHash = e.navigationType !== "traverse" && !!e.to && e.to.hash.length > 1 && e.to.pathname !== e.from?.pathname;
+            });
+            function alignToHash() {
+                if (!alignHash) return;
+                alignHash = false;
+                const id = decodeURIComponent(location.hash.slice(1));
+                const target = id ? document.getElementById(id) : null;
+                if (!target) return;
+                let cancelled = false;
+                const stop = () => { cancelled = true; };
+                for (const type of ["wheel", "touchstart", "keydown"]) window.addEventListener(type, stop, { once: true, passive: true });
+                const align = () => { if (!cancelled) target.scrollIntoView({ block: "start" }); };
+                requestAnimationFrame(align);
+                window.setTimeout(align, 250);
+                window.setTimeout(align, 800);
+            }
+
             document.addEventListener("astro:page-load", () => {
                 initNav();
                 initTheme();
+                alignToHash();
             });
 
             document.addEventListener("astro:after-swap", () => {

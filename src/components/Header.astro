@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import SiteSearch from './SiteSearch.astro';
 
 export interface Props {
   title?: string;
@@ -117,6 +118,7 @@ const navLinks = isEnglish
         </button>
       </div>
     </div>
+    <SiteSearch locale={isEnglish ? 'en' : 'it'} />
   </div>
 </header>
 

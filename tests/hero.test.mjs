@@ -133,7 +133,7 @@ test('Homepage event cards use only date, kind, title, venue and action', () => 
   assert(html.includes('>Dettagli '));
 });
 const protectedFiles = {
-  "src/components/Header.astro": "1e8a7fc88ccaf3b4974560733364fa2fb7c5ef86d993dc83b7103b943eaa9ca2",
+  "src/components/Header.astro": "718f5b9673e9809b455fb698c857a3183b2f07d70486d16fbe0d713d063bae82",
   "src/components/Footer.astro": "1d51a954d964d19c04ab75881a3721939f0afbcdc240de2cbd036aa97aa46fad",
   "src/layouts/Layout.astro": "d3159c8f37dbefc3673816767983c1ef44c50070d27f53711619d1f2cf4dc3c8",
   "src/components/CalendarRuntime.astro": "994d46cd1743aac304da4afee7b0d3223f0fa8486af48f35ce17e56ec1a857c7",

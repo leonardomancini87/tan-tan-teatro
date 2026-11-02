@@ -1,5 +1,6 @@
 ---
 title: "Cookie Policy"
+description: "How the Tan Tan Teatro website uses cookies and similar technologies."
 templateKey: page
 locale: "en"
 translationKey: "cookie-policy"

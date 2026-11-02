@@ -8,5 +8,22 @@
       "source": "/lab/:code",
       "destination": "/lab/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/news/:slug",
+      "destination": "/appuntamenti",
+      "permanent": true
+    },
+    {
+      "source": "/sold",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sold/:slug",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
