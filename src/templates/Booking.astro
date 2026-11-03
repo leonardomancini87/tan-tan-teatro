@@ -43,15 +43,13 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
         <div class="tt-booking-event" aria-live="polite">
           <p data-date></p>
           <p data-location></p>
-          <p class="tt-booking-limit" data-limit></p>
           <div class="tt-booking-venue-notes" data-dravelli-details hidden>
             <p>
               <strong>{isEn ? 'Performance time:' : 'Ore spettacolo:'}</strong>
               {isEn ? ' 9:00 pm.' : ' ore 21.'}
             </p>
             <p>
-              <strong>{isEn ? 'Requested contribution:' : 'Contributo richiesto:'}</strong>
-              {isEn ? ' €10.' : ' 10 euro.'}
+              <strong>{isEn ? 'Free admission.' : 'Ingresso libero.'}</strong>
             </p>
             <p>
               {isEn
@@ -60,15 +58,9 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
             </p>
           </div>
         </div>
-        <p class="tt-booking-intro">
-          {isEn
-            ? 'Request your seats now. No online payment is required: payment will be handled at the venue by the host theatre.'
-            : 'Richiedi ora i tuoi posti. Non è previsto alcun pagamento online: il pagamento sarà gestito in sede dal teatro ospitante.'}
-        </p>
 
         <form data-form novalidate>
           <fieldset class="tt-booking-person">
-            <legend>{isEn ? 'Spectator 1' : 'Spettatore 1'}</legend>
             <div class="tt-booking-grid">
               <div class="tt-booking-field">
                 <label for="booking-first-name">{isEn ? 'First name' : 'Nome'} *</label>
@@ -330,12 +322,10 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
         const title = root.querySelector('[data-title]');
         const date = root.querySelector('[data-date]');
         const location = root.querySelector('[data-location]');
-        const limit = root.querySelector('[data-limit]');
         const maximum = Math.max(1, Math.min(Number(appointment.booking_max_per_request) || 10, Number(appointment.booking_capacity) || 100));
         if (title) title.textContent = appointment.title;
         if (date) date.textContent = formatDate(appointment.starts_on, appointment.starts_at_time);
         if (location) location.textContent = locationLabel(appointment);
-        if (limit) limit.textContent = copy.limit(maximum);
         if (seatsInput instanceof HTMLInputElement) seatsInput.max = String(maximum);
         renderSpectators();
         if (loading) loading.hidden = true;

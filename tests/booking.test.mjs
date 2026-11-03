@@ -12,10 +12,8 @@ test('Booking page writes to the existing admin booking queue', () => {
   for (const field of ['appointment_id', 'full_name', 'email', 'phone', 'seats', 'notes']) assert(booking.includes(field));
 });
 
-test('Booking is explicitly a request without online payment', () => {
-  assert(booking.includes('Non è previsto alcun pagamento online'));
+test('Booking is explicitly a request, not yet a confirmation', () => {
   assert(booking.includes('Non è ancora una conferma'));
-  assert(booking.includes('payment will be handled at the venue'));
 });
 
 test('Form has validation, spam trap, privacy information and mobile layout', () => {
@@ -53,15 +51,17 @@ test('Booking labels explicitly inherit the neutral site palette', () => {
   assert(booking.includes('color:var(--tt-ink, currentColor) !important;'));
 });
 
-test('Dravelli bookings show performance time, contribution and Arci admission information', () => {
+test('Dravelli bookings show performance time, free admission and Arci admission information', () => {
   assert(booking.includes('data-dravelli-details'));
   assert(booking.includes('Ore spettacolo:'));
   assert(booking.includes("ore 21."));
-  assert(booking.includes('Contributo richiesto:'));
-  assert(booking.includes('10 euro.'));
+  assert(booking.includes('Ingresso libero.'));
+  assert(!booking.includes('Contributo richiesto:'));
+  assert(!booking.includes('data-limit'));
   assert(booking.includes('Entrata riservata ai soci Arci.'));
   assert(booking.includes('costo di 12 euro.'));
   assert(booking.includes("locationText.includes('dravelli')"));
-  assert(booking.includes('pagamento sarà gestito in sede dal teatro ospitante'));
+  assert(!booking.includes('Richiedi ora i tuoi posti.'));
+  assert(!booking.includes("'Spettatore 1'"));
 });
 
