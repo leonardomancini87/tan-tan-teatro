@@ -55,11 +55,11 @@ test('Dravelli bookings show performance time, free admission and Arci admission
   assert(booking.includes('data-dravelli-details'));
   assert(booking.includes('Ore spettacolo:'));
   assert(booking.includes("ore 21."));
-  assert(booking.includes('Ingresso libero.'));
+  assert(booking.includes('Ingresso gratuito.'));
   assert(!booking.includes('Contributo richiesto:'));
   assert(!booking.includes('data-limit'));
-  assert(booking.includes('Entrata riservata ai soci Arci.'));
-  assert(booking.includes('costo di 12 euro.'));
+  assert(booking.includes('è richiesta la tessera ARCI, ottenibile in loco o '));
+  assert(booking.includes('href="https://portale.arci.it"'));
   assert(booking.includes("locationText.includes('dravelli')"));
   assert(!booking.includes('Richiedi ora i tuoi posti.'));
   assert(!booking.includes("'Spettatore 1'"));
