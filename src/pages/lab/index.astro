@@ -5,6 +5,8 @@
 // Se il quaderno ha una password la chiede una volta e la ricorda in questo browser.
 // Le immagini sono in un bucket privato: si leggono e caricano tramite la
 // Edge Function workshop-notebook-images (link firmati temporanei).
+// Chi scrive riceve una chiave di modifica, ricordata in questo browser:
+// con quella può modificare o eliminare le proprie tracce, senza account.
 import Layout from '../../layouts/Layout.astro';
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
@@ -376,7 +378,17 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   }
   .nb-entry:first-child { padding-top: 40px; }
   .nb-entry:last-child { border-bottom: 0; }
-  .nb-margin { display: flex; align-items: baseline; gap: 10px; font-size: 14px; }
+  .nb-margin { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; font-size: 14px; }
+  .nb-edited { font-size: 13px; font-style: italic; color: var(--nb-faint); }
+  .nb-own { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 6px; font-size: 13px; color: var(--nb-soft); }
+  .nb-own .nb-plain { font-size: 13px; }
+  .nb-own .nb-danger { color: #9b3b2f !important; }
+  [data-theme='dark'] .nb-own .nb-danger { color: #e39a8e !important; }
+  .nb-edit { display: flex; flex-direction: column; gap: 14px; }
+  .nb-edit textarea { min-height: 120px; padding: 12px 14px; border: 1px solid var(--nb-field); border-radius: 3px; font-size: 20px; }
+  .nb-edit input[type='url'] { width: 100%; height: 44px; padding: 0 12px; font-size: 16px; }
+  .nb-edit-check { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--nb-soft); }
+  .nb-edit-buttons { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
   .nb-margin strong { font-weight: 500; letter-spacing: .02em; }
   .nb-margin time { font-family: var(--font-serif); font-style: italic; font-size: 16px; color: var(--nb-soft); }
   .nb-body { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
@@ -475,8 +487,23 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   type Entry = {
     id: string; author_name: string; body: string | null; link_url: string | null;
-    image_path: string | null; created_at: string;
+    image_path: string | null; created_at: string; edited_at?: string | null; edit_key?: string;
     session_id: string | null; session_title: string | null; session_starts: string | null;
+  };
+  const KEYS_KEY = 'tantan-quaderno-chiavi';
+  function editKeys(): Record<string, string> {
+    try { return JSON.parse(localStorage.getItem(KEYS_KEY) || '{}') || {}; } catch { return {}; }
+  }
+  function setEditKey(id: string, key: string | null) {
+    const keys = editKeys();
+    if (key) keys[id] = key; else delete keys[id];
+    try { localStorage.setItem(KEYS_KEY, JSON.stringify(keys)); } catch {}
+  }
+  const OWN_ERRORS: Record<string, string> = {
+    non_autorizzato: 'Questa traccia non si può più modificare da qui.',
+    traccia_vuota: 'La traccia non può restare vuota: scrivi qualcosa o lascia un link.',
+    link_non_valido: 'Il link non sembra valido.',
+    quaderno_chiuso: 'Il quaderno è chiuso: le tracce non si possono più modificare.',
   };
 
   function init() {
@@ -560,16 +587,17 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
     // ---- immagini: link firmati dalla Edge Function ----
     const imageUrls = new Map<string, string>();
-    async function images(action: 'view' | 'upload') {
+    async function server(payload: Record<string, unknown>) {
       const res = await fetch(`${url}/functions/v1/workshop-notebook-images`, {
         method: 'POST',
         headers: { apikey: key, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action, code, password }),
+        body: JSON.stringify({ ...payload, code, password }),
       });
       const data = await res.json().catch(() => null);
       if (!res.ok) throw new Error(data?.error || 'errore');
       return data;
     }
+    const images = (action: 'view' | 'upload') => server({ action });
     async function loadImages() {
       if (!entries.some((e) => e.image_path)) return;
       try {
@@ -635,6 +663,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       const time = el('time', '', when(e.created_at));
       time.dateTime = e.created_at;
       margin.append(el('strong', '', e.author_name), time);
+      if (e.edited_at) margin.append(el('span', 'nb-edited', 'modificata'));
 
       const body = el('div', 'nb-body');
       if (e.body) {
@@ -672,8 +701,129 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         );
         body.append(a);
       }
+      const ownKey = editKeys()[e.id];
+      if (ownKey) margin.append(ownControls(e, ownKey, art, body));
       art.append(margin, body);
       return art;
+    }
+
+    // ---- le proprie tracce: modificare ed eliminare ----
+    function ownControls(e: Entry, editKey: string, art: HTMLElement, body: HTMLElement) {
+      const box = el('div', 'nb-own');
+      const plain = (label: string, extra = '') => {
+        const b = el('button', 'nb-plain' + extra, label);
+        b.type = 'button';
+        return b;
+      };
+      function idle() {
+        box.replaceChildren();
+        if (isOpen) {
+          const edit = plain('Modifica');
+          edit.addEventListener('click', () => startEdit(e, editKey, art, body, box));
+          box.append(edit);
+        }
+        const del = plain('Elimina');
+        del.addEventListener('click', confirmDelete);
+        box.append(del);
+      }
+      function confirmDelete() {
+        box.replaceChildren();
+        const yes = plain('Sì, elimina', ' nb-danger');
+        const no = plain('No');
+        box.append(el('span', '', 'Eliminare la traccia?'), yes, no);
+        no.addEventListener('click', idle);
+        yes.addEventListener('click', async () => {
+          yes.disabled = true; no.disabled = true;
+          try {
+            await server({ action: 'delete', entry_id: e.id, edit_key: editKey });
+            setEditKey(e.id, null);
+            entries = entries.filter((item) => item.id !== e.id);
+            render();
+          } catch (error) {
+            ownFailure(e, (error as Error).message, box, idle);
+          }
+        });
+      }
+      idle();
+      return box;
+    }
+
+    function ownFailure(e: Entry, reason: string, box: HTMLElement, back: () => void, note?: HTMLElement) {
+      if (reason in LOCKED) { showLock(reason); return; }
+      const text = OWN_ERRORS[reason] || 'Qualcosa non ha funzionato. Riprova tra poco.';
+      if (reason === 'non_autorizzato') { setEditKey(e.id, null); render(); }
+      if (note) { note.textContent = text; return; }
+      back();
+      box.append(el('span', '', text));
+    }
+
+    function startEdit(e: Entry, editKey: string, art: HTMLElement, body: HTMLElement, box: HTMLElement) {
+      box.hidden = true;
+      const form = el('form', 'nb-edit');
+      form.noValidate = true;
+      const text = el('textarea');
+      text.value = e.body || '';
+      text.maxLength = 4000;
+      text.setAttribute('aria-label', 'Testo della traccia');
+      const link = el('input');
+      link.type = 'url';
+      link.inputMode = 'url';
+      link.maxLength = 2000;
+      link.placeholder = 'Link (facoltativo) https://…';
+      link.value = e.link_url || '';
+      link.setAttribute('aria-label', 'Link');
+      form.append(text, link);
+      let removeImage: HTMLInputElement | null = null;
+      if (e.image_path) {
+        const label = el('label', 'nb-edit-check');
+        removeImage = el('input');
+        removeImage.type = 'checkbox';
+        label.append(removeImage, document.createTextNode('Togli l’immagine'));
+        form.append(label);
+      }
+      const buttons = el('div', 'nb-edit-buttons');
+      const save = el('button', 'nb-submit', 'Salva');
+      save.type = 'submit';
+      const cancel = el('button', 'nb-plain', 'Annulla');
+      cancel.type = 'button';
+      buttons.append(save, cancel);
+      const note = el('p', 'nb-message');
+      note.setAttribute('role', 'status');
+      form.append(buttons, note);
+
+      const original = [...body.childNodes];
+      body.replaceChildren(form);
+      text.focus();
+      const close = () => { body.replaceChildren(...original); box.hidden = false; };
+      cancel.addEventListener('click', close);
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        let linkValue = link.value.trim();
+        if (linkValue && !/^https?:\/\//i.test(linkValue)) linkValue = `https://${linkValue}`;
+        if (linkValue && !safeLink(linkValue)) { note.textContent = OWN_ERRORS.link_non_valido; link.focus(); return; }
+        const dropImage = !!removeImage?.checked;
+        if (!text.value.trim() && !linkValue && (!e.image_path || dropImage)) {
+          note.textContent = OWN_ERRORS.traccia_vuota; text.focus(); return;
+        }
+        save.disabled = true;
+        save.textContent = 'Un momento…';
+        note.textContent = '';
+        try {
+          const data = await server({
+            action: 'edit', entry_id: e.id, edit_key: editKey,
+            body: text.value.trim() || null, link_url: linkValue || null, remove_image: dropImage,
+          });
+          const updated: Entry = data.entry;
+          entries = entries.map((item) => (item.id === updated.id ? updated : item));
+          render();
+        } catch (error) {
+          save.disabled = false;
+          save.textContent = 'Salva';
+          ownFailure(e, (error as Error).message, box, close, note);
+        }
+      });
+      art.classList.remove('nb-fresh');
     }
 
     function render(freshId?: string) {
@@ -802,6 +952,8 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         });
         if (result?.locked) { showLock(result.locked); return; }
         const entry: Entry = result;
+        if (entry.edit_key) setEditKey(entry.id, entry.edit_key);
+        delete entry.edit_key;
         try { localStorage.setItem(NAME_KEY, name); } catch {}
         entries = [entry, ...entries];
         render(entry.id);
