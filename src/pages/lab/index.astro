@@ -2,6 +2,9 @@
 // Il quaderno del laboratorio: pagina pubblica raggiungibile solo con il link.
 // URL: /lab/<codice>  (vercel.json riscrive /lab/:code su questa pagina)
 // Legge e scrive solo tramite le funzioni Supabase workshop_notebook_get / workshop_notebook_add.
+// Se il quaderno ha una password la chiede una volta e la ricorda in questo browser.
+// Le immagini sono in un bucket privato: si leggono e caricano tramite la
+// Edge Function workshop-notebook-images (link firmati temporanei).
 import Layout from '../../layouts/Layout.astro';
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
@@ -36,6 +39,19 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       <p class="nb-kicker">Quaderno del laboratorio</p>
       <h1>Quaderno non trovato</h1>
       <p>Il link potrebbe essere scaduto o incompleto. Chiedi a chi conduce il laboratorio quello aggiornato.</p>
+    </div>
+
+    <div class="nb-lock" data-lock hidden>
+      <p class="nb-kicker">Quaderno del laboratorio</p>
+      <h1>Il quaderno è riservato</h1>
+      <p class="nb-lock-text">Scrivi la password che ti ha dato chi conduce il laboratorio.</p>
+      <form class="nb-sign nb-lock-form" data-lock-form novalidate>
+        <label for="nb-password" class="nb-sr">Password</label>
+        <input id="nb-password" name="password" type="password" autocomplete="current-password"
+          autocapitalize="off" spellcheck="false" maxlength="200" placeholder="Password" required />
+        <button type="submit" class="nb-submit" data-lock-submit>Apri il quaderno</button>
+      </form>
+      <p class="nb-message nb-lock-message" data-lock-message role="status" aria-live="polite"></p>
     </div>
 
     <div class="nb-content" data-content hidden>
@@ -406,6 +422,10 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 
   .nb-missing { max-width: 640px; }
+  .nb-lock { max-width: 640px; }
+  .nb-lock-text { margin: 24px 0 32px; max-width: 30em; font-family: var(--font-serif); font-size: 22px; line-height: 1.5; }
+  .nb-lock-form { max-width: 520px; }
+  .nb-lock-message { margin-top: 14px; }
   .nb-missing p:last-child { margin-top: 24px; max-width: 30em; font-family: var(--font-serif); font-size: 22px; line-height: 1.5; }
 </style>
 
@@ -420,6 +440,12 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     immagine_non_trovata: "L'immagine non è arrivata: riprova a caricarla.",
     troppi_contributi: 'Hai lasciato molte tracce in poco tempo: riprova tra qualche minuto.',
   };
+  const LOCKED: Record<string, string> = {
+    password_richiesta: '',
+    password_errata: 'Password non corretta. Riprova.',
+    troppi_tentativi: 'Troppi tentativi sbagliati: riprova tra un quarto d’ora.',
+  };
+  const PASSWORD_KEY = 'tantan-quaderno-password:';
 
   type Entry = {
     id: string; author_name: string; body: string | null; link_url: string | null;
@@ -479,8 +505,55 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       return data;
     }
 
-    const publicImage = (path: string) =>
-      `${url}/storage/v1/object/public/workshop-notebook-images/${path.split('/').map(encodeURIComponent).join('/')}`;
+    // ---- password: ricordata in questo browser, per questo quaderno ----
+    const lock = $<HTMLElement>('[data-lock]');
+    const lockForm = $<HTMLFormElement>('[data-lock-form]');
+    const lockInput = $<HTMLInputElement>('#nb-password');
+    const lockSubmit = $<HTMLButtonElement>('[data-lock-submit]');
+    const lockMessage = $<HTMLElement>('[data-lock-message]');
+    let password: string | null = null;
+    try { password = localStorage.getItem(PASSWORD_KEY + code); } catch {}
+    function rememberPassword(value: string | null) {
+      password = value;
+      try {
+        if (value) localStorage.setItem(PASSWORD_KEY + code, value);
+        else localStorage.removeItem(PASSWORD_KEY + code);
+      } catch {}
+    }
+    function showLock(reason: string) {
+      if (reason !== 'troppi_tentativi') rememberPassword(null);
+      content.hidden = true;
+      fab.hidden = true;
+      lock.hidden = false;
+      lockMessage.textContent = LOCKED[reason] ?? '';
+      lockSubmit.disabled = false;
+      lockSubmit.textContent = 'Apri il quaderno';
+      lockInput.focus({ preventScroll: true });
+    }
+
+    // ---- immagini: link firmati dalla Edge Function ----
+    const imageUrls = new Map<string, string>();
+    async function images(action: 'view' | 'upload') {
+      const res = await fetch(`${url}/functions/v1/workshop-notebook-images`, {
+        method: 'POST',
+        headers: { apikey: key, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, code, password }),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(data?.error || 'errore');
+      return data;
+    }
+    async function loadImages() {
+      if (!entries.some((e) => e.image_path)) return;
+      try {
+        const data = await images('view');
+        for (const [path, signed] of Object.entries<string>(data.urls || {})) imageUrls.set(path, signed);
+      } catch { /* le immagini restano vuote, il testo resta leggibile */ }
+      root!.querySelectorAll<HTMLImageElement>('img[data-path]').forEach((img) => {
+        const signed = imageUrls.get(img.dataset.path!);
+        if (signed && !img.getAttribute('src')) img.src = signed;
+      });
+    }
 
     // ---- date in italiano, con "oggi" e "ieri" ----
     const dayMonth = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long' });
@@ -548,7 +621,9 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         const img = el('img');
         img.dataset.pending = '';
         img.addEventListener('load', () => delete img.dataset.pending, { once: true });
-        img.src = publicImage(e.image_path);
+        img.dataset.path = e.image_path;
+        const signed = imageUrls.get(e.image_path);
+        if (signed) img.src = signed;
         img.alt = e.body ? '' : `Immagine lasciata da ${e.author_name}`;
         img.loading = 'lazy';
         img.decoding = 'async';
@@ -627,14 +702,23 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     }
 
     async function upload(blob: Blob) {
-      const path = `${code}/${crypto.randomUUID()}.jpg`;
-      const res = await fetch(`${url}/storage/v1/object/workshop-notebook-images/${path}`, {
-        method: 'POST',
-        headers: { ...headers, 'Content-Type': 'image/jpeg', 'x-upsert': 'false' },
-        body: blob,
-      });
+      let slot: { path: string; token: string };
+      try {
+        slot = await images('upload');
+      } catch (error) {
+        const reason = (error as Error).message;
+        throw new Error(reason in LOCKED || reason in ERRORS ? reason : 'caricamento_immagine');
+      }
+      const encoded = slot.path.split('/').map(encodeURIComponent).join('/');
+      const formData = new FormData();
+      formData.append('cacheControl', '3600');
+      formData.append('', blob, 'immagine.jpg');
+      const res = await fetch(
+        `${url}/storage/v1/object/upload/sign/workshop-notebook-images/${encoded}?token=${encodeURIComponent(slot.token)}`,
+        { method: 'PUT', headers: { ...headers, 'x-upsert': 'false' }, body: formData },
+      );
       if (!res.ok) throw new Error('caricamento_immagine');
-      return path;
+      return slot.path;
     }
 
     function clearImage() {
@@ -685,13 +769,16 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       message.textContent = '';
       try {
         const imagePath = imageBlob ? await upload(imageBlob) : null;
-        const entry: Entry = await rpc('workshop_notebook_add', {
+        const result = await rpc('workshop_notebook_add', {
           p_code: code, p_author: name, p_body: body || null,
-          p_link_url: link || null, p_image_path: imagePath,
+          p_link_url: link || null, p_image_path: imagePath, p_password: password,
         });
+        if (result?.locked) { showLock(result.locked); return; }
+        const entry: Entry = result;
         try { localStorage.setItem(NAME_KEY, name); } catch {}
         entries = [entry, ...entries];
         render(entry.id);
+        if (entry.image_path) loadImages();
         bodyInput.value = '';
         linkInput.value = '';
         linkRow.hidden = true;
@@ -702,6 +789,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         fresh?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (error) {
         const reason = (error as Error).message;
+        if (reason in LOCKED) { showLock(reason); return; }
         message.textContent = ERRORS[reason] || (reason === 'caricamento_immagine'
           ? "L'immagine non si è caricata. Riprova, oppure lascia la traccia senza immagine."
           : 'Qualcosa non ha funzionato. Riprova tra poco.');
@@ -716,10 +804,28 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     (async () => {
       const dropCover = () => { document.querySelector('[data-cover]')?.remove(); document.documentElement.classList.remove('nb-cover-lock'); };
       if (!code) { dropCover(); loading.hidden = true; missing.hidden = false; return; }
+
+      lockForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const value = lockInput.value.trim();
+        if (!value) { lockMessage.textContent = 'Scrivi la password.'; lockInput.focus(); return; }
+        lockSubmit.disabled = true;
+        lockSubmit.textContent = 'Un momento…';
+        lockMessage.textContent = '';
+        rememberPassword(value);
+        if (await openNotebook()) { lock.hidden = true; lockInput.value = ''; }
+      });
+
+      await openNotebook();
+    })();
+
+    async function openNotebook(): Promise<boolean> {
+      const dropCover = () => { document.querySelector('[data-cover]')?.remove(); document.documentElement.classList.remove('nb-cover-lock'); };
       try {
-        const data = await rpc('workshop_notebook_get', { p_code: code });
+        const data = await rpc('workshop_notebook_get', { p_code: code, p_password: password });
         loading.hidden = true;
-        if (!data) { dropCover(); missing.hidden = false; return; }
+        if (!data) { dropCover(); lock.hidden = true; missing.hidden = false; return false; }
+        if (data.locked) { dropCover(); showLock(data.locked); return false; }
         const coverTitle = document.querySelector('[data-cover-title]');
         if (coverTitle) coverTitle.textContent = data.title || 'Il quaderno';
         $('[data-title]').textContent = data.title || 'Il quaderno';
@@ -733,13 +839,23 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         render();
         if (isOpen && !entries.length) showForm(false);
         content.hidden = false;
-        if (location.hash) root.querySelector(location.hash)?.scrollIntoView();
+        loadImages();
+        if (location.hash) root!.querySelector(location.hash)?.scrollIntoView();
+        return true;
       } catch {
         dropCover();
+        if (!lock.hidden) {
+          lockSubmit.disabled = false;
+          lockSubmit.textContent = 'Apri il quaderno';
+          lockMessage.textContent = 'Non riesco ad aprire il quaderno in questo momento. Riprova tra poco.';
+          return false;
+        }
+        loading.hidden = false;
         loading.replaceChildren(document.createTextNode('Non riesco ad aprire il quaderno in questo momento. Riprova tra poco.'));
         loading.classList.add('nb-status-text');
+        return false;
       }
-    })();
+    }
   }
 
   // ---- copertina: mostrata una volta per visita, si apre con un gesto ----
