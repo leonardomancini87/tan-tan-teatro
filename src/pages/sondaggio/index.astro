@@ -219,15 +219,16 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       return node;
     };
 
-    const dateFmt = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+    const dayFmt = new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Europe/Rome' });
+    const timeFmt = new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
 
     function renderHead(p: Poll) {
       $('[data-title]').textContent = p.title;
       $('[data-description]').textContent = p.description || '';
-      const parts: string[] = [];
-      if (p.is_open && p.closes_at) parts.push(`Si vota fino al ${dateFmt.format(new Date(p.closes_at))}`);
-      if (p.total) parts.push(`${p.total} ${p.total === 1 ? 'risposta' : 'risposte'}`);
-      $('[data-meta]').textContent = parts.join(' · ');
+      const deadline = p.is_open && p.closes_at ? new Date(p.closes_at) : null;
+      $('[data-meta]').textContent = deadline
+        ? `Scadenza del sondaggio: ${dayFmt.format(deadline)}, ore ${timeFmt.format(deadline)}`
+        : '';
       document.title = `${p.title} · Sondaggio | Tan Tan Teatro`;
     }
 
