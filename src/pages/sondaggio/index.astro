@@ -3,7 +3,8 @@
 // URL: /sondaggio/<codice>  (vercel.json riscrive /sondaggio/:code su questa pagina)
 // Chi vota sceglie il proprio nome tra i membri e tocca la risposta: il voto
 // finisce nello stesso sondaggio dell'App. Funzioni Supabase poll_web_get /
-// poll_web_vote (App: supabase/migrations/20261104180000_poll_whatsapp_links.sql).
+// poll_web_vote_choices (App: supabase/migrations/20261104180000_poll_whatsapp_links.sql
+// e 20261104200000_poll_multiple_choice.sql). Sondaggi a una o più risposte.
 // Il telefono è riconosciuto da una chiave casuale salvata nel browser:
 // un telefono vota con un solo nome per sondaggio.
 import Layout from '../../layouts/Layout.astro';
@@ -30,6 +31,8 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         <p class="pv-meta" data-meta></p>
       </header>
 
+      <p class="pv-notice" data-notice role="alert"></p>
+
       <!-- 1 · chi sei -->
       <section class="pv-step" data-step-who hidden aria-labelledby="pv-who-title">
         <h2 id="pv-who-title">Chi sei?</h2>
@@ -44,7 +47,9 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       <section class="pv-step" data-step-vote hidden aria-labelledby="pv-vote-title">
         <p class="pv-as" data-as></p>
         <h2 id="pv-vote-title">La tua risposta</h2>
+        <p class="pv-hint" data-multi-hint hidden>Puoi scegliere più risposte, poi tocca «Invia le risposte».</p>
         <div class="pv-options" data-options></div>
+        <button type="button" class="pv-send" data-send hidden>Invia le risposte</button>
         <p class="pv-message" data-message role="status" aria-live="polite"></p>
         <button type="button" class="pv-plain" data-change-name hidden>Non sono io</button>
       </section>
@@ -110,9 +115,17 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   .pv .pv-option:hover { border-color: var(--pv-ink); }
   .pv .pv-option[aria-pressed='true'] { border-color: var(--pv-ink); background: var(--pv-ink); color: var(--pv-ground) !important; }
   .pv .pv-option[disabled] { cursor: progress; opacity: .7; }
+  .pv .pv-send {
+    margin-top: 18px; min-height: 52px; height: auto; padding: 0 26px; border: 0; border-radius: 3px;
+    background: var(--pv-ink); color: var(--pv-ground) !important; box-shadow: none;
+    font-family: var(--font-sans-serif); font-size: 16px; line-height: 1.2; letter-spacing: .02em; text-transform: none; cursor: pointer;
+  }
+  .pv .pv-send[disabled] { opacity: .5; cursor: default; }
   .pv-check { font-family: var(--font-sans-serif); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
   .pv-message { margin: 18px 0 0; font-size: 16px; color: var(--pv-soft); }
   .pv-message:empty { display: none; }
+  .pv-notice { margin: 32px 0 0; padding: 14px 16px; border-left: 2px solid var(--pv-ink); background: var(--pv-paper); font-size: 15px; line-height: 1.5; }
+  .pv-notice:empty { display: none; }
   .pv .pv-plain { margin-top: 18px; padding: 0; border: 0; background: none; color: var(--pv-soft) !important; font-size: 14px; text-decoration: underline; }
   .pv button:focus-visible { outline: 2px solid var(--pv-ink); outline-offset: 3px; }
 
@@ -127,6 +140,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   type Option = { id: string; label: string; votes?: number };
   type Poll = {
     title: string; description: string | null; is_open: boolean; closes_at: string | null; total: number;
+    multiple?: boolean; my_options?: string[];
     me: { id: string; name: string } | null; my_option: string | null; options: Option[]; voters: Voter[];
   };
 
@@ -138,7 +152,9 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     nome_non_valido: 'Questo nome non è tra chi può votare.',
     telefono_gia_usato: 'Da questo telefono hai già votato con un altro nome.',
     nome_gia_usato: 'Questo nome ha già votato da un altro telefono.',
-    gia_votato_app: 'Hai già votato dall’App: puoi cambiare la risposta da lì.',
+    gia_votato_app: 'Hai già votato dall’App: puoi cambiare le risposte da lì.',
+    una_sola_risposta: 'In questo sondaggio si può scegliere una sola risposta.',
+    nessuna_risposta: 'Scegli almeno una risposta.',
     dispositivo_non_valido: 'Il browser non permette di salvare il voto. Prova da un’altra app o disattiva la navigazione privata.',
   };
 
@@ -173,10 +189,16 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     const closed = $<HTMLElement>('[data-step-closed]');
     const message = $<HTMLElement>('[data-message]');
     const changeName = $<HTMLButtonElement>('[data-change-name]');
+    const notice = $<HTMLElement>('[data-notice]');
 
     let poll: Poll | null = null;
     let chosen: Voter | null = null;
     let busy = false;
+    let picked = new Set<string>();
+    const sendButton = $<HTMLButtonElement>('[data-send]');
+    const multiHint = $<HTMLElement>('[data-multi-hint]');
+    const savedChoices = (p: Poll) =>
+      chosen && p.me && chosen.id === p.me.id ? (p.my_options ?? (p.my_option ? [p.my_option] : [])) : [];
 
     async function rpc(name: string, body: object) {
       const res = await fetch(`${url}/rest/v1/rpc/${name}`, {
@@ -217,7 +239,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         const b = el('button', 'pv-name', v.name);
         b.type = 'button';
         if (v.state === 'preso') { b.disabled = true; b.title = 'Ha già votato'; anyTaken = true; }
-        b.addEventListener('click', () => { chosen = v; message.textContent = ''; show(); });
+        b.addEventListener('click', () => { chosen = v; message.textContent = ''; notice.textContent = ''; show(); });
         box.append(b);
       }
       $<HTMLElement>('[data-taken-note]').hidden = !anyTaken;
@@ -226,26 +248,51 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     function renderOptions(p: Poll) {
       const box = $<HTMLElement>('[data-options]');
       box.replaceChildren();
-      const mine = chosen && p.me && chosen.id === p.me.id ? p.my_option : null;
+      const saved = savedChoices(p);
+      const multiple = !!p.multiple;
+      picked = new Set(saved);
+      multiHint.hidden = !multiple;
+      sendButton.hidden = !multiple;
+      const sameAsSaved = () => picked.size === saved.length && saved.every((id) => picked.has(id));
+      const refreshSend = () => {
+        sendButton.disabled = busy || (picked.size === 0 && saved.length === 0) || sameAsSaved();
+        sendButton.textContent = saved.length ? 'Aggiorna le risposte' : 'Invia le risposte';
+      };
       for (const o of p.options) {
         const b = el('button', 'pv-option');
         b.type = 'button';
-        b.setAttribute('aria-pressed', String(o.id === mine));
-        b.append(el('span', '', o.label));
-        if (o.id === mine) b.append(el('span', 'pv-check', 'Il tuo voto'));
-        b.addEventListener('click', () => submit(o));
+        const label = el('span', '', o.label);
+        const tag = el('span', 'pv-check');
+        const paint = () => {
+          const on = multiple ? picked.has(o.id) : saved.includes(o.id);
+          b.setAttribute('aria-pressed', String(on));
+          tag.textContent = on ? (multiple ? 'Scelta' : 'Il tuo voto') : '';
+        };
+        paint();
+        b.append(label, tag);
+        b.addEventListener('click', () => {
+          if (!multiple) { submit([o.id]); return; }
+          if (picked.has(o.id)) picked.delete(o.id); else picked.add(o.id);
+          paint();
+          refreshSend();
+          message.textContent = '';
+        });
         box.append(b);
       }
+      refreshSend();
       const as = $<HTMLElement>('[data-as]');
       as.replaceChildren(document.createTextNode('Voti come '), el('strong', '', chosen!.name));
       // Si può tornare alla scelta del nome solo finché questo telefono non ha votato.
       changeName.hidden = !!p.me;
     }
 
+    sendButton.addEventListener('click', () => submit([...picked]));
+
     function renderResults(p: Poll) {
       const box = $<HTMLElement>('[data-results]');
       box.replaceChildren();
-      const total = p.options.reduce((sum, o) => sum + (o.votes || 0), 0);
+      // Percentuale sulle persone che hanno risposto (con più risposte la somma supera il 100%).
+      const total = p.multiple ? p.total : p.options.reduce((sum, o) => sum + (o.votes || 0), 0);
       for (const o of p.options) {
         const n = o.votes || 0;
         const row = el('div');
@@ -273,30 +320,35 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
     changeName.addEventListener('click', () => { chosen = null; message.textContent = ''; show(); });
 
-    async function submit(option: Option) {
-      if (busy || !chosen) return;
+    async function submit(ids: string[]) {
+      if (busy || !chosen || !poll) return;
       busy = true;
-      root!.querySelectorAll<HTMLButtonElement>('.pv-option').forEach((b) => (b.disabled = true));
+      root!.querySelectorAll<HTMLButtonElement>('.pv-option, .pv-send').forEach((b) => (b.disabled = true));
       message.textContent = 'Un momento…';
       try {
-        poll = await rpc('poll_web_vote', {
-          p_code: code, p_user_id: chosen.id, p_option_id: option.id, p_device_key: device,
+        poll = await rpc('poll_web_vote_choices', {
+          p_code: code, p_user_id: chosen.id, p_option_ids: ids, p_device_key: device,
         });
+        busy = false;
         show();
-        message.textContent = `Grazie, il tuo voto è registrato: «${option.label}». Puoi cambiarlo finché il sondaggio è aperto.`;
+        const labels = poll!.options.filter((o) => ids.includes(o.id)).map((o) => `«${o.label}»`);
+        message.textContent = labels.length
+          ? `Grazie, ${labels.length === 1 ? 'il tuo voto è registrato' : 'le tue risposte sono registrate'}: ${labels.join(', ')}. Puoi cambiarle finché il sondaggio è aperto.`
+          : 'Hai ritirato le tue risposte.';
       } catch (error) {
         const reason = (error as Error).message;
-        message.textContent = ERRORS[reason] || 'Il voto non è arrivato. Riprova tra poco.';
-        root!.querySelectorAll<HTMLButtonElement>('.pv-option').forEach((b) => (b.disabled = false));
-        if (['nome_gia_usato', 'gia_votato_app', 'nome_non_valido', 'sondaggio_chiuso'].includes(reason)) {
-          const keep = message.textContent;
-          await load();
-          if (reason !== 'sondaggio_chiuso') { chosen = null; show(); }
-          message.textContent = keep;
-          if (!vote.hidden) return;
-          const note = $<HTMLElement>('[data-taken-note]');
-          note.hidden = false;
-          note.textContent = keep;
+        const text = ERRORS[reason] || 'Il voto non è arrivato. Riprova tra poco.';
+        message.textContent = '';
+        if (['nome_gia_usato', 'gia_votato_app', 'nome_non_valido', 'sondaggio_chiuso', 'opzione_non_valida'].includes(reason)) {
+          // La situazione è cambiata: ricarico il sondaggio e torno al passo giusto.
+          await load().catch(() => {});
+          if (!poll?.me) chosen = null;
+          show();
+          notice.textContent = text;
+        } else {
+          message.textContent = text;
+          root!.querySelectorAll<HTMLButtonElement>('.pv-option').forEach((b) => (b.disabled = false));
+          sendButton.disabled = false;
         }
       } finally {
         busy = false;
