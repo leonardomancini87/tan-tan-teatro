@@ -27,6 +27,14 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         <p class="nb-cover-kicker">Tan Tan Teatro · Quaderno del laboratorio</p>
         <p class="nb-cover-title" data-cover-title></p>
       </div>
+      <form class="nb-cover-lock" data-cover-lock novalidate hidden>
+        <label for="nb-cover-password" class="nb-sr">Password del quaderno</label>
+        <input id="nb-cover-password" name="nb-cover-password" type="password" autocomplete="off"
+          autocapitalize="off" spellcheck="false" maxlength="200" placeholder="Password"
+          data-1p-ignore data-lpignore="true" />
+        <button type="submit" class="nb-cover-enter" data-cover-submit>Apri il quaderno</button>
+        <p class="nb-cover-message" data-cover-message role="status" aria-live="polite"></p>
+      </form>
       <button type="button" class="nb-cover-enter" data-cover-enter>
         Quaderno
         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
@@ -47,7 +55,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       <p class="nb-lock-text">Scrivi la password che ti ha dato chi conduce il laboratorio.</p>
       <form class="nb-sign nb-lock-form" data-lock-form novalidate>
         <label for="nb-password" class="nb-sr">Password</label>
-        <input id="nb-password" name="password" type="password" autocomplete="current-password"
+        <input id="nb-password" name="nb-password" type="password" autocomplete="off" data-1p-ignore data-lpignore="true"
           autocapitalize="off" spellcheck="false" maxlength="200" placeholder="Password" required />
         <button type="submit" class="nb-submit" data-lock-submit>Apri il quaderno</button>
       </form>
@@ -218,6 +226,24 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   .nb-cover .nb-cover-enter svg { animation: nb-nudge 2.4s ease-in-out infinite; }
   .nb-cover .nb-cover-enter:focus-visible { outline: 2px solid #f4f2ec; outline-offset: 4px; }
   .nb-cover.nb-cover-out { transform: translateY(-100%); }
+  .nb-cover.nb-cover-locked { cursor: default; }
+  .nb-cover-lock {
+    position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: flex-end;
+    gap: 12px 28px; max-width: 620px; margin-top: clamp(28px, 5vw, 48px);
+  }
+  .nb-cover-lock[hidden], .nb-cover [hidden] { display: none !important; }
+  .nb-cover .nb-cover-lock input {
+    flex: 1 1 240px; min-width: 0; height: 48px; margin: 0; padding: 0 2px;
+    border: 0; border-bottom: 1px solid rgba(244,242,236,.6); border-radius: 0;
+    background: transparent; color: #f4f2ec; box-shadow: none; outline: none;
+    font-family: var(--font-sans-serif); font-size: 17px; letter-spacing: .04em;
+  }
+  .nb-cover .nb-cover-lock input::placeholder { color: rgba(244,242,236,.72); }
+  .nb-cover .nb-cover-lock input:focus { border-bottom-color: #f4f2ec; }
+  .nb-cover .nb-cover-lock .nb-cover-enter { margin-top: 0; }
+  .nb-cover .nb-cover-lock .nb-cover-enter[disabled] { opacity: .6; cursor: progress; }
+  .nb-cover-message { flex-basis: 100%; margin: 0; font-size: 15px; color: rgba(244,242,236,.92); }
+  .nb-cover-message:empty { display: none; }
   @keyframes nb-nudge { 0%, 100% { transform: none; } 50% { transform: translateY(4px); } }
   html.nb-cover-lock, html.nb-cover-lock body { overflow: hidden; }
   @media (prefers-reduced-motion: reduce) {
@@ -524,6 +550,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       if (reason !== 'troppi_tentativi') rememberPassword(null);
       content.hidden = true;
       fab.hidden = true;
+      if (coverApi?.ask(reason, LOCKED[reason] ?? '')) return;
       lock.hidden = false;
       lockMessage.textContent = LOCKED[reason] ?? '';
       lockSubmit.disabled = false;
@@ -802,8 +829,13 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
     // ---- apertura ----
     (async () => {
-      const dropCover = () => { document.querySelector('[data-cover]')?.remove(); document.documentElement.classList.remove('nb-cover-lock'); };
+      const dropCover = () => coverApi?.drop();
       if (!code) { dropCover(); loading.hidden = true; missing.hidden = false; return; }
+
+      coverApi?.onPassword(async (value) => {
+        rememberPassword(value);
+        return openNotebook();
+      });
 
       lockForm.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -820,12 +852,17 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     })();
 
     async function openNotebook(): Promise<boolean> {
-      const dropCover = () => { document.querySelector('[data-cover]')?.remove(); document.documentElement.classList.remove('nb-cover-lock'); };
+      const dropCover = () => coverApi?.drop();
       try {
         const data = await rpc('workshop_notebook_get', { p_code: code, p_password: password });
         loading.hidden = true;
         if (!data) { dropCover(); lock.hidden = true; missing.hidden = false; return false; }
-        if (data.locked) { dropCover(); showLock(data.locked); return false; }
+        if (data.locked) {
+          const coverTitle = document.querySelector('[data-cover-title]');
+          if (coverTitle) coverTitle.textContent = data.title || coverTitle.textContent || 'Il quaderno';
+          showLock(data.locked);
+          return false;
+        }
         const coverTitle = document.querySelector('[data-cover-title]');
         if (coverTitle) coverTitle.textContent = data.title || 'Il quaderno';
         $('[data-title]').textContent = data.title || 'Il quaderno';
@@ -840,9 +877,11 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
         if (isOpen && !entries.length) showForm(false);
         content.hidden = false;
         loadImages();
+        coverApi?.unlocked();
         if (location.hash) root!.querySelector(location.hash)?.scrollIntoView();
         return true;
       } catch {
+        if (coverApi?.failed('Non riesco ad aprire il quaderno in questo momento. Riprova tra poco.')) return false;
         dropCover();
         if (!lock.hidden) {
           lockSubmit.disabled = false;
@@ -858,7 +897,17 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     }
   }
 
-  // ---- copertina: mostrata una volta per visita, si apre con un gesto ----
+  // ---- copertina ----
+  // Mostrata una volta per visita e si apre con un gesto. Se il quaderno chiede
+  // la password, la copertina torna (anche se già vista) e il campo compare qui.
+  type CoverApi = {
+    ask(reason: string, text: string): boolean;
+    onPassword(handler: (value: string) => Promise<boolean>): void;
+    unlocked(): void;
+    failed(text: string): boolean;
+    drop(): void;
+  };
+  let coverApi: CoverApi | null = null;
   const COVER_KEY = 'tantan-quaderno-copertina';
   function initCover() {
     const cover = document.querySelector<HTMLElement>('[data-cover]');
@@ -866,7 +915,6 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     cover.dataset.ready = '1';
     let seen = false;
     try { seen = sessionStorage.getItem(COVER_KEY) === '1'; } catch {}
-    if (seen) { cover.remove(); return; }
 
     const img = cover.querySelector<HTMLImageElement>('[data-cover-img]')!;
     if (!img.complete) {
@@ -876,15 +924,41 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     img.addEventListener('error', () => img.closest('picture')?.remove(), { once: true });
     if (img.complete && img.naturalWidth === 0) img.closest('picture')?.remove();
 
+    const form = cover.querySelector<HTMLFormElement>('[data-cover-lock]')!;
+    const input = cover.querySelector<HTMLInputElement>('#nb-cover-password')!;
+    const submit = cover.querySelector<HTMLButtonElement>('[data-cover-submit]')!;
+    const note = cover.querySelector<HTMLElement>('[data-cover-message]')!;
+    const enterButton = cover.querySelector<HTMLElement>('[data-cover-enter]')!;
+
     // fuori dal contenitore della pagina, perché nessun antenato ne limiti la posizione fissa
     document.body.append(cover);
-    cover.hidden = false;
-    document.documentElement.classList.add('nb-cover-lock');
 
+    let shown = false;
     let gone = false;
+    let locked = false;
     let touchY = 0;
+    let passwordHandler: ((value: string) => Promise<boolean>) | null = null;
+
+    function show() {
+      if (shown || gone) return;
+      shown = true;
+      cover!.hidden = false;
+      document.documentElement.classList.add('nb-cover-lock');
+      cover!.addEventListener('click', onClick);
+      window.addEventListener('wheel', onWheel, { passive: true });
+      window.addEventListener('keydown', onKey);
+      cover!.addEventListener('touchstart', onTouchStart, { passive: true });
+      cover!.addEventListener('touchmove', onTouchMove, { passive: true });
+    }
+    function cleanup() {
+      cover!.removeEventListener('click', onClick);
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', onKey);
+      cover!.removeEventListener('touchstart', onTouchStart);
+      cover!.removeEventListener('touchmove', onTouchMove);
+    }
     function enter() {
-      if (gone) return;
+      if (gone || locked || !shown) return;
       gone = true;
       try { sessionStorage.setItem(COVER_KEY, '1'); } catch {}
       cover!.classList.add('nb-cover-out');
@@ -893,23 +967,68 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       cleanup();
       setTimeout(() => cover!.remove(), 1000);
     }
+    function drop() {
+      if (gone) return;
+      gone = true;
+      cleanup();
+      cover!.remove();
+      document.documentElement.classList.remove('nb-cover-lock');
+    }
+    function setLocked(value: boolean) {
+      locked = value;
+      cover!.classList.toggle('nb-cover-locked', value);
+      form.hidden = !value;
+      enterButton.hidden = value;
+    }
+    const onClick = (e: MouseEvent) => { if (!form.contains(e.target as Node)) enter(); };
     const onWheel = (e: WheelEvent) => { if (e.deltaY > 4) enter(); };
     const onKey = (e: KeyboardEvent) => {
+      if (locked) return; // si sta scrivendo la password
       if (['ArrowDown', 'PageDown', ' ', 'Enter', 'Escape'].includes(e.key)) { e.preventDefault(); enter(); }
     };
     const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0].clientY; };
     const onTouchMove = (e: TouchEvent) => { if (touchY - e.touches[0].clientY > 30) enter(); };
-    function cleanup() {
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('keydown', onKey);
-      cover!.removeEventListener('touchstart', onTouchStart);
-      cover!.removeEventListener('touchmove', onTouchMove);
-    }
-    cover.addEventListener('click', enter);
-    window.addEventListener('wheel', onWheel, { passive: true });
-    window.addEventListener('keydown', onKey);
-    cover.addEventListener('touchstart', onTouchStart, { passive: true });
-    cover.addEventListener('touchmove', onTouchMove, { passive: true });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const value = input.value.trim();
+      if (!value) { note.textContent = 'Scrivi la password.'; input.focus(); return; }
+      if (!passwordHandler) return;
+      submit.disabled = true;
+      submit.textContent = 'Un momento…';
+      note.textContent = '';
+      await passwordHandler(value);
+    });
+
+    coverApi = {
+      ask(_reason, text) {
+        if (gone) return false;
+        show();
+        setLocked(true);
+        note.textContent = text;
+        submit.disabled = false;
+        submit.textContent = 'Apri il quaderno';
+        input.value = '';
+        input.focus({ preventScroll: true });
+        return true;
+      },
+      onPassword(handler) { passwordHandler = handler; },
+      unlocked() {
+        if (!locked) return;
+        setLocked(false);
+        enter();
+      },
+      failed(text) {
+        if (gone || !locked) return false;
+        submit.disabled = false;
+        submit.textContent = 'Apri il quaderno';
+        note.textContent = text;
+        return true;
+      },
+      drop,
+    };
+
+    if (!seen) show();
   }
 
   initCover();
