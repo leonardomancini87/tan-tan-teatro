@@ -36,10 +36,18 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       <!-- 1 · chi sei -->
       <section class="pv-step" data-step-who hidden aria-labelledby="pv-who-title">
         <h2 id="pv-who-title">Chi sei?</h2>
-        <p class="pv-hint">Tocca il tuo nome. Da questo telefono potrai votare solo con questo nome.</p>
-        <div class="pv-names" data-names></div>
+        <p class="pv-hint">Scrivi il tuo nome e sceglilo tra i suggerimenti. Da questo telefono potrai votare solo con questo nome.</p>
+        <label class="pv-field">
+          <span class="pv-sr">Il tuo nome</span>
+          <input type="text" data-name-input placeholder="Il tuo nome…" autocomplete="off" autocapitalize="words"
+            autocorrect="off" spellcheck="false" enterkeyhint="go" aria-controls="pv-name-list" />
+        </label>
+        <div class="pv-names" id="pv-name-list" data-names role="list"></div>
+        <p class="pv-small" data-name-empty hidden>
+          Non trovo questo nome. Se fai parte della compagnia e non compari, avvisa chi ha condiviso il sondaggio.
+        </p>
         <p class="pv-small" data-taken-note hidden>
-          I nomi in grigio hanno già votato. Se il tuo è tra questi e non sei stato tu, avvisa chi ha condiviso il sondaggio.
+          Questo nome ha già votato da un altro telefono. Se non sei stato tu, avvisa chi ha condiviso il sondaggio.
         </p>
       </section>
 
@@ -98,13 +106,27 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
     height: auto; line-height: 1.3; box-shadow: none; text-transform: none; letter-spacing: normal;
     font-family: var(--font-sans-serif); cursor: pointer; white-space: normal; text-align: left;
   }
-  .pv-names { display: flex; flex-wrap: wrap; gap: 10px; }
-  .pv .pv-name {
-    min-height: 46px; padding: 10px 16px; border: 1px solid var(--pv-field); border-radius: 3px;
-    background: var(--pv-card); color: var(--pv-ink) !important; font-size: 16px;
+  .pv-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .pv-field { display: block; }
+  .pv .pv-field input {
+    display: block; width: 100%; height: auto; min-height: 58px; margin: 0; padding: 12px 2px;
+    border: 0; border-bottom: 1px solid var(--pv-field); border-radius: 0; background: transparent; box-shadow: none;
+    color: var(--pv-ink); font-family: var(--font-serif); font-size: 26px; line-height: 1.2; outline: none;
   }
-  .pv .pv-name:hover { border-color: var(--pv-ink); }
-  .pv .pv-name[disabled] { cursor: default; color: var(--pv-faint) !important; background: transparent; border-style: dashed; }
+  .pv .pv-field input::placeholder { color: var(--pv-faint); opacity: 1; }
+  .pv .pv-field input:focus { border-bottom-color: var(--pv-ink); }
+  .pv-names { display: flex; flex-direction: column; }
+  .pv-names:empty { display: none; }
+  .pv .pv-name {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%;
+    min-height: 54px; padding: 12px 2px; border: 0; border-bottom: 1px solid var(--pv-line); border-radius: 0;
+    background: transparent; color: var(--pv-ink) !important; font-size: 18px;
+  }
+  .pv .pv-name::after { content: '→'; color: var(--pv-soft); }
+  .pv .pv-name:hover, .pv .pv-name:focus-visible { background: var(--pv-paper); }
+  .pv .pv-name mark { background: none; color: inherit; font-weight: 600; }
+  .pv .pv-name[disabled] { cursor: default; color: var(--pv-faint) !important; background: transparent; }
+  .pv .pv-name[disabled]::after { content: 'ha già votato'; font-size: 13px; color: var(--pv-faint); }
   .pv-options { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
   .pv .pv-option {
     display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%;
@@ -232,19 +254,49 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       document.title = `${p.title} · Sondaggio | Tan Tan Teatro`;
     }
 
+    // Nome e cognome si trovano scrivendo l'inizio di una delle parole,
+    // senza badare ad accenti e maiuscole ("gio" → Giorgio, Giovanni).
+    const fold = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const nameInput = $<HTMLInputElement>('[data-name-input]');
+
+    function pick(v: Voter) {
+      chosen = v; message.textContent = ''; notice.textContent = ''; nameInput.value = ''; show();
+    }
+
+    function matches(p: Poll, query: string) {
+      const words = fold(query).split(/[\s'’]+/).filter(Boolean);
+      if (!words.length) return [];
+      return p.voters.filter((v) => {
+        const name = fold(v.name);
+        // "D'Oria" si trova sia con "oria" sia con "dor".
+        const parts = [...name.split(/[\s'’-]+/), ...name.replace(/['’-]/g, '').split(/\s+/)];
+        return words.every((w) => parts.some((part) => part.startsWith(w)));
+      }).slice(0, 6);
+    }
+
     function renderWho(p: Poll) {
       const box = $<HTMLElement>('[data-names]');
+      const query = nameInput.value.trim();
+      const found = matches(p, query);
       box.replaceChildren();
-      let anyTaken = false;
-      for (const v of p.voters) {
+      for (const v of found) {
         const b = el('button', 'pv-name', v.name);
         b.type = 'button';
-        if (v.state === 'preso') { b.disabled = true; b.title = 'Ha già votato'; anyTaken = true; }
-        b.addEventListener('click', () => { chosen = v; message.textContent = ''; notice.textContent = ''; show(); });
+        b.setAttribute('role', 'listitem');
+        if (v.state === 'preso') b.disabled = true;
+        b.addEventListener('click', () => pick(v));
         box.append(b);
       }
-      $<HTMLElement>('[data-taken-note]').hidden = !anyTaken;
+      $<HTMLElement>('[data-name-empty]').hidden = !(query.length >= 2 && !found.length);
+      $<HTMLElement>('[data-taken-note]').hidden = !found.some((v) => v.state === 'preso');
     }
+
+    nameInput.addEventListener('input', () => { if (poll) renderWho(poll); });
+    nameInput.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' || !poll) return;
+      const free = matches(poll, nameInput.value).filter((v) => v.state !== 'preso');
+      if (free.length === 1) { event.preventDefault(); pick(free[0]); }
+    });
 
     function renderOptions(p: Poll) {
       const box = $<HTMLElement>('[data-options]');
@@ -315,6 +367,7 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
       if (!poll.is_open) { renderResults(poll); closed.hidden = false; return; }
       if (poll.me) chosen = { id: poll.me.id, name: poll.me.name, state: 'tuo' };
       if (!chosen) { renderWho(poll); who.hidden = false; return; }
+      nameInput.blur();
       renderOptions(poll);
       vote.hidden = false;
     }
