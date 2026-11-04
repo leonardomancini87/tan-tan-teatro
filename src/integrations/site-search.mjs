@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 export const EXCLUDE = [
   /^\/admin(\/|$)/,          // CMS
   /^\/lab(\/|$)/,            // quaderno riservato ai partecipanti
+  /^\/sondaggio(\/|$)/,      // sondaggi della compagnia (link condiviso)
   /^\/news\//,               // articoli di esempio del tema originale
   /^\/sold(\/|$)/,           // idem
   /^\/contact\/thanks(\/|$)/,

@@ -6,7 +6,7 @@ import siteSearch from './src/integrations/site-search.mjs';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.tantanteatro.it',
-  integrations: [sitemap({ filter: (page) => !page.includes('/lab/') }), siteSearch()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/lab/') && !page.includes('/sondaggio/') }), siteSearch()],
   i18n: {
     locales: ['it', 'en'],
     defaultLocale: 'it',

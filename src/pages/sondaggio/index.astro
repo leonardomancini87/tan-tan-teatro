@@ -1,0 +1,328 @@
+---
+// Votare un sondaggio della compagnia da un link (es. inviato su WhatsApp).
+// URL: /sondaggio/<codice>  (vercel.json riscrive /sondaggio/:code su questa pagina)
+// Chi vota sceglie il proprio nome tra i membri e tocca la risposta: il voto
+// finisce nello stesso sondaggio dell'App. Funzioni Supabase poll_web_get /
+// poll_web_vote (App: supabase/migrations/20261104180000_poll_whatsapp_links.sql).
+// Il telefono è riconosciuto da una chiave casuale salvata nel browser:
+// un telefono vota con un solo nome per sondaggio.
+import Layout from '../../layouts/Layout.astro';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+---
+
+<Layout title="Sondaggio | Tan Tan Teatro" description="Sondaggio della compagnia Tan Tan Teatro." noindex>
+  <div class="pv" data-poll-page data-url={supabaseUrl} data-key={supabaseKey}>
+    <p class="pv-status" data-loading>Apro il sondaggio…</p>
+
+    <div class="pv-missing" data-missing hidden>
+      <p class="pv-kicker">Sondaggio della compagnia</p>
+      <h1>Sondaggio non trovato</h1>
+      <p class="pv-lead">Il link potrebbe essere incompleto. Chiedi a chi l’ha condiviso di mandartelo di nuovo.</p>
+    </div>
+
+    <div data-content hidden>
+      <header class="pv-head">
+        <p class="pv-kicker">Sondaggio della compagnia</p>
+        <h1 data-title></h1>
+        <p class="pv-lead" data-description></p>
+        <p class="pv-meta" data-meta></p>
+      </header>
+
+      <!-- 1 · chi sei -->
+      <section class="pv-step" data-step-who hidden aria-labelledby="pv-who-title">
+        <h2 id="pv-who-title">Chi sei?</h2>
+        <p class="pv-hint">Tocca il tuo nome. Da questo telefono potrai votare solo con questo nome.</p>
+        <div class="pv-names" data-names></div>
+        <p class="pv-small" data-taken-note hidden>
+          I nomi in grigio hanno già votato. Se il tuo è tra questi e non sei stato tu, avvisa chi ha condiviso il sondaggio.
+        </p>
+      </section>
+
+      <!-- 2 · la risposta -->
+      <section class="pv-step" data-step-vote hidden aria-labelledby="pv-vote-title">
+        <p class="pv-as" data-as></p>
+        <h2 id="pv-vote-title">La tua risposta</h2>
+        <div class="pv-options" data-options></div>
+        <p class="pv-message" data-message role="status" aria-live="polite"></p>
+        <button type="button" class="pv-plain" data-change-name hidden>Non sono io</button>
+      </section>
+
+      <!-- sondaggio chiuso -->
+      <section class="pv-step" data-step-closed hidden>
+        <p class="pv-lead">Il sondaggio è chiuso. Ecco come è andata:</p>
+        <div class="pv-results" data-results></div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  body:has(.pv) { background: #f7f6f2; }
+  [data-theme='dark'] body:has(.pv) { background: #141517; }
+  .pv {
+    --pv-ink: #16171a; --pv-soft: #5e5d59; --pv-faint: #8a877f; --pv-line: #e2e0da;
+    --pv-field: #d8d5cd; --pv-card: #fbfaf7; --pv-ground: #f7f6f2; --pv-paper: #efeeea;
+    max-width: 640px; margin: 0 auto; padding: clamp(36px, 8vw, 88px) 20px 64px;
+    color: var(--pv-ink); font-family: var(--font-sans-serif); font-size: 16px; box-sizing: border-box;
+  }
+  [data-theme='dark'] .pv {
+    --pv-ink: #ecebe6; --pv-soft: #b5b2aa; --pv-faint: #8d8a83; --pv-line: #2c2d31;
+    --pv-field: #3f4045; --pv-card: #1a1b1e; --pv-ground: #141517; --pv-paper: #1c1d20;
+  }
+  .pv *, .pv *::before, .pv *::after { box-sizing: border-box; }
+  .pv [hidden] { display: none !important; }
+  .pv-status { color: var(--pv-soft); font-size: 17px; }
+  .pv-kicker { margin: 0 0 22px; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--pv-soft); }
+  .pv h1 {
+    margin: 0; font-family: var(--font-serif); font-weight: 400;
+    font-size: clamp(40px, 9vw, 68px); line-height: 1.02; letter-spacing: -.01em; text-wrap: balance;
+  }
+  .pv h2 { margin: 0 0 8px; font-family: var(--font-serif); font-weight: 400; font-size: 28px; }
+  .pv-lead { margin: 22px 0 0; font-family: var(--font-serif); font-size: 21px; line-height: 1.5; color: var(--pv-ink); white-space: pre-line; }
+  .pv-lead:empty, .pv-meta:empty { display: none; }
+  .pv-meta { margin: 18px 0 0; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--pv-soft); }
+  .pv-step { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--pv-ink); }
+  .pv-hint, .pv-small { margin: 0 0 18px; font-size: 15px; line-height: 1.5; color: var(--pv-soft); }
+  .pv-small { margin: 16px 0 0; font-size: 13.5px; }
+  .pv-as { margin: 0 0 14px; font-size: 14px; color: var(--pv-soft); }
+  .pv-as strong { color: var(--pv-ink); font-weight: 500; }
+
+  .pv .pv-name, .pv .pv-option, .pv .pv-plain {
+    height: auto; line-height: 1.3; box-shadow: none; text-transform: none; letter-spacing: normal;
+    font-family: var(--font-sans-serif); cursor: pointer; white-space: normal; text-align: left;
+  }
+  .pv-names { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pv .pv-name {
+    min-height: 46px; padding: 10px 16px; border: 1px solid var(--pv-field); border-radius: 3px;
+    background: var(--pv-card); color: var(--pv-ink) !important; font-size: 16px;
+  }
+  .pv .pv-name:hover { border-color: var(--pv-ink); }
+  .pv .pv-name[disabled] { cursor: default; color: var(--pv-faint) !important; background: transparent; border-style: dashed; }
+  .pv-options { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+  .pv .pv-option {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%;
+    min-height: 64px; padding: 14px 20px; border: 1px solid var(--pv-field); border-radius: 3px;
+    background: var(--pv-card); color: var(--pv-ink) !important;
+    font-family: var(--font-serif); font-size: 22px;
+  }
+  .pv .pv-option:hover { border-color: var(--pv-ink); }
+  .pv .pv-option[aria-pressed='true'] { border-color: var(--pv-ink); background: var(--pv-ink); color: var(--pv-ground) !important; }
+  .pv .pv-option[disabled] { cursor: progress; opacity: .7; }
+  .pv-check { font-family: var(--font-sans-serif); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+  .pv-message { margin: 18px 0 0; font-size: 16px; color: var(--pv-soft); }
+  .pv-message:empty { display: none; }
+  .pv .pv-plain { margin-top: 18px; padding: 0; border: 0; background: none; color: var(--pv-soft) !important; font-size: 14px; text-decoration: underline; }
+  .pv button:focus-visible { outline: 2px solid var(--pv-ink); outline-offset: 3px; }
+
+  .pv-results { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+  .pv-result-row { display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-serif); font-size: 20px; }
+  .pv-bar { height: 4px; margin-top: 6px; background: var(--pv-line); }
+  .pv-bar span { display: block; height: 100%; background: var(--pv-ink); }
+</style>
+
+<script>
+  type Voter = { id: string; name: string; state: 'libero' | 'tuo' | 'preso' };
+  type Option = { id: string; label: string; votes?: number };
+  type Poll = {
+    title: string; description: string | null; is_open: boolean; closes_at: string | null; total: number;
+    me: { id: string; name: string } | null; my_option: string | null; options: Option[]; voters: Voter[];
+  };
+
+  const DEVICE_KEY = 'tantan-sondaggi-telefono';
+  const ERRORS: Record<string, string> = {
+    sondaggio_non_trovato: 'Questo sondaggio non esiste più.',
+    sondaggio_chiuso: 'Il sondaggio è stato chiuso: non si può più votare.',
+    opzione_non_valida: 'Questa risposta non è più disponibile. Ricarica la pagina.',
+    nome_non_valido: 'Questo nome non è tra chi può votare.',
+    telefono_gia_usato: 'Da questo telefono hai già votato con un altro nome.',
+    nome_gia_usato: 'Questo nome ha già votato da un altro telefono.',
+    gia_votato_app: 'Hai già votato dall’App: puoi cambiare la risposta da lì.',
+    dispositivo_non_valido: 'Il browser non permette di salvare il voto. Prova da un’altra app o disattiva la navigazione privata.',
+  };
+
+  function deviceKey(): string | null {
+    try {
+      let value = localStorage.getItem(DEVICE_KEY);
+      if (!value) {
+        const bytes = crypto.getRandomValues(new Uint8Array(18));
+        value = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+        localStorage.setItem(DEVICE_KEY, value);
+      }
+      return value;
+    } catch { return null; }
+  }
+
+  function init() {
+    const root = document.querySelector<HTMLElement>('[data-poll-page]');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    const url = root.dataset.url!;
+    const key = root.dataset.key!;
+    const pieces = location.pathname.split('/').filter(Boolean);
+    const code = new URLSearchParams(location.search).get('c') || (pieces[0] === 'sondaggio' ? pieces[1] || '' : '');
+    const device = deviceKey();
+
+    const $ = <T extends Element>(sel: string) => root.querySelector<T>(sel)!;
+    const loading = $<HTMLElement>('[data-loading]');
+    const missing = $<HTMLElement>('[data-missing]');
+    const content = $<HTMLElement>('[data-content]');
+    const who = $<HTMLElement>('[data-step-who]');
+    const vote = $<HTMLElement>('[data-step-vote]');
+    const closed = $<HTMLElement>('[data-step-closed]');
+    const message = $<HTMLElement>('[data-message]');
+    const changeName = $<HTMLButtonElement>('[data-change-name]');
+
+    let poll: Poll | null = null;
+    let chosen: Voter | null = null;
+    let busy = false;
+
+    async function rpc(name: string, body: object) {
+      const res = await fetch(`${url}/rest/v1/rpc/${name}`, {
+        method: 'POST',
+        headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : null;
+      if (!res.ok) throw new Error(data?.message || 'errore');
+      return data;
+    }
+
+    const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string) => {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      if (text != null) node.textContent = text;
+      return node;
+    };
+
+    const dateFmt = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+
+    function renderHead(p: Poll) {
+      $('[data-title]').textContent = p.title;
+      $('[data-description]').textContent = p.description || '';
+      const parts: string[] = [];
+      if (p.is_open && p.closes_at) parts.push(`Si vota fino al ${dateFmt.format(new Date(p.closes_at))}`);
+      if (p.total) parts.push(`${p.total} ${p.total === 1 ? 'risposta' : 'risposte'}`);
+      $('[data-meta]').textContent = parts.join(' · ');
+      document.title = `${p.title} · Sondaggio | Tan Tan Teatro`;
+    }
+
+    function renderWho(p: Poll) {
+      const box = $<HTMLElement>('[data-names]');
+      box.replaceChildren();
+      let anyTaken = false;
+      for (const v of p.voters) {
+        const b = el('button', 'pv-name', v.name);
+        b.type = 'button';
+        if (v.state === 'preso') { b.disabled = true; b.title = 'Ha già votato'; anyTaken = true; }
+        b.addEventListener('click', () => { chosen = v; message.textContent = ''; show(); });
+        box.append(b);
+      }
+      $<HTMLElement>('[data-taken-note]').hidden = !anyTaken;
+    }
+
+    function renderOptions(p: Poll) {
+      const box = $<HTMLElement>('[data-options]');
+      box.replaceChildren();
+      const mine = chosen && p.me && chosen.id === p.me.id ? p.my_option : null;
+      for (const o of p.options) {
+        const b = el('button', 'pv-option');
+        b.type = 'button';
+        b.setAttribute('aria-pressed', String(o.id === mine));
+        b.append(el('span', '', o.label));
+        if (o.id === mine) b.append(el('span', 'pv-check', 'Il tuo voto'));
+        b.addEventListener('click', () => submit(o));
+        box.append(b);
+      }
+      const as = $<HTMLElement>('[data-as]');
+      as.replaceChildren(document.createTextNode('Voti come '), el('strong', '', chosen!.name));
+      // Si può tornare alla scelta del nome solo finché questo telefono non ha votato.
+      changeName.hidden = !!p.me;
+    }
+
+    function renderResults(p: Poll) {
+      const box = $<HTMLElement>('[data-results]');
+      box.replaceChildren();
+      const total = p.options.reduce((sum, o) => sum + (o.votes || 0), 0);
+      for (const o of p.options) {
+        const n = o.votes || 0;
+        const row = el('div');
+        const line = el('div', 'pv-result-row');
+        line.append(el('span', '', o.label), el('span', '', `${n}`));
+        const bar = el('div', 'pv-bar');
+        const fill = el('span');
+        fill.style.width = total ? `${Math.round((n / total) * 100)}%` : '0';
+        bar.append(fill);
+        row.append(line, bar);
+        box.append(row);
+      }
+    }
+
+    function show() {
+      if (!poll) return;
+      renderHead(poll);
+      who.hidden = vote.hidden = closed.hidden = true;
+      if (!poll.is_open) { renderResults(poll); closed.hidden = false; return; }
+      if (poll.me) chosen = { id: poll.me.id, name: poll.me.name, state: 'tuo' };
+      if (!chosen) { renderWho(poll); who.hidden = false; return; }
+      renderOptions(poll);
+      vote.hidden = false;
+    }
+
+    changeName.addEventListener('click', () => { chosen = null; message.textContent = ''; show(); });
+
+    async function submit(option: Option) {
+      if (busy || !chosen) return;
+      busy = true;
+      root!.querySelectorAll<HTMLButtonElement>('.pv-option').forEach((b) => (b.disabled = true));
+      message.textContent = 'Un momento…';
+      try {
+        poll = await rpc('poll_web_vote', {
+          p_code: code, p_user_id: chosen.id, p_option_id: option.id, p_device_key: device,
+        });
+        show();
+        message.textContent = `Grazie, il tuo voto è registrato: «${option.label}». Puoi cambiarlo finché il sondaggio è aperto.`;
+      } catch (error) {
+        const reason = (error as Error).message;
+        message.textContent = ERRORS[reason] || 'Il voto non è arrivato. Riprova tra poco.';
+        root!.querySelectorAll<HTMLButtonElement>('.pv-option').forEach((b) => (b.disabled = false));
+        if (['nome_gia_usato', 'gia_votato_app', 'nome_non_valido', 'sondaggio_chiuso'].includes(reason)) {
+          const keep = message.textContent;
+          await load();
+          if (reason !== 'sondaggio_chiuso') { chosen = null; show(); }
+          message.textContent = keep;
+          if (!vote.hidden) return;
+          const note = $<HTMLElement>('[data-taken-note]');
+          note.hidden = false;
+          note.textContent = keep;
+        }
+      } finally {
+        busy = false;
+      }
+    }
+
+    async function load() {
+      const data: Poll | null = await rpc('poll_web_get', { p_code: code, p_device_key: device });
+      poll = data;
+      return data;
+    }
+
+    (async () => {
+      if (!code) { loading.hidden = true; missing.hidden = false; return; }
+      try {
+        const data = await load();
+        loading.hidden = true;
+        if (!data) { missing.hidden = false; return; }
+        content.hidden = false;
+        show();
+      } catch {
+        loading.textContent = 'Non riesco ad aprire il sondaggio in questo momento. Riprova tra poco.';
+      }
+    })();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

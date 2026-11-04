@@ -7,6 +7,10 @@
     {
       "source": "/lab/:code",
       "destination": "/lab/index.html"
+    },
+    {
+      "source": "/sondaggio/:code",
+      "destination": "/sondaggio/index.html"
     }
   ],
   "redirects": [
