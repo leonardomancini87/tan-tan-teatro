@@ -59,8 +59,8 @@ test('Booking labels explicitly inherit the neutral site palette', () => {
 
 test('Dravelli bookings show performance time, free admission and Arci admission information', () => {
   assert(booking.includes('data-dravelli-details'));
-  assert(booking.includes('Ore spettacolo:'));
-  assert(booking.includes("ore 21."));
+  assert(booking.includes('Inizio spettacolo:'));
+  assert(booking.includes("' ore 21:00.'"));
   assert(booking.includes('Ingresso gratuito.'));
   assert(!booking.includes('Contributo richiesto:'));
   assert(!booking.includes('data-limit'));
