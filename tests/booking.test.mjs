@@ -57,16 +57,20 @@ test('Booking labels explicitly inherit the neutral site palette', () => {
   assert(booking.includes('color:var(--tt-ink, currentColor) !important;'));
 });
 
-test('Dravelli bookings show performance time, free admission and Arci admission information', () => {
-  assert(booking.includes('data-dravelli-details'));
+test('Venue box reads time, address and access notes from the appointment, with Dravelli fallbacks', () => {
+  assert(booking.includes('data-venue-notes'));
+  assert(booking.includes('access_notes'));
+  assert(booking.includes('renderVenueNotes(appointment)'));
+  assert(booking.includes('normalizeTime(item.starts_at_time)'));
   assert(booking.includes('Inizio spettacolo:'));
-  assert(booking.includes("' ore 21:00.'"));
+  assert(booking.includes('` ore ${time}.`'));
+  assert(booking.includes("(isDravelli ? '21:00' : '')"));
   assert(booking.includes('Ingresso gratuito.'));
-  assert(!booking.includes('Contributo richiesto:'));
-  assert(!booking.includes('data-limit'));
   assert(booking.includes('è richiesta la tessera ARCI, ottenibile in loco o '));
   assert(booking.includes('href="https://portale.arci.it"'));
-  assert(booking.includes("locationText.includes('dravelli')"));
+  assert(!booking.includes('MutationObserver'));
+  assert(!booking.includes('Contributo richiesto:'));
+  assert(!booking.includes('data-limit'));
   assert(!booking.includes('Richiedi ora i tuoi posti.'));
   assert(!booking.includes("'Spettatore 1'"));
 });

@@ -43,15 +43,16 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
         <div class="tt-booking-event" aria-live="polite">
           <p data-date></p>
           <p data-location></p>
-          <div class="tt-booking-venue-notes" data-dravelli-details hidden>
-            <p>
+          <div class="tt-booking-venue-notes" data-venue-notes hidden>
+            <p data-time-line hidden>
               <strong>{isEn ? 'Performance starts:' : 'Inizio spettacolo:'}</strong>
-              {isEn ? ' 9:00 pm.' : ' ore 21:00.'}
+              <span data-time></span>
             </p>
-            <p>
+            <p data-free-line hidden>
               <strong>{isEn ? 'Free admission.' : 'Ingresso gratuito.'}</strong>
             </p>
-            <p>
+            <p data-access-line hidden></p>
+            <p data-dravelli-access hidden>
               {isEn
                 ? 'Access to Teatro Dravelli requires an ARCI membership card, available at the venue or '
                 : 'Per l’accesso al Teatro Dravelli è richiesta la tessera ARCI, ottenibile in loco o '}<a href="https://portale.arci.it" target="_blank" rel="noopener noreferrer">online</a>.
@@ -200,24 +201,56 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
     const formError = root.querySelector('[data-form-error]');
     const seatsInput = root.querySelector('[name="seats"]');
     const spectators = root.querySelector('[data-spectators]');
-    const bookingLocation = root.querySelector('[data-location]');
-    const dravelliDetails = root.querySelector('[data-dravelli-details]');
+    const venueNotes = root.querySelector('[data-venue-notes]');
+    const timeLine = root.querySelector('[data-time-line]');
+    const timeText = root.querySelector('[data-time]');
+    const freeLine = root.querySelector('[data-free-line]');
+    const accessLine = root.querySelector('[data-access-line]');
+    const dravelliAccess = root.querySelector('[data-dravelli-access]');
 
-    const syncDravelliDetails = () => {
-      const locationText = String(bookingLocation?.textContent || '').toLocaleLowerCase('it');
-      if (dravelliDetails instanceof HTMLElement) {
-        dravelliDetails.hidden = !locationText.includes('dravelli');
-      }
+    const normalizeTime = (value) => {
+      const match = String(value || '').match(/^(\d{1,2}):(\d{2})/);
+      return match ? `${match[1].padStart(2, '0')}:${match[2]}` : '';
     };
-
-    if (bookingLocation) {
-      new MutationObserver(syncDravelliDetails).observe(bookingLocation, {
-        childList: true,
-        subtree: true,
-        characterData: true,
-      });
-    }
-    syncDravelliDetails();
+    const timeLabel = (time) => {
+      if (!isEn) return ` ore ${time}.`;
+      const [hours, minutes] = time.split(':').map(Number);
+      return ` ${((hours + 11) % 12) + 1}:${String(minutes).padStart(2, '0')} ${hours < 12 ? 'am' : 'pm'}.`;
+    };
+    // Scrive le indicazioni come testo, trasformando in link gli indirizzi web.
+    const renderNotes = (element, text) => {
+      element.replaceChildren();
+      const pattern = /(?<![@\w.-])(https?:\/\/[^\s]+|(?:[a-z0-9-]+\.)+(?:it|com|org|net|eu)(?:\/[^\s]*)?)/gi;
+      let last = 0;
+      for (const match of text.matchAll(pattern)) {
+        const raw = match[0].replace(/[.,;:)]+$/, '');
+        element.append(text.slice(last, match.index));
+        const link = document.createElement('a');
+        link.href = raw.startsWith('http') ? raw : `https://${raw}`;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = raw;
+        element.append(link);
+        last = match.index + raw.length;
+      }
+      element.append(text.slice(last));
+    };
+    // Orario, indirizzo e indicazioni arrivano dalla scheda della data (app → Date pubbliche).
+    // Per il Teatro Dravelli restano i testi di riserva finché la scheda non è compilata.
+    const renderVenueNotes = (item) => {
+      const isDravelli = String(item.venue || '').toLocaleLowerCase('it').includes('dravelli');
+      const time = normalizeTime(item.starts_at_time) || (isDravelli ? '21:00' : '');
+      const notes = String(item.access_notes || '').trim();
+      if (timeText) timeText.textContent = time ? timeLabel(time) : '';
+      if (timeLine instanceof HTMLElement) timeLine.hidden = !time;
+      if (freeLine instanceof HTMLElement) freeLine.hidden = !isDravelli;
+      if (accessLine instanceof HTMLElement) {
+        if (notes) renderNotes(accessLine, notes);
+        accessLine.hidden = !notes;
+      }
+      if (dravelliAccess instanceof HTMLElement) dravelliAccess.hidden = !(isDravelli && !notes);
+      if (venueNotes instanceof HTMLElement) venueNotes.hidden = !(time || notes || isDravelli);
+    };
     let appointment;
 
     const headers = {
@@ -299,7 +332,7 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
         if (!sourceKey) throw new Error(copy.missing);
         const endpoint = new URL('/rest/v1/public_appointments', url);
         endpoint.search = new URLSearchParams({
-          select:'id,source_key,title,venue,city,address,starts_on,starts_at_time,is_published,booking_enabled,booking_url,booking_capacity,booking_max_per_request',
+          select:'id,source_key,title,venue,city,address,starts_on,starts_at_time,access_notes,is_published,booking_enabled,booking_url,booking_capacity,booking_max_per_request',
           source_key:`eq.${sourceKey}`,
           is_published:'eq.true',
           booking_enabled:'eq.true',
@@ -324,7 +357,8 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
         const location = root.querySelector('[data-location]');
         const maximum = Math.max(1, Math.min(Number(appointment.booking_max_per_request) || 10, Number(appointment.booking_capacity) || 100));
         if (title) title.textContent = appointment.title;
-        if (date) date.textContent = formatDate(appointment.starts_on, appointment.starts_at_time);
+        if (date) date.textContent = formatDate(appointment.starts_on, null);
+        renderVenueNotes(appointment);
         if (location) location.textContent = locationLabel(appointment);
         if (seatsInput instanceof HTMLInputElement) seatsInput.max = String(maximum);
         renderSpectators();
