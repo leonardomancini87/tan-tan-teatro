@@ -106,11 +106,11 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
       </div>
 
       <div class="tt-booking-success" data-success hidden tabindex="-1">
-        <p class="tt-booking-kicker">{isEn ? 'REQUEST RECEIVED' : 'RICHIESTA RICEVUTA'}</p>
+        <p class="tt-booking-kicker" data-success-kicker>{isEn ? 'BOOKING CONFIRMED' : 'PRENOTAZIONE CONFERMATA'}</p>
         <h1>{isEn ? 'Thank you' : 'Grazie'}</h1>
-        <p>{isEn
-          ? 'Your request has been sent. It is not yet a confirmation: you will receive an email after it has been reviewed. Payment will be made at the venue.'
-          : 'La tua richiesta è stata inviata. Non è ancora una conferma: riceverai un’email dopo la verifica. Il pagamento avverrà in sede.'}</p>
+        <p data-success-text>{isEn
+          ? 'Your booking is confirmed. You will shortly receive an email with your tickets (one QR code per person) to show at the entrance.'
+          : 'La tua prenotazione è confermata. A breve riceverai un’email con i biglietti (un QR per ogni persona) da mostrare all’ingresso.'}</p>
         <a class="tt-booking-return" href={isEn ? '/en/news/' : '/appuntamenti/'}>
           {isEn ? 'Return to events' : 'Torna agli appuntamenti'}
         </a>
@@ -186,8 +186,8 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
     root.dataset.ready = 'true';
     const isEn = root.dataset.locale === 'en';
     const copy = isEn
-      ? { unavailable:'This performance cannot be booked at the moment.', missing:'The event address is missing.', limit:(n) => `You may request up to ${n} ${n === 1 ? 'seat' : 'seats'}.`, spectator:(n) => `Spectator ${n}`, firstName:'First name', lastName:'Last name', others:'Other spectators', send:'Send booking request', sending:'Sending…', invalid:'Please check the required fields.', failed:'The request could not be sent. Please try again or contact info@tantanteatro.it.' }
-      : { unavailable:'Al momento non è possibile prenotare questo spettacolo.', missing:'Manca il riferimento allo spettacolo.', limit:(n) => `Puoi richiedere fino a ${n} ${n === 1 ? 'posto' : 'posti'}.`, spectator:(n) => `Spettatore ${n}`, firstName:'Nome', lastName:'Cognome', others:'Altri spettatori', send:'Invia richiesta di prenotazione', sending:'Invio…', invalid:'Controlla i campi obbligatori.', failed:'Non è stato possibile inviare la richiesta. Riprova oppure scrivi a info@tantanteatro.it.' };
+      ? { unavailable:'This performance cannot be booked at the moment.', missing:'The event address is missing.', limit:(n) => `You may request up to ${n} ${n === 1 ? 'seat' : 'seats'}.`, spectator:(n) => `Spectator ${n}`, firstName:'First name', lastName:'Last name', others:'Other spectators', send:'Send booking request', sending:'Sending…', invalid:'Please check the required fields.', failed:'The request could not be sent. Please try again or contact info@tantanteatro.it.', confirmedKicker:'BOOKING CONFIRMED', confirmed:'Your booking is confirmed. You will shortly receive an email with your tickets (one QR code per person) to show at the entrance.', confirmedNoEmail:'Your booking is confirmed, but we could not send the email with your tickets right now. We will send it to you as soon as possible.', waitlistKicker:'WAITING LIST', waitlist:'The performance is currently full: your request has been added to the waiting list. We will write to you if seats become available.' }
+      : { unavailable:'Al momento non è possibile prenotare questo spettacolo.', missing:'Manca il riferimento allo spettacolo.', limit:(n) => `Puoi richiedere fino a ${n} ${n === 1 ? 'posto' : 'posti'}.`, spectator:(n) => `Spettatore ${n}`, firstName:'Nome', lastName:'Cognome', others:'Altri spettatori', send:'Invia richiesta di prenotazione', sending:'Invio…', invalid:'Controlla i campi obbligatori.', failed:'Non è stato possibile inviare la richiesta. Riprova oppure scrivi a info@tantanteatro.it.', confirmedKicker:'PRENOTAZIONE CONFERMATA', confirmed:'La tua prenotazione è confermata. A breve riceverai un’email con i biglietti (un QR per ogni persona) da mostrare all’ingresso.', confirmedNoEmail:'La tua prenotazione è confermata, ma al momento non siamo riusciti a inviarti l’email con i biglietti. Te la invieremo al più presto.', waitlistKicker:'LISTA D’ATTESA', waitlist:'Al momento i posti sono esauriti: la tua richiesta è stata inserita in lista d’attesa. Ti scriveremo se si libereranno dei posti.' };
     const url = root.dataset.url;
     const key = root.dataset.key;
     const loading = root.querySelector('[data-loading]');
@@ -345,42 +345,57 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
       submit.disabled = true; submit.textContent = copy.sending;
       if (formError) formError.hidden = true;
       try {
-        const otherSpectators = [...form.querySelectorAll('[data-spectator-person]')]
+        const attendees = [...form.querySelectorAll('[data-spectator-person]')]
           .map((person) => {
             const number = person.getAttribute('data-spectator-person');
             const first = person.querySelector(`[data-spectator-field="${number}:first"]`);
             const last = person.querySelector(`[data-spectator-field="${number}:last"]`);
-            return [
-              first instanceof HTMLInputElement ? first.value.trim() : '',
-              last instanceof HTMLInputElement ? last.value.trim() : '',
-            ].filter(Boolean).join(' ');
-          })
-          .filter(Boolean);
+            return {
+              givenName:first instanceof HTMLInputElement ? first.value.trim() : '',
+              surname:last instanceof HTMLInputElement ? last.value.trim() : '',
+            };
+          });
         const fullName = [
           String(values.get('first_name') || '').trim(),
           String(values.get('last_name') || '').trim(),
         ].filter(Boolean).join(' ');
-        const originalNotes = String(values.get('notes') || '').trim();
-        const spectatorNotes = otherSpectators.length
-          ? `${copy.others}:\n${otherSpectators.map((name, index) => `${index + 2}. ${name}`).join('\n')}`
-          : '';
-        const response = await fetch(`${url}/rest/v1/public_booking_requests`, {
-          method:'POST', headers:{ ...headers, Prefer:'return=minimal' }, credentials:'omit',
+        // Le prenotazioni passano dalla Edge Function (come nell'App): la tabella
+        // public_booking_requests non accetta inserimenti diretti dal pubblico.
+        const response = await fetch(`${url}/functions/v1/create-public-booking`, {
+          method:'POST', headers, credentials:'omit',
           body:JSON.stringify({
-            appointment_id:appointment.id,
-            full_name:fullName,
+            sourceKey:appointment.source_key,
+            fullName,
             email:String(values.get('email') || '').trim().toLowerCase(),
-            phone:String(values.get('phone') || '').trim() || null,
+            phone:String(values.get('phone') || '').trim(),
             seats:Number(values.get('seats')),
-            notes:[spectatorNotes, originalNotes].filter(Boolean).join('\n\n') || null,
+            notes:String(values.get('notes') || '').trim(),
+            attendees,
+            privacyAccepted:true,
+            website:'',
           }),
         });
-        if (!response.ok) throw new Error(copy.failed);
+        let result = null;
+        try { result = await response.json(); } catch {}
+        if (!response.ok || !result?.success) {
+          const serverMessage = typeof result?.error === 'string' ? result.error.trim() : '';
+          throw new Error(!isEn && serverMessage ? serverMessage : copy.failed);
+        }
+        const status = String(result?.booking?.status || '');
+        const successKicker = root.querySelector('[data-success-kicker]');
+        const successText = root.querySelector('[data-success-text]');
+        if (status === 'waitlisted') {
+          if (successKicker) successKicker.textContent = copy.waitlistKicker;
+          if (successText) successText.textContent = copy.waitlist;
+        } else {
+          if (successKicker) successKicker.textContent = copy.confirmedKicker;
+          if (successText) successText.textContent = result?.emailDelivery === 'failed' ? copy.confirmedNoEmail : copy.confirmed;
+        }
         formBox.hidden = true;
         if (success) { success.hidden = false; success.focus(); }
         window.scrollTo({ top:0, behavior:'smooth' });
-      } catch {
-        if (formError) { formError.textContent = copy.failed; formError.hidden = false; }
+      } catch (error) {
+        if (formError) { formError.textContent = error instanceof Error && error.message ? error.message : copy.failed; formError.hidden = false; }
         submit.disabled = false; submit.textContent = copy.send;
       }
     });

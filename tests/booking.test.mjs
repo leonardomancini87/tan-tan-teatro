@@ -7,13 +7,19 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const booking = readFileSync(resolve(root, 'src/templates/Booking.astro'), 'utf8');
 
-test('Booking page writes to the existing admin booking queue', () => {
-  assert(booking.includes('/rest/v1/public_booking_requests'));
-  for (const field of ['appointment_id', 'full_name', 'email', 'phone', 'seats', 'notes']) assert(booking.includes(field));
+test('Booking page sends requests through the create-public-booking Edge Function', () => {
+  assert(booking.includes('/functions/v1/create-public-booking'));
+  assert(!booking.includes('/rest/v1/public_booking_requests'));
+  for (const field of ['sourceKey', 'fullName', 'email', 'phone', 'seats', 'notes', 'attendees', 'privacyAccepted']) assert(booking.includes(field));
+  assert(booking.includes('givenName'));
+  assert(booking.includes('surname'));
 });
 
-test('Booking is explicitly a request, not yet a confirmation', () => {
-  assert(booking.includes('Non è ancora una conferma'));
+test('Success message reflects confirmed and waitlisted bookings', () => {
+  assert(booking.includes('data-success-kicker'));
+  assert(booking.includes("status === 'waitlisted'"));
+  assert(booking.includes('LISTA D’ATTESA'));
+  assert(booking.includes("result?.emailDelivery === 'failed'"));
 });
 
 test('Form has validation, spam trap, privacy information and mobile layout', () => {
@@ -30,7 +36,7 @@ test('Additional seats require the names of every additional spectator', () => {
   assert(booking.includes("firstName:'Nome'"));
   assert(booking.includes("lastName:'Cognome'"));
   assert(booking.includes("input.required = true"));
-  assert(booking.includes("copy.others"));
+  assert(booking.includes("data-spectator-person"));
 });
 
 test('First spectator has separate first and last name fields', () => {
