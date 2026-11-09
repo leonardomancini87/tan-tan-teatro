@@ -1,0 +1,197 @@
+---
+/**
+ * «Prossime date» nella pagina di uno spettacolo.
+ * Stessa fonte di Home e Appuntamenti (vista pubblica public_appointments su Supabase,
+ * con PERFORMANCE_SNAPSHOT come riserva): le date si gestiscono solo dall'App → Date pubbliche.
+ * Il pulsante «Prenota» compare quando la data ha le prenotazioni attive e porta a /prenota/?evento=<source_key>.
+ */
+import CalendarRuntime from './CalendarRuntime.astro';
+import { renderAgenda } from '../lib/agenda-render.mjs';
+import { UI } from '../data/agenda.mjs';
+
+interface Props { show: 'macbett' | 'matrimonio'; locale?: 'it' | 'en'; variant?: 'band' | 'aside'; }
+/** variant="aside": colonna compatta accanto alla sinossi; "band": fascia a tutta larghezza. */
+const { show, locale = 'it', variant = 'band' } = Astro.props;
+const t = UI[locale];
+const headingId = `show-dates-${show}`;
+---
+<section class:list={["show-dates", variant === "aside" && "show-dates--aside"]} aria-labelledby={headingId}>
+  <div class="show-dates-head">
+    <h2 id={headingId}>{t.showDates}</h2>
+  </div>
+  <Fragment set:html={renderAgenda({ locale, mode: 'dates', limit: 0, show })} />
+  <CalendarRuntime />
+</section>
+
+<style is:global>
+  .show-dates {
+    padding: 3.2rem 3.2rem 3.6rem;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  /* Dopo Accessibilità/Materiali: la loro riga inferiore fa già da separatore. */
+  .show-info + .show-dates { border-top: 0; }
+  .show-dates-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .5rem 2rem;
+    margin-bottom: 1.4rem;
+  }
+  .show-page .show-dates h2 { margin: 0; font-size: 34px; line-height: 1.08; }
+  .show-dates-list { margin: 0; padding: 0; list-style: none; }
+  .show-date {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .show-date:first-child { border-top: 0; }
+  .show-date-day { display: flex; align-items: baseline; gap: .6rem; }
+  .show-date-day strong { font-size: 46px; font-weight: 400; line-height: 1; letter-spacing: -.03em; }
+  .show-date-day span {
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1em;
+  }
+  .show-page .show-date-copy p { margin: 0; }
+  .show-date-when { font-size: 18px; line-height: 1.35; }
+  .show-date-venue { font-size: 19px; line-height: 1.35; font-style: italic; }
+  .show-date-address { margin-top: 2px !important; font-size: 15px; opacity: .7; }
+  .show-date-book {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-width: 150px;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid color-mix(in srgb, var(--color-base) 45%, transparent);
+    background: transparent;
+    color: var(--color-base) !important;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-decoration: none !important;
+    text-transform: uppercase;
+  }
+  /* Contorno sottile; si riempie solo al passaggio del mouse o con la tastiera. */
+  .show-date-book:hover,
+  .show-date-book:focus-visible { border-color: var(--color-base); background: var(--color-base); color: var(--color-bg) !important; }
+  .show-date-book:focus-visible { outline: 2px solid var(--color-base); outline-offset: 3px; }
+  .show-date-soon {
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .62;
+  }
+  .show-dates-empty { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.5rem; }
+  .show-dates-empty p { margin: 0; font-size: 19px; }
+  .show-dates-empty a { display: inline-flex; align-items: center; gap: .5rem; color: inherit; }
+  .show-dates .tt-agenda-status { margin: 10px 0 0; font-size: 15px; opacity: .7; }
+  .show-dates .tt-agenda-status a { color: inherit; }
+  @media (max-width: 1050px) { .show-dates { padding: 3rem 2.4rem 3.4rem; } }
+  @media (max-width: 720px) {
+    .show-dates { padding: 2.6rem 1.5rem 3rem; }
+    .show-date { grid-template-columns: 1fr; gap: .6rem; }
+    .show-date-book { width: 100%; }
+  }
+
+  /* ===== Variante accanto alla sinossi =====
+     Nota: nel sito 1rem = 10px (html 62.5%), quindi qui le misure sono in px. */
+  .show-synopsis-standalone.show-synopsis-with-dates {
+    display: grid;
+    grid-template-columns: minmax(0, 940px) minmax(300px, 380px);
+    justify-content: space-between;
+    align-items: start;
+    column-gap: clamp(48px, 6vw, 110px);
+  }
+  /* Il bordo destro della colonna coincide con quello delle immagini. */
+  @media (min-width: 1251px) {
+    .show-synopsis-standalone.show-synopsis-with-dates { padding-right: 0; }
+  }
+  /* Riquadro chiaro, stesso tono della sezione Accessibilità/Materiali. */
+  .show-dates--aside {
+    padding: 30px 32px 14px;
+    border: 0;
+    background: rgba(127, 127, 127, .045);
+  }
+  .show-dates--aside .show-dates-head { display: block; margin: 0 0 6px; padding: 0; border: 0; }
+  .show-page .show-dates--aside h2 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -.015em;
+    text-transform: none;
+  }
+  .show-dates--aside .show-date {
+    grid-template-columns: 64px minmax(0, 1fr);
+    align-items: start;
+    gap: 0 20px;
+    padding: 22px 0 24px;
+    border-top: 1px solid var(--color-border);
+  }
+  .show-dates--aside .show-date:first-child { border-top: 0; }
+  .show-dates--aside .show-date-day { flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 2px; }
+  .show-dates--aside .show-date-day strong { font-size: 42px; line-height: .9; letter-spacing: -.02em; }
+  .show-dates--aside .show-date-day span {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    white-space: nowrap;
+    opacity: .6;
+  }
+  .show-dates--aside .show-date-when {
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    opacity: .6;
+  }
+  .show-dates--aside .show-date-venue { margin-top: 7px !important; font-size: 21px; line-height: 1.25; font-style: normal; }
+  .show-dates--aside .show-date-address { margin-top: 3px !important; font-size: 15px; line-height: 1.35; opacity: .62; }
+  .show-dates--aside .show-date-action { grid-column: 2; margin-top: 14px; }
+  /* Prenota come link editoriale: testo sottolineato e freccia, niente riquadro. */
+  .show-dates--aside .show-date-book {
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+    gap: 12px;
+    padding: 4px 0 5px;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    background: transparent;
+    color: var(--color-base) !important;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12em;
+  }
+  .show-dates--aside .show-date-book svg { width: 18px; height: 18px; transition: transform .2s ease; }
+  .show-dates--aside .show-date-book:hover,
+  .show-dates--aside .show-date-book:focus-visible { background: transparent; color: var(--color-base) !important; border-color: currentColor; opacity: 1; }
+  .show-dates--aside .show-date-book:hover svg,
+  .show-dates--aside .show-date-book:focus-visible svg { transform: translateX(4px); }
+  .show-dates--aside .show-date-soon { font-size: 12px; }
+  .show-dates--aside .show-dates-empty { display: block; padding: 18px 0 20px; }
+  .show-dates--aside .show-dates-empty p { font-size: 19px; margin-bottom: 8px; }
+  .show-dates--aside .tt-agenda-status { font-size: 15px; margin-bottom: 16px; }
+  @media (max-width: 1250px) {
+    .show-synopsis-standalone.show-synopsis-with-dates { grid-template-columns: 1fr; row-gap: 48px; }
+    .show-dates--aside { max-width: 560px; }
+  }
+  @media (max-width: 720px) {
+    .show-dates--aside { max-width: none; }
+    .show-dates--aside { padding: 24px 22px 10px; }
+    .show-dates--aside .show-date { grid-template-columns: 56px minmax(0, 1fr); gap: 0 16px; }
+  }
+</style>

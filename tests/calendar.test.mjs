@@ -103,3 +103,18 @@ test('Library readings page: both languages, date, time, address, library link',
 const src=(html)=>html.match(/<img[^>]+src="\/([^"]+)"/)[1];
 test('Broken archive shape is detected, never silently discarded', () => assert.throws(()=>extractArchive('no archive')));
 test('First performance snapshot matches the existing site', () => assert.equal(PERFORMANCE_SNAPSHOT[0].starts_on,'2026-11-14'));
+test('Show page dates list only that show, with booking link when enabled', () => {
+  const rows=[row({id:'a',source_key:'2026-11-14-macbett-dravelli',venue:'Teatro Dravelli',booking_enabled:true}),row({id:'b',title:'Il matrimonio',starts_on:'2027-01-30'})];
+  const html=renderEvents({today,mode:'dates',limit:0,rows,show:'macbett'});
+  assert(html.includes('/prenota/?evento=2026-11-14-macbett-dravelli'));assert(!html.includes('2027-01-30'));assert(html.includes('Via Praciosa 11'));
+  assert(renderAgenda({today,mode:'dates',limit:0,show:'macbett'}).includes('data-show="macbett"'));
+});
+test('Show page without upcoming dates shows a calm empty message', () => {
+  const html=renderEvents({today,mode:'dates',limit:0,rows:[],show:'macbett'});
+  assert(html.includes('non ci sono repliche'));
+});
+test('Show page date without open booking shows no fake booking link', () => {
+  const html=renderEvents({today,mode:'dates',limit:0,rows:[row({booking_enabled:false})],show:'macbett'});
+  assert(!html.includes('/prenota/'));assert(html.includes('Prenotazioni in apertura'));
+  assert(!renderEvents({today,mode:'dates',limit:0,show:'macbett'}).includes('Prenotazioni in apertura'));
+});

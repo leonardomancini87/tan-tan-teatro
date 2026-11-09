@@ -53,11 +53,31 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
     </div>
   </article>`;
 }
-export function renderEvents({ locale = 'it', mode = 'cards', limit = 3, today = romeToday(), rows } = {}) {
-  const items = upcomingEvents({ locale, rows, today, limit });
+/** Riga compatta per la pagina di uno spettacolo: data, luogo e pulsante Prenota (senza foto). */
+export function renderShowDate(event, locale = 'it') {
+  const t = UI[locale], d = dateLabel(event.start, event.end, locale);
+  const localeCode = locale === 'it' ? 'it-IT' : 'en-GB';
+  const weekday = new Intl.DateTimeFormat(localeCode, { weekday: 'long', timeZone: 'Europe/Rome' }).format(new Date(`${event.start}T12:00:00Z`));
+  const when = [weekday.charAt(0).toLocaleUpperCase(localeCode) + weekday.slice(1), event.detail ? (locale === 'it' ? `ore ${event.detail}` : event.detail) : ''].filter(Boolean).join(' \u00b7 ');
+  const address = /dravelli/i.test(event.venue ?? '') ? 'Via Praciosa 11, 10024 Moncalieri (TO)' : event.address ?? '';
+  const action = event.bookingHref
+    ? `<a class="show-date-book" href="${e(event.bookingHref)}" aria-label="${e(`${event.bookingLabel}: ${event.title}, ${d.long}`)}">${e(event.bookingLabel)} ${arrow}</a>`
+    : event.bookingClosed ? `<span class="show-date-soon">${e(t.bookingSoon)}</span>` : '';
+  return `<li class="show-date" data-event-id="${e(event.id)}">
+    <time class="show-date-day" datetime="${e(event.start)}" aria-label="${e(d.long)}"><strong>${e(d.day)}</strong><span>${e(d.month)} ${e(d.year)}</span></time>
+    <div class="show-date-copy"><p class="show-date-when">${e(when)}${d.until ? ` \u00b7 ${e(d.until)}` : ''}</p><p class="show-date-venue">${e(event.venue)}</p>${address ? `<p class="show-date-address">${e(address)}</p>` : ''}</div>
+    <div class="show-date-action">${action}</div>
+  </li>`;
+}
+export function renderEvents({ locale = 'it', mode = 'cards', limit = 3, today = romeToday(), rows, show = '' } = {}) {
+  const items = upcomingEvents({ locale, rows, today, limit, show });
+  if (mode === 'dates') {
+    if (!items.length) return `<div class="show-dates-empty"><p>${e(UI[locale].showEmpty)}</p><a class="tt-text-link" href="${routes(locale).contacts}">${e(UI[locale].emptyLink)} ${arrow}</a></div>`;
+    return `<ul class="show-dates-list">${items.map((item) => renderShowDate(item, locale)).join('')}</ul>`;
+  }
   if (!items.length) return `<div class="tt-agenda-empty"><p>${e(UI[locale].empty)}</p><a class="tt-text-link" href="${routes(locale).contacts}">${e(UI[locale].emptyLink)} ${arrow}</a></div>`;
   return `<div class="tt-events tt-events--${e(mode)}">${items.map((item) => renderEvent(item, locale, mode, today)).join('')}</div>`;
 }
-export function renderAgenda({ locale = 'it', mode = 'cards', limit = 3, today = romeToday() } = {}) {
-  return `<tt-agenda data-locale="${e(locale)}" data-mode="${e(mode)}" data-limit="${limit}" data-rendered-day="${today}"><div data-agenda-items>${renderEvents({ locale, mode, limit, today })}</div><p class="tt-agenda-status" data-agenda-status hidden></p></tt-agenda>`;
+export function renderAgenda({ locale = 'it', mode = 'cards', limit = 3, today = romeToday(), show = '' } = {}) {
+  return `<tt-agenda data-locale="${e(locale)}" data-mode="${e(mode)}" data-limit="${limit}"${show ? ` data-show="${e(show)}"` : ''} data-rendered-day="${today}"><div data-agenda-items>${renderEvents({ locale, mode, limit, today, show })}</div><p class="tt-agenda-status" data-agenda-status hidden></p></tt-agenda>`;
 }

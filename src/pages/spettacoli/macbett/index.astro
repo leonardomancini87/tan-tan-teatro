@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import ShowDates from '../../../components/ShowDates.astro';
 import AutoGallery from '../../../components/AutoGallery.astro';
 import Gallery from '../../../components/Gallery.astro';
 import { getEntry } from 'astro:content';
@@ -40,9 +41,10 @@ const albums = albumDefinitions.map((album) => {
       {data.thumbnail && <figure class="show-hero-image"><img src={data.thumbnail} alt={`Una scena di ${data.title}`} fetchpriority="high" /></figure>}
     </section>
 
-    {data.synopsis && <section class="show-synopsis-standalone" aria-label="Sinossi">
+    {data.synopsis ? <section class="show-synopsis-standalone show-synopsis-with-dates" aria-label="Sinossi">
       <div class="show-synopsis-copy" set:html={renderRichText(data.synopsis)} />
-    </section>}
+      <ShowDates show="macbett" variant="aside" />
+    </section> : <ShowDates show="macbett" />}
 
     {data.stageImage && <figure class="show-stage-band macbett-stage-band">
       <img src={data.stageImage} alt={data.stageImageAlt || `Una scena di ${data.title}`} loading="lazy" />

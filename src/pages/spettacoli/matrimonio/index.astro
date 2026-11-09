@@ -1,6 +1,7 @@
 ---
 import '../../../styles/components/show-editorial.css';
 import Layout from '../../../layouts/Layout.astro';
+import ShowDates from '../../../components/ShowDates.astro';
 import { studiumCaptions as relatedAlbumCaptions } from '../../../data/matrimonio-albums';
 import AutoGallery from '../../../components/AutoGallery.astro';
 import { getEntry } from 'astro:content';
@@ -99,12 +100,13 @@ const cmsAuthor = matrimonioCmsEntry?.data.author ?? '{cmsAuthor}';
       </figure>
     </section>
 
-    <section class="show-synopsis-standalone">
+    <section class="show-synopsis-standalone show-synopsis-with-dates">
   <div class="show-synopsis-copy">
       <p>L’«Io è un altro» scrive Rimbaud; «l'io è il muso che mi hanno affibbiato gli altri», pensa Witold Gombrowicz (1904-1969), secondo l’interpretazione critica offerta da Jan Kott (1971). Nella seconda opera teatrale dell’autore polacco, il cerimoniale umano, e in particolare il rituale del matrimonio, sono al centro dell’attenzione.</p>
 
         <p>Concepita come farsa tragica, la pièce interroga i modi in cui l’impotenza dell’uomo, cui resta solo la possibilità dello scontro e di gesti simbolici e deformanti, assume le manifestazioni più grottesche. In una dimensione sospesa fra sogno e veglia, la vicenda, ambientata da Gombrowicz nella cupa notte della Seconda guerra mondiale, è riportata al nostro tempo contemporaneo, nel quale indifferenza, senso di impotenza e volgarità convivono nuovamente nel vivere quotidiano.</p>
     </div>
+      <ShowDates show="matrimonio" variant="aside" />
 </section>
 
     <figure class="show-stage-band">

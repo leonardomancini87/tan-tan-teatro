@@ -68,13 +68,15 @@ export const UI = {
     book: 'Prenota',
     event: 'Dettagli dell\u2019appuntamento', ongoing: 'In corso', empty: 'I prossimi appuntamenti saranno pubblicati qui.',
     emptyLink: 'Resta in contatto', monthYear: 'it-IT', kind: { research: 'Ricerca \u00b7 Public engagement', lab: 'Laboratorio', show: 'Spettacolo', other: 'Appuntamento' },
-    status: 'Calendario in aggiornamento. Per le repliche, verifica le date con noi.', statusLink: 'Contattaci' },
+    status: 'Calendario in aggiornamento. Per le repliche, verifica le date con noi.', statusLink: 'Contattaci',
+    showDates: 'Prossime date', showEmpty: 'Al momento non ci sono repliche in programma.', bookingSoon: 'Prenotazioni in apertura' },
   en: { upcoming: 'Upcoming events', all: 'All events', programme: 'Explore the programme',
     lab: 'Explore the laboratory', signup: 'Join the laboratory', show: 'Performance details',
     book: 'Book',
     event: 'Event details', ongoing: 'In progress', empty: 'Our next events will be published here.',
     emptyLink: 'Stay in touch', monthYear: 'en-GB', kind: { research: 'Research \u00b7 Public engagement', lab: 'Laboratory', show: 'Performance', other: 'Event' },
-    status: 'Calendar being updated. Please check performance dates with us.', statusLink: 'Contact us' },
+    status: 'Calendar being updated. Please check performance dates with us.', statusLink: 'Contact us',
+    showDates: 'Upcoming dates', showEmpty: 'No performances are scheduled at the moment.', bookingSoon: 'Booking opens soon' },
 };
 
 export const routes = (locale = 'it') => locale === 'en'
@@ -179,14 +181,17 @@ export function normalizePerformances(rows, locale = 'it') {
       venue, detail: time, image: macbettPhoto?.src ?? (macbett ? '/img/macbett01.jpg' : marriage ? '/img/matrimonio01.jpg' : '/img/tantanteatro.jpeg'),
       imagePosition: macbettPhoto?.position ?? '50% 46%', mobileImagePosition: macbettPhoto?.position ?? (macbett ? '50% 48%' : marriage ? '50% 50%' : '50% 46%'), imageAlt: title,
       href: macbett ? r.macbett : marriage ? r.marriage : r.contacts,
+      showKey: macbett ? 'macbett' : marriage ? 'matrimonio' : '',
       label: macbett || marriage ? UI[locale].show : UI[locale].event,
-      bookingHref, bookingLabel: UI[locale].book }];
+      bookingHref, bookingLabel: UI[locale].book, bookingClosed: row.booking_enabled === false }];
   });
 }
-export function upcomingEvents({ locale = 'it', rows = PERFORMANCE_SNAPSHOT, today = romeToday(), limit = 0 } = {}) {
+export function upcomingEvents({ locale = 'it', rows = PERFORMANCE_SNAPSHOT, today = romeToday(), limit = 0, show = '' } = {}) {
   const seen = new Set();
   const events = [...editorialEvents(locale, today), ...oneOffEvents(locale), ...normalizePerformances(rows, locale)]
     .filter((e) => e.end >= today)
+    // Pagina di uno spettacolo: solo le sue repliche.
+    .filter((e) => !show || (e.kind === 'show' && e.showKey === show))
     .sort((a, b) => a.start.localeCompare(b.start) || a.title.localeCompare(b.title))
     .filter((e) => {
       const key = `${e.start}|${e.end}|${e.title.toLowerCase()}|${e.venue.toLowerCase()}`;

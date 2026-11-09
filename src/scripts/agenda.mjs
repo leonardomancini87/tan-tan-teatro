@@ -36,7 +36,8 @@ class TanTanAgenda extends HTMLElement {
     this.rows = undefined;
     this.failed = false;
     this.locale = this.dataset.locale === 'en' ? 'en' : 'it';
-    this.mode = this.dataset.mode === 'list' ? 'list' : 'cards';
+    this.mode = ['list', 'dates'].includes(this.dataset.mode) ? this.dataset.mode : 'cards';
+    this.show = this.dataset.show || '';
     this.limit = Math.max(0, Number(this.dataset.limit) || 0);
     this.day = romeToday();
     this.paint();
@@ -74,7 +75,7 @@ class TanTanAgenda extends HTMLElement {
     // Never replace a focused link without restoring its focus.
     const focus = this.contains(document.activeElement) && document.activeElement instanceof HTMLAnchorElement
       ? { href: document.activeElement.getAttribute('href'), label: document.activeElement.textContent } : null;
-    const html = renderEvents({ locale: this.locale, mode: this.mode, limit: this.limit, today: this.day, rows: this.rows });
+    const html = renderEvents({ locale: this.locale, mode: this.mode, limit: this.limit, today: this.day, rows: this.rows, show: this.show });
     if (html !== this.lastHTML) {
       items.innerHTML = html; this.lastHTML = html;
       if (focus) Array.from(items.querySelectorAll('a')).find((a) => a.getAttribute('href') === focus.href && a.textContent === focus.label)?.focus({ preventScroll: true });
