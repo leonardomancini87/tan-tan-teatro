@@ -236,6 +236,8 @@ const msgError = unsubscribe ? text.unsubError : text.error;
     flex: 1 1 auto;
     min-width: 0;
     margin: 0;
+    height: auto;
+    min-height: 48px;
     font: inherit;
     font-size: 1.6rem;
     padding: 0.8rem 1rem;
@@ -248,6 +250,12 @@ const msgError = unsubscribe ? text.unsubError : text.error;
   .tt-newsletter-row button {
     flex: 0 0 auto;
     margin: 0;
+    /* Il tema fissa l'altezza dei tasti a 40px: qui il tasto segue il campo email */
+    height: auto;
+    line-height: 1.2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font: inherit;
     font-size: 1.4rem;
     font-weight: 500;
