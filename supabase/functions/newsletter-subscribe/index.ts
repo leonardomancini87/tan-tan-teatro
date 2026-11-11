@@ -2,16 +2,16 @@
 //
 // Chiamata dal modulo del sito (NewsletterForm.astro) con la chiave pubblica.
 // Salva l'indirizzo come "da confermare" e invia l'email con il link di conferma
-// tramite Resend. Risponde sempre allo stesso modo, così dal sito non si può
-// capire se un indirizzo è già iscritto.
+// tramite Resend. Risponde sempre allo stesso modo, cosi dal sito non si puo
+// capire se un indirizzo e gia iscritto.
 //
-// Secret usati (già presenti per le altre funzioni email):
+// Secret usati (gia presenti per le altre funzioni email):
 //   RESEND_API_KEY                      obbligatorio
 //   NEWSLETTER_EMAIL_FROM               facoltativo, altrimenti RESEND_FROM_EMAIL / RESEND_FROM
 //   NEWSLETTER_EMAIL_REPLY_TO           facoltativo, altrimenti RESEND_REPLY_TO
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY sono forniti da Supabase.
 //
-// Va pubblicata con la verifica JWT disattivata (la chiave pubblica del sito non è un JWT):
+// Va pubblicata con la verifica JWT disattivata (la chiave pubblica del sito non e un JWT):
 //   supabase functions deploy newsletter-subscribe --no-verify-jwt
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
@@ -45,10 +45,10 @@ const copy = {
   it: {
     subject: 'Conferma la tua iscrizione alla newsletter di Tan Tan Teatro',
     title: 'Conferma la tua iscrizione',
-    body: 'Grazie per esserti iscritto alla newsletter di Tan Tan Teatro. Per completare l’iscrizione, conferma il tuo indirizzo email.',
-    button: 'Conferma l’iscrizione',
-    note: 'Il link vale 7 giorni. Se non hai chiesto tu l’iscrizione, ignora questa email: senza conferma non riceverai nulla.',
-    unsubscribe: 'Non vuoi più ricevere le nostre email?',
+    body: 'Grazie per esserti iscritto alla newsletter di Tan Tan Teatro. Per completare l\u2019iscrizione, conferma il tuo indirizzo email.',
+    button: 'Conferma l\u2019iscrizione',
+    note: 'Il link vale 7 giorni. Se non hai chiesto tu l\u2019iscrizione, ignora questa email: senza conferma non riceverai nulla.',
+    unsubscribe: 'Non vuoi pi\u00f9 ricevere le nostre email?',
     unsubscribeLink: 'Disiscriviti',
     confirmPath: '/newsletter/conferma',
     unsubscribePath: '/newsletter/disiscrizione',
@@ -102,7 +102,7 @@ Deno.serve(async (req) => {
   const source = String(body.source ?? '').slice(0, 40) || null
   const website = String(body.website ?? '')
 
-  // Campo trappola compilato: è un bot. Rispondiamo come se fosse andata bene.
+  // Campo trappola compilato: e un bot. Rispondiamo come se fosse andata bene.
   if (website) return json(200, { ok: true })
   if (!isEmail(email)) return json(400, { error: 'invalid_email' })
   if (body.consent !== true) return json(400, { error: 'consent_required' })
@@ -121,7 +121,7 @@ Deno.serve(async (req) => {
     return json(500, { error: 'server_error' })
   }
 
-  // Già iscritto e confermato: niente da fare, nessuna email.
+  // Gia iscritto e confermato: niente da fare, nessuna email.
   if (existing?.confirmed_at && !existing.unsubscribed_at) return json(200, { ok: true })
 
   // Email di conferma appena inviata: non la rimandiamo subito.
@@ -154,7 +154,7 @@ Deno.serve(async (req) => {
   const confirmUrl = `${SITE}${t.confirmPath}/?token=${saved.confirm_token}`
   const unsubscribeUrl = `${SITE}${t.unsubscribePath}/?token=${saved.unsubscribe_token}`
 
-  const html = `<!doctype html><html lang="${locale}"><body style="margin:0;padding:32px 16px;background:#f2f0ec;color:#201b1b;font-family:Arial,Helvetica,sans-serif">
+  const html = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"></head><body style="margin:0;padding:32px 16px;background:#f2f0ec;color:#201b1b;font-family:Arial,Helvetica,sans-serif">
 <div style="max-width:560px;margin:0 auto;background:#faf9f6;border:1px solid #dedad3;padding:36px 32px">
 <p style="margin:0 0 28px;font-size:13px;letter-spacing:2px;text-transform:uppercase">Tan Tan Teatro</p>
 <h1 style="margin:0 0 16px;font-family:Georgia,'Times New Roman',serif;font-weight:normal;font-size:30px;line-height:1.15">${escapeHtml(t.title)}</h1>
