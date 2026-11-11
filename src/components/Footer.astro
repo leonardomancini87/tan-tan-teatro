@@ -1,4 +1,6 @@
 ---
+import NewsletterForm from './NewsletterForm.astro';
+
 interface Props {
   locale?: 'it' | 'en';
 }
@@ -19,9 +21,16 @@ const cookieHref = isEn
 
 const appPrivacyHref = '/privacy-app';
 
+// Su Newsletter e Contatti il modulo c'è già nella pagina: non ripeterlo nel footer.
+const onNewsletterPage = /^\/(en\/)?(newsletter|contatti|contact)\/?$/.test(Astro.url.pathname);
+
 const iubendaPrivacyHref =
   'https://www.iubenda.com/privacy-policy/15384815';
 ---
+
+{!onNewsletterPage && (
+  <NewsletterForm locale={locale} variant="compact" source="footer" />
+)}
 
 <footer class="site-footer">
   <div class="site-footer-content">

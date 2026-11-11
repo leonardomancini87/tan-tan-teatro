@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+---
+
+<Layout title="Newsletter | Tan Tan Teatro" description="Subscribe to the Tan Tan Teatro newsletter: performances, workshops and news." locale="en">
+  <article class="post-content page-template no-image">
+    <p class="post-content-excerpt">Performances, workshops and news from Tan Tan Teatro, straight to your inbox.</p>
+    <div class="post-content-body">
+      <NewsletterForm locale="en" variant="full" source="pagina" />
+    </div>
+  </article>
+</Layout>

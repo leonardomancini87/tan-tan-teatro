@@ -1,0 +1,322 @@
+---
+/**
+ * Modulo di iscrizione alla newsletter.
+ * Salva l'email su Supabase tramite la funzione subscribe_newsletter
+ * (vedi supabase/migrations/20261111_newsletter.sql).
+ *
+ * variant="compact": riga unica, per il footer.
+ * variant="full": con titolo e testo, per Contatti e /newsletter.
+ * source: da dove arriva l'iscrizione (footer, contatti, pagina).
+ */
+interface Props {
+  locale?: 'it' | 'en';
+  variant?: 'compact' | 'full';
+  source?: string;
+  heading?: boolean;
+}
+
+const { locale = 'it', variant = 'full', source = 'sito', heading = true } = Astro.props;
+
+const url = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+const privacyHref = 'https://www.iubenda.com/privacy-policy/15384815';
+
+const text = {
+  it: {
+    title: 'Newsletter',
+    intro: 'Ricevi via email i prossimi spettacoli, i laboratori e le novità di Tan Tan Teatro. Poche email, niente spam.',
+    email: 'La tua email',
+    consentBefore: 'Acconsento a ricevere la newsletter e ho letto l’',
+    consentLink: 'informativa privacy',
+    consentAfter: '. Posso disiscrivermi in qualsiasi momento.',
+    submit: 'Iscriviti',
+    sending: 'Invio…',
+    ok: 'Grazie! Ti sei iscritto alla newsletter di Tan Tan Teatro.',
+    invalid: 'Controlla l’indirizzo email.',
+    consentMissing: 'Per iscriverti serve il consenso.',
+    error: 'Non è stato possibile completare l’iscrizione. Riprova più tardi.',
+  },
+  en: {
+    title: 'Newsletter',
+    intro: 'Get upcoming performances, workshops and news from Tan Tan Teatro by email. Few emails, no spam.',
+    email: 'Your email',
+    consentBefore: 'I agree to receive the newsletter and have read the ',
+    consentLink: 'privacy policy',
+    consentAfter: '. I can unsubscribe at any time.',
+    submit: 'Subscribe',
+    sending: 'Sending…',
+    ok: 'Thank you! You are now subscribed to the Tan Tan Teatro newsletter.',
+    invalid: 'Please check the email address.',
+    consentMissing: 'Your consent is required to subscribe.',
+    error: 'We could not complete your subscription. Please try again later.',
+  },
+}[locale];
+
+const uid = `tt-nl-${source}-${locale}`;
+---
+
+<section
+  class:list={['tt-newsletter', `tt-newsletter--${variant}`]}
+  aria-labelledby={heading ? `${uid}-title` : undefined}
+  aria-label={heading ? undefined : text.title}
+>
+  {heading && (
+    <h3 class="tt-newsletter-title" id={`${uid}-title`}>{text.title}</h3>
+  )}
+  {variant === 'full' && <p class="tt-newsletter-intro">{text.intro}</p>}
+
+  <form
+    class="tt-newsletter-form"
+    data-tt-newsletter
+    data-url={url}
+    data-key={key}
+    data-locale={locale}
+    data-source={source}
+    data-msg-ok={text.ok}
+    data-msg-invalid={text.invalid}
+    data-msg-consent={text.consentMissing}
+    data-msg-error={text.error}
+    data-msg-sending={text.sending}
+    novalidate
+  >
+    <div class="tt-newsletter-row">
+      <label class="tt-visually-hidden" for={`${uid}-email`}>{text.email}</label>
+      <input
+        id={`${uid}-email`}
+        type="email"
+        name="email"
+        placeholder={text.email}
+        autocomplete="email"
+        maxlength="254"
+        required
+      />
+      <button type="submit">{text.submit}</button>
+    </div>
+
+    <!-- Campo trappola per i bot: le persone non lo vedono. -->
+    <div class="tt-newsletter-hp" aria-hidden="true">
+      <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+    </div>
+
+    <label class="tt-newsletter-consent">
+      <input type="checkbox" name="consent" required />
+      <span>
+        {text.consentBefore}<a href={privacyHref} target="_blank" rel="noopener noreferrer">{text.consentLink}</a>{text.consentAfter}
+      </span>
+    </label>
+
+    <p class="tt-newsletter-status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<script>
+  const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  // Un solo listener sul documento: funziona anche dopo la navigazione
+  // del ClientRouter, che sostituisce l'HTML senza ricaricare gli script.
+  // In fase di capture (true) per bloccare l'invio prima che il ClientRouter
+  // lo trasformi in una navigazione.
+  document.addEventListener('submit', async (event) => {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement) || !form.matches('[data-tt-newsletter]')) return;
+    event.preventDefault();
+
+    const d = form.dataset;
+    const status = form.querySelector<HTMLElement>('.tt-newsletter-status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+    const consent = form.elements.namedItem('consent') as HTMLInputElement;
+    const honeypot = form.elements.namedItem('website') as HTMLInputElement;
+
+    const show = (msg: string, state: 'ok' | 'error' | '') => {
+      status.textContent = msg;
+      status.dataset.state = state;
+    };
+
+    const email = emailInput.value.trim();
+    emailInput.removeAttribute('aria-invalid');
+    if (!EMAIL_RE.test(email)) {
+      emailInput.setAttribute('aria-invalid', 'true');
+      emailInput.focus();
+      return show(d.msgInvalid!, 'error');
+    }
+    if (!consent.checked) {
+      consent.focus();
+      return show(d.msgConsent!, 'error');
+    }
+    // Un bot ha compilato il campo nascosto: fingiamo che sia andata bene.
+    if (honeypot.value) return show(d.msgOk!, 'ok');
+
+    if (!d.url || !d.key) {
+      console.warn('Newsletter: PUBLIC_SUPABASE_URL o PUBLIC_SUPABASE_PUBLISHABLE_KEY mancanti.');
+      return show(d.msgError!, 'error');
+    }
+
+    const label = button.textContent;
+    button.disabled = true;
+    button.textContent = d.msgSending!;
+    show('', '');
+
+    try {
+      const res = await fetch(new URL('/rest/v1/rpc/subscribe_newsletter', d.url), {
+        method: 'POST',
+        headers: {
+          apikey: d.key,
+          Authorization: `Bearer ${d.key}`,
+          'Content-Type': 'application/json',
+        },
+        credentials: 'omit',
+        body: JSON.stringify({ p_email: email, p_locale: d.locale, p_source: d.source }),
+      });
+      if (res.ok) {
+        form.reset();
+        show(d.msgOk!, 'ok');
+      } else if (res.status === 400) {
+        emailInput.setAttribute('aria-invalid', 'true');
+        show(d.msgInvalid!, 'error');
+      } else {
+        show(d.msgError!, 'error');
+      }
+    } catch {
+      show(d.msgError!, 'error');
+    } finally {
+      button.disabled = false;
+      button.textContent = label;
+    }
+  }, true);
+</script>
+
+<style>
+  .tt-newsletter {
+    font-family: var(--font-sans-serif);
+    color: var(--color-base);
+  }
+  .tt-newsletter-title {
+    font-family: var(--font-sans-serif);
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    margin: 0 0 0.6rem;
+  }
+  .tt-newsletter-intro {
+    font-family: var(--font-serif);
+    margin: 0 0 1.2rem;
+  }
+  .tt-newsletter-form { margin: 0; }
+
+  .tt-newsletter-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: stretch;
+  }
+  .tt-newsletter-row input[type='email'] {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    font: inherit;
+    font-size: 1.6rem;
+    padding: 0.8rem 1rem;
+    color: var(--color-base);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+  .tt-newsletter-row input[type='email'][aria-invalid='true'] { border-color: #c0392b; }
+  .tt-newsletter-row button {
+    flex: 0 0 auto;
+    margin: 0;
+    font: inherit;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.8rem 1.6rem;
+    color: var(--color-bg);
+    background: var(--color-base);
+    border: 1px solid var(--color-base);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .tt-newsletter-row button:disabled { opacity: 0.6; cursor: wait; }
+  .tt-newsletter-row input:focus-visible,
+  .tt-newsletter-row button:focus-visible,
+  .tt-newsletter-consent input:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .tt-newsletter-consent {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 0.9rem 0 0;
+    color: var(--color-base);
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+  }
+  .tt-newsletter-consent input {
+    flex: 0 0 auto;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 0.15rem 0 0;
+    appearance: auto;
+    -webkit-appearance: checkbox;
+    opacity: 1;
+    position: static;
+  }
+  .tt-newsletter-consent a { color: inherit; text-decoration: underline; }
+
+  .tt-newsletter-status {
+    min-height: 1.5em;
+    margin: 0.6rem 0 0;
+    font-size: 1.4rem;
+  }
+  .tt-newsletter-status[data-state='ok'] { color: #2e7d32; }
+  .tt-newsletter-status[data-state='error'] { color: #c0392b; }
+  :global([data-theme='dark']) .tt-newsletter-status[data-state='ok'] { color: #81c784; }
+  :global([data-theme='dark']) .tt-newsletter-status[data-state='error'] { color: #ef9a9a; }
+
+  .tt-newsletter-hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .tt-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Footer: centrato e stretto */
+  .tt-newsletter--compact {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 2.4rem 1.6rem 0;
+    text-align: center;
+  }
+  .tt-newsletter--compact .tt-newsletter-consent { justify-content: center; }
+  .tt-newsletter--compact .tt-newsletter-consent span { max-width: 40rem; }
+
+  .tt-newsletter--full {
+    margin: 3rem 0;
+    padding: 2.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 480px) {
+    .tt-newsletter-row { flex-direction: column; }
+    .tt-newsletter-row button { width: 100%; }
+    .tt-newsletter--full { padding: 1.6rem; }
+  }
+</style>

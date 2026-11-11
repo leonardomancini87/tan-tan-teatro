@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+---
+
+<Layout title="Newsletter | Tan Tan Teatro" description="Iscriviti alla newsletter di Tan Tan Teatro: spettacoli, laboratori e novità." locale="it">
+  <article class="post-content page-template no-image">
+    <p class="post-content-excerpt">Spettacoli, laboratori e novità di Tan Tan Teatro, direttamente nella tua casella email.</p>
+    <div class="post-content-body">
+      <NewsletterForm locale="it" variant="full" source="pagina" />
+    </div>
+  </article>
+</Layout>

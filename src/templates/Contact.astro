@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
 import { type CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -116,6 +117,8 @@ const t = formText[currentLocale];
           </div>
         </div>
       </form>
+
+      <NewsletterForm locale={currentLocale} variant="full" source="contatti" />
     </div>
   </article>
 </Layout>
