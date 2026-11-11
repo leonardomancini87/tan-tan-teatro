@@ -1,4 +1,4 @@
-import { escapeHTML as e, UI, routes, dateLabel, upcomingEvents, romeToday } from '../data/agenda.mjs';
+import { escapeHTML as e, UI, routes, dateLabel, upcomingEvents, romeToday, venueAddress } from '../data/agenda.mjs';
 export const arrow = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
 export function renderEvent(event, locale = 'it', mode = 'cards', today = romeToday()) {
   const t = UI[locale], d = dateLabel(event.start, event.end, locale);
@@ -35,9 +35,7 @@ export function renderEvent(event, locale = 'it', mode = 'cards', today = romeTo
       label.charAt(0).toLocaleUpperCase(localeCode) + label.slice(1);
     return event.detail ? `${sentenceLabel} · ${event.detail}` : sentenceLabel;
   })();
-  const editorialAddress = /dravelli/i.test(event.venue ?? '')
-    ? 'Via Praciosa 11, 10024 Moncalieri (TO)'
-    : event.address ?? '';
+  const editorialAddress = venueAddress(event.venue) || (event.address ?? '');
   return `<article class="tt-event tt-event--${e(event.kind)}" data-event-id="${e(event.id)}">
     <div class="tt-event-photo"><img src="${e(event.image)}" alt="" loading="lazy" decoding="async" width="320" height="360" style="--tt-event-position:${e(event.imagePosition)};--tt-event-mobile-position:${e(event.mobileImagePosition ?? event.imagePosition)}" /></div>
     <div class="tt-event-copy">
@@ -59,7 +57,7 @@ export function renderShowDate(event, locale = 'it') {
   const localeCode = locale === 'it' ? 'it-IT' : 'en-GB';
   const weekday = new Intl.DateTimeFormat(localeCode, { weekday: 'long', timeZone: 'Europe/Rome' }).format(new Date(`${event.start}T12:00:00Z`));
   const when = [weekday.charAt(0).toLocaleUpperCase(localeCode) + weekday.slice(1), event.detail ? (locale === 'it' ? `ore ${event.detail}` : event.detail) : ''].filter(Boolean).join(' \u00b7 ');
-  const address = /dravelli/i.test(event.venue ?? '') ? 'Via Praciosa 11, 10024 Moncalieri (TO)' : event.address ?? '';
+  const address = venueAddress(event.venue) || (event.address ?? '');
   const action = event.bookingHref
     ? `<a class="show-date-book" href="${e(event.bookingHref)}" aria-label="${e(`${event.bookingLabel}: ${event.title}, ${d.long}`)}">${e(event.bookingLabel)} ${arrow}</a>`
     : event.bookingClosed ? `<span class="show-date-soon">${e(t.bookingSoon)}</span>` : '';

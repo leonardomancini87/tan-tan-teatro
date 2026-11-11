@@ -181,6 +181,7 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
 </style>
 
 <script>
+  import { venueAddress } from '../data/agenda.mjs';
   function initBookingPage() {
     const root = document.querySelector('[data-booking-page]');
     if (!(root instanceof HTMLElement) || root.dataset.ready === 'true') return;
@@ -274,13 +275,11 @@ const privacyUrl = 'https://www.iubenda.com/privacy-policy/15384815';
       const venue = String(item.venue || '').trim();
       const address = String(item.address || '').trim();
       const city = String(item.city || '').trim();
-      const dravelliAddress = venue.toLocaleLowerCase('it').includes('dravelli')
-        ? 'Via Praciosa 11, 10024 Moncalieri (TO)'
-        : '';
+      const knownAddress = venueAddress(venue);
       return address
         ? [venue, address, city].filter(Boolean).join(' · ')
-        : dravelliAddress
-          ? [venue, dravelliAddress].filter(Boolean).join(' · ')
+        : knownAddress
+          ? [venue, knownAddress].filter(Boolean).join(' · ')
           : [venue, city].filter(Boolean).join(' · ');
     };
     const renderSpectators = () => {

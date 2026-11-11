@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { venueAddress } from '../src/data/agenda.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const booking = readFileSync(resolve(root, 'src/templates/Booking.astro'), 'utf8');
@@ -48,7 +49,10 @@ test('First spectator has separate first and last name fields', () => {
 
 test('Booking details capitalize the weekday and include the verified Dravelli address', () => {
   assert(booking.includes("toLocaleUpperCase(isEn ? 'en-GB' : 'it-IT')"));
-  assert(booking.includes('Via Praciosa 11, 10024 Moncalieri (TO)'));
+  // Gli indirizzi dei teatri stanno nell'elenco comune di src/data/agenda.mjs.
+  assert(booking.includes("import { venueAddress } from '../data/agenda.mjs'"));
+  assert.equal(venueAddress('Teatro Dravelli'), 'Via Praciosa 11, 10024 Moncalieri (TO)');
+  assert.equal(venueAddress('Auditorium "Franca Rame" · Rivalta di Torino'), 'Via Gorizia 51, 10040 Rivalta di Torino (TO)');
   assert(booking.includes('locationLabel(appointment)'));
 });
 

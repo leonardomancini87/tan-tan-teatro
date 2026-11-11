@@ -36,6 +36,17 @@ export const BIBLIOTECA_20 = Object.freeze({
   address: 'Via Eusebio Bava 31, 10124 Torino',
 });
 
+// Indirizzi dei teatri, mostrati sotto il nome del luogo negli appuntamenti
+// e nella pagina di prenotazione. Il nome viene cercato nel luogo della data.
+export const VENUE_ADDRESSES = Object.freeze([
+  { match: /dravelli/i, address: 'Via Praciosa 11, 10024 Moncalieri (TO)' },
+  { match: /franca rame/i, address: 'Via Gorizia 51, 10040 Rivalta di Torino (TO)' },
+]);
+export function venueAddress(venue) {
+  const text = String(venue ?? '');
+  return VENUE_ADDRESSES.find((v) => v.match.test(text))?.address ?? '';
+}
+
 // Source: upcoming dates already present in the uploaded site (news-en.md).
 // This is a resilience snapshot, NOT a second live calendar to maintain.
 export const PERFORMANCE_SNAPSHOT = [
