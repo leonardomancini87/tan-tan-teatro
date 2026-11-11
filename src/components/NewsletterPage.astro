@@ -1,0 +1,243 @@
+---
+/**
+ * Pagina Newsletter (/newsletter e /en/newsletter).
+ * Usa lo stile editoriale della home: apertura fotografica, pannello,
+ * schede con foto. I testi delle due lingue stanno qui sotto.
+ */
+import Layout from '../layouts/Layout.astro';
+import NewsletterForm from './NewsletterForm.astro';
+import { routes } from '../data/agenda.mjs';
+import { arrow } from '../lib/agenda-render.mjs';
+
+interface Props {
+  locale?: 'it' | 'en';
+}
+
+const { locale = 'it' } = Astro.props;
+const r = routes(locale);
+
+const copy = {
+  it: {
+    title: 'Newsletter | Tan Tan Teatro',
+    description: 'Iscriviti alla newsletter di Tan Tan Teatro: spettacoli, laboratori e novità, direttamente nella tua casella email.',
+    kicker: 'Newsletter',
+    heading: ['Il teatro,', 'nella tua casella email.'],
+    intro: 'Prime date, nuove edizioni del laboratorio, progetti di ricerca. Ti scriviamo quando c’è qualcosa da raccontare.',
+    cta: 'Iscriviti',
+    heroAlt: 'Una scena di Macbett di Tan Tan Teatro',
+    whatKicker: 'Cosa riceverai',
+    whatTitle: 'Tutto quello che succede in Tan Tan Teatro.',
+    items: [
+      { title: 'Spettacoli', text: 'Le nuove date in anteprima, i luoghi e il link per prenotare prima che i posti finiscano.' },
+      { title: 'Laboratorio', text: 'L’apertura delle iscrizioni al laboratorio di training e ai seminari intensivi.' },
+      { title: 'Ricerca e accessibilità', text: 'Le novità del progetto ETICA, gli incontri e gli strumenti per partecipare agli spettacoli.' },
+    ],
+    formTitle: 'Iscriviti',
+    formIntro: 'Basta la tua email: al resto pensiamo noi.',
+    promises: [
+      { title: 'Poche email', text: 'Solo quando c’è un appuntamento o una novità.' },
+      { title: 'I tuoi dati restano a noi', text: 'Non li cediamo a nessuno e li usiamo solo per la newsletter.' },
+      { title: 'Libero di andare', text: 'Puoi disiscriverti in qualsiasi momento, scrivendoci.' },
+    ],
+    moreKicker: 'Nel frattempo',
+    moreTitle: 'Scopri cosa facciamo',
+    cards: [
+      { title: 'Spettacoli', text: 'Da Ionesco a Gombrowicz: la creazione scenica come lavoro collettivo.', label: 'Scopri gli spettacoli', href: r.shows, img: '/img/macbett01.jpg' },
+      { title: 'Laboratorio', text: 'Corpo, movimento e voce. Appuntamenti settimanali di training.', label: 'Esplora il laboratorio', href: r.lab, img: '/img/lab01.jpeg' },
+      { title: 'Appuntamenti', text: 'Le prossime date in scena, in laboratorio e negli incontri.', label: 'Vedi gli appuntamenti', href: r.agenda, img: '/img/home/matrimonio-ivrea-1200.webp' },
+    ],
+  },
+  en: {
+    title: 'Newsletter | Tan Tan Teatro',
+    description: 'Subscribe to the Tan Tan Teatro newsletter: performances, workshops and news, straight to your inbox.',
+    kicker: 'Newsletter',
+    heading: ['Theatre,', 'straight to your inbox.'],
+    intro: 'First dates, new laboratory editions, research projects. We write when there is something to tell.',
+    cta: 'Subscribe',
+    heroAlt: 'A scene from Macbett by Tan Tan Teatro',
+    whatKicker: 'What you will receive',
+    whatTitle: 'Everything happening at Tan Tan Teatro.',
+    items: [
+      { title: 'Performances', text: 'New dates ahead of time, venues and the booking link before seats run out.' },
+      { title: 'Laboratory', text: 'Registrations opening for the training laboratory and intensive seminars.' },
+      { title: 'Research and accessibility', text: 'News from the ETICA project, meetings and tools that broaden audience participation.' },
+    ],
+    formTitle: 'Subscribe',
+    formIntro: 'All we need is your email address.',
+    promises: [
+      { title: 'Few emails', text: 'Only when there is an event or some news.' },
+      { title: 'Your data stays with us', text: 'We never share it and use it only for the newsletter.' },
+      { title: 'Free to leave', text: 'You can unsubscribe at any time by writing to us.' },
+    ],
+    moreKicker: 'In the meantime',
+    moreTitle: 'Discover what we do',
+    cards: [
+      { title: 'Performances', text: 'From Ionesco to Gombrowicz, theatrical creation through collective work.', label: 'Explore the performances', href: r.shows, img: '/img/macbett01.jpg' },
+      { title: 'Laboratory', text: 'Body, movement and voice. Weekly training sessions.', label: 'Explore the laboratory', href: r.lab, img: '/img/lab01.jpeg' },
+      { title: 'Events', text: 'Upcoming dates on stage, in the laboratory and at meetings.', label: 'See all events', href: r.agenda, img: '/img/home/matrimonio-ivrea-1200.webp' },
+    ],
+  },
+}[locale];
+---
+
+<Layout title={copy.title} description={copy.description} locale={locale} editorial={true} image="/img/bio-wide.jpg">
+  <div class="tt-editorial tt-nl">
+    <section class="tt-hero tt-nl-hero" aria-labelledby="tt-nl-title">
+      <img class="tt-hero-image" src="/img/bio-wide.jpg" alt={copy.heroAlt} width="2048" height="1038" loading="eager" fetchpriority="high" decoding="async" />
+      <div class="tt-hero-shade" aria-hidden="true"></div>
+      <div class="tt-hero-copy">
+        <p class="tt-kicker">{copy.kicker}</p>
+        <h1 id="tt-nl-title">{copy.heading[0]}<br />{copy.heading[1]}</h1>
+        <p class="tt-hero-intro">{copy.intro}</p>
+        <div class="tt-hero-actions">
+          <a class="tt-button tt-button--light" href="#iscriviti">{copy.cta} <Fragment set:html={arrow} /></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="tt-nl-main" aria-label={copy.whatKicker}>
+      <div class="tt-nl-what">
+        <p class="tt-kicker">{copy.whatKicker}</p>
+        <h2>{copy.whatTitle}</h2>
+        <ol class="tt-nl-list">
+          {copy.items.map((item, i) => (
+            <li>
+              <span class="tt-nl-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="tt-nl-form" id="iscriviti">
+        <NewsletterForm locale={locale} variant="editorial" source="pagina" title={copy.formTitle} intro={copy.formIntro} />
+      </div>
+    </section>
+
+    <ul class="tt-nl-promises">
+      {copy.promises.map((p) => (
+        <li>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </li>
+      ))}
+    </ul>
+
+    <section class="tt-section tt-nl-more" aria-labelledby="tt-nl-more-title">
+      <div class="tt-section-heading">
+        <div>
+          <p class="tt-kicker">{copy.moreKicker}</p>
+          <h2 id="tt-nl-more-title">{copy.moreTitle}</h2>
+        </div>
+      </div>
+      <div class="tt-activity-grid">
+        {copy.cards.map((c) => (
+          <article class="tt-activity">
+            <a href={c.href}>
+              <img src={c.img} alt="" loading="lazy" decoding="async" width="640" height="520" />
+              <div class="tt-activity-shade" aria-hidden="true"></div>
+              <div class="tt-activity-copy">
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+                <span class="tt-activity-link">{c.label} <Fragment set:html={arrow} /></span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  /* La foto ha il fondo nero: la spostiamo a destra e lasciamo il nero al testo */
+  .tt-nl-hero .tt-hero-image { left: auto; right: 0; width: 74%; object-position: 50% 45%; }
+  .tt-nl-hero .tt-hero-shade {
+    background: linear-gradient(90deg, #080808 0%, #080808 26%, rgba(8, 8, 8, .55) 40%, rgba(8, 8, 8, 0) 62%);
+  }
+  .tt-nl-hero h1 { max-width: 640px; }
+  .tt-nl-hero .tt-hero-intro { max-width: 420px; }
+
+  /* Cosa riceverai + modulo */
+  .tt-nl-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+    padding: clamp(44px, 5vw, 72px) clamp(28px, 4vw, 64px);
+    background: var(--tt-panel);
+  }
+  .tt-nl-what .tt-kicker { color: var(--tt-muted); }
+  .tt-nl-what h2 { max-width: 520px; margin-bottom: 34px; }
+  .tt-nl-list { list-style: none; margin: 0; padding: 0; }
+  .tt-nl-list li {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 8px;
+    padding: 22px 0;
+    border-top: 1px solid var(--tt-line);
+  }
+  .tt-nl-list li:last-child { border-bottom: 1px solid var(--tt-line); }
+  .tt-nl-number {
+    padding-top: 6px;
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--tt-muted);
+  }
+  .tt-nl-list h3 { font-size: clamp(22px, 1.8vw, 28px); margin-bottom: 6px; }
+  .tt-nl-list p {
+    max-width: 460px;
+    font-family: var(--font-sans-serif);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--tt-muted);
+  }
+
+  .tt-nl-form {
+    position: sticky;
+    top: 28px;
+    padding: clamp(28px, 3vw, 44px);
+    background: var(--tt-paper);
+    border: 1px solid var(--tt-line);
+    scroll-margin-top: 28px;
+  }
+
+  /* Tre promesse */
+  .tt-nl-promises {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin: 0;
+    padding: 44px clamp(28px, 4vw, 64px);
+    border-bottom: 1px solid var(--tt-line);
+  }
+  .tt-nl-promises h3 { font-size: 22px; margin-bottom: 8px; }
+  .tt-nl-promises p {
+    font-family: var(--font-sans-serif);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--tt-muted);
+  }
+
+  .tt-nl-more { padding-left: 0; padding-right: 0; }
+  .tt-nl-more .tt-section-heading .tt-kicker { color: var(--tt-muted); }
+
+  @media (max-width: 1000px) {
+    .tt-nl-main { grid-template-columns: 1fr; }
+    .tt-nl-form { position: static; }
+  }
+  @media (max-width: 760px) {
+    .tt-nl-main { padding: 36px 22px; gap: 36px; }
+    .tt-nl-form { padding: 24px 20px; }
+    .tt-nl-promises { grid-template-columns: 1fr; gap: 22px; padding: 34px 4px; }
+    .tt-nl-hero .tt-hero-image { left: 0; width: 100%; object-position: 72% 50%; opacity: .55; }
+    .tt-nl-hero .tt-hero-shade { background: linear-gradient(0deg, rgba(8, 8, 8, .85), rgba(8, 8, 8, .3)); }
+  }
+</style>

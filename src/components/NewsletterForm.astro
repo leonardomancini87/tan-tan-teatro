@@ -5,17 +5,20 @@
  * (vedi supabase/migrations/20261111_newsletter.sql).
  *
  * variant="compact": riga unica, per il footer.
- * variant="full": con titolo e testo, per Contatti e /newsletter.
+ * variant="full": con titolo e testo, per Contatti.
+ * variant="editorial": senza bordo, per la pagina /newsletter.
  * source: da dove arriva l'iscrizione (footer, contatti, pagina).
  */
 interface Props {
   locale?: 'it' | 'en';
-  variant?: 'compact' | 'full';
+  variant?: 'compact' | 'full' | 'editorial';
   source?: string;
   heading?: boolean;
+  title?: string;
+  intro?: string;
 }
 
-const { locale = 'it', variant = 'full', source = 'sito', heading = true } = Astro.props;
+const { locale = 'it', variant = 'full', source = 'sito', heading = true, title, intro } = Astro.props;
 
 const url = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
 const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
@@ -61,9 +64,9 @@ const uid = `tt-nl-${source}-${locale}`;
   aria-label={heading ? undefined : text.title}
 >
   {heading && (
-    <h3 class="tt-newsletter-title" id={`${uid}-title`}>{text.title}</h3>
+    <h3 class="tt-newsletter-title" id={`${uid}-title`}>{title ?? text.title}</h3>
   )}
-  {variant === 'full' && <p class="tt-newsletter-intro">{text.intro}</p>}
+  {variant !== 'compact' && <p class="tt-newsletter-intro">{intro ?? text.intro}</p>}
 
   <form
     class="tt-newsletter-form"
@@ -230,7 +233,8 @@ const uid = `tt-nl-${source}-${locale}`;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 0.8rem 1.6rem;
-    color: var(--color-bg);
+    /* !important: il tema forza il bianco su tutti i tasti, illeggibile in modalità scura */
+    color: var(--color-bg) !important;
     background: var(--color-base);
     border: 1px solid var(--color-base);
     border-radius: var(--radius);
@@ -313,6 +317,36 @@ const uid = `tt-nl-${source}-${locale}`;
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
   }
+
+  /* Pagina /newsletter: senza bordo, tasto squadrato come gli altri tasti del sito */
+  .tt-newsletter--editorial .tt-newsletter-intro {
+    font-family: var(--font-sans-serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--tt-muted, var(--color-base));
+  }
+  .tt-newsletter--editorial .tt-newsletter-row input[type='email'] {
+    border-radius: 2px;
+    border-color: var(--tt-line, var(--color-border));
+    background: var(--tt-paper, var(--color-bg));
+    color: var(--tt-ink, var(--color-base));
+    min-height: 52px;
+  }
+  .tt-newsletter--editorial .tt-newsletter-row button {
+    border-radius: 2px;
+    background: var(--tt-button, var(--color-base));
+    border-color: var(--tt-button, var(--color-base));
+    color: var(--tt-button-ink, var(--color-bg)) !important;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    padding: 14px 24px 12px;
+  }
+  .tt-newsletter--editorial .tt-newsletter-row button:hover:not(:disabled) {
+    background: transparent;
+    color: var(--tt-ink, var(--color-base)) !important;
+  }
+  .tt-newsletter--editorial .tt-newsletter-consent { color: var(--tt-muted, var(--color-base)); }
 
   @media (max-width: 480px) {
     .tt-newsletter-row { flex-direction: column; }
