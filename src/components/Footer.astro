@@ -19,23 +19,11 @@ const cookieHref = isEn
 
 const appPrivacyHref = '/privacy-app';
 
-// Tasto verso la pagina Newsletter. Nascosto dove il modulo è già nella pagina
-// e in home, dove il tasto sta accanto a Scrivici e Instagram.
-const onNewsletterPage = /^\/((en\/)?(newsletter(\/(disiscrizione|unsubscribe))?|contatti|contact)|en)?\/?$/.test(Astro.url.pathname);
 const newsletterHref = isEn ? '/en/newsletter' : '/newsletter';
 
 const iubendaPrivacyHref =
   'https://www.iubenda.com/privacy-policy/15384815';
 ---
-
-{!onNewsletterPage && (
-  <div class="tt-footer-newsletter">
-    <a class="tt-footer-newsletter-button" href={newsletterHref}>
-      Newsletter
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-    </a>
-  </div>
-)}
 
 <footer class="site-footer">
   <div class="site-footer-content">
@@ -67,43 +55,10 @@ const iubendaPrivacyHref =
       <a href={appPrivacyHref}>
         {isEn ? 'App Privacy Policy' : 'Privacy dell’App'}
       </a>
+
+      {" | "}
+
+      <a href={newsletterHref}>Newsletter</a>
     </p>
   </div>
 </footer>
-
-<style>
-  /* Stesso aspetto del tasto "Scrivici" della home */
-  .tt-footer-newsletter {
-    display: flex;
-    justify-content: center;
-    padding: 2.4rem 1.6rem 0;
-  }
-  .tt-footer-newsletter-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    min-height: 48px;
-    padding: 14px 21px 12px;
-    border: 1px solid var(--tt-button, var(--color-base));
-    border-radius: 2px;
-    background: var(--tt-button, var(--color-base));
-    color: var(--tt-button-ink, var(--color-bg));
-    font-family: var(--font-sans-serif);
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.15s, color 0.15s;
-  }
-  .tt-footer-newsletter-button:hover {
-    background: transparent;
-    color: var(--tt-ink, var(--color-base));
-  }
-  .tt-footer-newsletter-button:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-</style>
