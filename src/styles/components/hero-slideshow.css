@@ -2,7 +2,9 @@
  * Hero custom properties are always supplied inline by renderHero. Do not add
  * var() fallbacks here: the existing PostCSS preserve:false setting would
  * compile those fallbacks instead of retaining each photograph's crop. */
-.tt-hero--slideshow { align-items:flex-end; }
+/* .tt-hero.tt-hero--slideshow: vince su .tt-hero (centrato) anche quando, dopo una
+ * navigazione, il foglio editoriale viene caricato dopo questo. */
+.tt-hero.tt-hero--slideshow { align-items:flex-end; }
 .tt-hero--slideshow .tt-hero-navigation { position:absolute; bottom:8px; left:0; right:0; z-index:4; display:flex; justify-content:center; align-items:center; pointer-events:none; }
 .tt-hero--slideshow .tt-hero-navigation[hidden], .tt-hero--slideshow .tt-hero-navigation button[hidden] { display:none; }
 .tt-hero--slideshow .tt-hero-navigation button { display:grid; place-items:center; width:28px; height:44px; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; outline:none; transition:none; cursor:pointer; pointer-events:auto; }
