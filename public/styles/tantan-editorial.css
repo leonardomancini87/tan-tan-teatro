@@ -375,3 +375,5 @@ tt-agenda { display:block; }
 .tt-biblioteca-programme + .tt-biblioteca-programme { padding-top:40px; }
 .tt-biblioteca-poster { padding:34px 38px 0; }
 @media (max-width: 600px) { .tt-biblioteca-poster { padding:28px 4px 0; } }
+/* Newsletter accanto a Scrivici e Instagram: su schermi stretti i tasti vanno a capo */
+.tt-contact-actions { flex-wrap:wrap; }

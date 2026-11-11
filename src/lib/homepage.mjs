@@ -31,6 +31,6 @@ export function renderHome(locale = 'it', today, settings = {}) {
       <aside class="tt-etica" aria-labelledby="tt-etica-title"><p class="tt-kicker">${e(c.eticaLabel)}</p><h3 id="tt-etica-title">${e(c.eticaName)}</h3><p class="tt-etica-name" lang="it">${e(c.eticaTitle)}</p><p class="tt-etica-note">${e(c.eticaText)}</p><a class="tt-text-link" href="${SOURCES.etica}" target="_blank" rel="noopener noreferrer">${e(c.eticaLink)} ${arrow}</a></aside>
     </section>
 
-    <section class="tt-contact-band" aria-labelledby="tt-contact-title"><div><h2 id="tt-contact-title">${e(c.contactTitle)}</h2><p>${e(c.contactText)}</p></div><div class="tt-contact-actions"><a class="tt-button" href="${r.contacts}">${e(c.contactLink)} ${arrow}</a><a class="tt-text-link" href="https://www.instagram.com/tantanteatro/" target="_blank" rel="noopener noreferrer">Instagram ${arrow}</a></div></section>
+    <section class="tt-contact-band" aria-labelledby="tt-contact-title"><div><h2 id="tt-contact-title">${e(c.contactTitle)}</h2><p>${e(c.contactText)}</p></div><div class="tt-contact-actions"><a class="tt-button" href="${r.contacts}">${e(c.contactLink)} ${arrow}</a><a class="tt-button tt-button--outline" href="${locale === 'en' ? '/en/newsletter' : '/newsletter'}">Newsletter ${arrow}</a><a class="tt-text-link" href="https://www.instagram.com/tantanteatro/" target="_blank" rel="noopener noreferrer">Instagram ${arrow}</a></div></section>
   </div>`;
 }
