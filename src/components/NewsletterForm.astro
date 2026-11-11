@@ -8,6 +8,8 @@
  * variant="full": con titolo e testo, per Contatti.
  * variant="editorial": senza bordo, per la pagina /newsletter.
  * source: da dove arriva l'iscrizione (footer, contatti, pagina).
+ * mode="unsubscribe": modulo di disiscrizione (funzione unsubscribe_newsletter,
+ * vedi supabase/migrations/20261111_newsletter_unsubscribe.sql).
  */
 interface Props {
   locale?: 'it' | 'en';
@@ -16,9 +18,11 @@ interface Props {
   heading?: boolean;
   title?: string;
   intro?: string;
+  mode?: 'subscribe' | 'unsubscribe';
 }
 
-const { locale = 'it', variant = 'full', source = 'sito', heading = true, title, intro } = Astro.props;
+const { locale = 'it', variant = 'full', source = 'sito', heading = true, title, intro, mode = 'subscribe' } = Astro.props;
+const unsubscribe = mode === 'unsubscribe';
 
 const url = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
 const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
@@ -38,6 +42,9 @@ const text = {
     invalid: 'Controlla l’indirizzo email.',
     consentMissing: 'Per iscriverti serve il consenso.',
     error: 'Non è stato possibile completare l’iscrizione. Riprova più tardi.',
+    unsubSubmit: 'Disiscriviti',
+    unsubOk: 'Fatto. Non riceverai più la newsletter di Tan Tan Teatro.',
+    unsubError: 'Non è stato possibile completare la disiscrizione. Riprova più tardi o scrivici.',
   },
   en: {
     title: 'Newsletter',
@@ -52,10 +59,16 @@ const text = {
     invalid: 'Please check the email address.',
     consentMissing: 'Your consent is required to subscribe.',
     error: 'We could not complete your subscription. Please try again later.',
+    unsubSubmit: 'Unsubscribe',
+    unsubOk: 'Done. You will no longer receive the Tan Tan Teatro newsletter.',
+    unsubError: 'We could not complete your request. Please try again later or write to us.',
   },
 }[locale];
 
 const uid = `tt-nl-${source}-${locale}`;
+const submitLabel = unsubscribe ? text.unsubSubmit : text.submit;
+const msgOk = unsubscribe ? text.unsubOk : text.ok;
+const msgError = unsubscribe ? text.unsubError : text.error;
 ---
 
 <section
@@ -75,10 +88,11 @@ const uid = `tt-nl-${source}-${locale}`;
     data-key={key}
     data-locale={locale}
     data-source={source}
-    data-msg-ok={text.ok}
+    data-mode={mode}
+    data-msg-ok={msgOk}
     data-msg-invalid={text.invalid}
     data-msg-consent={text.consentMissing}
-    data-msg-error={text.error}
+    data-msg-error={msgError}
     data-msg-sending={text.sending}
     novalidate
   >
@@ -93,7 +107,7 @@ const uid = `tt-nl-${source}-${locale}`;
         maxlength="254"
         required
       />
-      <button type="submit">{text.submit}</button>
+      <button type="submit">{submitLabel}</button>
     </div>
 
     <!-- Campo trappola per i bot: le persone non lo vedono. -->
@@ -101,12 +115,14 @@ const uid = `tt-nl-${source}-${locale}`;
       <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
     </div>
 
+    {!unsubscribe && (
     <label class="tt-newsletter-consent">
       <input type="checkbox" name="consent" required />
       <span>
         {text.consentBefore}<a href={privacyHref} target="_blank" rel="noopener noreferrer">{text.consentLink}</a>{text.consentAfter}
       </span>
     </label>
+    )}
 
     <p class="tt-newsletter-status" role="status" aria-live="polite"></p>
   </form>
@@ -128,7 +144,8 @@ const uid = `tt-nl-${source}-${locale}`;
     const status = form.querySelector<HTMLElement>('.tt-newsletter-status')!;
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const emailInput = form.elements.namedItem('email') as HTMLInputElement;
-    const consent = form.elements.namedItem('consent') as HTMLInputElement;
+    const consent = form.elements.namedItem('consent') as HTMLInputElement | null;
+    const unsubscribe = d.mode === 'unsubscribe';
     const honeypot = form.elements.namedItem('website') as HTMLInputElement;
 
     const show = (msg: string, state: 'ok' | 'error' | '') => {
@@ -143,7 +160,7 @@ const uid = `tt-nl-${source}-${locale}`;
       emailInput.focus();
       return show(d.msgInvalid!, 'error');
     }
-    if (!consent.checked) {
+    if (consent && !consent.checked) {
       consent.focus();
       return show(d.msgConsent!, 'error');
     }
@@ -161,7 +178,11 @@ const uid = `tt-nl-${source}-${locale}`;
     show('', '');
 
     try {
-      const res = await fetch(new URL('/rest/v1/rpc/subscribe_newsletter', d.url), {
+      const rpc = unsubscribe ? 'unsubscribe_newsletter' : 'subscribe_newsletter';
+      const body = unsubscribe
+        ? { p_email: email }
+        : { p_email: email, p_locale: d.locale, p_source: d.source };
+      const res = await fetch(new URL(`/rest/v1/rpc/${rpc}`, d.url), {
         method: 'POST',
         headers: {
           apikey: d.key,
@@ -169,7 +190,7 @@ const uid = `tt-nl-${source}-${locale}`;
           'Content-Type': 'application/json',
         },
         credentials: 'omit',
-        body: JSON.stringify({ p_email: email, p_locale: d.locale, p_source: d.source }),
+        body: JSON.stringify(body),
       });
       if (res.ok) {
         form.reset();

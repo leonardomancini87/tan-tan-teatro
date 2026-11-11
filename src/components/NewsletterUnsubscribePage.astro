@@ -1,0 +1,70 @@
+---
+/**
+ * Pagina di disiscrizione (/newsletter/disiscrizione e /en/newsletter/unsubscribe).
+ */
+import Layout from '../layouts/Layout.astro';
+import NewsletterForm from './NewsletterForm.astro';
+
+interface Props {
+  locale?: 'it' | 'en';
+}
+
+const { locale = 'it' } = Astro.props;
+
+const copy = {
+  it: {
+    title: 'Disiscrizione dalla newsletter | Tan Tan Teatro',
+    description: 'Disiscriviti dalla newsletter di Tan Tan Teatro.',
+    kicker: 'Newsletter',
+    heading: 'Disiscrizione',
+    intro: 'Inserisci l’indirizzo email con cui ti sei iscritto: non riceverai più la newsletter. Puoi anche scriverci e ci pensiamo noi.',
+    back: 'Torna alla pagina Newsletter',
+    backHref: '/newsletter',
+  },
+  en: {
+    title: 'Unsubscribe from the newsletter | Tan Tan Teatro',
+    description: 'Unsubscribe from the Tan Tan Teatro newsletter.',
+    kicker: 'Newsletter',
+    heading: 'Unsubscribe',
+    intro: 'Enter the email address you subscribed with and you will no longer receive the newsletter. You can also write to us and we will take care of it.',
+    back: 'Back to the Newsletter page',
+    backHref: '/en/newsletter',
+  },
+}[locale];
+---
+
+<Layout title={copy.title} description={copy.description} locale={locale} editorial={true}>
+  <div class="tt-editorial tt-nl-unsub">
+    <section class="tt-nl-unsub-box" aria-labelledby="tt-nl-unsub-title">
+      <p class="tt-kicker">{copy.kicker}</p>
+      <h1 id="tt-nl-unsub-title">{copy.heading}</h1>
+      <NewsletterForm
+        locale={locale}
+        variant="editorial"
+        mode="unsubscribe"
+        source="disiscrizione"
+        heading={false}
+        intro={copy.intro}
+      />
+      <a class="tt-nl-unsub-back" href={copy.backHref}>{copy.back}</a>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tt-nl-unsub-box {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: clamp(48px, 7vw, 104px) clamp(22px, 4vw, 48px);
+  }
+  .tt-nl-unsub-box .tt-kicker { color: var(--tt-muted); }
+  .tt-nl-unsub-box h1 { margin-bottom: 18px; }
+  .tt-nl-unsub-back {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: var(--font-sans-serif);
+    font-size: 14px;
+    color: var(--tt-muted);
+    text-decoration: underline;
+  }
+</style>

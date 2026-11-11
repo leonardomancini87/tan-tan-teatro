@@ -21,7 +21,7 @@ const appPrivacyHref = '/privacy-app';
 
 // Tasto verso la pagina Newsletter. Nascosto dove il modulo è già nella pagina
 // e in home, dove il tasto sta accanto a Scrivici e Instagram.
-const onNewsletterPage = /^\/((en\/)?(newsletter|contatti|contact)|en)?\/?$/.test(Astro.url.pathname);
+const onNewsletterPage = /^\/((en\/)?(newsletter(\/(disiscrizione|unsubscribe))?|contatti|contact)|en)?\/?$/.test(Astro.url.pathname);
 const newsletterHref = isEn ? '/en/newsletter' : '/newsletter';
 
 const iubendaPrivacyHref =

@@ -35,9 +35,9 @@ const copy = {
     formTitle: 'Iscriviti',
     formIntro: 'Basta la tua email: al resto pensiamo noi.',
     promises: [
-      { title: 'Poche email', text: 'Solo quando c’è un appuntamento o una novità.' },
-      { title: 'I tuoi dati restano a noi', text: 'Non li cediamo a nessuno e li usiamo solo per la newsletter.' },
-      { title: 'Libero di andare', text: 'Puoi disiscriverti in qualsiasi momento, scrivendoci.' },
+      { title: 'Poche email', text: 'Raccogliamo le comunicazioni in pochi e brevi invii annuali.' },
+      { title: 'Protezione dei dati', text: 'Non usiamo servizi commerciali esterni e non cediamo dati per alcuna finalità terza, commerciale o non.' },
+      { title: 'Disiscrizione', text: 'Puoi disiscriverti in qualsiasi momento, <a href="/contatti">scrivendoci</a> o tramite il <a href="/newsletter/disiscrizione">modulo dedicato</a>.' },
     ],
     moreKicker: 'Nel frattempo',
     moreTitle: 'Scopri cosa facciamo',
@@ -65,9 +65,9 @@ const copy = {
     formTitle: 'Subscribe',
     formIntro: 'All we need is your email address.',
     promises: [
-      { title: 'Few emails', text: 'Only when there is an event or some news.' },
-      { title: 'Your data stays with us', text: 'We never share it and use it only for the newsletter.' },
-      { title: 'Free to leave', text: 'You can unsubscribe at any time by writing to us.' },
+      { title: 'Few emails', text: 'We gather our news into a few short mailings a year.' },
+      { title: 'Data protection', text: 'We use no external commercial services and never share data for any third-party purpose, commercial or otherwise.' },
+      { title: 'Unsubscribe', text: 'You can unsubscribe at any time by <a href="/en/contact">writing to us</a> or through the <a href="/en/newsletter/unsubscribe">dedicated form</a>.' },
     ],
     moreKicker: 'In the meantime',
     moreTitle: 'Discover what we do',
@@ -121,7 +121,7 @@ const copy = {
       {copy.promises.map((p) => (
         <li>
           <h3>{p.title}</h3>
-          <p>{p.text}</p>
+          <p set:html={p.text} />
         </li>
       ))}
     </ul>
@@ -218,6 +218,7 @@ const copy = {
     border-bottom: 1px solid var(--tt-line);
   }
   .tt-nl-promises h3 { font-size: 22px; margin-bottom: 8px; }
+  .tt-nl-promises :global(a) { color: inherit; text-decoration: underline; }
   .tt-nl-promises p {
     font-family: var(--font-sans-serif);
     font-size: 15px;
