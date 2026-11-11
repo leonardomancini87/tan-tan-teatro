@@ -1,0 +1,181 @@
+---
+/**
+ * Azione aperta dal link di un'email della newsletter (?token=…).
+ * mode="confirm": conferma l'iscrizione appena la pagina si apre.
+ * mode="unsubscribe": mostra un tasto e disiscrive solo dopo il clic
+ *   (alcuni programmi di posta aprono i link da soli per controllarli).
+ * Se nella pagina non c'è un token il blocco resta nascosto.
+ * Funzioni SQL: confirm_newsletter e unsubscribe_newsletter_token
+ * (supabase/migrations/20261111170000_newsletter_double_optin.sql).
+ */
+interface Props {
+  locale?: 'it' | 'en';
+  mode: 'confirm' | 'unsubscribe';
+}
+
+const { locale = 'it', mode } = Astro.props;
+const url = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+
+const text = {
+  it: {
+    working: mode === 'confirm' ? 'Confermiamo la tua iscrizione…' : 'Disiscrizione in corso…',
+    ok: mode === 'confirm'
+      ? 'Fatto! La tua iscrizione alla newsletter di Tan Tan Teatro è confermata.'
+      : 'Fatto. Non riceverai più la newsletter di Tan Tan Teatro.',
+    invalid: mode === 'confirm'
+      ? 'Questo link non è valido o è scaduto. Iscriviti di nuovo per riceverne uno nuovo.'
+      : 'Questo link non è valido. Puoi disiscriverti inserendo la tua email qui sotto.',
+    error: 'Qualcosa non ha funzionato. Riprova più tardi o scrivici.',
+    button: 'Conferma la disiscrizione',
+    ask: 'Vuoi smettere di ricevere la newsletter di Tan Tan Teatro?',
+  },
+  en: {
+    working: mode === 'confirm' ? 'Confirming your subscription…' : 'Unsubscribing…',
+    ok: mode === 'confirm'
+      ? 'Done! Your subscription to the Tan Tan Teatro newsletter is confirmed.'
+      : 'Done. You will no longer receive the Tan Tan Teatro newsletter.',
+    invalid: mode === 'confirm'
+      ? 'This link is not valid or has expired. Subscribe again to receive a new one.'
+      : 'This link is not valid. You can unsubscribe by entering your email below.',
+    error: 'Something went wrong. Please try again later or write to us.',
+    button: 'Confirm unsubscribe',
+    ask: 'Do you want to stop receiving the Tan Tan Teatro newsletter?',
+  },
+}[locale];
+---
+
+<div
+  class="tt-nl-link"
+  data-tt-nl-link
+  data-mode={mode}
+  data-url={url}
+  data-key={key}
+  data-msg-working={text.working}
+  data-msg-ok={text.ok}
+  data-msg-invalid={text.invalid}
+  data-msg-error={text.error}
+  hidden
+>
+  {mode === 'unsubscribe' && (
+    <div class="tt-nl-link-ask" data-tt-nl-link-ask>
+      <p>{text.ask}</p>
+      <button type="button" class="tt-nl-link-button" data-tt-nl-link-button>{text.button}</button>
+    </div>
+  )}
+  <p class="tt-nl-link-status" role="status" aria-live="polite" data-tt-nl-link-status></p>
+</div>
+
+<script>
+  const TOKEN_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+  async function run(box: HTMLElement, token: string) {
+    const d = box.dataset;
+    const status = box.querySelector<HTMLElement>('[data-tt-nl-link-status]')!;
+    const ask = box.querySelector<HTMLElement>('[data-tt-nl-link-ask]');
+    const show = (msg: string, state: string) => {
+      status.textContent = msg;
+      status.dataset.state = state;
+    };
+    const finish = (ok: boolean) => {
+      if (ask) ask.hidden = true;
+      // Con un link valido il modulo con l'email non serve più.
+      if (ok) document.querySelectorAll<HTMLElement>('[data-tt-nl-hide-on-token]').forEach((el) => (el.hidden = true));
+    };
+
+    if (!d.url || !d.key) return show(d.msgError!, 'error');
+    show(d.msgWorking!, '');
+    const rpc = d.mode === 'confirm' ? 'confirm_newsletter' : 'unsubscribe_newsletter_token';
+    try {
+      const res = await fetch(new URL(`/rest/v1/rpc/${rpc}`, d.url), {
+        method: 'POST',
+        headers: { apikey: d.key, Authorization: `Bearer ${d.key}`, 'Content-Type': 'application/json' },
+        credentials: 'omit',
+        body: JSON.stringify({ p_token: token }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      const ok = (await res.json()) === true;
+      finish(ok);
+      show(ok ? d.msgOk! : d.msgInvalid!, ok ? 'ok' : 'error');
+    } catch {
+      show(d.msgError!, 'error');
+    }
+  }
+
+  function init() {
+    const box = document.querySelector<HTMLElement>('[data-tt-nl-link]');
+    if (!box || box.dataset.ready) return;
+    box.dataset.ready = 'true';
+    const token = new URLSearchParams(location.search).get('token') ?? '';
+    if (!token) {
+      // Pagina di conferma aperta senza link: lo diciamo subito.
+      if (box.dataset.mode === 'confirm') {
+        box.hidden = false;
+        const status = box.querySelector<HTMLElement>('[data-tt-nl-link-status]')!;
+        status.textContent = box.dataset.msgInvalid!;
+        status.dataset.state = 'error';
+      }
+      return;
+    }
+    box.hidden = false;
+    if (!TOKEN_RE.test(token)) {
+      const status = box.querySelector<HTMLElement>('[data-tt-nl-link-status]')!;
+      box.querySelector<HTMLElement>('[data-tt-nl-link-ask]')?.setAttribute('hidden', '');
+      status.textContent = box.dataset.msgInvalid!;
+      status.dataset.state = 'error';
+      return;
+    }
+    if (box.dataset.mode === 'confirm') {
+      run(box, token);
+    } else {
+      document.querySelectorAll<HTMLElement>('[data-tt-nl-hide-on-token]').forEach((el) => (el.hidden = true));
+      box.querySelector<HTMLButtonElement>('[data-tt-nl-link-button]')?.addEventListener('click', (event) => {
+        (event.currentTarget as HTMLButtonElement).disabled = true;
+        run(box, token);
+      });
+    }
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
+
+<style>
+  .tt-nl-link { margin: 0 0 8px; }
+  .tt-nl-link-ask p,
+  .tt-nl-link-status {
+    margin: 0 0 18px;
+    font-family: var(--font-sans-serif);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--tt-ink, var(--color-base));
+  }
+  .tt-nl-link-status:empty { display: none; }
+  .tt-nl-link-status[data-state='ok'] { color: #2e7d32; }
+  .tt-nl-link-status[data-state='error'] { color: #c0392b; }
+  :global([data-theme='dark']) .tt-nl-link-status[data-state='ok'] { color: #81c784; }
+  :global([data-theme='dark']) .tt-nl-link-status[data-state='error'] { color: #ef9a9a; }
+  .tt-nl-link-button {
+    height: auto;
+    min-height: 52px;
+    margin: 0 0 18px;
+    padding: 14px 24px 12px;
+    border: 1px solid var(--tt-button, var(--color-base));
+    border-radius: 2px;
+    background: var(--tt-button, var(--color-base));
+    color: var(--tt-button-ink, var(--color-bg)) !important;
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .tt-nl-link-button:hover:not(:disabled) {
+    background: transparent;
+    color: var(--tt-ink, var(--color-base)) !important;
+  }
+  .tt-nl-link-button:disabled { opacity: .6; cursor: wait; }
+</style>

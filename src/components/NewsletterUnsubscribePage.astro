@@ -1,9 +1,11 @@
 ---
 /**
  * Pagina di disiscrizione (/newsletter/disiscrizione e /en/newsletter/unsubscribe).
+ * Con ?token=… (link nelle email) basta un clic; senza, si inserisce l'email.
  */
 import Layout from '../layouts/Layout.astro';
 import NewsletterForm from './NewsletterForm.astro';
+import NewsletterLinkAction from './NewsletterLinkAction.astro';
 
 interface Props {
   locale?: 'it' | 'en';
@@ -38,14 +40,17 @@ const copy = {
     <section class="tt-nl-unsub-box" aria-labelledby="tt-nl-unsub-title">
       <p class="tt-kicker">{copy.kicker}</p>
       <h1 id="tt-nl-unsub-title">{copy.heading}</h1>
-      <NewsletterForm
-        locale={locale}
-        variant="editorial"
-        mode="unsubscribe"
-        source="disiscrizione"
-        heading={false}
-        intro={copy.intro}
-      />
+      <NewsletterLinkAction locale={locale} mode="unsubscribe" />
+      <div data-tt-nl-hide-on-token>
+        <NewsletterForm
+          locale={locale}
+          variant="editorial"
+          mode="unsubscribe"
+          source="disiscrizione"
+          heading={false}
+          intro={copy.intro}
+        />
+      </div>
       <a class="tt-nl-unsub-back" href={copy.backHref}>{copy.back}</a>
     </section>
   </div>

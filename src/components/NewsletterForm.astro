@@ -1,8 +1,8 @@
 ---
 /**
  * Modulo di iscrizione alla newsletter.
- * Salva l'email su Supabase tramite la funzione subscribe_newsletter
- * (vedi supabase/migrations/20261111_newsletter.sql).
+ * L'iscrizione passa dalla Edge Function newsletter-subscribe
+ * (supabase/functions/newsletter-subscribe), che invia l'email di conferma.
  *
  * variant="compact": riga unica, per il footer.
  * variant="full": con titolo e testo, per Contatti.
@@ -38,7 +38,7 @@ const text = {
     consentAfter: '. Posso disiscrivermi in qualsiasi momento.',
     submit: 'Iscriviti',
     sending: 'Invio…',
-    ok: 'Grazie! Ti sei iscritto alla newsletter di Tan Tan Teatro.',
+    ok: 'Quasi fatto! Ti abbiamo mandato un’email: apri il link per confermare l’iscrizione. Se non la trovi, controlla nello spam.',
     invalid: 'Controlla l’indirizzo email.',
     consentMissing: 'Per iscriverti serve il consenso.',
     error: 'Non è stato possibile completare l’iscrizione. Riprova più tardi.',
@@ -55,7 +55,7 @@ const text = {
     consentAfter: '. I can unsubscribe at any time.',
     submit: 'Subscribe',
     sending: 'Sending…',
-    ok: 'Thank you! You are now subscribed to the Tan Tan Teatro newsletter.',
+    ok: 'Almost done! We have sent you an email: open the link to confirm your subscription. If you cannot find it, check your spam folder.',
     invalid: 'Please check the email address.',
     consentMissing: 'Your consent is required to subscribe.',
     error: 'We could not complete your subscription. Please try again later.',
@@ -178,16 +178,19 @@ const msgError = unsubscribe ? text.unsubError : text.error;
     show('', '');
 
     try {
-      const rpc = unsubscribe ? 'unsubscribe_newsletter' : 'subscribe_newsletter';
+      // Iscrizione: Edge Function newsletter-subscribe, che invia l'email con il
+      // link di conferma. Disiscrizione: funzione SQL unsubscribe_newsletter.
+      const endpoint = unsubscribe ? '/rest/v1/rpc/unsubscribe_newsletter' : '/functions/v1/newsletter-subscribe';
       const body = unsubscribe
         ? { p_email: email }
-        : { p_email: email, p_locale: d.locale, p_source: d.source };
-      const res = await fetch(new URL(`/rest/v1/rpc/${rpc}`, d.url), {
+        : { email, locale: d.locale, source: d.source, consent: true, website: '' };
+      const res = await fetch(new URL(endpoint, d.url), {
         method: 'POST',
         headers: {
           apikey: d.key,
-          Authorization: `Bearer ${d.key}`,
           'Content-Type': 'application/json',
+          // Le chiavi sb_publishable_ non sono JWT: il Bearer serve solo con le vecchie chiavi.
+          ...(d.key.startsWith('eyJ') || unsubscribe ? { Authorization: `Bearer ${d.key}` } : {}),
         },
         credentials: 'omit',
         body: JSON.stringify(body),
