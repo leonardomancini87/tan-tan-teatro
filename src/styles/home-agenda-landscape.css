@@ -170,7 +170,26 @@
   }
 }
 
-/* Homepage: lower laboratory CTA */
-.tt-home .tt-agenda-band .tt-events--cards .tt-event--lab .tt-event-actions {
-  margin-top: 20px;
+/* Homepage: i tasti (Prenota, Scopri il laboratorio) stanno sempre in fondo
+   alla scheda, alla stessa altezza in tutte le schede. */
+.tt-home .tt-agenda-band .tt-events--cards .tt-event-actions {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+/* L'indirizzo usa lo stesso carattere del luogo, su una riga a sé. */
+.tt-home .tt-agenda-band .tt-events--cards .tt-event-address {
+  margin: 2px 0 0;
+  font-family: var(--font-sans-serif);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--tt-muted);
+}
+
+@media (max-width: 600px) {
+  .tt-home .tt-agenda-band .tt-events--cards .tt-event-address {
+    font-size: 14px;
+    line-height: 1.4;
+  }
 }
