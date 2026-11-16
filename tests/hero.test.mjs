@@ -58,7 +58,7 @@ test('Only the first image loads in the server-rendered hero', () => {
   assert(initial.includes('fetchpriority="high"'));
   assert(initial.includes('loading="eager"'));
 });
-test('Hero exposes direct photo selectors without numbers or arrows', () => {
+test('Hero has no visible navigation controls', () => {
   const html = renderHero();
   assert(!html.includes('data-hero-controls'));
   assert(!html.includes('data-hero-toggle'));
@@ -67,7 +67,8 @@ test('Hero exposes direct photo selectors without numbers or arrows', () => {
   assert(!html.includes('data-hero-counter'));
   assert(!html.includes('data-hero-prev'));
   assert(!html.includes('data-hero-next'));
-  assert.equal((html.match(/data-hero-select=/g) || []).length, HERO_SLIDES.length);
+  assert(!html.includes('data-hero-select'));
+  assert(!html.includes('data-hero-navigation'));
 
 });
 test('Slides keep accessible names without visible navigation controls', () => {

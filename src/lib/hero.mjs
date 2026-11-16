@@ -48,9 +48,6 @@ export function renderHero(locale = 'it', photos = {}) {
         </div>`;
       }).join('')}</div>
       <div class="tt-hero-shade" aria-hidden="true"></div>
-      <div class="tt-hero-navigation" data-hero-navigation hidden role="group" aria-label="${lang === 'en' ? 'Choose photo' : 'Scegli una foto'}">
-        ${slides.map((slide, index) => `<button type="button" data-hero-select="${index}" data-mobile="${slide.mobile}" aria-label="${lang === 'en' ? 'Show photo' : 'Mostra foto'} ${index + 1}: ${e(slide[lang].name)}" aria-pressed="${index === 0}"><span aria-hidden="true"></span></button>`).join('')}
-      </div>
       <p class="tt-hero-sr" data-hero-status role="status" aria-live="polite" aria-atomic="true"></p>
       <script type="application/json" data-hero-labels>${JSON.stringify(ui).replace(/</g, '\\u003c')}</script>
     </section>`;
