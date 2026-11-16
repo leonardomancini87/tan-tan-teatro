@@ -51,9 +51,6 @@ trailer:
   title: Trailer Macbett
   url: https://www.youtube.com/embed/_p8u-0JkcHc
 performances:
-  - date: 14 novembre 2026
-    name: "Teatro Dravelli "
-    details: (Moncalieri, TO)
   - date: 10/07/2026
     name: International University Theatre Festival
     details: (XIII World Congress of the International University Theatre
@@ -86,6 +83,9 @@ performances:
     name: Festival de théâtre universitaire Meraki
     details: Lione
     url: https://iiclione.esteri.it/it/gli_eventi/calendario/spettacolo-macbett/
+  - date: 14 novembre 2026
+    name: "Teatro Dravelli "
+    details: (Moncalieri, TO)
 press:
   - author: Micaela Vernice
     title: Tan Tan Teatro rilegge lo Shakespeare di Ionesco
