@@ -13,6 +13,16 @@ RANGE_RE = re.compile(
 DATE_RE = re.compile(
     r"(?<!\d)(\d{1,2})/(\d{1,2})/(\d{4})(?!\d)"
 )
+MONTHS = {
+    "gennaio": 1, "febbraio": 2, "marzo": 3, "aprile": 4, "maggio": 5, "giugno": 6,
+    "luglio": 7, "agosto": 8, "settembre": 9, "ottobre": 10, "novembre": 11, "dicembre": 12,
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
+}
+# Esempio: "14 novembre 2026" oppure "5-6 settembre 2026" (usa il primo giorno).
+TEXT_DATE_RE = re.compile(
+    r"(?<!\d)(\d{1,2})(?:\s*[-–—]\s*\d{1,2})?\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})(?!\d)"
+)
 
 
 def clean_yaml_scalar(value: str) -> str:
@@ -43,6 +53,13 @@ def date_key(value: str):
         year = int(match.group(3))
         try:
             return date(year, month, day).toordinal()
+        except ValueError:
+            return None
+
+    match = TEXT_DATE_RE.search(value)
+    if match and match.group(2).lower() in MONTHS:
+        try:
+            return date(int(match.group(3)), MONTHS[match.group(2).lower()], int(match.group(1))).toordinal()
         except ValueError:
             return None
 
