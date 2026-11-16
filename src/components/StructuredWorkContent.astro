@@ -78,7 +78,7 @@ const accessibilityHtml = renderRichText(data.accessibility);
             ) : (
               performance.name
             )
-          }{performance.details ? `, ${performance.details}` : ''}<br />
+          }{performance.details ? `${performance.details.trim().startsWith('(') ? ' ' : ', '}${performance.details.trim()}` : ''}<br />
         </div>
       ))}
     </div>

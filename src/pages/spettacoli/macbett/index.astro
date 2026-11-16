@@ -71,7 +71,7 @@ const albums = albumDefinitions.map((album) => {
         <div class="show-performance-list" tabindex="0" role="region" aria-label="Precedenti rappresentazioni di Macbett">
           {data.performances?.map((performance) => <div class="show-performance">
             <strong>{performance.date}</strong>
-            <span>{performance.url ? <a href={performance.url} target="_blank" rel="noopener noreferrer">{performance.name}</a> : performance.name}{performance.details ? `, ${performance.details}` : ''}</span>
+            <span>{performance.url ? <a href={performance.url} target="_blank" rel="noopener noreferrer">{performance.name}</a> : performance.name}{performance.details ? `${performance.details.trim().startsWith('(') ? ' ' : ', '}${performance.details.trim()}` : ''}</span>
           </div>)}
         </div>
       </div>
